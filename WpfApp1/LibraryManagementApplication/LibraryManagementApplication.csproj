@@ -94,5 +94,23 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\angle-left.png" />
+    <Resource Include="Icon\arrow-left.png" />
+    <Resource Include="Icon\cross.png" />
+    <Resource Include="Icon\edit.png" />
+    <Resource Include="Icon\envelope.png" />
+    <Resource Include="Icon\globe.png" />
+    <Resource Include="Icon\home.png" />
+    <Resource Include="Icon\marker.png" />
+    <Resource Include="Icon\plus.png" />
+    <Resource Include="Icon\search.png" />
+    <Resource Include="Icon\settings.png" />
+    <Resource Include="Icon\stats.png" />
+    <Resource Include="Icon\time-past.png" />
+    <Resource Include="Icon\user.png" />
+    <Resource Include="Icon\users-alt.png" />
+    <Resource Include="Icon\users.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
