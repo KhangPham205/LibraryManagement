@@ -27,7 +27,7 @@
             <TextBlock Text="Hiển thị danh sách những cuốn sách đang mượn"
                        VerticalAlignment="Center" 
                        HorizontalAlignment="Center"
-                       FontSize="14"/>
+                       FontSize="14" FontFamily="Cascadia Mono"/>
         </Border>
 
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="#E0FFFF" Height="Auto">
@@ -70,11 +70,24 @@
                         Background="Transparent" BorderBrush="Transparent">
                     <Image Source="pack://application:,,,/Icon/home.png"/>                    
                 </Button>
+                <Button Width="40" Height="40" Margin="0 15 0 0"
+                        Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="pack://application:,,,/Icon/user.png"/>
+                </Button>
+                <Button Width="40" Height="40" Margin="0 15 0 0"
+                        Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="pack://application:,,,/Icon/bookmark.png"/>
+                </Button>
+                <Button Width="40" Height="40" Margin="0 15 0 0"
+                        Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="pack://application:,,,/Icon/time-past.png"/>
+                </Button>
+                <Button Width="40" Height="40" Margin="0 15 0 0"
+                        Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="pack://application:,,,/Icon/users.png"/>
+                </Button>
                 <Button Width="40" Height="40" Margin="0 15 0 0"></Button>
-                <Button Width="40" Height="40" Margin="0 15 0 0"></Button>
-                <Button Width="40" Height="40" Margin="0 15 0 0"></Button>
-                <Button Width="40" Height="40" Margin="0 15 0 0"></Button>
-                <Button Width="30" Height="30" Margin="0 50 0 10"/>
+                <Button Width="30" Height="30" Margin="0 10 0 10"/>
             </StackPanel>
         </Border>
 
@@ -86,7 +99,7 @@
             <Calendar Margin="10" RenderTransformOrigin="0.5,0.5" Width="173">
 
             </Calendar>
-            <Image Source="C:\Users\Admin\OneDrive\Đồ án\Image\Map.png" Height="85" Width="174"></Image>
+            <Image Source="pack://application:,,,/Image/Map.png" Height="85" Width="174"></Image>
         </StackPanel>
     </Grid>
 </Window>

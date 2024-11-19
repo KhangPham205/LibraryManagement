@@ -112,5 +112,12 @@
     <Resource Include="Icon\users-alt.png" />
     <Resource Include="Icon\users.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\bookmark.png" />
+    <Resource Include="Icon\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Map.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
