@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagementApplication"
         mc:Ignorable="d"
-        Title="Library Application" Height="450" Width="800"
-        MinHeight="450" MinWidth="800">
+        Title="Library Application" Height="465" Width="800"
+        MinHeight="465" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70"/>
