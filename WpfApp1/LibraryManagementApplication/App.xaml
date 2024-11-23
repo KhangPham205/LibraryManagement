@@ -28,12 +28,12 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="ButtonBorder"
-             Background="{TemplateBinding Background}"
-             BorderBrush="{TemplateBinding BorderBrush}"
-             BorderThickness="{TemplateBinding BorderThickness}"
-             CornerRadius="10"
-             Width="100"
-             Height="40">
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10"
+                            Width="100"
+                            Height="40">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -55,23 +55,53 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border
-             Background="#ffffff"
-             BorderBrush="{TemplateBinding BorderBrush}"
-             BorderThickness="1"
-             CornerRadius="10"
-             Height="40">
+                             Background="#ffffff"
+                             BorderBrush="{TemplateBinding BorderBrush}"
+                             BorderThickness="1"
+                             CornerRadius="10"
+                             Height="40">
                             <TextBox 
-                   FontSize="22"
-                   Margin="5"
-                   BorderBrush="Transparent"
-                   BorderThickness ="0"
-                   ></TextBox>
+                               FontSize="22"
+                               Margin="5"
+                               BorderBrush="Transparent"
+                               BorderThickness ="0"
+                               ></TextBox>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-
+        <Style TargetType="TextBox" x:Key="findbox1">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border
+                            Background="#ffffff"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="10"
+                            Height="40">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox 
+                                FontSize="22"
+                                Margin="5"
+                                BorderBrush="Transparent"
+                                BorderThickness ="0"
+                                Width="{TemplateBinding Width}"
+                                ></TextBox>
+                                <Button 
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="0">
+                                    <Image Source="/icon/search.png"
+                                           Margin="5"/>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <ResourceDictionary x:Key="MainVM">
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ResourceXAML/MainResource.xaml"/>

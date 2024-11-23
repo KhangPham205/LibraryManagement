@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0" Grid.RowSpan="2"
                 Background="#FF9ACBFF"
-                CornerRadius="0,20,20,0"
+                CornerRadius="0,0,20,0"
                 BorderBrush="Transparent"
                 BorderThickness="0"
                 Margin="0">
@@ -54,5 +54,9 @@
                 </Button>
             </Grid>
         </Border>
+        <Frame x:Name="Mainpage" 
+               Grid.Column="1"
+               NavigationUIVisibility="Hidden">
+        </Frame>
     </Grid>
 </Window>

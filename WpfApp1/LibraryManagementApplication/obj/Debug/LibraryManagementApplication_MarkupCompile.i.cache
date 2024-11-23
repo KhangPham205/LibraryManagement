@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\App.xaml
-4733866692
+5173996960
 
-10442763615
+11-2090040077
 13-38814620
-MainWindow.xaml;ResourceXAML\MainResource.xaml;Signin.xaml;Signup.xaml;
+mainpage.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;Signin.xaml;Signup.xaml;
 
-False
+True
 
