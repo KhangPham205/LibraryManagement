@@ -116,26 +116,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icon\angle-left.png" />
-    <Resource Include="Icon\arrow-left.png" />
-    <Resource Include="Icon\cross.png" />
-    <Resource Include="Icon\edit.png" />
-    <Resource Include="Icon\envelope.png" />
-    <Resource Include="Icon\globe.png" />
     <Resource Include="Icon\home.png" />
-    <Resource Include="Icon\marker.png" />
-    <Resource Include="Icon\plus.png" />
-    <Resource Include="Icon\search.png" />
-    <Resource Include="Icon\settings.png" />
-    <Resource Include="Icon\stats.png" />
-    <Resource Include="Icon\time-past.png" />
     <Resource Include="Icon\user.png" />
-    <Resource Include="Icon\users-alt.png" />
-    <Resource Include="Icon\users.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icon\bookmark.png" />
-    <Resource Include="Icon\check.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\Map.png" />
@@ -147,6 +129,15 @@
     <Resource Include="Icon\eye.png" />
     <Resource Include="Icon\hide.png" />
     <Resource Include="Icon\house-key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\document.png" />
+    <Resource Include="Icon\open-book.png" />
+    <Resource Include="Icon\reader.png" />
+    <Resource Include="Icon\team.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\logout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

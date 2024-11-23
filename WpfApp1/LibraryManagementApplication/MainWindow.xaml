@@ -11,53 +11,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <Border BorderBrush="Black" 
-                BorderThickness="1" 
-                Background="#E0FFFF" 
-                Margin="10,10,10,160" 
-                Grid.Column="1"
-                Grid.Row="1">
-            <TextBlock Text="Hiển thị danh sách những cuốn sách đang mượn"
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"
-                       FontSize="14" FontFamily="Cascadia Mono"/>
-        </Border>
-
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="#E0FFFF" Height="Auto">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <!-- Thanh tìm kiếm -->
-                <ColumnDefinition Width="Auto"/>
-                <!-- Dòng chữ "Trang chủ" -->
-            </Grid.ColumnDefinitions>
-
-            <!-- Thanh tìm kiếm -->
-            <Grid Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" Height="30" VerticalAlignment="Center"
-                     FontSize="14" Margin="80,0,175,0"/>
-                <Button Width="30" Height="30" Margin="80,10,0,0"
-                        VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <Image Stretch="Uniform"/>
-                </Button>
-            </Grid>
-
-            <!-- Dòng chữ "Trang chủ" -->
-            <TextBlock Text="TRANG CHỦ" FontSize="27" FontWeight="Bold"
-                   VerticalAlignment="Top" HorizontalAlignment="Right"
-                   Margin="0,20,10,0" RenderTransformOrigin="0.529,0.432" Foreground="#FF07209E"/>
-        </Grid>
-
         <Border Grid.Column="0" Grid.RowSpan="2"
                 Background="#FF9ACBFF"
                 CornerRadius="0,20,20,0"
@@ -68,38 +22,34 @@
                 <Button Width="40" Height="40" Margin="0 15 0 0" Style="{StaticResource RoundButton}"></Button>
                 <Button Width="40" Height="40" Margin="0 15 0 0"
                         Background="Transparent" BorderBrush="Transparent">
-                    <Image Source="pack://application:,,,/Icon/home.png"/>                    
+                    <Image Source="/Icon/home.png"/>
                 </Button>
                 <Button Width="40" Height="40" Margin="0 15 0 0"
                         Background="Transparent" BorderBrush="Transparent">
-                    <Image Source="pack://application:,,,/Icon/user.png"/>
+                    <Image Source="/Icon/user.png"/>
                 </Button>
                 <Button Width="40" Height="40" Margin="0 15 0 0"
                         Background="Transparent" BorderBrush="Transparent">
-                    <Image Source="pack://application:,,,/Icon/bookmark.png"/>
+                    <Image Source="/Icon/open-book.png"/>
                 </Button>
                 <Button Width="40" Height="40" Margin="0 15 0 0"
                         Background="Transparent" BorderBrush="Transparent">
-                    <Image Source="pack://application:,,,/Icon/time-past.png"/>
+                    <Image Source="/Icon/document.png"/>
                 </Button>
                 <Button Width="40" Height="40" Margin="0 15 0 0"
                         Background="Transparent" BorderBrush="Transparent">
-                    <Image Source="pack://application:,,,/Icon/users.png"/>
+                    <Image Source="/Icon/reader.png"/>
+                 
                 </Button>
-                <Button Width="40" Height="40" Margin="0 15 0 0"></Button>
-                <Button Width="30" Height="30" Margin="0 10 0 10"/>
+                <Button Width="40" Height="40" Margin="0 15 0 0"
+                         Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="/Icon/team.png"/>
+                </Button>
+                <Button Width="30" Height="30" Margin="0 10 0 10"
+                        Background="Transparent" BorderBrush="Transparent">
+                    <Image Source="/Icon/logout.png"/>
+                </Button>
             </StackPanel>
         </Border>
-
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"
-                    Grid.Column="2" Grid.Row="1">
-            <!-- Đồng hồ -->
-            <TextBlock Name="ClockText" FontSize="24" HorizontalAlignment="Center" />
-            <!-- Lịch -->
-            <Calendar Margin="10" RenderTransformOrigin="0.5,0.5" Width="173">
-
-            </Calendar>
-            <Image Source="pack://application:,,,/Image/Map.png" Height="85" Width="174"></Image>
-        </StackPanel>
     </Grid>
 </Window>
