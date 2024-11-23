@@ -18,38 +18,41 @@
                 BorderBrush="Transparent"
                 BorderThickness="0"
                 Margin="0">
-            <StackPanel x:Name="listMainButton">
-                <Button Width="40" Height="40" Margin="0 15 0 0" Style="{StaticResource RoundButton}"></Button>
-                <Button Width="40" Height="40" Margin="0 15 0 0"
-                        Background="Transparent" BorderBrush="Transparent">
-                    <Image Source="/Icon/home.png"/>
-                </Button>
-                <Button Width="40" Height="40" Margin="0 15 0 0"
-                        Background="Transparent" BorderBrush="Transparent">
-                    <Image Source="/Icon/user.png"/>
-                </Button>
-                <Button Width="40" Height="40" Margin="0 15 0 0"
-                        Background="Transparent" BorderBrush="Transparent">
-                    <Image Source="/Icon/open-book.png"/>
-                </Button>
-                <Button Width="40" Height="40" Margin="0 15 0 0"
-                        Background="Transparent" BorderBrush="Transparent">
-                    <Image Source="/Icon/document.png"/>
-                </Button>
-                <Button Width="40" Height="40" Margin="0 15 0 0"
-                        Background="Transparent" BorderBrush="Transparent">
-                    <Image Source="/Icon/reader.png"/>
+            <Grid>
+                <StackPanel x:Name="listMainButton">
+                    <Button Width="40" Height="40" Margin="0 15 0 0" Style="{StaticResource RoundButton}"></Button>
+                    <Button Width="40" Height="40" Margin="0 15 0 0"
+                            Background="Transparent" BorderBrush="Transparent">
+                        <Image Source="/Icon/home.png"/>
+                    </Button>
+                    <Button Width="40" Height="40" Margin="0 15 0 0"
+                            Background="Transparent" BorderBrush="Transparent">
+                        <Image Source="/Icon/user.png"/>
+                    </Button>
+                    <Button Width="40" Height="40" Margin="0 15 0 0"
+                            Background="Transparent" BorderBrush="Transparent">
+                        <Image Source="/Icon/open-book.png"/>
+                    </Button>
+                    <Button Width="40" Height="40" Margin="0 15 0 0"
+                            Background="Transparent" BorderBrush="Transparent">
+                        <Image Source="/Icon/document.png"/>
+                    </Button>
+                    <Button Width="40" Height="40" Margin="0 15 0 0"
+                            Background="Transparent" BorderBrush="Transparent">
+                        <Image Source="/Icon/reader.png"/>
                  
-                </Button>
-                <Button Width="40" Height="40" Margin="0 15 0 0"
-                         Background="Transparent" BorderBrush="Transparent">
-                    <Image Source="/Icon/team.png"/>
-                </Button>
-                <Button Width="30" Height="30" Margin="0 10 0 10"
-                        Background="Transparent" BorderBrush="Transparent">
+                    </Button>
+                    <Button Width="40" Height="40" Margin="0 15 0 0"
+                             Background="Transparent" BorderBrush="Transparent">
+                        <Image Source="/Icon/team.png"/>
+                    </Button>
+                
+                </StackPanel>
+                <Button Width="30" Height="30" Margin="0 10 0 10" VerticalAlignment="Bottom"
+                            Background="Transparent" BorderBrush="Transparent" >
                     <Image Source="/Icon/logout.png"/>
                 </Button>
-            </StackPanel>
+            </Grid>
         </Border>
     </Grid>
 </Window>

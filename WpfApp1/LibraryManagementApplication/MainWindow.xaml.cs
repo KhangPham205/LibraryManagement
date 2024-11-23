@@ -21,19 +21,9 @@ namespace LibraryManagementApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        DispatcherTimer timer = new DispatcherTimer();
-
         public MainWindow()
         {
             InitializeComponent();
-
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            ClockText.Text = DateTime.Now.ToString("HH:mm:ss");
         }
     }
 }

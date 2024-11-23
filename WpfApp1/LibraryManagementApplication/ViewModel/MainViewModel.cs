@@ -11,7 +11,8 @@ namespace LibraryManagementApplication.ViewModel
     {
         public MainViewModel() 
         {
-            MessageBox.Show("Into main view model");
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }
