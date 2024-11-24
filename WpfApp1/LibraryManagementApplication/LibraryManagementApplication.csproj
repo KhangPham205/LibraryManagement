@@ -59,6 +59,12 @@
     <Compile Include="mainpage.xaml.cs">
       <DependentUpon>mainpage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Class\DocGia.cs" />
+    <Compile Include="Model\Class\NhaXuatBan.cs" />
+    <Compile Include="Model\Class\Sach.cs" />
+    <Compile Include="Model\Class\TacGia.cs" />
+    <Compile Include="Model\Class\TaiKhoan.cs" />
+    <Compile Include="Model\Class\TheLoai.cs" />
     <Compile Include="Signin.xaml.cs">
       <DependentUpon>Signin.xaml</DependentUpon>
     </Compile>
@@ -130,7 +136,7 @@
     <Resource Include="Image\Map.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Folder Include="Model\Database\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\eye.png" />
