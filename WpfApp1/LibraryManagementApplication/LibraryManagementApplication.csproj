@@ -59,7 +59,9 @@
     <Compile Include="mainpage.xaml.cs">
       <DependentUpon>mainpage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Class\CTDM.cs" />
     <Compile Include="Model\Class\DocGia.cs" />
+    <Compile Include="Model\Class\DonMuon.cs" />
     <Compile Include="Model\Class\NhaXuatBan.cs" />
     <Compile Include="Model\Class\Sach.cs" />
     <Compile Include="Model\Class\TacGia.cs" />
@@ -68,6 +70,14 @@
     <Compile Include="Signin.xaml.cs">
       <DependentUpon>Signin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ClassViewModel\CTDMViewModel.cs" />
+    <Compile Include="ViewModel\ClassViewModel\DocGiaViewModel.cs" />
+    <Compile Include="ViewModel\ClassViewModel\DonMuonViewModel.cs" />
+    <Compile Include="ViewModel\ClassViewModel\NhaXuatBanViewModel.cs" />
+    <Compile Include="ViewModel\ClassViewModel\SachViewModel.cs" />
+    <Compile Include="ViewModel\ClassViewModel\TacGiaViewModel.cs" />
+    <Compile Include="ViewModel\ClassViewModel\TaiKhoanViewModel.cs" />
+    <Compile Include="ViewModel\ClassViewModel\TheLoaiViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="Window1.xaml.cs">
