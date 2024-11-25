@@ -55,7 +55,7 @@
                                 <ColumnDefinition Width="40"/>
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="timsach"
-                                FontSize="28"
+                                FontSize="18"
                                 Margin="5"
                                 BorderBrush="Transparent"
                                 BorderThickness="0"></TextBox>
@@ -72,7 +72,8 @@
                      </Border>
                 </StackPanel>
                 <ListView x:Name="sach" 
-                          Grid.Row="1"></ListView>
+                          Grid.Row="1"
+                          Margin="5,0,5,0"></ListView>
                 <StackPanel Orientation="Horizontal"
                             Grid.Row="2">
                     <TextBlock Text="Tìm kiếm đơn mượn:" 
@@ -94,7 +95,7 @@
                                 <ColumnDefinition Width="40"/>
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="timdonmuon"
-                                FontSize="28"
+                                FontSize="18"
                                 Margin="5"
                                 BorderBrush="Transparent"
                                 BorderThickness="0"></TextBox>
@@ -111,7 +112,8 @@
                     </Border>
                 </StackPanel>
                 <ListView x:Name="donmuon" 
-                        Grid.Row="3"></ListView>
+                        Grid.Row="3"
+                        Margin="5,0,5,0"></ListView>
             </Grid>
             <Border Grid.Column="1" 
                     CornerRadius="10"
