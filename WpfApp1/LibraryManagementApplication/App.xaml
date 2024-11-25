@@ -61,7 +61,7 @@
                              CornerRadius="10"
                              Height="40">
                             <TextBox 
-                               FontSize="22"
+                               FontSize="18"
                                Margin="5"
                                BorderBrush="Transparent"
                                BorderThickness ="0"

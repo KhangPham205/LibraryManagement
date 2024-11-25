@@ -20,14 +20,13 @@
                 Margin="0">
             <Grid>
                 <StackPanel x:Name="listMainButton">
-                    <Button Width="40" Height="40" Margin="0 15 0 0" Style="{StaticResource RoundButton}"></Button>
-                    <Button Width="40" Height="40" Margin="0 15 0 0"
-                            Background="Transparent" BorderBrush="Transparent">
-                        <Image Source="/Icon/home.png"/>
+                    <Button Width="40" Height="40" Margin="0 15 0 0" 
+                            Style="{StaticResource RoundButton}">
+                        <Image Source="/Icon/user.png"/>
                     </Button>
                     <Button Width="40" Height="40" Margin="0 15 0 0"
                             Background="Transparent" BorderBrush="Transparent">
-                        <Image Source="/Icon/user.png"/>
+                        <Image Source="/Icon/home.png"/>
                     </Button>
                     <Button Width="40" Height="40" Margin="0 15 0 0"
                             Background="Transparent" BorderBrush="Transparent">
