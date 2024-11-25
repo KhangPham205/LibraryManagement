@@ -132,6 +132,7 @@
                     Style="{DynamicResource button1}"
                     Grid.Column="2"
                     Grid.Row="6"
+                    Width="100"
                     HorizontalAlignment="Right"
                     Command ="{Binding SUClickCommand}"
                     CommandParameter="{Binding ElementName=signUpWindow}">

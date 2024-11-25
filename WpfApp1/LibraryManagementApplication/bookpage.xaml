@@ -34,6 +34,101 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="1"
+                                   Margin="5">
+                            <TextBlock Text="Ten sach: "
+                                       Foreground="#07209e"
+                                       FontSize="18"/>
+                            <TextBox x:Name="tentb"/>
+                        </DockPanel>
+                        <DockPanel Grid.Row="2"
+                                   Margin="5">
+                            <TextBlock Text="ISBN: "
+                                    Foreground="#07209e"
+                                    FontSize="18"/>
+                            <TextBox x:Name="isbn"/>
+                        </DockPanel>
+                        <DockPanel Grid.Row="3"
+                                    Margin="5">
+                            <TextBlock Text="Tac gia: "
+                                Foreground="#07209e"
+                                FontSize="18"/>
+                            <ComboBox x:Name="tacgiatb"/>
+                        </DockPanel>
+                        <DockPanel Grid.Row="4"
+                                Margin="5">
+                            <TextBlock Text="The loai: "
+                               Foreground="#07209e"
+                               FontSize="18"/>
+                            <ComboBox x:Name="theloaitb"/>
+                        </DockPanel>
+                        <DockPanel Grid.Row="5"
+                                    Margin="5">
+                            <TextBlock Text="NXB: "
+                                       Foreground="#07209e"
+                                       FontSize="18"/>
+                            <ComboBox x:Name="nxbtb"/>
+                        </DockPanel>
+                        <DockPanel Grid.Row="6"
+                                    Margin="5">
+                            <TextBlock Text="Ngon ngu: "
+                                        Foreground="#07209e"
+                                        FontSize="18"/>
+                            <TextBox x:Name="ngonngutb"/>
+                        </DockPanel>
+                        <DockPanel Grid.Row="7"
+                                   Margin="5">
+                            <TextBlock Text="Vi tri: "
+                                        Foreground="#07209e"
+                                        FontSize="18"/>
+                            <TextBox x:Name="vitritb"/>
+                        </DockPanel>
+                        <DockPanel Grid.Row="8"
+                                    Margin="5">
+                            <TextBlock Text="Trang thai: "
+                                       Foreground="#07209e"
+                                       FontSize="18"/>
+                            <ComboBox x:Name="trangthaitb"/>
+                        </DockPanel>
+                        <Grid Grid.Row="9">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button  x:Name="addsach"
+                                     Content="Them"
+                                     Background="#FF1CD148"
+                                     Margin="30,5,30,5"
+                                     Style="{DynamicResource button1}"/>
+                            <Button  x:Name="editsach"
+                                     Content="Sua"
+                                     Background="#FFD1CD1C"
+                                     Margin="30,5,30,5"
+                                     Grid.Column="1"
+                                     Style="{DynamicResource button1}"/>
+                            <Button  x:Name="deletesach"
+                                     Content="Xoa"
+                                     Grid.Column="2"
+                                     Background="#FFD1291C"
+                                     Margin="30,5,30,5"
+                                     Style="{DynamicResource button1}"/>
+                        </Grid>
+                    </Grid>
                     <ListView x:Name="sach"
                           Margin="5"
                           Grid.Column="1">
@@ -52,15 +147,146 @@
                           Margin="5" 
                           Grid.Column="0">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="110"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Ten tac gia: "
+                                       Foreground="#07209e"
+                                       FontSize="18"
+                                       Margin="5"
+                                       Grid.ColumnSpan="3"/>
+                            <TextBox Grid.Row="1"
+                                     Margin="5"
+                                     Grid.ColumnSpan="3"></TextBox>
+                            <Button x:Name="addtg"
+                                    Style="{DynamicResource RoundButton}"
+                                    Content="+"
+                                    Background="#FF1CD148"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="0"
+                                    Grid.Row="2"/>
+                            <Button x:Name="deltg"
+                                    Style="{DynamicResource RoundButton}"
+                                    Content="-"
+                                    Background="#FFD1291C"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="1"
+                                    Grid.Row="2"/>
+                        </Grid>
                         <ListView x:Name="tacgia"
                             Margin="5"
-                            Grid.Row="1">      
+                            Grid.Row="1">
                         </ListView>
                     </Grid>
-                    
+                    <Grid Background="#cfcfcf"
+                          Margin="5" 
+                          Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="110"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Ten the loai: "
+                                       Foreground="#07209e"
+                                       FontSize="18"
+                                       Margin="5"
+                                       Grid.ColumnSpan="3"/>
+                            <TextBox Grid.Row="1"
+                                     Margin="5"
+                                     Grid.ColumnSpan="3"></TextBox>
+                            <Button x:Name="addtl"
+                                    Style="{DynamicResource RoundButton}"
+                                    Content="+"
+                                    Background="#FF1CD148"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="0"
+                                    Grid.Row="2"/>
+                            <Button x:Name="deltl"
+                                    Style="{DynamicResource RoundButton}"
+                                    Content="-"
+                                    Background="#FFD1291C"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="1"
+                                    Grid.Row="2"/>
+                        </Grid>
+                        <ListView x:Name="theloai"
+                            Margin="5"
+                            Grid.Row="1">
+                        </ListView>
+                    </Grid>
+                    <Grid Background="#cfcfcf"
+                          Margin="5" 
+                          Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="110"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Ten nha xuat ban: "
+                                       Foreground="#07209e"
+                                       FontSize="18"
+                                       Margin="5"
+                                       Grid.ColumnSpan="3"/>
+                            <TextBox Grid.Row="1"
+                                         Margin="5"
+                                         Grid.ColumnSpan="3"></TextBox>
+                            <Button x:Name="addnxb"
+                                    Style="{DynamicResource RoundButton}"
+                                    Content="+"
+                                    Background="#FF1CD148"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="0"
+                                    Grid.Row="2"/>          
+                            <Button x:Name="delnxb"
+                                    Style="{DynamicResource RoundButton}"
+                                    Content="-"
+                                    Background="#FFD1291C"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="1"
+                                    Grid.Row="2"/>
+                        </Grid>
+                        <ListView x:Name="nxb"
+                            Margin="5"
+                            Grid.Row="1">
+                        </ListView>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>
