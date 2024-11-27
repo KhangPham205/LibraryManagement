@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon/search.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/database/librarymanagement.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/database/librarymanagement_log.ldf")]
 
 

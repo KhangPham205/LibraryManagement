@@ -28,12 +28,12 @@ namespace LibraryManagementApplication.ViewModel
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("YourConnectionStringHere");
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\Model\Database\LibraryManagement.mdf;Integrated Security=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configuring many-to-many relationship between Sach and TacGia using intermediate entity
+            // Quan hệ nhiều - nhiều giữa sách và tác giả
             modelBuilder.Entity<SachTacGia>()
                 .HasKey(stg => new { stg.MaSach, stg.MaTG });
 
@@ -47,7 +47,7 @@ namespace LibraryManagementApplication.ViewModel
                 .WithMany(tg => tg.SachTacGias)
                 .HasForeignKey(stg => stg.MaTG);
 
-            // Configuring many-to-many relationship between Sach and TheLoai using intermediate entity
+            // Quan hệ nhiều - nhiều giữa sách và thể loại
             modelBuilder.Entity<SachTheLoai>()
                 .HasKey(stl => new { stl.MaSach, stl.MaTL });
 
@@ -61,7 +61,7 @@ namespace LibraryManagementApplication.ViewModel
                 .WithMany(tl => tl.SachTheLoais)
                 .HasForeignKey(stl => stl.MaTL);
 
-            // Configuring many-to-many relationship between Sach and NhaXuatBan using intermediate entity
+            // Quan hệ nhiều - nhiều giữa sách và nhà xuất bản
             modelBuilder.Entity<SachNhaXuatBan>()
                 .HasKey(snb => new { snb.MaSach, snb.MaNXB });
 
@@ -75,7 +75,7 @@ namespace LibraryManagementApplication.ViewModel
                 .WithMany(nxb => nxb.SachNhaXuatBans)
                 .HasForeignKey(snb => snb.MaNXB);
 
-            // Configuring one-to-many relationship between DonMuon and DocGia
+            // Quan hệ một - nhiều giữa đơn mượn và độc giả
             modelBuilder.Entity<DonMuon>()
                 .HasOne(dm => dm.DocGia)
                 .WithMany(dg => dg.DonMuons)
