@@ -203,6 +203,12 @@
     <Compile Include="bookpage.xaml.cs">
       <DependentUpon>bookpage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="borrowpage.xaml.cs">
+      <DependentUpon>borrowpage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="employeepage.xaml.cs">
+      <DependentUpon>employeepage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="mainpage.xaml.cs">
       <DependentUpon>mainpage.xaml</DependentUpon>
     </Compile>
@@ -217,6 +223,9 @@
     <Compile Include="Model\Class\TacGia.cs" />
     <Compile Include="Model\Class\TaiKhoan.cs" />
     <Compile Include="Model\Class\TheLoai.cs" />
+    <Compile Include="readerpage.xaml.cs">
+      <DependentUpon>readerpage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Signin.xaml.cs">
       <DependentUpon>Signin.xaml</DependentUpon>
     </Compile>
@@ -239,6 +248,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="borrowpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="employeepage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="mainpage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -255,6 +272,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="readerpage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -332,6 +353,9 @@
     <Resource Include="Icon\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icon\edit.png" />
+    <Resource Include="Icon\minus-sign.png" />
+    <Resource Include="Icon\plus.png" />
     <Content Include="Model\Database\LibraryDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

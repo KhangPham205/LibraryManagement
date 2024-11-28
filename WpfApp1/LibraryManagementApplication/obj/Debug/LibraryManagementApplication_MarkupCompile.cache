@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\
 LibraryManagementApplication
 none
 false
 DEBUG;TRACE
-C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\App.xaml
-62061019692
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\App.xaml
+9856079029
 21788202152
-32-336407122
-59-544229840
-bookpage.xaml;mainpage.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;Signin.xaml;Signup.xaml;
+35756496097
+59799942451
+bookpage.xaml;borrowpage.xaml;employeepage.xaml;mainpage.xaml;MainWindow.xaml;readerpage.xaml;ResourceXAML\MainResource.xaml;Signin.xaml;Signup.xaml;
 
 False
 
