@@ -1,9 +1,9 @@
 ﻿using LibraryManagementApplication.Model.Class;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -34,13 +34,25 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public SachViewModel()
         {
             SachList = new ObservableCollection<Sach>();
-            AddCommand = new RelayCommand<object>((p) => true, (p) => AddSach());
-            EditCommand = new RelayCommand<object>((p) => SelectedSach != null, (p) => EditSach());
-            DeleteCommand = new RelayCommand<object>((p) => SelectedSach != null, (p) => DeleteSach());
-            SearchCommand = new RelayCommand<string>((p) => true, (p) => SearchSach(p));
+            AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddSach());
+            EditCommand = new RelayCommand<object>((p) => SelectedSach != null, async (p) => await EditSach());
+            DeleteCommand = new RelayCommand<object>((p) => SelectedSach != null, async (p) => await DeleteSach());
+            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchSach(p));
+
+            LoadSachList();
         }
 
-        private void AddSach()
+        private async void LoadSachList()
+        {
+            SachList.Clear();
+            var sachs = await GetAllSachs();
+            foreach (var sach in sachs)
+            {
+                SachList.Add(sach);
+            }
+        }
+
+        private async Task AddSach()
         {
             Sach newSach = new Sach()
             {
@@ -52,34 +64,149 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 TrangThai = "Available"
             };
             SachList.Add(newSach);
+
+            bool isSuccess = await AddSachToDatabase(newSach);
+            if (!isSuccess)
+            {
+                // Handle failure (e.g. show error message to user)
+            }
         }
 
-        private void EditSach()
+        private async Task EditSach()
         {
             if (SelectedSach != null)
             {
-                //SelectedSach.TenSach = "Edited Book";
-                //Sử dụng Binding để cập nhật vào đây
                 OnPropertyChanged(nameof(SelectedSach));
+
+                bool isSuccess = await UpdateSachInDatabase(SelectedSach);
+                if (!isSuccess)
+                {
+                    // Handle failure (e.g. show error message to user)
+                }
             }
         }
 
-        private void DeleteSach()
+        private async Task DeleteSach()
         {
             if (SelectedSach != null)
             {
-                SachList.Remove(SelectedSach);
+                bool isSuccess = await DeleteSachFromDatabase(SelectedSach.MaSach);
+                if (isSuccess)
+                {
+                    SachList.Remove(SelectedSach);
+                }
+                else
+                {
+                    // Handle failure (e.g. show error message to user)
+                }
             }
         }
 
-        private void SearchSach(string keyword)
+        private async Task SearchSach(string keyword)
         {
-            var filteredList = SachList.Where(s => s.TenSach.Contains(keyword)).ToList();
+            var filteredListFromDb = await SearchSachInDatabase(keyword);
             SachList.Clear();
-            foreach (var sach in filteredList)
+            foreach (var sach in filteredListFromDb)
             {
                 SachList.Add(sach);
             }
         }
+
+        #region MethodToDatabase
+        public static async Task<bool> AddSachToDatabase(Sach sach)
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    context.Sachs.Add(sach);
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding book: {ex.Message}");
+                return false;
+            }
+        }
+
+        public static async Task<bool> UpdateSachInDatabase(Sach sach)
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    context.Sachs.Update(sach);
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating book: {ex.Message}");
+                return false;
+            }
+        }
+
+        public static async Task<bool> DeleteSachFromDatabase(string maSach)
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    var sachToDelete = await context.Sachs.FirstOrDefaultAsync(s => s.MaSach == maSach);
+                    if (sachToDelete != null)
+                    {
+                        context.Sachs.Remove(sachToDelete);
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting book: {ex.Message}");
+                return false;
+            }
+        }
+
+        public static async Task<List<Sach>> SearchSachInDatabase(string keyword)
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    var result = await context.Sachs
+                        .Where(s => s.TenSach.Contains(keyword))
+                        .ToListAsync();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error searching books: {ex.Message}");
+                return new List<Sach>();
+            }
+        }
+
+        public static async Task<List<Sach>> GetAllSachs()
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    var result = await context.Sachs.ToListAsync();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting all books: {ex.Message}");
+                return new List<Sach>();
+            }
+        }
+        #endregion
     }
 }
