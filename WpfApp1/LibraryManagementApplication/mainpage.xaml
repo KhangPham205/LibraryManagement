@@ -60,6 +60,7 @@
                                 BorderBrush="Transparent"
                                 BorderThickness="0"></TextBox>
                             <Button x:Name="finds"
+                                    Style="{DynamicResource IconButton}"
                                     Background="Transparent"
                                     BorderThickness = "0"
                                     BorderBrush="Transparent"
@@ -71,9 +72,26 @@
                         </Grid>
                      </Border>
                 </StackPanel>
-                <ListView x:Name="sach" 
+                <DataGrid x:Name="sach"
+                          Margin="5"
                           Grid.Row="1"
-                          Margin="5,0,5,0"></ListView>
+                          FontSize="18"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          HeadersVisibility="Column">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã sách" Binding="{Binding MaSach}" />
+                        <DataGridTextColumn Header="Tên sách" Binding="{Binding TenSach}" />
+                        <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" />
+                        <DataGridTextColumn Header="Tác giả" Binding="{Binding TacGia}" />
+                        <DataGridTextColumn Header="Thể loại" Binding="{Binding TheLoai}" />
+                        <DataGridTextColumn Header="NXB" Binding="{Binding NXB}" />
+                        <DataGridTextColumn Header="Năm XB" Binding="{Binding NamXB}" />
+                        <DataGridTextColumn Header="Ngôn ngữ" Binding="{Binding NgonNgu}" />
+                        <DataGridTextColumn Header="Vị trí" Binding="{Binding ViTri}" />
+                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding TrangThai}" />
+                    </DataGrid.Columns>
+                </DataGrid>
                 <StackPanel Orientation="Horizontal"
                             Grid.Row="2">
                     <TextBlock Text="Tìm kiếm đơn mượn:" 
@@ -100,6 +118,7 @@
                                 BorderBrush="Transparent"
                                 BorderThickness="0"></TextBox>
                             <Button x:Name="finddm"
+                                    Style="{DynamicResource IconButton}"
                                     Background="Transparent"
                                     BorderThickness = "0"
                                     BorderBrush="Transparent"
@@ -111,9 +130,24 @@
                         </Grid>
                     </Border>
                 </StackPanel>
-                <ListView x:Name="donmuon" 
-                        Grid.Row="3"
-                        Margin="5,0,5,0"></ListView>
+                <DataGrid x:Name="muon"
+                          Grid.Row="3" 
+                          Grid.ColumnSpan="2"
+                          FontSize="18"
+                          Margin="5" 
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã đơn mượn" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Tên độc giả" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Tên nhân viên" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Ngày mượn" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Ngày trả dự kiến" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Ngày trả thực tế" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Ngày trả phí phạt" IsReadOnly="True"/>
+                        <DataGridCheckBoxColumn Header="Trả"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
             </Grid>
             <Border Grid.Column="1" 
                     CornerRadius="10"

@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon/search.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon/edit.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon/minus-sign.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon/plus.png")]
 
 

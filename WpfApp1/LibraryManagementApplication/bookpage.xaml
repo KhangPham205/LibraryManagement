@@ -27,7 +27,7 @@
         <TabControl Grid.Row="1"
                 Height="auto"
                         VerticalAlignment ="Stretch">
-            <TabItem Header="Sach" >
+            <TabItem Header="Sách" FontSize="18" >
                 <Grid 
                         Background="#cfcfcf">
                     <Grid.RowDefinitions>
@@ -51,7 +51,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                         <TextBlock Text="Ten sach:"
+                        <TextBlock Text="Tên sách:"
                                     Foreground="#07209e"
                                     FontSize="18"
                                     Grid.Column="0"
@@ -73,7 +73,7 @@
                                     Grid.Column="1"
                                     Grid.Row="2"
                                     Margin="5"/>
-                        <TextBlock Text="Tac gia: "
+                        <TextBlock Text="Tác giả: "
                                     Foreground="#07209e"
                                     FontSize="18"
                                     Grid.Column="0"
@@ -84,7 +84,7 @@
                                     Grid.Column="1"
                                     Grid.Row="3"
                                     Margin="5"/>
-                        <TextBlock Text="The loai: "
+                        <TextBlock Text="Thể loại: "
                                     Foreground="#07209e"
                                     FontSize="18"
                                     Grid.Column="0"
@@ -106,7 +106,7 @@
                                     Grid.Column="1"
                                     Grid.Row="5"
                                     Margin="5"/>
-                        <TextBlock Text="Nam XB: "
+                        <TextBlock Text="Năm XB: "
                                     Foreground="#07209e"
                                     FontSize="18"
                                     Grid.Column="2"
@@ -117,7 +117,7 @@
                                     Grid.Column="3"
                                     Grid.Row="1"
                                     Margin="5"/>
-                        <TextBlock Text="Ngon ngu: "
+                        <TextBlock Text="Ngôn ngữ: "
                                     Foreground="#07209e"
                                     FontSize="18"
                                     Grid.Column="2"
@@ -128,7 +128,7 @@
                                     Grid.Column="3"
                                     Grid.Row="2"
                                     Margin="5"/>
-                        <TextBlock Text="Vi tri: "
+                        <TextBlock Text="Vị trí: "
                                     Foreground="#07209e"
                                     FontSize="18"
                                     Grid.Column="2"
@@ -139,7 +139,7 @@
                                     Grid.Column="3"
                                     Grid.Row="3"
                                     Margin="5"/>
-                        <TextBlock Text="Trang thai: "
+                        <TextBlock Text="Trạng thái: "
                                     Foreground="#07209e"
                                     FontSize="18"
                                     Grid.Column="2"
@@ -157,48 +157,62 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Button  x:Name="addsach"
-                                     Content="Them"
-                                     Background="#FF1CD148"
-                                     Margin="30,5,30,5"
+                                     Content="Thêm"
+                                     Background="#FF9AFFAB"
+                                     Width="75"
+                                     Margin="5"
+                                     Style="{DynamicResource button1}"/>
+                            <Button  x:Name="findsach"
+                                     Content="Tìm"
+                                     Background="#9acbff"
+                                     Grid.Column="1"
+                                     Width="75"
+                                     Margin="5"
                                      Style="{DynamicResource button1}"/>
                             <Button  x:Name="editsach"
-                                     Content="Sua"
-                                     Background="#FFD1CD1C"
-                                     Margin="30,5,30,5"
-                                     Grid.Column="1"
+                                     Content="Sửa"
+                                     Background="#FFF6FF9A"
+                                     Grid.Column="2"
+                                     Width="75"
+                                     Margin="5"
                                      Style="{DynamicResource button1}"/>
                             <Button  x:Name="deletesach"
-                                     Content="Xoa"
-                                     Grid.Column="2"
-                                     Background="#FFD1291C"
-                                     Margin="30,5,30,5"
+                                     Content="Xóa"
+                                     Grid.Column="3"
+                                     Width="75"
+                                     Margin="5"
+                                     Background="#FFFF9A9A"
                                      Style="{DynamicResource button1}"/>
                         </Grid>
                     </Grid>
-                    <ListView x:Name="sach"
-                          Margin="5"
-                          Grid.Row="1">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Ma sach"/>
-                                <GridViewColumn Header="Ten sach"/>
-                                <GridViewColumn Header="ISBN"/>
-                                <GridViewColumn Header="Tac gia"/>
-                                <GridViewColumn Header="The loai"/>
-                                <GridViewColumn Header="NXB"/>
-                                <GridViewColumn Header="Nam XB"/>
-                                <GridViewColumn Header="Ngon ngu"/>
-                                <GridViewColumn Header="Vi tri"/>
-                                <GridViewColumn Header="Trang thai"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <DataGrid x:Name="sach"
+                              Margin="5"
+                              Grid.Row="1"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              HeadersVisibility="Column"
+                              >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã sách" Binding="{Binding MaSach}" />
+                            <DataGridTextColumn Header="Tên sách" Binding="{Binding TenSach}" />
+                            <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" />
+                            <DataGridTextColumn Header="Tác giả" Binding="{Binding TacGia}" />
+                            <DataGridTextColumn Header="Thể loại" Binding="{Binding TheLoai}" />
+                            <DataGridTextColumn Header="NXB" Binding="{Binding NXB}" />
+                            <DataGridTextColumn Header="Năm XB" Binding="{Binding NamXB}" />
+                            <DataGridTextColumn Header="Ngôn ngữ" Binding="{Binding NgonNgu}" />
+                            <DataGridTextColumn Header="Vị trí" Binding="{Binding ViTri}" />
+                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding TrangThai}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Thong tin them">
+            <TabItem Header="Thông tin khác" FontSize="18">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -216,48 +230,70 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35"/>
                                 <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Ten tac gia: "
+                            <TextBlock Text="Tên tác giả: "
                                        Foreground="#07209e"
                                        FontSize="18"
                                        Margin="5"
-                                       Grid.ColumnSpan="3"/>
+                                       Grid.ColumnSpan="5"/>
                             <TextBox Grid.Row="1"
-                                     Margin="5"
-                                     Grid.ColumnSpan="3"></TextBox>
+                                     Grid.ColumnSpan="5"></TextBox>
                             <Button x:Name="addtg"
                                     Style="{DynamicResource RoundButton}"
-                                    Content="+"
-                                    Background="#FF1CD148"
+                                    Background="#FF9AFFAB"
                                     Height="30"
                                     Width="30"
                                     Grid.Column="0"
-                                    Grid.Row="2"/>
-                            <Button x:Name="deltg"
+                                    Grid.Row="2">
+                                <Image Source="/Icon/plus.png" Margin="6"/>
+                            </Button>
+                            <Button x:Name="fndtg"
                                     Style="{DynamicResource RoundButton}"
-                                    Content="-"
-                                    Background="#FFD1291C"
+                                    Background="#9acbff"
                                     Height="30"
                                     Width="30"
                                     Grid.Column="1"
-                                    Grid.Row="2"/>
+                                    Grid.Row="2">
+                                <Image Source="\Icon\search.png" Margin="5"/>
+                            </Button>
+                            <Button x:Name="edittg"
+                                    Style="{DynamicResource RoundButton}"
+                                    Background="#FFF6FF9A"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="2"
+                                    Grid.Row="2">
+                                <Image Source="/Icon/edit.png" Margin="5"/>
+                            </Button>
+                            <Button x:Name="deltg"
+                                    Style="{DynamicResource RoundButton}"
+                                    Background="#FFFF9A9A"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="3"
+                                    Grid.Row="2">
+                                <Image Source="/Icon/minus-sign.png" Margin="5"/>
+                            </Button>
                         </Grid>
-                        <ListView x:Name="tacgia"
-                            Margin="5"
-                            Grid.Row="1">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Ma tac gia"/>
-                                    <GridViewColumn Header="Ten tac gia"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <DataGrid x:Name="tacgia"
+                                  Margin="5"
+                                  Grid.Row="1"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã tác giả" Binding="{Binding MaTG}" />
+                                <DataGridTextColumn Header="Tên tác giả" Binding="{Binding TenTG}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
                     </Grid>
                     <Grid Background="#cfcfcf"
                           Margin="5" 
@@ -270,48 +306,70 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35"/>
                                 <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Ten the loai: "
+                            <TextBlock Text="Tên thể loại: "
                                        Foreground="#07209e"
                                        FontSize="18"
                                        Margin="5"
-                                       Grid.ColumnSpan="3"/>
+                                       Grid.ColumnSpan="5"/>
                             <TextBox Grid.Row="1"
-                                     Margin="5"
-                                     Grid.ColumnSpan="3"></TextBox>
+                                     Grid.ColumnSpan="5"></TextBox>
                             <Button x:Name="addtl"
                                     Style="{DynamicResource RoundButton}"
-                                    Content="+"
-                                    Background="#FF1CD148"
+                                    Background="#FF9AFFAB"
                                     Height="30"
                                     Width="30"
                                     Grid.Column="0"
-                                    Grid.Row="2"/>
-                            <Button x:Name="deltl"
+                                    Grid.Row="2">
+                                <Image Source="/Icon/plus.png" Margin="6"/>
+                            </Button>
+                            <Button x:Name="fndtl"
                                     Style="{DynamicResource RoundButton}"
-                                    Content="-"
-                                    Background="#FFD1291C"
+                                    Background="#9acbff"
                                     Height="30"
                                     Width="30"
                                     Grid.Column="1"
-                                    Grid.Row="2"/>
+                                    Grid.Row="2">
+                                <Image Source="\Icon\search.png" Margin="5"/>
+                            </Button>
+                            <Button x:Name="edittl"
+                                    Style="{DynamicResource RoundButton}"
+                                    Background="#FFF6FF9A"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="2"
+                                    Grid.Row="2">
+                                <Image Source="/Icon/edit.png" Margin="5"/>
+                            </Button>
+                            <Button x:Name="deltl"
+                                    Style="{DynamicResource RoundButton}"
+                                    Background="#FFFF9A9A"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="3"
+                                    Grid.Row="2">
+                                <Image Source="/Icon/minus-sign.png" Margin="5"/>
+                            </Button>
                         </Grid>
-                        <ListView x:Name="theloai"
-                            Margin="5"
-                            Grid.Row="1">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Ma the loai"/>
-                                    <GridViewColumn Header="Ten the loai"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <DataGrid x:Name="theloai"
+                                  Margin="5"
+                                  Grid.Row="1"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã thể loại" Binding="{Binding MaTL}" />
+                                <DataGridTextColumn Header="Tên thể loại" Binding="{Binding TenTL}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
                     </Grid>
                     <Grid Background="#cfcfcf"
                           Margin="5" 
@@ -324,48 +382,71 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35"/>
                                 <RowDefinition Height="30"/>
-                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Ten nha xuat ban: "
+                            <TextBlock Text="Tên nhà xuất bản: "
                                        Foreground="#07209e"
                                        FontSize="18"
                                        Margin="5"
-                                       Grid.ColumnSpan="3"/>
+                                       Grid.ColumnSpan="5"/>
                             <TextBox Grid.Row="1"
-                                         Margin="5"
-                                         Grid.ColumnSpan="3"></TextBox>
+                                         Grid.ColumnSpan="5"></TextBox>
                             <Button x:Name="addnxb"
                                     Style="{DynamicResource RoundButton}"
-                                    Content="+"
-                                    Background="#FF1CD148"
+                                    Background="#FF9AFFAB"
                                     Height="30"
                                     Width="30"
                                     Grid.Column="0"
-                                    Grid.Row="2"/>          
-                            <Button x:Name="delnxb"
+                                    Grid.Row="2">
+                                <Image Source="/Icon/plus.png" Margin="6"/>
+                            </Button>
+                            <Button x:Name="fndNXB"
                                     Style="{DynamicResource RoundButton}"
-                                    Content="-"
-                                    Background="#FFD1291C"
+                                    Background="#9acbff"
                                     Height="30"
                                     Width="30"
                                     Grid.Column="1"
-                                    Grid.Row="2"/>
+                                    Grid.Row="2">
+                                <Image Source="\Icon\search.png" Margin="5"/>
+                            </Button>
+                            <Button x:Name="editnxb"
+                                    Style="{DynamicResource RoundButton}"
+                                    Background="#FFF6FF9A"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="2"
+                                    Grid.Row="2">
+                                <Image Source="/Icon/edit.png" Margin="5"/>
+                            </Button>
+                            <Button x:Name="delnxb"
+                                    Style="{DynamicResource RoundButton}"
+                                    Background="#FFFF9A9A"
+                                    Height="30"
+                                    Width="30"
+                                    Grid.Column="3"
+                                    Grid.Row="2">
+                                <Image Source="/Icon/minus-sign.png" Margin="5"/>
+                            </Button>
                         </Grid>
-                        <ListView x:Name="nxb"
-                            Margin="5"
-                            Grid.Row="1">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Ma nxb"/>
-                                    <GridViewColumn Header="Ten nxb"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
+                        <DataGrid x:Name="nxb"
+                                    Margin="5"
+                                    Grid.Row="1"
+                                    AutoGenerateColumns="False"
+                                    IsReadOnly="True"
+                                    >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã NXB" Binding="{Binding MaNXB}" />
+                                <DataGridTextColumn Header="Tên NXB" Binding="{Binding TenNXB}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
                     </Grid>
                 </Grid>
             </TabItem>

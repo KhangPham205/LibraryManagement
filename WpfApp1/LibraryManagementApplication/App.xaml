@@ -4,19 +4,51 @@
              xmlns:local="clr-namespace:LibraryManagementApplication"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="Button" x:Key="RoundButton">
-            <Setter Property="Background" Value="LightBlue"/>
-            <Setter Property="BorderBrush" Value="White"/>
-            <Setter Property="BorderThickness" Value="2"/>
+        <Style TargetType="Button" x:Key="IconButton">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid>
-                            <Ellipse Fill="{TemplateBinding Background}" 
-                                 Stroke="{TemplateBinding BorderBrush}" 
-                                 StrokeThickness="{TemplateBinding BorderThickness}"/>
+                            <Ellipse x:Name="btn"
+                        Fill="{TemplateBinding Background}" 
+                        Stroke="{TemplateBinding BorderBrush}" 
+                        StrokeThickness="{TemplateBinding BorderThickness}"/>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="btn" Property="Fill" Value="#cfcfcf"/>
+                                <Setter TargetName="btn" Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button" x:Key="RoundButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse x:Name="btn"
+                                Fill="{TemplateBinding Background}" 
+                                Stroke="{TemplateBinding BorderBrush}" 
+                                StrokeThickness="{TemplateBinding BorderThickness}"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="btn" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="black"
+                                                  Direction="45"
+                                                  ShadowDepth="4"
+                                                  Opacity="0.5"
+                                                  BlurRadius="10" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -33,13 +65,16 @@
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Background" Value="LightSkyBlue" />
-                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="Blue" />
-                            </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Background" Value="DodgerBlue" />
-                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="DarkBlue" />
+                                <Setter TargetName="ButtonBorder" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#cfcfcf"
+                                                    Direction="45"
+                                                    ShadowDepth="4"
+                                                    Opacity="0.5"
+                                                    BlurRadius="10" />
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

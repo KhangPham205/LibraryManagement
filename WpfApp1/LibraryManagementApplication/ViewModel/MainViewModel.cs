@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagementApplication.Model.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,7 @@ namespace LibraryManagementApplication.ViewModel
     {
         public MainViewModel() 
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            
         }
     }
 }

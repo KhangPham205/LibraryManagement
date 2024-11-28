@@ -59,6 +59,9 @@
     <Compile Include="bookpage.xaml.cs">
       <DependentUpon>bookpage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="employeepage.xaml.cs">
+      <DependentUpon>employeepage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="mainpage.xaml.cs">
       <DependentUpon>mainpage.xaml</DependentUpon>
     </Compile>
@@ -70,6 +73,12 @@
     <Compile Include="Model\Class\TacGia.cs" />
     <Compile Include="Model\Class\TaiKhoan.cs" />
     <Compile Include="Model\Class\TheLoai.cs" />
+    <Compile Include="borrowpage.xaml.cs">
+      <DependentUpon>borrowpage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="readerpage.xaml.cs">
+      <DependentUpon>readerpage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Signin.xaml.cs">
       <DependentUpon>Signin.xaml</DependentUpon>
     </Compile>
@@ -90,6 +99,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="employeepage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="mainpage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,6 +119,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="borrowpage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="readerpage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,6 +192,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\edit.png" />
+    <Resource Include="Icon\minus-sign.png" />
+    <Resource Include="Icon\plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
