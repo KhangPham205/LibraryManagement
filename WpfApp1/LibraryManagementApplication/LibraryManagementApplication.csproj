@@ -17,6 +17,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,7 +30,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -332,12 +332,12 @@
     <Resource Include="Icon\search.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\Database\LibraryManagement.mdf">
+    <Content Include="Model\Database\LibraryDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Model\Database\LibraryManagement_log.ldf">
+    <Content Include="Model\Database\LibraryDatabase_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>LibraryManagement.mdf</DependentUpon>
+      <DependentUpon>LibraryDatabase.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
