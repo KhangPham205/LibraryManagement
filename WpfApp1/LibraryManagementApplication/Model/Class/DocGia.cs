@@ -15,7 +15,7 @@ namespace LibraryManagementApplication.Model.Class
         public string Email { get; set; }
         public string SDT { get; set; }
         public string CCCD { get; set; }
-
+        public string SDT { get; set; }
         // Navigation properties
         public ICollection<DonMuon> DonMuons { get; set; }
         public DocGia() { }

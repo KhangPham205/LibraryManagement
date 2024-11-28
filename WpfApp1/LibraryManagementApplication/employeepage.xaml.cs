@@ -17,20 +17,21 @@ using System.Windows.Shapes;
 namespace LibraryManagementApplication
 {
     /// <summary>
-    /// Interaction logic for mainpage.xaml
+    /// Interaction logic for employeepage.xaml
     /// </summary>
-    public partial class mainpage : Page
+    public partial class employeepage : Page
     {
-        public mainpage()
+        public employeepage()
         {
             InitializeComponent();
-            List<Sach> danhSachSach = new List<Sach>
+            List<TaiKhoan> danhSachNhanVien = new List<TaiKhoan>
             {
-                new Sach { MaSach = "S001", TenSach = "Sách A", ISBN = "1234567890", NgonNgu = "Tiếng Việt", ViTri = "Kệ A1", TrangThai = "Còn" },
-                new Sach {MaSach = "S002", TenSach = "Sách B", ISBN = "0987654321", NgonNgu = "Tiếng Anh", ViTri = "Kệ B2", TrangThai = "Mượn"}
+                new TaiKhoan { UserID = "NV001", UserName = "Nguyen Van A", Password = "123", Email = "a@gmail.com", CCCD = "123456789", SDT = "0912345678" },
+                new TaiKhoan { UserID = "NV002", UserName = "Tran Thi B", Password = "abc", Email = "b@gmail.com", CCCD = "987654321", SDT = "0987654321" }
             };
-            // Gán danh sách dữ liệu cho DataGrid
-            sach.ItemsSource = danhSachSach;
+
+            // Gán dữ liệu cho DataGrid
+            sach.ItemsSource = danhSachNhanVien;
         }
     }
 }

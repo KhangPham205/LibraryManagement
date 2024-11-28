@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagementApplication"
         mc:Ignorable="d"
-                Height="400" Width="600"
+        Height="400" Width="600"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         DataContext="{DynamicResource MainVM}"
@@ -28,7 +28,7 @@
                 Margin="0,10,0,10"/>
         </Border>
 
-        <Grid 
+        <Grid x:Name="parent"
             Grid.Row="1"
             Margin="10,0,10,0">
             <Grid.ColumnDefinitions>
@@ -91,12 +91,12 @@
                 IsEnabled="False"
                 Visibility="Hidden"></TextBox>
             <Button x:Name="see"
+                Style="{DynamicResource IconButton}"
+                Background="Transparent"
+                BorderBrush="White"
                 Grid.Row="2"
                 Grid.Column="3"
-                BorderBrush="Transparent"
-                Background="Transparent"
-                Margin="10,15,20,15"
-                BorderThickness="0">
+                Margin="10,15,20,15">
                 <Image Source="/icon/hide.png"/>
             </Button>
             <Grid
