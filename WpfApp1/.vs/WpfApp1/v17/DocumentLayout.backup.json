@@ -3,19 +3,27 @@
   "WorkspaceRootPath": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\librarymanagementapplication\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\d\\lecture\\it008_laptrinhtrucquan\\doancuoiky\\wpfapp1\\librarymanagementapplication\\viewmodel\\classviewmodel\\sachviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\viewmodel\\classviewmodel\\sachviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\d\\lecture\\it008_laptrinhtrucquan\\doancuoiky\\wpfapp1\\librarymanagementapplication\\model\\class\\taikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\model\\class\\taikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\d\\lecture\\it008_laptrinhtrucquan\\doancuoiky\\wpfapp1\\librarymanagementapplication\\viewmodel\\librarydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\librarymanagementapplication\\viewmodel\\librarydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\viewmodel\\librarydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\d\\lecture\\it008_laptrinhtrucquan\\doancuoiky\\wpfapp1\\librarymanagementapplication\\model\\class\\sach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\d\\lecture\\it008_laptrinhtrucquan\\doancuoiky\\wpfapp1\\librarymanagementapplication\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\d\\lecture\\it008_laptrinhtrucquan\\doancuoiky\\wpfapp1\\librarymanagementapplication\\viewmodel\\classviewmodel\\ctdmviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\viewmodel\\classviewmodel\\ctdmviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\librarymanagementapplication\\model\\class\\taikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\model\\class\\taikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\librarymanagementapplication\\model\\class\\sach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\model\\class\\sach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 248,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,7 +62,33 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SachViewModel.cs",
+              "DocumentMoniker": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\ViewModel\\ClassViewModel\\SachViewModel.cs",
+              "RelativeDocumentMoniker": "LibraryManagementApplication\\ViewModel\\ClassViewModel\\SachViewModel.cs",
+              "ToolTip": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\ViewModel\\ClassViewModel\\SachViewModel.cs*",
+              "RelativeToolTip": "LibraryManagementApplication\\ViewModel\\ClassViewModel\\SachViewModel.cs*",
+              "ViewState": "AgIAALcAAAAAAAAAAAAqwNMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T08:29:21.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "CTDMViewModel.cs",
+              "DocumentMoniker": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\ViewModel\\ClassViewModel\\CTDMViewModel.cs",
+              "RelativeDocumentMoniker": "LibraryManagementApplication\\ViewModel\\ClassViewModel\\CTDMViewModel.cs",
+              "ToolTip": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\ViewModel\\ClassViewModel\\CTDMViewModel.cs",
+              "RelativeToolTip": "LibraryManagementApplication\\ViewModel\\ClassViewModel\\CTDMViewModel.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAcwDsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T08:24:28.35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Sach.cs",
               "DocumentMoniker": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\Model\\Class\\Sach.cs",
               "RelativeDocumentMoniker": "LibraryManagementApplication\\Model\\Class\\Sach.cs",
@@ -62,12 +96,11 @@
               "RelativeToolTip": "LibraryManagementApplication\\Model\\Class\\Sach.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T04:31:45.809Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-28T04:31:45.809Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "TaiKhoan.cs",
               "DocumentMoniker": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\Model\\Class\\TaiKhoan.cs",
               "RelativeDocumentMoniker": "LibraryManagementApplication\\Model\\Class\\TaiKhoan.cs",
@@ -75,31 +108,30 @@
               "RelativeToolTip": "LibraryManagementApplication\\Model\\Class\\TaiKhoan.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T04:29:07.334Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-28T04:29:07.334Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "LoginViewModel.cs",
               "DocumentMoniker": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\ViewModel\\LoginViewModel.cs",
               "RelativeDocumentMoniker": "LibraryManagementApplication\\ViewModel\\LoginViewModel.cs",
               "ToolTip": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\ViewModel\\LoginViewModel.cs",
               "RelativeToolTip": "LibraryManagementApplication\\ViewModel\\LoginViewModel.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwB8AAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAgwD8AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-27T14:31:43.529Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "LibraryDbContext.cs",
               "DocumentMoniker": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\ViewModel\\LibraryDbContext.cs",
               "RelativeDocumentMoniker": "LibraryManagementApplication\\ViewModel\\LibraryDbContext.cs",
               "ToolTip": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\ViewModel\\LibraryDbContext.cs",
               "RelativeToolTip": "LibraryManagementApplication\\ViewModel\\LibraryDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-27T13:37:41.672Z",
               "EditorCaption": ""
