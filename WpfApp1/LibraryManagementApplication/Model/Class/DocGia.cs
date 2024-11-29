@@ -16,7 +16,7 @@ namespace LibraryManagementApplication.Model.Class
         public string SDT { get; set; }
         public string CCCD { get; set; }
         // Navigation properties
-        public ICollection<DonMuon> DonMuons { get; set; }
+        public ICollection<DonMuon> DonMuons { get; set; } = new List<DonMuon>();
         public DocGia() { }
     }
 }

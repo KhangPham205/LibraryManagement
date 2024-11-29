@@ -11,6 +11,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class SachViewModel : BaseViewModel
     {
+        public string MaSach { get; set; }
+        public string TenSach { get; set; }
+        public string ISBN { get; set; }
+        public string ViTri { get; set; }
+        public string NgonNgu { get; set; }
+        public string TrangThai { get; set; }
         public ObservableCollection<Sach> SachList { get; set; }
         private Sach _selectedSach;
         public Sach SelectedSach
@@ -58,7 +64,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             {
                 MaSach = "S001",
                 TenSach = "New Book",
-                ISBN = "1234567890",
+                ISBN = ISBN,
                 ViTri = "A1",
                 NgonNgu = "Vietnamese",
                 TrangThai = "Available"

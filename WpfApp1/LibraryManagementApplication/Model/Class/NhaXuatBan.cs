@@ -14,7 +14,7 @@ namespace LibraryManagementApplication.Model.Class
         public string TenNXB { get; set; }
 
         // Navigation properties
-        public ICollection<SachNhaXuatBan> SachNhaXuatBans { get; set; }
+        public ICollection<SachNhaXuatBan> SachNhaXuatBans { get; set; } = new List<SachNhaXuatBan>();
         public NhaXuatBan() { }
     }
 }

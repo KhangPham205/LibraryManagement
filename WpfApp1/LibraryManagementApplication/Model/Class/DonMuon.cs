@@ -19,7 +19,7 @@ namespace LibraryManagementApplication.Model.Class
 
         // Navigation properties
         public DocGia DocGia { get; set; }
-        public ICollection<CTDM> CTDMs { get; set; }
+        public ICollection<CTDM> CTDMs { get; set; } = new List<CTDM>();
 
         public DonMuon() { }
         public DonMuon(string maMuon, string maDG, DateTime ngayMuon, DateTime ngayTraDK, DateTime ngayTraTT, decimal phiPhat)

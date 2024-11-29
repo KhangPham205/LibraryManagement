@@ -18,10 +18,10 @@ namespace LibraryManagementApplication.Model.Class
         public string TrangThai { get; set; }
 
         // Navigation properties
-        public ICollection<SachTacGia> SachTacGias { get; set; }
-        public ICollection<SachTheLoai> SachTheLoais { get; set; }
-        public ICollection<SachNhaXuatBan> SachNhaXuatBans { get; set; }
-        public ICollection<CTDM> CTDMs { get; set; }
+        public ICollection<SachTacGia> SachTacGias { get; set; } = new List<SachTacGia>();
+        public ICollection<SachTheLoai> SachTheLoais { get; set; } = new List<SachTheLoai>();
+        public ICollection<SachNhaXuatBan> SachNhaXuatBans { get; set; } = new List<SachNhaXuatBan>();
+        public ICollection<CTDM> CTDMs { get; set; } = new List<CTDM>();
 
         public Sach() { }
     }

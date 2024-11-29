@@ -14,7 +14,7 @@ namespace LibraryManagementApplication.Model.Class
         public string TenTG { get; set; }
 
         // Navigation properties
-        public ICollection<SachTacGia> SachTacGias { get; set; }
+        public ICollection<SachTacGia> SachTacGias { get; set; } = new List<SachTacGia>();
         public TacGia() { }
     }
 }
