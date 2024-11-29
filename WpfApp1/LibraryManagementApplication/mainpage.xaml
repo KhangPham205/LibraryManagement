@@ -6,7 +6,6 @@
       xmlns:local="clr-namespace:LibraryManagementApplication"
       mc:Ignorable="d" 
       d:DesignHeight="465" d:DesignWidth="730">
-
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -78,7 +77,8 @@
                           FontSize="18"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
-                          HeadersVisibility="Column">
+                          HeadersVisibility="Column"
+                          ItemsSource="{Binding danhsachSach}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Mã sách" Binding="{Binding MaSach}" />
                         <DataGridTextColumn Header="Tên sách" Binding="{Binding TenSach}" />
@@ -135,7 +135,8 @@
                           Grid.ColumnSpan="2"
                           FontSize="18"
                           Margin="5" 
-                          AutoGenerateColumns="False">
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding danhsachDon}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Mã đơn mượn" IsReadOnly="True"/>
                         <DataGridTextColumn Header="Tên độc giả" IsReadOnly="True"/>
