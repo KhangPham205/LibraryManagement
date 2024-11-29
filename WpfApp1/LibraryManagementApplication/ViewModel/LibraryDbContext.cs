@@ -1,5 +1,7 @@
 ﻿using LibraryManagementApplication.Model.Class;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace LibraryManagementApplication.ViewModel
 {
@@ -15,17 +17,18 @@ namespace LibraryManagementApplication.ViewModel
         public DbSet<TaiKhoan> TaiKhoans { get; set; }
 
         // Các bảng trung gian
-        public DbSet<SachTacGia> SachTacGias { get; set; }
-        public DbSet<SachTheLoai> SachTheLoais { get; set; }
-        public DbSet<SachNhaXuatBan> SachNhaXuatBans { get; set; }
+        //public DbSet<SachTacGia> SachTacGias { get; set; }
+        //public DbSet<SachTheLoai> SachTheLoais { get; set; }
+        //public DbSet<SachNhaXuatBan> SachNhaXuatBans { get; set; }
 
         // Cấu hình chuỗi kết nối đến cơ sở dữ liệu
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\Model\Database\LibraryManagement.mdf;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\Model\Database\DatabaseLibrary.mdf;Integrated Security=True;MultipleActiveResultSets=True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Sach>()
                 .ToTable("Sach");
 
@@ -45,20 +48,20 @@ namespace LibraryManagementApplication.ViewModel
                 .ToTable("DonMuon");
 
             modelBuilder.Entity<CTDM>()
-                .ToTable("CTDM");
+                .ToTable("CTDM").HasNoKey();
 
             modelBuilder.Entity<TaiKhoan>()
                 .ToTable("TaiKhoan");
 
             // Cấu hình các bảng trung gian, nếu cần
-            modelBuilder.Entity<SachTacGia>()
-                .ToTable("SachTacGia");
+            //modelBuilder.Entity<SachTacGia>()
+            //    .ToTable("SachTacGia");
 
-            modelBuilder.Entity<SachTheLoai>()
-                .ToTable("SachTheLoai");
+            //modelBuilder.Entity<SachTheLoai>()
+            //    .ToTable("SachTheLoai");
 
-            modelBuilder.Entity<SachNhaXuatBan>()
-                .ToTable("SachNhaXuatBan");
+            //modelBuilder.Entity<SachNhaXuatBan>()
+            //    .ToTable("SachNhaXuatBan");
         }
     }
 }

@@ -14,7 +14,6 @@ namespace LibraryManagementApplication.Model.Class
         public string TenTL { get; set; }
 
         // Navigation properties
-        public ICollection<SachTheLoai> SachTheLoais { get; set; } = new List<SachTheLoai>();
         public TheLoai() { }
     }
 }

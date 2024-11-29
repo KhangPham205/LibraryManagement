@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
@@ -40,7 +41,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public SachViewModel()
         {
             SachList = new ObservableCollection<Sach>();
-            AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddSach());
+            AddCommand = new RelayCommand<object>((p) => true, (p) => AddSach());
             EditCommand = new RelayCommand<object>((p) => SelectedSach != null, async (p) => await EditSach());
             DeleteCommand = new RelayCommand<object>((p) => SelectedSach != null, async (p) => await DeleteSach());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchSach(p));
@@ -58,7 +59,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        private async Task AddSach()
+        private void AddSach()
         {
             Sach newSach = new Sach()
             {
@@ -71,10 +72,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             };
             SachList.Add(newSach);
 
-            bool isSuccess = await AddSachToDatabase(newSach);
+            bool isSuccess = AddSachToDatabase(newSach);
             if (!isSuccess)
             {
-                // Handle failure (e.g. show error message to user)
+                MessageBox.Show("Cannot save changes");
             }
         }
 
@@ -119,20 +120,38 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         #region MethodToDatabase
-        public static async Task<bool> AddSachToDatabase(Sach sach)
+        public static bool AddSachToDatabase(Sach sach)
         {
             try
             {
+
                 using (var context = new LibraryDbContext())
                 {
+                    var connection = context.Database.GetDbConnection();
+                    Console.WriteLine($"Trạng thái kết nối: {connection.State}");
+
+                    if (connection.State == System.Data.ConnectionState.Open)
+                    {
+                        MessageBox.Show("Kết nối đã được mở.");
+                    }
+                    else
+                    {
+                        connection.Open(); // Mở kết nối thủ công nếu cần
+                        MessageBox.Show("Đóng");
+                    }
+
+                    if (connection.State == System.Data.ConnectionState.Open)
+                    {
+                        MessageBox.Show("Kết nối đã được mở.");
+                    }
                     context.Sachs.Add(sach);
-                    await context.SaveChangesAsync();
+                    context.SaveChanges();
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error adding book: {ex.Message}");
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
