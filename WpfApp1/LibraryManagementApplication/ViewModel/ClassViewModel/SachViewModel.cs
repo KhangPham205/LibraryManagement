@@ -62,12 +62,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             Sach newSach = new Sach()
             {
-                MaSach = "S001",
-                TenSach = "New Book",
+                MaSach = "1",
+                TenSach = TenSach,
                 ISBN = ISBN,
-                ViTri = "A1",
-                NgonNgu = "Vietnamese",
-                TrangThai = "Available"
+                ViTri = ViTri,
+                NgonNgu = NgonNgu,
+                TrangThai = TrangThai 
             };
             SachList.Add(newSach);
 

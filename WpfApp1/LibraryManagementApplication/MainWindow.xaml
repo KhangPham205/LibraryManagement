@@ -28,6 +28,7 @@
                             Style="{DynamicResource IconButton}"
                             Background="Transparent" BorderBrush="Transparent">
                         <Image Source="/Icon/home.png"/>
+                        
                     </Button>
                     <Button Width="40" Height="40" Margin="0 15 0 0"
                             Style="{DynamicResource IconButton}"
