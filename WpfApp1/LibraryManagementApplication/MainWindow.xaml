@@ -3,10 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LibraryManagementApplication"
+        xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel"
         mc:Ignorable="d"
         Title="Library Application" Height="465" Width="800"
         MinHeight="465" MinWidth="870">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70"/>
@@ -21,48 +24,62 @@
             <Grid>
                 <StackPanel x:Name="listMainButton">
                     <Button Width="40" Height="40" Margin="0 15 0 0" 
-                            Style="{StaticResource RoundButton}">
+                            Style="{StaticResource RoundButton}"
+                            Command="{Binding signincommand}"
+                            >
                         <Image Source="/Icon/user.png"/>
                     </Button>
                     <Button Width="40" Height="40" Margin="0 15 0 0"
                             Style="{DynamicResource IconButton}"
-                            Background="Transparent" BorderBrush="Transparent">
+                            Background="Transparent" BorderBrush="Transparent"
+                            Command="{Binding mainpagecommand}"
+                            CommandParameter="{Binding ElementName=Mainpage}">
                         <Image Source="/Icon/home.png"/>
                         
                     </Button>
                     <Button Width="40" Height="40" Margin="0 15 0 0"
                             Style="{DynamicResource IconButton}"
-                            Background="Transparent" BorderBrush="Transparent">
+                            Background="Transparent" BorderBrush="Transparent"
+                            Command="{Binding bookpagecommand}"
+                            CommandParameter="{Binding ElementName=Mainpage}">
                         <Image Source="/Icon/open-book.png"/>
                     </Button>
                     <Button Width="40" Height="40" Margin="0 15 0 0"
                             Style="{DynamicResource IconButton}"
-                            Background="Transparent" BorderBrush="Transparent">
+                            Background="Transparent" BorderBrush="Transparent"
+                            Command="{Binding borrowpagecommand}" 
+                            CommandParameter="{Binding ElementName=Mainpage}">
                         <Image Source="/Icon/document.png"/>
                     </Button>
                     <Button Width="40" Height="40" Margin="0 15 0 0"
                            Style="{DynamicResource IconButton}"
-                            Background="Transparent" BorderBrush="Transparent">
+                            Background="Transparent" BorderBrush="Transparent"
+                            Command="{Binding readerpagecommand}"
+                            CommandParameter="{Binding ElementName=Mainpage}">
                         <Image Source="/Icon/reader.png"/>
                  
                     </Button>
                     <Button Width="40" Height="40" Margin="0 15 0 0"
                             Style="{DynamicResource IconButton}"
-                             Background="Transparent" BorderBrush="Transparent">
+                             Background="Transparent" BorderBrush="Transparent"
+                            Command="{Binding employeepagecommand}"
+                            CommandParameter="{Binding ElementName=Mainpage}">
                         <Image Source="/Icon/team.png"/>
                     </Button>
                 
                 </StackPanel>
                 <Button Width="30" Height="30" Margin="0 10 0 10" VerticalAlignment="Bottom"
                         Style="{DynamicResource IconButton}"
-                        Background="Transparent" BorderBrush="Transparent" >
+                        Background="Transparent" BorderBrush="Transparent"
+                        Command="{Binding signoutcommand}">
                     <Image Source="/Icon/logout.png"/>
                 </Button>
             </Grid>
         </Border>
         <Frame x:Name="Mainpage" 
                Grid.Column="1"
-               NavigationUIVisibility="Hidden">
+               NavigationUIVisibility="Hidden"
+               >
         </Frame>
     </Grid>
 </Window>

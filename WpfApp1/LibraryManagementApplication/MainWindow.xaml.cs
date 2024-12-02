@@ -25,7 +25,6 @@ namespace LibraryManagementApplication
         public MainWindow()
         {
             InitializeComponent();
-            Mainpage.Content = new bookpage();
         }
     }
 }
