@@ -26,7 +26,7 @@ namespace LibraryManagementApplication.ViewModel
         public MainViewModel()
         { 
             signincommand = new RelayCommand<object> ( (p) => { return true; /*xet da dang nhap hay chua*/ }, (p) => { Signin window = new Signin(); window.ShowDialog(); } );
-            signoutcommand = new RelayCommand<object>((p) => { return true; /*xet da dang nhap hay chua*/ }, (p) => { /*xu ly du lieu dang nhap*/});
+            signoutcommand = new RelayCommand<object>((p) => { return true; /*xet da dang nhap hay chua*/ }, (p) => { /*xu ly dang xuat*/});
             mainpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is mainpage); }, (p) => { p.Content = new mainpage(); });
             bookpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is bookpage); }, (p) => { p.Content = new bookpage(); });
             borrowpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is borrowpage); }, (p) => { p.Content = new borrowpage(); });

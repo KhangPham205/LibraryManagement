@@ -4,13 +4,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LibraryManagementApplication"
+        xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel"
         mc:Ignorable="d"
         Height="400" Width="600"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        DataContext="{DynamicResource MainVM}"
         >
+    <Window.DataContext>
+        <local:LoginViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -64,7 +66,8 @@
                     FontSize="28"
                     Margin="5"
                     BorderBrush="Transparent"
-                    BorderThickness="0"></TextBox>
+                    BorderThickness="0"
+                    Text="{Binding Username}"></TextBox>
             </Border>
             <Border 
                 Background="#ffffff"
@@ -122,8 +125,8 @@
                         FontSize="18"
                         Grid.Column="0"
                         Grid.Row="1"
-                        Command="{Binding SUClickCommand}"
-                        CommandParameter="{Binding ElementName=signup}">
+                        Command="{Binding SignupCommand}"
+                        CommandParameter="{Binding ElementName=signInWindow}">
                 </Button>
 
                 <Button x:Name="signin"
@@ -136,8 +139,7 @@
                         FontSize="18"
                         Grid.Column="2"
                         Grid.Row="1"
-                        Command="{Binding SIClickCommand}"
-                        CommandParameter="{Binding ElementName=signin}">
+                        Command="{Binding LoginCommand}">
                 </Button>
 
                 <TextBlock x:Name="forgot"

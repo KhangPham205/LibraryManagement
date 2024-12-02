@@ -32,8 +32,8 @@
                 Margin="10,0,10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="6*"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -49,7 +49,7 @@
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="1"
-                Text="Tài khoản:"
+                Text="Tên người dùng:"
                 Foreground="#07209e"
                 FontSize="18"
                 Margin="10"
