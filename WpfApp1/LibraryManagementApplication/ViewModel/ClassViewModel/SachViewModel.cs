@@ -18,6 +18,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public string ViTri { get; set; }
         public string NgonNgu { get; set; }
         public string TrangThai { get; set; }
+        public string TenTG { get; set; }
+        public string TheLoai { get; set; }
+        public string NhaXuatBan { get; set; }
+        public int NamXuatBan { get; set; }
         public ObservableCollection<Sach> SachList { get; set; }
         private Sach _selectedSach;
         public Sach SelectedSach
@@ -41,7 +45,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public SachViewModel()
         {
             SachList = new ObservableCollection<Sach>();
-            AddCommand = new RelayCommand<object>((p) => true, (p) => AddSach());
+            AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddSach());
             EditCommand = new RelayCommand<object>((p) => SelectedSach != null, async (p) => await EditSach());
             DeleteCommand = new RelayCommand<object>((p) => SelectedSach != null, async (p) => await DeleteSach());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchSach(p));
@@ -52,30 +56,33 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         private async void LoadSachList()
         {
             SachList.Clear();
-            var sachs = await GetAllSachs();
+            var sachs = await GetAllSachsAsync();
             foreach (var sach in sachs)
             {
                 SachList.Add(sach);
             }
         }
 
-        private void AddSach()
+        private async Task AddSach()
         {
-            Sach newSach = new Sach()
+            var newSach = new Sach()
             {
-                MaSach = "1",
+                MaSach = "1", // You might want to generate a unique ID
                 TenSach = TenSach,
                 ISBN = ISBN,
                 ViTri = ViTri,
                 NgonNgu = NgonNgu,
-                TrangThai = TrangThai 
+                TrangThai = TrangThai,
+                TenTG = TenTG,
+                NhaXuatBan = NhaXuatBan,
+                NamXuatBan = NamXuatBan
             };
             SachList.Add(newSach);
 
-            bool isSuccess = AddSachToDatabase(newSach);
+            bool isSuccess = await AddSachToDatabaseAsync(newSach);
             if (!isSuccess)
             {
-                MessageBox.Show("Cannot save changes");
+                MessageBox.Show("Cannot save changes.");
             }
         }
 
@@ -83,9 +90,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             if (SelectedSach != null)
             {
-                OnPropertyChanged(nameof(SelectedSach));
-
-                bool isSuccess = await UpdateSachInDatabase(SelectedSach);
+                bool isSuccess = await UpdateSachInDatabaseAsync(SelectedSach);
                 if (!isSuccess)
                 {
                     // Handle failure (e.g. show error message to user)
@@ -97,7 +102,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             if (SelectedSach != null)
             {
-                bool isSuccess = await DeleteSachFromDatabase(SelectedSach.MaSach);
+                bool isSuccess = await DeleteSachFromDatabaseAsync(SelectedSach.MaSach);
                 if (isSuccess)
                 {
                     SachList.Remove(SelectedSach);
@@ -111,7 +116,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async Task SearchSach(string keyword)
         {
-            var filteredListFromDb = await SearchSachInDatabase(keyword);
+            var filteredListFromDb = await SearchSachInDatabaseAsync(keyword);
             SachList.Clear();
             foreach (var sach in filteredListFromDb)
             {
@@ -120,43 +125,26 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         #region MethodToDatabase
-        public static bool AddSachToDatabase(Sach sach)
+
+        public static async Task<bool> AddSachToDatabaseAsync(Sach sach)
         {
             try
             {
-
                 using (var context = new LibraryDbContext())
                 {
-                    var connection = context.Database.GetDbConnection();
-                    Console.WriteLine($"Trạng thái kết nối: {connection.State}");
-
-                    if (connection.State == System.Data.ConnectionState.Open)
-                    {
-                        MessageBox.Show("Kết nối đã được mở.");
-                    }
-                    else
-                    {
-                        connection.Open(); // Mở kết nối thủ công nếu cần
-                        MessageBox.Show("Đóng");
-                    }
-
-                    if (connection.State == System.Data.ConnectionState.Open)
-                    {
-                        MessageBox.Show("Kết nối đã được mở.");
-                    }
                     context.Sachs.Add(sach);
-                    context.SaveChanges();
+                    await context.SaveChangesAsync();
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"Error adding book: {ex.Message}");
                 return false;
             }
         }
 
-        public static async Task<bool> UpdateSachInDatabase(Sach sach)
+        public static async Task<bool> UpdateSachInDatabaseAsync(Sach sach)
         {
             try
             {
@@ -169,12 +157,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error updating book: {ex.Message}");
+                MessageBox.Show($"Error updating book: {ex.Message}");
                 return false;
             }
         }
 
-        public static async Task<bool> DeleteSachFromDatabase(string maSach)
+        public static async Task<bool> DeleteSachFromDatabaseAsync(string maSach)
         {
             try
             {
@@ -192,31 +180,31 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error deleting book: {ex.Message}");
+                MessageBox.Show($"Error deleting book: {ex.Message}");
                 return false;
             }
         }
 
-        public static async Task<List<Sach>> SearchSachInDatabase(string keyword)
+        public static async Task<List<Sach>> SearchSachInDatabaseAsync(string keyword)
         {
             try
             {
                 using (var context = new LibraryDbContext())
                 {
                     var result = await context.Sachs
-                        .Where(s => s.TenSach.Contains(keyword))
-                        .ToListAsync();
+                                              .Where(s => s.TenSach.Contains(keyword))
+                                              .ToListAsync();
                     return result;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error searching books: {ex.Message}");
+                MessageBox.Show($"Error searching books: {ex.Message}");
                 return new List<Sach>();
             }
         }
 
-        public static async Task<List<Sach>> GetAllSachs()
+        public static async Task<List<Sach>> GetAllSachsAsync()
         {
             try
             {
@@ -228,10 +216,11 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error getting all books: {ex.Message}");
+                MessageBox.Show($"Error getting all books: {ex.Message}");
                 return new List<Sach>();
             }
         }
+
         #endregion
     }
 }

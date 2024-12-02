@@ -1,18 +1,28 @@
 ﻿using LibraryManagementApplication.Model.Class;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class TaiKhoanViewModel : BaseViewModel
     {
+        public string UserID { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Loai { get; set; }
+        public string Email { get; set; }
+        public string SDT { get; set; }
+        public string CCCD { get; set; }
+
         public ObservableCollection<TaiKhoan> TaiKhoanList { get; set; }
         private TaiKhoan _selectedTaiKhoan;
+
         public TaiKhoan SelectedTaiKhoan
         {
             get { return _selectedTaiKhoan; }
@@ -34,80 +44,181 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public TaiKhoanViewModel()
         {
             TaiKhoanList = new ObservableCollection<TaiKhoan>();
-            AddCommand = new RelayCommand<object>((p) => true, (p) => AddTaiKhoan());
-            EditCommand = new RelayCommand<object>((p) => SelectedTaiKhoan != null, (p) => EditTaiKhoan());
-            DeleteCommand = new RelayCommand<object>((p) => SelectedTaiKhoan != null, (p) => DeleteTaiKhoan());
-            SearchCommand = new RelayCommand<string>((p) => true, (p) => SearchTaiKhoan(p));
+            AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddTaiKhoan());
+            EditCommand = new RelayCommand<object>((p) => SelectedTaiKhoan != null, async (p) => await EditTaiKhoan());
+            DeleteCommand = new RelayCommand<object>((p) => SelectedTaiKhoan != null, async (p) => await DeleteTaiKhoan());
+            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchTaiKhoan(p));
+            LoadTaiKhoanList();
         }
 
-        private void AddTaiKhoan()
+        private async void LoadTaiKhoanList()
+        {
+            var taiKhoans = await GetAllTaiKhoansAsync();
+            foreach (var taiKhoan in taiKhoans)
+            {
+                TaiKhoanList.Add(taiKhoan);
+            }
+        }
+
+        private async Task AddTaiKhoan()
         {
             TaiKhoan newTaiKhoan = new TaiKhoan()
             {
-                UserID = "TK001",
-                UserName = "User Mới",
-                Password = "password123",
-                Loai = "NV",
-                Email = "usermoi@example.com",
-                SDT = "0123456789",
-                CCCD = "123456789"
+                UserID = UserID,
+                UserName = UserName,
+                Password = Password,
+                Loai = Loai,
+                Email = Email,
+                SDT = SDT,
+                CCCD = CCCD
             };
-            TaiKhoanList.Add(newTaiKhoan);
-        }
 
-        private void EditTaiKhoan()
-        {
-            if (SelectedTaiKhoan != null)
+            bool isSuccess = await AddTaiKhoanToDatabaseAsync(newTaiKhoan);
+            if (isSuccess)
             {
-                OnPropertyChanged(nameof(SelectedTaiKhoan));
+                TaiKhoanList.Add(newTaiKhoan); // Add to ObservableCollection only after DB operation succeeds
+            }
+            else
+            {
+                MessageBox.Show("Error adding Tai Khoan.");
             }
         }
 
-        private void DeleteTaiKhoan()
+        private async Task EditTaiKhoan()
         {
             if (SelectedTaiKhoan != null)
             {
-                TaiKhoanList.Remove(SelectedTaiKhoan);
+                bool isSuccess = await UpdateTaiKhoanInDatabaseAsync(SelectedTaiKhoan);
+                if (!isSuccess)
+                {
+                    MessageBox.Show("Error updating Tai Khoan.");
+                }
             }
         }
 
-        private void SearchTaiKhoan(string keyword)
+        private async Task DeleteTaiKhoan()
         {
-            var filteredList = TaiKhoanList.Where(tk => tk.UserName.Contains(keyword)).ToList();
+            if (SelectedTaiKhoan != null)
+            {
+                bool isSuccess = await DeleteTaiKhoanFromDatabaseAsync(SelectedTaiKhoan.UserID);
+                if (isSuccess)
+                {
+                    TaiKhoanList.Remove(SelectedTaiKhoan);
+                }
+                else
+                {
+                    MessageBox.Show("Error deleting Tai Khoan.");
+                }
+            }
+        }
+
+        private async Task SearchTaiKhoan(string keyword)
+        {
+            var filteredList = await SearchTaiKhoanInDatabaseAsync(keyword);
             TaiKhoanList.Clear();
             foreach (var taiKhoan in filteredList)
             {
                 TaiKhoanList.Add(taiKhoan);
             }
         }
-    }
 
-    // RelayCommand implementation for ICommand
-    public class RelayCommand<T> : ICommand
-    {
-        private readonly Predicate<T> _canExecute;
-        private readonly Action<T> _execute;
+        #region MethodToDatabase
 
-        public RelayCommand(Predicate<T> canExecute, Action<T> execute)
+        public static async Task<bool> AddTaiKhoanToDatabaseAsync(TaiKhoan taiKhoan)
         {
-            _canExecute = canExecute;
-            _execute = execute;
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    context.TaiKhoans.Add(taiKhoan);
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding Tai khoan: {ex.Message}");
+                return false;
+            }
         }
 
-        public bool CanExecute(object parameter)
+        public static async Task<bool> UpdateTaiKhoanInDatabaseAsync(TaiKhoan taiKhoan)
         {
-            return _canExecute == null || _canExecute((T)parameter);
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    context.TaiKhoans.Update(taiKhoan);
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating Tai khoan: {ex.Message}");
+                return false;
+            }
         }
 
-        public void Execute(object parameter)
+        public static async Task<bool> DeleteTaiKhoanFromDatabaseAsync(string userID)
         {
-            _execute((T)parameter);
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    var taiKhoanToDelete = await context.TaiKhoans.FirstOrDefaultAsync(s => s.UserID == userID);
+                    if (taiKhoanToDelete != null)
+                    {
+                        context.TaiKhoans.Remove(taiKhoanToDelete);
+                        await context.SaveChangesAsync();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting Tai khoan: {ex.Message}");
+                return false;
+            }
         }
 
-        public event EventHandler CanExecuteChanged
+        public static async Task<List<TaiKhoan>> SearchTaiKhoanInDatabaseAsync(string keyword)
         {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    var result = await context.TaiKhoans
+                                              .Where(s => s.UserName.Contains(keyword)) // Filtering by UserName
+                                              .ToListAsync();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error searching Tai khoan: {ex.Message}");
+                return new List<TaiKhoan>();
+            }
         }
+
+        public static async Task<List<TaiKhoan>> GetAllTaiKhoansAsync()
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    var result = await context.TaiKhoans.ToListAsync();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting all Tai khoan: {ex.Message}");
+                return new List<TaiKhoan>();
+            }
+        }
+
+        #endregion
     }
 }

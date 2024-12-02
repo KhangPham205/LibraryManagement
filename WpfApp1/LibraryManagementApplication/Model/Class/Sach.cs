@@ -16,7 +16,10 @@ namespace LibraryManagementApplication.Model.Class
         public string ViTri { get; set; }
         public string NgonNgu { get; set; }
         public string TrangThai { get; set; }
-
+        public string TenTG { get; set; }
+        public string TheLoai { get; set; }
+        public string NhaXuatBan { get; set; }
+        public int NamXuatBan { get; set; }
         // Navigation properties
 
         public Sach() { }

@@ -10,17 +10,14 @@ namespace LibraryManagementApplication.Model.Class
     {
         public string MaMuon { get; set; }
         public string MaSach { get; set; }
-        public int SoLuong { get; set; }
-
         // Navigation properties
         public DonMuon DonMuon { get; set; }
         public Sach Sach { get; set; }
         public CTDM() { }
-        public CTDM(string maMuon, string maSach, int soLuong)
+        public CTDM(string maMuon, string maSach)
         {
             MaMuon = maMuon;
             MaSach = maSach;
-            SoLuong = soLuong;
         }
     }
 }
