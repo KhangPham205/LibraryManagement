@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace LibraryManagementApplication.ViewModel
@@ -55,10 +56,11 @@ namespace LibraryManagementApplication.ViewModel
 
         // Command for login action
         public ICommand LoginCommand { get; set; }
-
+        public ICommand SignupCommand { get; set; }
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand<object>((p) => true, (p) => Login());
+            SignupCommand = new RelayCommand<Window>((p) => true, (p) => { Signup window = new Signup(); p.Close();  window.ShowDialog(); });
         }
 
         private void Login()
