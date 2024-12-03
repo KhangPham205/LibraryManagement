@@ -48,7 +48,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Tên độc giả:"
+                <TextBlock Text="Mã độc giả:"
                      Foreground="#07209e"
                      FontSize="18"
                      Grid.Column="0"

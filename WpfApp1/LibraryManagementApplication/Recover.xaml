@@ -4,9 +4,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LibraryManagementApplication"
+        xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel"
         mc:Ignorable="d"
         Title="recover" Height="450" Width="650">
+    <Window.DataContext>
+        <local:RecoverViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -118,6 +121,8 @@
                 Width="100"
                 Height="40"
                 HorizontalAlignment="Right"
+                Command="{Binding RecoverCommand}"
+                CommandParameter="{Binding ElementName=password}"
                 >
             </Button>
         </Grid>
