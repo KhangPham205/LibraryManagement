@@ -57,28 +57,40 @@ namespace LibraryManagementApplication.ViewModel
         // Command for login action
         public ICommand LoginCommand { get; set; }
         public ICommand SignupCommand { get; set; }
+        public ICommand RecoverCommand { get; set; }
         public LoginViewModel()
         {
-            LoginCommand = new RelayCommand<object>((p) => true, (p) => Login());
-            SignupCommand = new RelayCommand<Window>((p) => true, (p) => { Signup window = new Signup(); p.Close();  window.ShowDialog(); });
+            LoginCommand = new RelayCommand<Window>((p) => true, (p) => Login(p));
+            SignupCommand = new RelayCommand<Window>((p) => true, (p) => { Signup window = new Signup(); window.ShowDialog(); });
+            RecoverCommand = new RelayCommand<object>((p) => true, (p) => { Window window = new Recover(); window.ShowDialog(); });
         }
 
-        private void Login()
+        private void Login(Window p)
         {
             using (var context = new LibraryDbContext())
             {
+                Window mainwindow = new MainWindow1();
+                mainwindow.Show();
+                p.Close();
                 // Tìm người dùng dựa vào Username và Password (cần hash password nếu sử dụng trong thực tế)
-                var user = context.TaiKhoans.FirstOrDefault(u => u.UserName == Username && u.Password == Password);
-                if (user != null)
-                {
-                    IsLoginSuccessful = true;
+                //var user = context.TaiKhoans.FirstOrDefault(u => u.UserName == Username && u.Password == Password);
+                //if (user != null)
+                //{
+                    //IsLoginSuccessful = true;
+                    
+                    //if(user la admin) 
+                    //Window mainwindow = new MainWindow1();
+                    //else 
+                    //Window mainwindow = new MainWindow2();
+                    //mainwindow.Show();
+                    //p.Close();
                     // Điều hướng đến trang chính của ứng dụng hoặc hiển thị thông báo thành công
-                }
-                else
-                {
-                    IsLoginSuccessful = false;
+                //}
+                //else
+                //{
+                   //IsLoginSuccessful = false;
                     // Hiển thị thông báo lỗi cho người dùng
-                }
+                //}
             }
         }
     }
