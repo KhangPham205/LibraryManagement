@@ -139,16 +139,21 @@
                         FontSize="18"
                         Grid.Column="2"
                         Grid.Row="1"
-                        Command="{Binding LoginCommand}">
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=signInWindow}">
                 </Button>
 
-                <TextBlock x:Name="forgot"
-                    Text="Quên mật khẩu?"
+                <TextBlock  x:Name="forgot"
                     Foreground="#07209e"
+                    Background="Transparent"
                     Grid.Row="0"
                     Height="auto"
                     VerticalAlignment="Top"
-                    FontSize="13"/>
+                    FontSize="13">
+                    <Hyperlink Command="{Binding RecoverCommand}" Cursor="Hand">
+                        Quên mật khẩu?
+                    </Hyperlink>
+                </TextBlock>
             </Grid>
         </Grid>
     </Grid>

@@ -25,13 +25,15 @@ namespace LibraryManagementApplication.ViewModel
         #endregion
         public MainViewModel()
         { 
-            signincommand = new RelayCommand<object> ( (p) => { return true; /*xet da dang nhap hay chua*/ }, (p) => { Signin window = new Signin(); window.ShowDialog(); } );
-            signoutcommand = new RelayCommand<object>((p) => { return true; /*xet da dang nhap hay chua*/ }, (p) => { /*xu ly dang xuat*/});
+            signincommand = new RelayCommand<Window> ( (p) => { return isLogin(); }, (p) => {  Signin window = new Signin(); window.Show(); p.Close(); } );
+            signoutcommand = new RelayCommand<object>((p) => { return !isLogin(); }, (p) => { logOut(); });
             mainpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is mainpage); }, (p) => { p.Content = new mainpage(); });
             bookpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is bookpage); }, (p) => { p.Content = new bookpage(); });
             borrowpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is borrowpage); }, (p) => { p.Content = new borrowpage(); });
             readerpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is readerpage); }, (p) => { p.Content = new readerpage(); });
             employeepagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is employeepage); }, (p) => { p.Content = new employeepage(); });
         }
+        bool isLogin() { return true; }//kiem tra da dang nhap chua
+        void logOut() { }
     }
 }

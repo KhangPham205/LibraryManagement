@@ -86,7 +86,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border
-                             Background="#ffffff"
+                             Background="{TemplateBinding Background}"
                              BorderBrush="{TemplateBinding BorderBrush}"
                              BorderThickness="1"
                              CornerRadius="10"
@@ -95,6 +95,7 @@
                                FontSize="18"
                                Margin="5"
                                BorderBrush="Transparent"
+                               Background="{TemplateBinding Background}"
                                BorderThickness ="0"
                                ></TextBox>
                         </Border>
@@ -102,6 +103,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
         <Style TargetType="TextBox" x:Key="findbox1">
             <Setter Property="Template">
                 <Setter.Value>

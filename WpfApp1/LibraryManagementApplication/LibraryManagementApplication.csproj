@@ -214,6 +214,12 @@
     <Compile Include="mainpage.xaml.cs">
       <DependentUpon>mainpage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindow1.xaml.cs">
+      <DependentUpon>MainWindow1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow2.xaml.cs">
+      <DependentUpon>MainWindow2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Class\CTDM.cs" />
     <Compile Include="Model\Class\DocGia.cs" />
     <Compile Include="Model\Class\DonMuon.cs" />
@@ -227,6 +233,9 @@
     <Compile Include="Model\Class\TheLoai.cs" />
     <Compile Include="readerpage.xaml.cs">
       <DependentUpon>readerpage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Recover.xaml.cs">
+      <DependentUpon>Recover.xaml</DependentUpon>
     </Compile>
     <Compile Include="Signin.xaml.cs">
       <DependentUpon>Signin.xaml</DependentUpon>
@@ -243,6 +252,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\SignupViewModel.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Signup.xaml</DependentUpon>
     </Compile>
@@ -274,9 +284,21 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWindow1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="readerpage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Recover.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
