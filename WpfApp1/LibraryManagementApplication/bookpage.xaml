@@ -6,9 +6,6 @@
       xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel.ClassViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="465" d:DesignWidth="730">
-    <Page.DataContext>
-        <local:SachViewModel/>
-    </Page.DataContext>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -32,6 +29,9 @@
             <TabItem Header="Sách" FontSize="18" >
                 <Grid 
                         Background="#cfcfcf">
+                    <Grid.DataContext>
+                        <local:SachViewModel/>
+                    </Grid.DataContext>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="195"/>
                         <RowDefinition Height="*"/>
@@ -64,7 +64,7 @@
                                     Grid.Column="1"
                                     Grid.Row="1"
                                     Margin="5"
-                                    Text="{Binding TenSach}"/>
+                                    Text="{Binding TenSach, Mode=OneWayToSource}"/>
                         <TextBlock Text="ISBN: "
                                     Foreground="#07209e"
                                     FontSize="18"
@@ -76,7 +76,7 @@
                                     Grid.Column="1"
                                     Grid.Row="2"
                                     Margin="5"
-                                    Text="{Binding ISBN}"/>
+                                    Text="{Binding ISBN, Mode=OneWayToSource}"/>
                         <TextBlock Text="Tác giả: "
                                     Foreground="#07209e"
                                     FontSize="18"
@@ -133,7 +133,7 @@
                                     Grid.Column="3"
                                     Grid.Row="2"
                                     Margin="5"
-                                    Text="{Binding NgonNgu}"/>
+                                    Text="{Binding NgonNgu, Mode=OneWayToSource}"/>
                         <TextBlock Text="Vị trí: "
                                     Foreground="#07209e"
                                     FontSize="18"
@@ -145,7 +145,7 @@
                                     Grid.Column="3"
                                     Grid.Row="3"
                                     Margin="5"
-                                    Text="{Binding ViTri}"/>
+                                    Text="{Binding ViTri, Mode=OneWayToSource}"/>
                         <TextBlock Text="Trạng thái: "
                                     Foreground="#07209e"
                                     FontSize="18"
@@ -157,7 +157,7 @@
                                     Grid.Column="3"
                                     Grid.Row="4"
                                     Margin="5"
-                                    Text="{Binding TrangThai}">
+                                    Text="{Binding TrangThai, Mode=OneWayToSource}">
                             <ComboBoxItem Content="Có Sẵn"/>
                         </ComboBox>
                         <Grid Grid.Row="5"
@@ -234,6 +234,9 @@
                     <Grid Background="#cfcfcf"
                           Margin="5" 
                           Grid.Column="0">
+                        <Grid.DataContext>
+                            <local:TacGiaViewModel/>
+                        </Grid.DataContext>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="110"/>
                             <RowDefinition Height="*"/>
@@ -257,7 +260,8 @@
                                        Margin="5"
                                        Grid.ColumnSpan="5"/>
                             <TextBox Grid.Row="1"
-                                     Grid.ColumnSpan="5"></TextBox>
+                                     Grid.ColumnSpan="5"
+                                     Text="{Binding TenTG, Mode=OneWayToSource}"></TextBox>
                             <Button x:Name="addtg"
                                     Style="{DynamicResource RoundButton}"
                                     Background="#FF9AFFAB"
@@ -310,6 +314,9 @@
                     <Grid Background="#cfcfcf"
                           Margin="5" 
                           Grid.Column="1">
+                        <Grid.DataContext>
+                            <local:TheLoaiViewModel/>
+                        </Grid.DataContext>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="110"/>
                             <RowDefinition Height="*"/>
@@ -333,7 +340,8 @@
                                        Margin="5"
                                        Grid.ColumnSpan="5"/>
                             <TextBox Grid.Row="1"
-                                     Grid.ColumnSpan="5"></TextBox>
+                                     Grid.ColumnSpan="5"
+                                     Text="{Binding TenTL, Mode=OneWayToSource}"></TextBox>
                             <Button x:Name="addtl"
                                     Style="{DynamicResource RoundButton}"
                                     Background="#FF9AFFAB"
@@ -386,6 +394,9 @@
                     <Grid Background="#cfcfcf"
                           Margin="5" 
                           Grid.Column="2">
+                        <Grid.DataContext>
+                            <local:NhaXuatBanViewModel/>
+                        </Grid.DataContext>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="110"/>
                             <RowDefinition Height="*"/>
@@ -409,7 +420,8 @@
                                        Margin="5"
                                        Grid.ColumnSpan="5"/>
                             <TextBox Grid.Row="1"
-                                         Grid.ColumnSpan="5"></TextBox>
+                                     Grid.ColumnSpan="5"
+                                     Text="{Binding TenNXB, Mode=OneWayToSource}"></TextBox>
                             <Button x:Name="addnxb"
                                     Style="{DynamicResource RoundButton}"
                                     Background="#FF9AFFAB"

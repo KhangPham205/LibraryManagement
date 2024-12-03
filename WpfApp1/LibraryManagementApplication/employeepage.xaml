@@ -3,10 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:LibraryManagementApplication"
+      xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel.ClassViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="employeepage">
+    <Page.DataContext>
+        <local:TaiKhoanViewModel/>
+    </Page.DataContext>
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -57,7 +60,8 @@
                      Grid.Column="1"
                      Grid.Row="1"
                      FontSize="18"
-                     Margin="5"/>
+                     Margin="5"
+                     Text="{Binding UserName}"/>
                 <TextBlock Text="Mật khẩu:"
                      Foreground="#07209e"
                      FontSize="18"
@@ -69,7 +73,8 @@
                      Grid.Column="1"
                      Grid.Row="2"
                      FontSize="18"
-                     Margin="5"/>
+                     Margin="5"
+                     Text="{Binding Password}"/>
                 <TextBlock Text="Email: "
                      Foreground="#07209e"
                      FontSize="18"
@@ -81,7 +86,8 @@
                      Grid.Column="1"
                      Grid.Row="3"
                      FontSize="18"
-                     Margin="5"/>
+                     Margin="5"
+                     Text="{Binding Email}"/>
                 <TextBlock Text="CCCD: "
                      Foreground="#07209e"
                      FontSize="18"
@@ -93,7 +99,8 @@
                      Grid.Column="3"
                      Grid.Row="1"
                      FontSize="18"
-                     Margin="5"/>
+                     Margin="5"
+                     Text="{Binding CCCD}"/>
                 <TextBlock Text="SDT: "
                      Foreground="#07209e"
                      FontSize="18"
@@ -105,7 +112,8 @@
                      Grid.Column="3"
                      Grid.Row="2"
                      FontSize="18"
-                     Margin="5"/>
+                     Margin="5"
+                     Text="{Binding SDT}"/>
                 <Grid Grid.Row="3"
                       Grid.Column="2"
                       Grid.ColumnSpan="2">
@@ -121,7 +129,8 @@
                          Width="75"
                          Margin="5"
                          FontSize="18"
-                         Style="{DynamicResource button1}"/>
+                         Style="{DynamicResource button1}"
+                         Command="{Binding AddCommand}"/>
                     <Button  x:Name="finddg"
                          Content="Tìm"
                          Background="#9acbff"
@@ -129,7 +138,8 @@
                          Width="75"
                          Margin="5"
                          FontSize="18"
-                         Style="{DynamicResource button1}"/>
+                         Style="{DynamicResource button1}"
+                         Command="{Binding SearchCommand}"/>
                     <Button  x:Name="editdg"
                          Content="Sửa"
                          Background="#FFF6FF9A"
@@ -137,7 +147,8 @@
                          Width="75"
                          Margin="5"
                          FontSize="18"
-                         Style="{DynamicResource button1}"/>
+                         Style="{DynamicResource button1}"
+                         Command="{Binding EditCommand}"/>
                     <Button  x:Name="deletedg"
                          Content="Xóa"
                          Grid.Column="3"
@@ -145,7 +156,8 @@
                          Margin="5"
                          FontSize="18"
                          Background="#FFFF9A9A"
-                         Style="{DynamicResource button1}"/>
+                         Style="{DynamicResource button1}"
+                         Command="{Binding DeleteCommand}"/>
                 </Grid>
             </Grid>
             <DataGrid x:Name="sach"

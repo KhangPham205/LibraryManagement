@@ -57,7 +57,8 @@
                      Grid.Column="1"
                      Grid.Row="1"
                      FontSize="18"
-                     Margin="5"/>
+                     Margin="5"
+                     />
                 <TextBlock Text="Email: "
                      Foreground="#07209e"
                      FontSize="18"
