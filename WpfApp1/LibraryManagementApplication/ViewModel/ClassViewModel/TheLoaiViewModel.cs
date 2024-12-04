@@ -191,7 +191,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<TheLoai>> GetAllTheLoaisAsync()
+        /*public static async Task<List<TheLoai>> GetAllTheLoaisAsync()
         {
             try
             {
@@ -206,7 +206,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 MessageBox.Show($"Error getting all The loai: {ex.Message}");
                 return new List<TheLoai>();
             }
-        }
+        }*/
 
         #endregion
     }
