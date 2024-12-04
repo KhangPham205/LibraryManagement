@@ -191,7 +191,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        /*public static async Task<List<NhaXuatBan>> GetAllNhaXuatBanAsync()
+        public static async Task<List<NhaXuatBan>> GetAllNhaXuatBanAsync()
         {
             try
             {
@@ -206,7 +206,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 MessageBox.Show($"Error getting all DonMuon: {ex.Message}");
                 return new List<NhaXuatBan>();
             }
-        }*/
+        }
 
         #endregion
     }

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel"
         mc:Ignorable="d"
-        Title="Library Application" Height="465" Width="800"
+        Title="Library Application" Height="700" Width="1200"
         MinHeight="465" MinWidth="870">
     <Window.DataContext>
         <local:MainViewModel/>
@@ -32,7 +32,6 @@
                         <Image Source="/Icon/user.png"/>
                     </Button>
                     <Button Width="40" Height="40" Margin="0 15 0 0"
-                            Style="{DynamicResource IconButton}"
                             Background="Transparent" BorderBrush="Transparent"
                             Command="{Binding mainpagecommand}"
                             CommandParameter="{Binding ElementName=Mainpage}">

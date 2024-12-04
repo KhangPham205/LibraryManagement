@@ -36,8 +36,7 @@
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Tìm kiếm sách:" 
-                               Foreground="#07209e"
-                               FontSize="18"
+                               Style="{StaticResource textblock:style1}"
                                Margin="10"/>
                     <Border 
                             Background="#ffffff"
@@ -59,7 +58,6 @@
                                 BorderBrush="Transparent"
                                 BorderThickness="0"></TextBox>
                             <Button x:Name="finds"
-                                    Style="{DynamicResource IconButton}"
                                     Background="Transparent"
                                     BorderThickness = "0"
                                     BorderBrush="Transparent"
@@ -95,8 +93,7 @@
                 <StackPanel Orientation="Horizontal"
                             Grid.Row="2">
                     <TextBlock Text="Tìm kiếm đơn mượn:" 
-                           Foreground="#07209e"
-                           FontSize="18"
+                           Style="{StaticResource textblock:style1}"
                            Margin="10"/>
                     <Border 
                         Background="#ffffff"
@@ -118,7 +115,6 @@
                                 BorderBrush="Transparent"
                                 BorderThickness="0"></TextBox>
                             <Button x:Name="finddm"
-                                    Style="{DynamicResource IconButton}"
                                     Background="Transparent"
                                     BorderThickness = "0"
                                     BorderBrush="Transparent"

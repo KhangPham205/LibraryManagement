@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel.ClassViewModel"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="1000"
       Title="employeepage">
     <Page.DataContext>
         <local:TaiKhoanViewModel/>
@@ -50,8 +50,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="Tên nhân viên:"
-                     Foreground="#07209e"
-                     FontSize="18"
+                     Style="{StaticResource textblock:style1}"
                      Grid.Column="0"
                      Grid.Row="1"
                      Margin="5"
@@ -63,8 +62,7 @@
                      Margin="5"
                      Text="{Binding UserName}"/>
                 <TextBlock Text="Mật khẩu:"
-                     Foreground="#07209e"
-                     FontSize="18"
+                     Style="{StaticResource textblock:style1}"
                      Grid.Column="0"
                      Grid.Row="2"
                      Margin="5"
@@ -76,8 +74,7 @@
                      Margin="5"
                      Text="{Binding Password}"/>
                 <TextBlock Text="Email: "
-                     Foreground="#07209e"
-                     FontSize="18"
+                     Style="{StaticResource textblock:style1}"
                      Grid.Column="0"
                      Grid.Row="3"
                      Margin="5"
@@ -89,8 +86,7 @@
                      Margin="5"
                      Text="{Binding Email}"/>
                 <TextBlock Text="CCCD: "
-                     Foreground="#07209e"
-                     FontSize="18"
+                     Style="{StaticResource textblock:style1}"
                      Grid.Column="2"
                      Grid.Row="1"
                      Margin="5"
@@ -102,8 +98,7 @@
                      Margin="5"
                      Text="{Binding CCCD}"/>
                 <TextBlock Text="SDT: "
-                     Foreground="#07209e"
-                     FontSize="18"
+                     Style="{StaticResource textblock:style1}"
                      Grid.Column="2"
                      Grid.Row="2"
                      Margin="5"
