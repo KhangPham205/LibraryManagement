@@ -198,7 +198,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<DonMuon>> GetAllDonMuonAsync()
+        /*public static async Task<List<DonMuon>> GetAllDonMuonAsync()
         {
             try
             {
@@ -213,7 +213,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 MessageBox.Show($"Error getting all DonMuon: {ex.Message}");
                 return new List<DonMuon>();
             }
-        }
+        }*/
 
         #endregion
     }

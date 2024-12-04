@@ -202,7 +202,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<TaiKhoan>> GetAllTaiKhoansAsync()
+        /*public static async Task<List<TaiKhoan>> GetAllTaiKhoansAsync()
         {
             try
             {
@@ -217,7 +217,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 MessageBox.Show($"Error getting all Tai khoan: {ex.Message}");
                 return new List<TaiKhoan>();
             }
-        }
+        }*/
 
         #endregion
     }

@@ -195,7 +195,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<DocGia>> GetAllDocGiasAsync()
+        /*public static async Task<List<DocGia>> GetAllDocGiasAsync()
         {
             try
             {
@@ -210,7 +210,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 MessageBox.Show($"Error getting all DocGia: {ex.Message}");
                 return new List<DocGia>();
             }
-        }
+        }*/
 
         #endregion
     }

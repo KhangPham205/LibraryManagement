@@ -204,7 +204,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<Sach>> GetAllSachsAsync()
+        /*public static async Task<List<Sach>> GetAllSachsAsync()
         {
             try
             {
@@ -219,7 +219,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 MessageBox.Show($"Error getting all books: {ex.Message}");
                 return new List<Sach>();
             }
-        }
+        }*/
 
         #endregion
     }

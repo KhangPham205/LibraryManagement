@@ -190,7 +190,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<CTDM>> GetAllCTDMsAsync()
+        /*public static async Task<List<CTDM>> GetAllCTDMsAsync()
         {
             try
             {
@@ -205,7 +205,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 MessageBox.Show($"Error getting all CTDM: {ex.Message}");
                 return new List<CTDM>();
             }
-        }
+        }*/
 
         #endregion
     }
