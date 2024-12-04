@@ -192,7 +192,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        /*public static async Task<List<TacGia>> GetAllTacGiasAsync()
+        public static async Task<List<TacGia>> GetAllTacGiasAsync()
         {
             try
             {
@@ -207,7 +207,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 MessageBox.Show($"Error getting all Tac gia: {ex.Message}");
                 return new List<TacGia>();
             }
-        }*/
+        }
 
         #endregion
     }

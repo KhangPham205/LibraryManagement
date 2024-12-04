@@ -128,3 +128,4 @@ C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplicat
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\MainWindow2.g.cs
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\MainWindow1.baml
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\MainWindow2.baml
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\FontAwesome.Sharp.dll
