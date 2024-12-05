@@ -30,34 +30,7 @@ namespace LibraryManagementApplication
                 new Sach {MaSach = "S002", TenSach = "Sách B", ISBN = "0987654321", NgonNgu = "Tiếng Anh", ViTri = "Kệ B2", TrangThai = "Mượn"}
             };
             // Gán danh sách dữ liệu cho DataGrid
-            //sach.ItemsSource = danhSachSach;
-
-            List<TacGia> danhSachTacGia = new List<TacGia>
-            {
-            new TacGia { MaTG = "TG001", TenTG = "Nguyễn Nhật Ánh" },
-            new TacGia { MaTG = "TG002", TenTG  = "Tô Hoài" },
-            new TacGia { MaTG = "TG003", TenTG = "Vũ Trọng Phụng"}
-            };
-            // Gán danh sách dữ liệu cho DataGrid
-            tacgia.ItemsSource = danhSachTacGia;
-
-            List<TheLoai> danhSachTheLoai = new List<TheLoai>
-            {
-                new TheLoai { MaTL = "TL001", TenTL = "Văn học" },
-                new TheLoai { MaTL = "TL002", TenTL = "Khoa học" },
-                new TheLoai { MaTL = "TL003", TenTL = "Thiếu nhi" }
-            };
-            // Gán danh sách dữ liệu cho DataGrid
-            theloai.ItemsSource = danhSachTheLoai;
-
-            List<NhaXuatBan> danhSachNXB = new List<NhaXuatBan>
-            {
-            new NhaXuatBan { MaNXB = "NXB001", TenNXB = "Kim Đồng" },
-            new NhaXuatBan { MaNXB = "NXB002", TenNXB = "Giáo dục Việt Nam" },
-            new NhaXuatBan { MaNXB = "NXB003", TenNXB = "Khoa học Kỹ thuật" }
-            };
-            // Gán danh sách dữ liệu cho DataGrid
-            nxb.ItemsSource = danhSachNXB;
+            sach.ItemsSource = danhSachSach;
         }
     }
 }
