@@ -75,7 +75,9 @@
                                             Style="{StaticResource textblock:submenu}"/>
                             </StackPanel>
                         </RadioButton>
-                        <RadioButton Style="{StaticResource rbutton:submenu}">
+                        <RadioButton Style="{StaticResource rbutton:submenu}"
+                                     Command="{Binding writerpagecommand}"
+                                     CommandParameter="{Binding ElementName=Mainpage}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="PenNib"
                                                 Style="{StaticResource icon:submenu}"/>
@@ -83,7 +85,9 @@
                                             Style="{StaticResource textblock:submenu}"/>
                             </StackPanel>
                         </RadioButton>
-                        <RadioButton Style="{StaticResource rbutton:submenu}">
+                        <RadioButton Style="{StaticResource rbutton:submenu}"
+                                     Command="{Binding typepagecommand}"
+                                     CommandParameter="{Binding ElementName=Mainpage}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="BookBookmark" 
                                                 Style="{StaticResource icon:submenu}"/>
@@ -91,7 +95,9 @@
                                             Style="{StaticResource textblock:submenu}"/>
                             </StackPanel>
                         </RadioButton>
-                        <RadioButton Style="{StaticResource rbutton:submenu}">
+                        <RadioButton Style="{StaticResource rbutton:submenu}"
+                                     Command="{Binding publisherpagecommand}"
+                                     CommandParameter="{Binding ElementName=Mainpage}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="Print"
                                                     Style="{StaticResource icon:submenu}"/>
@@ -137,7 +143,7 @@
         <Frame x:Name="Mainpage" 
                Grid.Column="1"
                NavigationUIVisibility="Hidden"
-               >
+               Content="{x:Null}">
         </Frame>
     </Grid>
 </Window>

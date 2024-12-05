@@ -120,23 +120,13 @@
                            Style="{StaticResource textblock:menu}"/>
                         </StackPanel>
                     </RadioButton>
-                    <RadioButton Style="{StaticResource rbutton:menu}"
-                     Command="{Binding employeepagecommand}"
-                     CommandParameter="{Binding ElementName=Mainpage}">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="UserAlt"
-                              Style="{StaticResource icon:menu}"/>
-                            <TextBlock Text="Nhân viên"
-                           Style="{StaticResource textblock:menu}"/>
-                        </StackPanel>
-                    </RadioButton>
-
                 </StackPanel>
             </Grid>
         </Border>
         <Frame x:Name="Mainpage" 
                Grid.Column="1"
                NavigationUIVisibility="Hidden"
+               Content="{x:Null}"
                >
         </Frame>
     </Grid>

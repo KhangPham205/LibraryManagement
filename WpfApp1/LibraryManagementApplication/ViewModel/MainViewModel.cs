@@ -22,6 +22,9 @@ namespace LibraryManagementApplication.ViewModel
         public ICommand borrowpagecommand { get; set; }
         public ICommand readerpagecommand { get; set; }
         public ICommand employeepagecommand { get; set; }
+        public ICommand writerpagecommand { get; set; }
+        public ICommand typepagecommand { get; set; }
+        public ICommand publisherpagecommand { get; set; }
         #endregion
         public MainViewModel()
         { 
@@ -32,6 +35,9 @@ namespace LibraryManagementApplication.ViewModel
             borrowpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is borrowpage); }, (p) => { p.Content = new borrowpage(); });
             readerpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is readerpage); }, (p) => { p.Content = new readerpage(); });
             employeepagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is employeepage); }, (p) => { p.Content = new employeepage(); });
+            writerpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is writerpage); }, (p) => { p.Content = new writerpage(); });
+            typepagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is typepage); }, (p) => { p.Content = new typepage(); });
+            publisherpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is publisherpage); }, (p) => { p.Content = new publisherpage(); });
         }
         bool isLogin() { return true; }//kiem tra da dang nhap chua
         void logOut() { }

@@ -234,6 +234,9 @@
     <Compile Include="Model\Class\TacGia.cs" />
     <Compile Include="Model\Class\TaiKhoan.cs" />
     <Compile Include="Model\Class\TheLoai.cs" />
+    <Compile Include="publisherpage.xaml.cs">
+      <DependentUpon>publisherpage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="readerpage.xaml.cs">
       <DependentUpon>readerpage.xaml</DependentUpon>
     </Compile>
@@ -242,6 +245,9 @@
     </Compile>
     <Compile Include="Signin.xaml.cs">
       <DependentUpon>Signin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="typepage.xaml.cs">
+      <DependentUpon>typepage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ClassViewModel\CTDMViewModel.cs" />
     <Compile Include="ViewModel\ClassViewModel\DocGiaViewModel.cs" />
@@ -259,6 +265,9 @@
     <Compile Include="ViewModel\SignupViewModel.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Signup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="writerpage.xaml.cs">
+      <DependentUpon>writerpage.xaml</DependentUpon>
     </Compile>
     <Page Include="bookpage.xaml">
       <SubType>Designer</SubType>
@@ -296,6 +305,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="publisherpage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="readerpage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -313,6 +326,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Signup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="typepage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="writerpage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

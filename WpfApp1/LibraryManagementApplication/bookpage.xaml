@@ -22,12 +22,7 @@
                    HorizontalAlignment="Right"
                    />
         </Grid>
-
-        <TabControl Grid.Row="1"
-                Height="auto"
-                        VerticalAlignment ="Stretch">
-            <TabItem Header="Sách" FontSize="18" >
-                <Grid 
+        <Grid  Grid.Row="1"
                         Background="#cfcfcf">
                     <Grid.DataContext>
                         <local:SachViewModel/>
@@ -174,7 +169,7 @@
                                      Background="#FF9AFFAB"
                                      Width="75"
                                      Margin="5"
-                                     Style="{DynamicResource button1}"
+                                     Style="{DynamicResource button:add}"
                                      Command="{Binding AddCommand}"/>
                             <Button  x:Name="findsach"
                                      Content="Tìm"
@@ -182,21 +177,21 @@
                                      Grid.Column="1"
                                      Width="75"
                                      Margin="5"
-                                     Style="{DynamicResource button1}"/>
+                                     Style="{DynamicResource button:find}"/>
                             <Button  x:Name="editsach"
                                      Content="Sửa"
                                      Background="#FFF6FF9A"
                                      Grid.Column="2"
                                      Width="75"
                                      Margin="5"
-                                     Style="{DynamicResource button1}"/>
+                                     Style="{DynamicResource button:edit}"/>
                             <Button  x:Name="deletesach"
                                      Content="Xóa"
                                      Grid.Column="3"
                                      Width="75"
                                      Margin="5"
                                      Background="#FFFF9A9A"
-                                     Style="{DynamicResource button1}"/>
+                                     Style="{DynamicResource button:delete}"/>
                         </Grid>
                     </Grid>
                     <DataGrid x:Name="sach"
@@ -222,258 +217,5 @@
                     </DataGrid>
 
                 </Grid>
-            </TabItem>
-
-            <TabItem Header="Thông tin khác" FontSize="18">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Background="#cfcfcf"
-                          Margin="5" 
-                          Grid.Column="0">
-                        <Grid.DataContext>
-                            <local:TacGiaViewModel/>
-                        </Grid.DataContext>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="110"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="35"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="40"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Tên tác giả: "
-                                       Foreground="#07209e"
-                                       FontSize="18"
-                                       Margin="5"
-                                       Grid.ColumnSpan="5"/>
-                            <TextBox Grid.Row="1"
-                                     Grid.ColumnSpan="5"
-                                     Text="{Binding TenTG, Mode=OneWayToSource}"></TextBox>
-                            <Button x:Name="addtg"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#FF9AFFAB"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="0"
-                                    Grid.Row="2">
-                                <Image Source="/Icon/plus.png" Margin="6"/>
-                            </Button>
-                            <Button x:Name="fndtg"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#9acbff"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="1"
-                                    Grid.Row="2">
-                                <Image Source="\Icon\search.png" Margin="5"/>
-                            </Button>
-                            <Button x:Name="edittg"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#FFF6FF9A"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="2"
-                                    Grid.Row="2">
-                                <Image Source="/Icon/edit.png" Margin="5"/>
-                            </Button>
-                            <Button x:Name="deltg"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#FFFF9A9A"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="3"
-                                    Grid.Row="2">
-                                <Image Source="/Icon/minus-sign.png" Margin="5"/>
-                            </Button>
-                        </Grid>
-                        <DataGrid x:Name="tacgia"
-                                  Margin="5"
-                                  Grid.Row="1"
-                                  AutoGenerateColumns="False"
-                                  IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã tác giả" Binding="{Binding MaTG}" />
-                                <DataGridTextColumn Header="Tên tác giả" Binding="{Binding TenTG}" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-
-                    </Grid>
-                    <Grid Background="#cfcfcf"
-                          Margin="5" 
-                          Grid.Column="1">
-                        <Grid.DataContext>
-                            <local:TheLoaiViewModel/>
-                        </Grid.DataContext>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="110"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="35"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="40"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Tên thể loại: "
-                                       Foreground="#07209e"
-                                       FontSize="18"
-                                       Margin="5"
-                                       Grid.ColumnSpan="5"/>
-                            <TextBox Grid.Row="1"
-                                     Grid.ColumnSpan="5"
-                                     Text="{Binding TenTL, Mode=OneWayToSource}"></TextBox>
-                            <Button x:Name="addtl"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#FF9AFFAB"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="0"
-                                    Grid.Row="2">
-                                <Image Source="/Icon/plus.png" Margin="6"/>
-                            </Button>
-                            <Button x:Name="fndtl"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#9acbff"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="1"
-                                    Grid.Row="2">
-                                <Image Source="\Icon\search.png" Margin="5"/>
-                            </Button>
-                            <Button x:Name="edittl"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#FFF6FF9A"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="2"
-                                    Grid.Row="2">
-                                <Image Source="/Icon/edit.png" Margin="5"/>
-                            </Button>
-                            <Button x:Name="deltl"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#FFFF9A9A"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="3"
-                                    Grid.Row="2">
-                                <Image Source="/Icon/minus-sign.png" Margin="5"/>
-                            </Button>
-                        </Grid>
-                        <DataGrid x:Name="theloai"
-                                  Margin="5"
-                                  Grid.Row="1"
-                                  AutoGenerateColumns="False"
-                                  IsReadOnly="True">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã thể loại" Binding="{Binding MaTL}" />
-                                <DataGridTextColumn Header="Tên thể loại" Binding="{Binding TenTL}" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-
-                    </Grid>
-                    <Grid Background="#cfcfcf"
-                          Margin="5" 
-                          Grid.Column="2">
-                        <Grid.DataContext>
-                            <local:NhaXuatBanViewModel/>
-                        </Grid.DataContext>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="110"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="35"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="40"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Tên nhà xuất bản: "
-                                       Foreground="#07209e"
-                                       FontSize="18"
-                                       Margin="5"
-                                       Grid.ColumnSpan="5"/>
-                            <TextBox Grid.Row="1"
-                                     Grid.ColumnSpan="5"
-                                     Text="{Binding TenNXB, Mode=OneWayToSource}"></TextBox>
-                            <Button x:Name="addnxb"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#FF9AFFAB"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="0"
-                                    Grid.Row="2">
-                                <Image Source="/Icon/plus.png" Margin="6"/>
-                            </Button>
-                            <Button x:Name="fndNXB"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#9acbff"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="1"
-                                    Grid.Row="2">
-                                <Image Source="\Icon\search.png" Margin="5"/>
-                            </Button>
-                            <Button x:Name="editnxb"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#FFF6FF9A"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="2"
-                                    Grid.Row="2">
-                                <Image Source="/Icon/edit.png" Margin="5"/>
-                            </Button>
-                            <Button x:Name="delnxb"
-                                    Style="{DynamicResource RoundButton}"
-                                    Background="#FFFF9A9A"
-                                    Height="30"
-                                    Width="30"
-                                    Grid.Column="3"
-                                    Grid.Row="2">
-                                <Image Source="/Icon/minus-sign.png" Margin="5"/>
-                            </Button>
-                        </Grid>
-                        <DataGrid x:Name="nxb"
-                                    Margin="5"
-                                    Grid.Row="1"
-                                    AutoGenerateColumns="False"
-                                    IsReadOnly="True"
-                                    >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã NXB" Binding="{Binding MaNXB}" />
-                                <DataGridTextColumn Header="Tên NXB" Binding="{Binding TenNXB}" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-
-                    </Grid>
-                </Grid>
-            </TabItem>
-        </TabControl>
     </Grid>
 </Page>

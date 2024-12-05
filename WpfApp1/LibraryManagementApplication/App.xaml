@@ -33,6 +33,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--style button thông thường-->
         <Style TargetType="Button" x:Key="button:style1">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Medium"/>
@@ -71,6 +72,163 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Style nút tìm-->
+        <Style TargetType="Button" x:Key="button:find">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder"
+                                BorderBrush="#07209e"
+                                Background="#9acbff"
+                                BorderThickness="1"
+                                CornerRadius="20">
+                            <ContentPresenter  x:Name="text"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       TextElement.Foreground="#07209e"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#cfcfcf"
+                                            Direction="45"
+                                            ShadowDepth="4"
+                                            Opacity="0.5"
+                                            BlurRadius="10" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#07209e"/>
+                                <Setter TargetName="text" Property="TextElement.Foreground" Value="#9acbff"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Style nút thêm-->
+        <Style TargetType="Button" x:Key="button:add">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder"
+                                BorderBrush="#FF079E26"
+                                Background="#FF9AFFAB"
+                                BorderThickness="1"
+                                CornerRadius="20">
+                            <ContentPresenter  x:Name="text"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                TextElement.Foreground="#FF079E26"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#cfcfcf"
+                                     Direction="45"
+                                     ShadowDepth="4"
+                                     Opacity="0.5"
+                                     BlurRadius="10" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FF079E26"/>
+                                <Setter TargetName="text" Property="TextElement.Foreground" Value="#FF9AFFAB"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Style nút sửa-->
+        <Style TargetType="Button" x:Key="button:edit">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder"
+                         BorderBrush="#FF869E07"
+                         Background="#FFF6FF9A"
+                         BorderThickness="1"
+                         CornerRadius="20">
+                            <ContentPresenter  x:Name="text"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                TextElement.Foreground="#FF869E07"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#cfcfcf"
+                                     Direction="45"
+                                     ShadowDepth="4"
+                                     Opacity="0.5"
+                                     BlurRadius="10" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FF869E07"/>
+                                <Setter TargetName="text" Property="TextElement.Foreground" Value="#FFF6FF9A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Style nút xóa-->
+        <Style TargetType="Button" x:Key="button:delete">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder"
+                 BorderBrush="#FF9E0707"
+                 Background="#FFFF9A9A"
+                 BorderThickness="1"
+                 CornerRadius="20">
+                            <ContentPresenter  x:Name="text"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        TextElement.Foreground="#FF9E0707"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#cfcfcf"
+                             Direction="45"
+                             ShadowDepth="4"
+                             Opacity="0.5"
+                             BlurRadius="10" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FF9E0707"/>
+                                <Setter TargetName="text" Property="TextElement.Foreground" Value="#FFFF9A9A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Style textbox thông thường-->
         <Style TargetType="TextBox" x:Key="textbox:style1">
             <Setter Property="Template">
                 <Setter.Value>
@@ -190,12 +348,50 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Style textblock thông thường-->
         <Style TargetType="TextBlock" x:Key="textblock:style1">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Medium"/>
             <Setter Property="Foreground" Value="#07209e"/>
             <Setter Property="IsHitTestVisible" Value="False"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="BorderBrush" Value="#07209e"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="RowBackground" Value="#FFFFFF"/>
+            <Setter Property="AlternatingRowBackground" Value="#e6f3ff"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
+        </Style>
+
+        <Style TargetType="DataGridRowHeader">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Content" 
+                    Value="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=Header}"/>
+        </Style>
+        <!-- Style for DataGridHeader -->
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#9acbff"/>
+            <Setter Property="Foreground" Value="#07209e"/>
+            <Setter Property="BorderBrush" Value="#07209e"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Padding" Value="10,0,10,0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
         <ResourceDictionary x:Key="MainVM">
             <ResourceDictionary.MergedDictionaries>
