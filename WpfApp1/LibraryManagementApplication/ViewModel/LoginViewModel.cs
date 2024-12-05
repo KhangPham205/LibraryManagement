@@ -23,7 +23,7 @@ namespace LibraryManagementApplication.ViewModel
                 if (_userid == "" || _userid != value)
                 {
                     _userid = value;
-                    OnPropertyChanged(nameof(_userid));
+                    OnPropertyChanged(nameof(UserID));
                 }
             }
         }
@@ -34,7 +34,7 @@ namespace LibraryManagementApplication.ViewModel
             get { return _password; }
             set
             {
-                if (_password != value)
+                if (_password == "" || _password != value)
                 {
                     _password = value;
                     OnPropertyChanged(nameof(Password));
@@ -71,42 +71,43 @@ namespace LibraryManagementApplication.ViewModel
         {
             using (var context = new LibraryDbContext())
             {
-                //Window mainwindow;
+                Window mainwindow;
                 // Tìm người dùng dựa vào Username và Password (cần hash password nếu sử dụng trong thực tế)
-                MessageBox.Show(UserID + " " + Password);
-
-                foreach (var item in context.TaiKhoans)
+                //foreach (var item in context.TaiKhoans)
+                //{
+                //    if (item.UserID.ToString().Equals(UserID))
+                //    {
+                //        MessageBox.Show("Thanh cong dang nhap");
+                //        IsLoginSuccessful = true;
+                //    }
+                //    if (Password != "" && item.Password.ToString().Equals(Password))
+                //    {
+                //        MessageBox.Show("Thanh cong dang nhap");
+                //        IsLoginSuccessful = true;
+                //    }
+                //    MessageBox.Show(item.UserID + " " + item.Password);
+                //}
+                var user = context.TaiKhoans.FirstOrDefault(u => u.UserID == UserID && u.Password == Password);
+                if (user != null)
                 {
-                    if (item.UserID.ToString().Equals(UserID) && item.Password == Password)
-                    {
-                        MessageBox.Show("Thanh cong dang nhap");
-                        IsLoginSuccessful = true;
-                    }
-                    MessageBox.Show(item.UserID + " " + item.Password);
+                    IsLoginSuccessful = true;
+
+                    if (user.Loai == "AD")
+                        mainwindow = new MainWindow1();
+                    else
+                        mainwindow = new MainWindow2();
+                    mainwindow.Show();
+                    p.Close();
                 }
-                if (!IsLoginSuccessful)
-                    MessageBox.Show("Failed to login");
-                //var user = context.TaiKhoans.FirstOrDefault(u => u.UserID == UserID && u.Password == Password);
-                //if (user != null)
-                //{
-                //    IsLoginSuccessful = true;
+                else
+                {
+                    IsLoginSuccessful = false;
+                }
 
-                //    if (user.Loai == "AD") 
-                //        mainwindow = new MainWindow1();
-                //    else
-                //        mainwindow = new MainWindow2();
-                //    mainwindow.Show();
-                //    p.Close();
-                //}
-                //else
-                //{
-                //    IsLoginSuccessful = false;
-                //}
-
-                //if (IsLoginSuccessful)
-                //    MessageBox.Show("Dang nhap thanh cong", "Thong bao");
-                //else
-                //    MessageBox.Show("Dang nhap that bai" + user.UserID + " " + user.Password, "Thong bao");
+                if (IsLoginSuccessful)
+                    MessageBox.Show("Dang nhap thanh cong", "Thong bao");
+                else
+                    MessageBox.Show("Dang nhap that bai", "Thong bao");
             }
         }
     }
@@ -130,11 +131,20 @@ namespace LibraryManagementApplication.ViewModel
         {
             if (d is PasswordBox passwordBox)
             {
-                passwordBox.PasswordChanged += (sender, args) =>
-                {
-                    SetBindPassword(passwordBox, passwordBox.Password);
-                };
+                // Lắng nghe sự kiện PasswordChanged để cập nhật giá trị Password trong ViewModel
+                passwordBox.PasswordChanged -= PasswordBox_PasswordChanged;
+                passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
+            }
+        }
+
+        private static void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (sender is PasswordBox passwordBox)
+            {
+                // Cập nhật giá trị vào thuộc tính BindPassword
+                SetBindPassword(passwordBox, passwordBox.Password);
             }
         }
     }
+
 }
