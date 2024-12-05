@@ -189,6 +189,49 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Style nút radio sửa-->
+        <Style TargetType="RadioButton" x:Key="rbutton:edit">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="ButtonBorder"
+                             BorderBrush="#FF869E07"
+                             Background="#FFF6FF9A"
+                             BorderThickness="1"
+                             CornerRadius="20"> 
+                            <ContentPresenter  x:Name="text"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        TextElement.Foreground="#FF869E07"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#cfcfcf"
+                                             Direction="45"
+                                             ShadowDepth="4"
+                                             Opacity="0.5"
+                                             BlurRadius="10" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FF869E07"/>
+                                <Setter TargetName="text" Property="TextElement.Foreground" Value="#FFF6FF9A"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FF869E07"/>
+                                <Setter TargetName="text" Property="TextElement.Foreground" Value="#FFF6FF9A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <!--Style nút xóa-->
         <Style TargetType="Button" x:Key="button:delete">
             <Setter Property="FontSize" Value="18"/>
@@ -239,19 +282,57 @@
                              BorderThickness="1"
                              CornerRadius="10"
                              Height="40">
-                            <TextBox 
+                            <TextBox x:Name="tb"
                                FontSize="18"
-                                FontWeight="Medium"
+                               FontWeight="Medium"
                                Margin="5"
                                BorderBrush="Transparent"
                                Background="white"
                                BorderThickness ="0"
                                ></TextBox>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="tb" Property="BorderBrush" Value="#07209e"/>
+                                <Setter TargetName="tb" Property="BorderThickness" Value="0,0,0,2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Style cho combobox thông thường-->
+        <Style TargetType="ComboBox" x:Key="combobox:style1">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Border x:Name="Border"
+                         Background="White"
+                         BorderBrush="#07209e"
+                         BorderThickness="1"
+                         CornerRadius="10"
+                         Height="40">
+                            <ComboBox x:Name="cb"
+                                FontSize="18"
+                                FontWeight="Medium"
+                                Margin="5"
+                                BorderBrush="Transparent"
+                                Background="white"
+                                BorderThickness ="0"
+                                IsEditable="True">
+                            </ComboBox>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="cb" Property="BorderBrush" Value="#07209e"/>
+                                <Setter TargetName="cb" Property="BorderThickness" Value="0,0,0,2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--Style cho icon trong menu-->
         <Style TargetType="fa:IconImage" x:Key="icon:menu">
             <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
             <Setter Property="Width" Value="30" />
@@ -388,6 +469,7 @@
             <Setter Property="BorderBrush" Value="#07209e"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="Padding" Value="10,0,10,0"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>

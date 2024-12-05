@@ -272,3 +272,9 @@ C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplicat
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\LibraryM.B0B81D9C.Up2Date
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\LibraryManagementApplication.exe
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\LibraryManagementApplication.pdb
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\headerbookpage.g.cs
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\lendpage.g.cs
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\headerbookpage.baml
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\lendpage.baml
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\infoxaml.g.cs
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\infoxaml.baml
