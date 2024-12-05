@@ -82,7 +82,8 @@
                     Margin="5"
                     BorderBrush="Transparent"
                     BorderThickness="0"
-                    ></PasswordBox>
+                    local:PasswordBoxHelper.BindPassword="{Binding Password}">
+                </PasswordBox>
             </Border>
 
             <TextBox x:Name="visiblepasswork"

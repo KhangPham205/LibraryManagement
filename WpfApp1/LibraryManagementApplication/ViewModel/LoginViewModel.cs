@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManagementApplication.ViewModel
@@ -12,16 +14,16 @@ namespace LibraryManagementApplication.ViewModel
     public class LoginViewModel : BaseViewModel
     {
         // Properties for binding to the UI
-        private string _username;
-        public string Username
+        private string _userid;
+        public string UserID
         {
-            get { return _username; }
+            get { return _userid; }
             set
             {
-                if (_username != value)
+                if (_userid == "" || _userid != value)
                 {
-                    _username = value;
-                    OnPropertyChanged(nameof(Username));
+                    _userid = value;
+                    OnPropertyChanged(nameof(_userid));
                 }
             }
         }
@@ -40,7 +42,7 @@ namespace LibraryManagementApplication.ViewModel
             }
         }
 
-        private bool _isLoginSuccessful;
+        private bool _isLoginSuccessful = false;
         public bool IsLoginSuccessful
         {
             get { return _isLoginSuccessful; }
@@ -69,28 +71,69 @@ namespace LibraryManagementApplication.ViewModel
         {
             using (var context = new LibraryDbContext())
             {
-                Window mainwindow = new MainWindow1();
-                mainwindow.Show();
-                p.Close();
+                //Window mainwindow;
                 // Tìm người dùng dựa vào Username và Password (cần hash password nếu sử dụng trong thực tế)
-                //var user = context.TaiKhoans.FirstOrDefault(u => u.UserName == Username && u.Password == Password);
+                MessageBox.Show(UserID + " " + Password);
+
+                foreach (var item in context.TaiKhoans)
+                {
+                    if (item.UserID.ToString().Equals(UserID) && item.Password == Password)
+                    {
+                        MessageBox.Show("Thanh cong dang nhap");
+                        IsLoginSuccessful = true;
+                    }
+                    MessageBox.Show(item.UserID + " " + item.Password);
+                }
+                if (!IsLoginSuccessful)
+                    MessageBox.Show("Failed to login");
+                //var user = context.TaiKhoans.FirstOrDefault(u => u.UserID == UserID && u.Password == Password);
                 //if (user != null)
                 //{
-                    //IsLoginSuccessful = true;
-                    
-                    //if(user la admin) 
-                    //Window mainwindow = new MainWindow1();
-                    //else 
-                    //Window mainwindow = new MainWindow2();
-                    //mainwindow.Show();
-                    //p.Close();
-                    // Điều hướng đến trang chính của ứng dụng hoặc hiển thị thông báo thành công
+                //    IsLoginSuccessful = true;
+
+                //    if (user.Loai == "AD") 
+                //        mainwindow = new MainWindow1();
+                //    else
+                //        mainwindow = new MainWindow2();
+                //    mainwindow.Show();
+                //    p.Close();
                 //}
                 //else
                 //{
-                   //IsLoginSuccessful = false;
-                    // Hiển thị thông báo lỗi cho người dùng
+                //    IsLoginSuccessful = false;
                 //}
+
+                //if (IsLoginSuccessful)
+                //    MessageBox.Show("Dang nhap thanh cong", "Thong bao");
+                //else
+                //    MessageBox.Show("Dang nhap that bai" + user.UserID + " " + user.Password, "Thong bao");
+            }
+        }
+    }
+
+    public static class PasswordBoxHelper
+    {
+        public static readonly DependencyProperty BindPasswordProperty =
+            DependencyProperty.RegisterAttached("BindPassword", typeof(string), typeof(PasswordBoxHelper), new PropertyMetadata(string.Empty, OnBindPasswordChanged));
+
+        public static void SetBindPassword(DependencyObject element, string value)
+        {
+            element.SetValue(BindPasswordProperty, value);
+        }
+
+        public static string GetBindPassword(DependencyObject element)
+        {
+            return (string)element.GetValue(BindPasswordProperty);
+        }
+
+        private static void OnBindPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is PasswordBox passwordBox)
+            {
+                passwordBox.PasswordChanged += (sender, args) =>
+                {
+                    SetBindPassword(passwordBox, passwordBox.Password);
+                };
             }
         }
     }
