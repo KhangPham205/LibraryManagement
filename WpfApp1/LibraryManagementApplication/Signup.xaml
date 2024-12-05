@@ -9,6 +9,7 @@
         Height="450" Width="650"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
+        Icon="/Icon/book (1).png"
         >
     <Window.DataContext>
         <local:SignupViewModel/>

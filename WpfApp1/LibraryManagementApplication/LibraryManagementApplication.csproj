@@ -208,11 +208,20 @@
     <Compile Include="bookpage.xaml.cs">
       <DependentUpon>bookpage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="headerbookpage.xaml.cs">
+      <DependentUpon>headerbookpage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="borrowpage.xaml.cs">
       <DependentUpon>borrowpage.xaml</DependentUpon>
     </Compile>
     <Compile Include="employeepage.xaml.cs">
       <DependentUpon>employeepage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="infoxaml.xaml.cs">
+      <DependentUpon>infoxaml.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="lendpage.xaml.cs">
+      <DependentUpon>lendpage.xaml</DependentUpon>
     </Compile>
     <Compile Include="mainpage.xaml.cs">
       <DependentUpon>mainpage.xaml</DependentUpon>
@@ -273,6 +282,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="headerbookpage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="borrowpage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -280,6 +293,14 @@
     <Page Include="employeepage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="infoxaml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="lendpage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="mainpage.xaml">
       <SubType>Designer</SubType>
@@ -408,6 +429,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="Icon\open-book %281%29.png" />
+    <Resource Include="Icon\book.png" />
+    <Resource Include="Icon\book %281%29.png" />
     <Content Include="Model\Database\DatabaseLibrary.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

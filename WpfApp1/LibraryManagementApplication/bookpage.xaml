@@ -3,9 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel.ClassViewModel"
+      xmlns:local="clr-namespace:LibraryManagementApplication"
       mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="1000">
+      d:DesignHeight="700" d:DesignWidth="1000"
+      Title="bookpage">
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -13,7 +15,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"
           Background="#e6f3ff">
-            <TextBlock Text="Quản lý thông tin sách " 
+            <TextBlock Text="Quản lý sách " 
                    FontSize="50" 
                    FontWeight="Bold" 
                    FontFamily="roboto"
@@ -23,199 +25,129 @@
                    />
         </Grid>
         <Grid  Grid.Row="1"
-                        Background="#cfcfcf">
-                    <Grid.DataContext>
-                        <local:SachViewModel/>
-                    </Grid.DataContext>
+               Background="#e6f3ff">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Margin="40,40,40,10"
+                 BorderBrush="#07209e"
+                 BorderThickness="2"
+                 CornerRadius="20">
+                <Grid Margin="10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="195"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="10"/>
                     </Grid.RowDefinitions>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="10"/>
-                        </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Tên đầu sách:"
+                           Style="{StaticResource textblock:style1}"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           Margin="5"
+                           HorizontalAlignment="Right"/>
+                    <TextBox x:Name="tentb"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         Margin="5"
+                         Style="{StaticResource textbox:style1}"
+                         Text="{Binding TenDSach, Mode=OneWayToSource}"/>
+
+                    <TextBlock Text="ISBN: "
+           Style="{StaticResource textblock:style1}"
+           Grid.Column="0"
+           Grid.Row="2"
+           Margin="5"
+           HorizontalAlignment="Right"/>
+                    <TextBox x:Name="isbn"
+         Grid.Column="1"
+         Grid.Row="2"
+         Margin="5"
+         Style="{StaticResource textbox:style1}"
+         Text="{Binding ISBN, Mode=OneWayToSource}"/>
+                    <TextBlock Text="Vị trí: "
+           Style="{StaticResource textblock:style1}"
+           Grid.Column="2"
+           Grid.Row="1"
+           Margin="5"
+           HorizontalAlignment="Right"/>
+                    <TextBox x:Name="vitritb"
+         Grid.Column="3"
+         Grid.Row="1"
+         Margin="5"
+         Style="{StaticResource textbox:style1}"
+         Text="{Binding ViTri, Mode=OneWayToSource}"/>
+                    <TextBlock Text="Trạng thái: "
+           Style="{StaticResource textblock:style1}"
+           Grid.Column="2"
+           Grid.Row="2"
+           Margin="5"
+           HorizontalAlignment="Right"/>
+                    <ComboBox x:Name="trangthaitb"
+          Grid.Column="3"
+          Grid.Row="2"
+          Margin="5"
+          Style="{StaticResource combobox:style1}"
+          Text="{Binding TrangThai, Mode=OneWayToSource}">
+                        <ComboBoxItem Content="Có Sẵn"/>
+                    </ComboBox>
+                    <Grid Grid.Row="5"
+                              Grid.Column="0"
+                              Grid.ColumnSpan="2">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-
-                        <TextBlock Text="Tên sách:"
-                                    Foreground="#07209e"
-                                    FontSize="18"
-                                    Grid.Column="0"
-                                    Grid.Row="1"
-                                    Margin="5"
-                                    HorizontalAlignment="Right"/>
-                        <TextBox x:Name="tentb"
-                                    Grid.Column="1"
-                                    Grid.Row="1"
-                                    Margin="5"
-                                    Text="{Binding TenSach, Mode=OneWayToSource}"/>
-                        <TextBlock Text="ISBN: "
-                                    Foreground="#07209e"
-                                    FontSize="18"
-                                    Grid.Column="0"
-                                    Grid.Row="2"
-                                    Margin="5"
-                                    HorizontalAlignment="Right"/>
-                        <TextBox x:Name="isbn"
-                                    Grid.Column="1"
-                                    Grid.Row="2"
-                                    Margin="5"
-                                    Text="{Binding ISBN, Mode=OneWayToSource}"/>
-                        <TextBlock Text="Tác giả: "
-                                    Foreground="#07209e"
-                                    FontSize="18"
-                                    Grid.Column="0"
-                                    Grid.Row="3"
-                                    Margin="5"
-                                    HorizontalAlignment="Right"/>
-                        <ComboBox x:Name="tacgiatb"
-                                    Grid.Column="1"
-                                    Grid.Row="3"
-                                    Margin="5"/>
-                        <TextBlock Text="Thể loại: "
-                                    Foreground="#07209e"
-                                    FontSize="18"
-                                    Grid.Column="0"
-                                    Grid.Row="4"
-                                    Margin="5"
-                                    HorizontalAlignment="Right"/>
-                        <ComboBox x:Name="theloaitb"
-                                    Grid.Column="1"
-                                    Grid.Row="4"
-                                    Margin="5"/>
-                        <TextBlock Text="NXB: "
-                                    Foreground="#07209e"
-                                    FontSize="18"
-                                    Grid.Column="0"
-                                    Grid.Row="5"
-                                    Margin="5"
-                                    HorizontalAlignment="Right"/>
-                        <ComboBox x:Name="nxbtb"
-                                    Grid.Column="1"
-                                    Grid.Row="5"
-                                    Margin="5"/>
-                        <TextBlock Text="Năm XB: "
-                                    Foreground="#07209e"
-                                    FontSize="18"
-                                    Grid.Column="2"
-                                    Grid.Row="1"
-                                    Margin="5"
-                                    HorizontalAlignment="Right"/>
-                        <TextBox x:Name="namxbtb"
-                                    Grid.Column="3"
-                                    Grid.Row="1"
-                                    Margin="5"
-                                    />
-                        <TextBlock Text="Ngôn ngữ: "
-                                    Foreground="#07209e"
-                                    FontSize="18"
-                                    Grid.Column="2"
-                                    Grid.Row="2"
-                                    Margin="5"
-                                    HorizontalAlignment="Right"/>
-                        <TextBox x:Name="ngonngutb"
-                                    Grid.Column="3"
-                                    Grid.Row="2"
-                                    Margin="5"
-                                    Text="{Binding NgonNgu, Mode=OneWayToSource}"/>
-                        <TextBlock Text="Vị trí: "
-                                    Foreground="#07209e"
-                                    FontSize="18"
-                                    Grid.Column="2"
-                                    Grid.Row="3"
-                                    Margin="5"
-                                    HorizontalAlignment="Right"/>
-                        <TextBox x:Name="vitritb"
-                                    Grid.Column="3"
-                                    Grid.Row="3"
-                                    Margin="5"
-                                    Text="{Binding ViTri, Mode=OneWayToSource}"/>
-                        <TextBlock Text="Trạng thái: "
-                                    Foreground="#07209e"
-                                    FontSize="18"
-                                    Grid.Column="2"
-                                    Grid.Row="4"
-                                    Margin="5"
-                                    HorizontalAlignment="Right"/>
-                        <ComboBox x:Name="trangthaitb"
-                                    Grid.Column="3"
-                                    Grid.Row="4"
-                                    Margin="5"
-                                    Text="{Binding TrangThai, Mode=OneWayToSource}">
-                            <ComboBoxItem Content="Có Sẵn"/>
-                        </ComboBox>
-                        <Grid Grid.Row="5"
-                              Grid.Column="2"
-                              Grid.ColumnSpan="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button  x:Name="addsach"
-                                     Content="Thêm"
-                                     Background="#FF9AFFAB"
-                                     Width="75"
-                                     Margin="5"
-                                     Style="{DynamicResource button:add}"
-                                     Command="{Binding AddCommand}"/>
-                            <Button  x:Name="findsach"
-                                     Content="Tìm"
-                                     Background="#9acbff"
-                                     Grid.Column="1"
-                                     Width="75"
-                                     Margin="5"
-                                     Style="{DynamicResource button:find}"/>
-                            <Button  x:Name="editsach"
-                                     Content="Sửa"
-                                     Background="#FFF6FF9A"
-                                     Grid.Column="2"
-                                     Width="75"
-                                     Margin="5"
-                                     Style="{DynamicResource button:edit}"/>
-                            <Button  x:Name="deletesach"
-                                     Content="Xóa"
-                                     Grid.Column="3"
-                                     Width="75"
-                                     Margin="5"
-                                     Background="#FFFF9A9A"
-                                     Style="{DynamicResource button:delete}"/>
-                        </Grid>
+                        <Button  x:Name="addsach"
+                             Content="Thêm"
+                             Margin="5"
+                             Style="{DynamicResource button:add}"
+                             Command="{Binding AddCommand}"/>
+                        <Button  x:Name="findsach"
+                             Content="Tìm"
+                             Grid.Column="1"
+                             Margin="5"
+                             Style="{DynamicResource button:find}"/>
+                        <Button  x:Name="editsach"
+                             Content="Sửa"
+                             Grid.Column="2"
+                             Margin="5"
+                             Style="{DynamicResource button:edit}"/>
+                        <Button  x:Name="deletesach"
+                             Content="Xóa"
+                             Grid.Column="3"
+                             Margin="5"
+                             Style="{DynamicResource button:delete}"/>
                     </Grid>
-                    <DataGrid x:Name="sach"
-                              Margin="5"
-                              Grid.Row="1"
-                              AutoGenerateColumns="False"
-                              IsReadOnly="True"
-                              HeadersVisibility="Column"
-                              ItemsSource="{Binding SachList}"
-                              >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã sách" Binding="{Binding MaSach}" />
-                            <DataGridTextColumn Header="Tên sách" Binding="{Binding TenSach}" />
-                            <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" />
-                            <DataGridTextColumn Header="Tác giả" Binding="{Binding TacGia}" />
-                            <DataGridTextColumn Header="Thể loại" Binding="{Binding TheLoai}" />
-                            <DataGridTextColumn Header="NXB" Binding="{Binding NXB}" />
-                            <DataGridTextColumn Header="Năm XB" Binding="{Binding NamXB}" />
-                            <DataGridTextColumn Header="Ngôn ngữ" Binding="{Binding NgonNgu}" />
-                            <DataGridTextColumn Header="Vị trí" Binding="{Binding ViTri}" />
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding TrangThai}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-
                 </Grid>
+            </Border>
+            <DataGrid x:Name="sach"
+                      Margin="5"
+                      Grid.Row="1"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã đầu sách" Width="*" Binding="{Binding MaDSach}" />
+                    <DataGridTextColumn Header="Tên đầu sách" Width="2*" Binding="{Binding TenDSach}" />
+                    <DataGridTextColumn Header="ISBN" Width="*" Binding="{Binding ISBN}" />
+                    <DataGridTextColumn Header="Vị trí" Width="*" Binding="{Binding ViTri}" />
+                    <DataGridTextColumn Header="Trạng thái" Width="*" Binding="{Binding TrangThai}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
     </Grid>
 </Page>
