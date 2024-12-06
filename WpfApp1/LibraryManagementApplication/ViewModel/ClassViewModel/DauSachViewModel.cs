@@ -13,13 +13,13 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class DauSachViewModel : BaseViewModel
     {
+        private Random random = new Random();
         public string MaDauSach { get; set; }
         public string TenDauSach { get; set; }
         public string TenTG { get; set; }
         public string NgonNgu { get; set; }
         public string TenTL { get; set; }
         public string TenNXB { get; set; }
-        public string NamXB { get; set; }
         public ObservableCollection<DauSach> DauSachList { get; set; }
         private DauSach _selectedDauSach;
         public DauSach SelectedDauSach
@@ -63,18 +63,20 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             var newDauSach = new DauSach()
             {
-                MaDauSach = MaDauSach, // You might want to generate a unique ID
+                MaDauSach = "1",
                 TenDauSach = TenDauSach,
                 TenTG = TenTG,
                 NgonNgu = NgonNgu,
                 TenTL = TenTL,
                 TenNXB = TenNXB,
-                NamXB = NamXB
             };
-            DauSachList.Add(newDauSach);
-
+            MessageBox.Show(newDauSach.MaDauSach + " " + newDauSach.TenDauSach + " " + newDauSach.TenTL);
             bool isSuccess = await AddDauSachToDatabaseAsync(newDauSach);
-            if (!isSuccess)
+            if (isSuccess)
+            {
+                DauSachList.Add(newDauSach);
+            }
+            else
             {
                 MessageBox.Show("Cannot save changes.");
             }
@@ -131,11 +133,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     return true;
                 }
             }
-            catch (Exception ex)
+            catch (DbUpdateException ex)
             {
-                MessageBox.Show($"Error adding book: {ex.Message}");
+                MessageBox.Show($"Error adding header book: {ex.InnerException?.Message ?? ex.Message}");
                 return false;
             }
+            catch (Exception ex) { MessageBox.Show(ex.Message); return false; }
         }
 
         public static async Task<bool> UpdateDauSachInDatabaseAsync(DauSach DauSach)
@@ -151,7 +154,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating book: {ex.Message}");
+                MessageBox.Show($"Error updating header book: {ex.Message}");
                 return false;
             }
         }
@@ -174,7 +177,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting book: {ex.Message}");
+                MessageBox.Show($"Error deleting header book: {ex.Message}");
                 return false;
             }
         }
@@ -193,7 +196,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching books: {ex.Message}");
+                MessageBox.Show($"Error searching header books: {ex.Message}");
                 return new List<DauSach>();
             }
         }
