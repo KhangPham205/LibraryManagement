@@ -233,6 +233,7 @@
       <DependentUpon>MainWindow2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Class\CTDM.cs" />
+    <Compile Include="Model\Class\DauSach.cs" />
     <Compile Include="Model\Class\DocGia.cs" />
     <Compile Include="Model\Class\DonMuon.cs" />
     <Compile Include="Model\Class\NhaXuatBan.cs" />
@@ -259,6 +260,7 @@
       <DependentUpon>typepage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ClassViewModel\CTDMViewModel.cs" />
+    <Compile Include="ViewModel\ClassViewModel\DauSachViewModel.cs" />
     <Compile Include="ViewModel\ClassViewModel\DocGiaViewModel.cs" />
     <Compile Include="ViewModel\ClassViewModel\DonMuonViewModel.cs" />
     <Compile Include="ViewModel\ClassViewModel\NhaXuatBanViewModel.cs" />
@@ -427,11 +429,12 @@
     <Resource Include="Icon\minus-sign.png" />
     <Resource Include="Icon\plus.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Icon\open-book %281%29.png" />
     <Resource Include="Icon\book.png" />
     <Resource Include="Icon\book %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\Database\DatabaseLibrary.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

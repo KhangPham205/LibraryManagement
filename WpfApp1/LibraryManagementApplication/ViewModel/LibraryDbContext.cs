@@ -9,6 +9,7 @@ namespace LibraryManagementApplication.ViewModel
 {
     public class LibraryDbContext : DbContext
     {
+        public DbSet<DauSach> DauSachs { get; set; }
         public DbSet<Sach> Sachs { get; set; }
         public DbSet<NhaXuatBan> NhaXuatBans { get; set; }
         public DbSet<TheLoai> TheLoais { get; set; }
@@ -26,11 +27,14 @@ namespace LibraryManagementApplication.ViewModel
         // Cấu hình chuỗi kết nối đến cơ sở dữ liệu
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\Model\Database\DatabaseLibrary.mdf;Integrated Security=True;MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Model\Database\DatabaseLibrary.mdf;Integrated Security=True;MultipleActiveResultSets=True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<DauSach>()
+                .ToTable("DauSach");
+
             modelBuilder.Entity<Sach>()
                 .ToTable("Sach");
 

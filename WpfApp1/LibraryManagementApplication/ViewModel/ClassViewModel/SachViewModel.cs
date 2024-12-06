@@ -12,16 +12,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class SachViewModel : BaseViewModel
     {
-        public string MaSach { get; set; }
-        public string TenSach { get; set; }
+        public string MaDauSach { get; set; }
         public string ISBN { get; set; }
         public string ViTri { get; set; }
-        public string NgonNgu { get; set; }
         public string TrangThai { get; set; }
-        public string TenTG { get; set; }
-        public string TheLoai { get; set; }
-        public string NhaXuatBan { get; set; }
-        public int NamXuatBan { get; set; }
         public ObservableCollection<Sach> SachList { get; set; }
         private Sach _selectedSach;
         public Sach SelectedSach
@@ -67,15 +61,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             var newSach = new Sach()
             {
-                MaSach = "1", // You might want to generate a unique ID
-                TenSach = TenSach,
+                MaDauSach = MaDauSach, // You might want to generate a unique ID
                 ISBN = ISBN,
                 ViTri = ViTri,
-                NgonNgu = NgonNgu,
                 TrangThai = TrangThai,
-                TenTG = TenTG,
-                NhaXuatBan = NhaXuatBan,
-                NamXuatBan = NamXuatBan
             };
             SachList.Add(newSach);
 
@@ -102,7 +91,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             if (SelectedSach != null)
             {
-                bool isSuccess = await DeleteSachFromDatabaseAsync(SelectedSach.MaSach);
+                bool isSuccess = await DeleteSachFromDatabaseAsync(SelectedSach.ISBN);
                 if (isSuccess)
                 {
                     SachList.Remove(SelectedSach);
@@ -162,13 +151,13 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<bool> DeleteSachFromDatabaseAsync(string maSach)
+        public static async Task<bool> DeleteSachFromDatabaseAsync(string isbn)
         {
             try
             {
                 using (var context = new LibraryDbContext())
                 {
-                    var sachToDelete = await context.Sachs.FirstOrDefaultAsync(s => s.MaSach == maSach);
+                    var sachToDelete = await context.Sachs.FirstOrDefaultAsync(s => s.ISBN == isbn);
                     if (sachToDelete != null)
                     {
                         context.Sachs.Remove(sachToDelete);
@@ -192,7 +181,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 using (var context = new LibraryDbContext())
                 {
                     var result = await context.Sachs
-                                              .Where(s => s.TenSach.Contains(keyword))
+                                              .Where(s => s.MaDauSach.Contains(keyword))
                                               .ToListAsync();
                     return result;
                 }

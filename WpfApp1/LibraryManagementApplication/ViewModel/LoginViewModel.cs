@@ -131,7 +131,7 @@ namespace LibraryManagementApplication.ViewModel
         {
             if (d is PasswordBox passwordBox)
             {
-                // Lắng nghe sự kiện PasswordChanged để cập nhật giá trị Password trong ViewModel
+                // sự kiện PasswordChanged để cập nhật giá trị Password trong ViewModel
                 passwordBox.PasswordChanged -= PasswordBox_PasswordChanged;
                 passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
             }
