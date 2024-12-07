@@ -33,10 +33,14 @@ namespace LibraryManagementApplication.ViewModel
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<DauSach>()
-                .ToTable("DauSach");
+                .ToTable("DauSach")
+                .HasKey("MaDauSach");
 
             modelBuilder.Entity<Sach>()
-                .ToTable("Sach");
+                .ToTable("Sach")
+                .HasOne(s => s.DauSach)  // Sach has one DauSach
+                .WithMany(d => d.Sachs)   // DauSach has many Sachs
+                .HasForeignKey(s => s.MaDauSach);  // Foreign key in Sach is MaDauSach
 
             modelBuilder.Entity<NhaXuatBan>()
                 .ToTable("NhaXuatBan");

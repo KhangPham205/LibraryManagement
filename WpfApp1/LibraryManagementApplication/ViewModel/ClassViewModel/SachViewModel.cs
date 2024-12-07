@@ -7,15 +7,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using LibraryManagementApplication.ViewModel.ClassViewModel;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class SachViewModel : BaseViewModel
     {
         public string MaDauSach { get; set; }
+        public string TenDauSach { get; set; }
         public string ISBN { get; set; }
         public string ViTri { get; set; }
         public string TrangThai { get; set; }
+        public int NamXB { get; set; }
         public ObservableCollection<Sach> SachList { get; set; }
         private Sach _selectedSach;
         public Sach SelectedSach
@@ -30,7 +33,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
-
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
@@ -46,7 +48,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
             LoadSachList();
         }
-
         private async void LoadSachList()
         {
             SachList.Clear();
@@ -56,15 +57,16 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 SachList.Add(sach);
             }
         }
-
         private async Task AddSach()
         {
+            var context = new LibraryDbContext();
             var newSach = new Sach()
             {
-                MaDauSach = MaDauSach, // You might want to generate a unique ID
+                MaDauSach = context.DauSachs.FirstOrDefault(s => s.TenDauSach == TenDauSach).MaDauSach,
                 ISBN = ISBN,
                 ViTri = ViTri,
                 TrangThai = TrangThai,
+                DauSach = context.DauSachs.FirstOrDefault(s => s.TenDauSach == TenDauSach),
             };
             SachList.Add(newSach);
 
@@ -74,7 +76,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 MessageBox.Show("Cannot save changes.");
             }
         }
-
         private async Task EditSach()
         {
             if (SelectedSach != null)
@@ -82,11 +83,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool isSuccess = await UpdateSachInDatabaseAsync(SelectedSach);
                 if (!isSuccess)
                 {
-                    // Handle failure (e.g. show error message to user)
+                    MessageBox.Show("Cannot edit sach");
                 }
             }
         }
-
         private async Task DeleteSach()
         {
             if (SelectedSach != null)
@@ -98,11 +98,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
                 else
                 {
-                    // Handle failure (e.g. show error message to user)
+                    MessageBox.Show("Cannot delete sach");
                 }
             }
         }
-
         private async Task SearchSach(string keyword)
         {
             var filteredListFromDb = await SearchSachInDatabaseAsync(keyword);
@@ -114,7 +113,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         #region MethodToDatabase
-
         public static async Task<bool> AddSachToDatabaseAsync(Sach sach)
         {
             try
@@ -132,7 +130,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-
         public static async Task<bool> UpdateSachInDatabaseAsync(Sach sach)
         {
             try
@@ -150,7 +147,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-
         public static async Task<bool> DeleteSachFromDatabaseAsync(string isbn)
         {
             try
@@ -173,7 +169,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-
         public static async Task<List<Sach>> SearchSachInDatabaseAsync(string keyword)
         {
             try
@@ -192,14 +187,15 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return new List<Sach>();
             }
         }
-
         public static async Task<List<Sach>> GetAllSachsAsync()
         {
             try
             {
                 using (var context = new LibraryDbContext())
                 {
-                    var result = await context.Sachs.ToListAsync();
+                    var result = await context.Sachs
+                                              .Include(s => s.DauSach)
+                                              .ToListAsync();
                     return result;
                 }
             }
@@ -209,7 +205,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return new List<Sach>();
             }
         }
-
         #endregion
     }
 }

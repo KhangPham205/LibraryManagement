@@ -14,8 +14,8 @@ namespace LibraryManagementApplication.Model.Class
         public string ISBN { get; set; }
         public string ViTri { get; set; }
         public string TrangThai { get; set; }
-        // Navigation properties
-
+        public int NamXB { get; set; }
+        public DauSach DauSach { get; set; }
         public Sach() { }
     }
 }

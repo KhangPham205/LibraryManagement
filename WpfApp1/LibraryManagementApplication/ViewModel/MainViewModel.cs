@@ -33,17 +33,17 @@ namespace LibraryManagementApplication.ViewModel
         { 
             signincommand = new RelayCommand<Window> ( (p) => { return isLogin(); }, (p) => {  Signin window = new Signin(); window.Show(); p.Close(); } );
             signoutcommand = new RelayCommand<object>((p) => { return !isLogin(); }, (p) => { logOut(); });
-            mainpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is mainpage); }, (p) => { p.Content = new mainpage(); });
-            bookpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is bookpage); }, (p) => { p.Content = new bookpage(); });
-            borrowpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is borrowpage); }, (p) => { p.Content = new borrowpage(); });
-            readerpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is readerpage); }, (p) => { p.Content = new readerpage(); });
-            employeepagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is employeepage); }, (p) => { p.Content = new employeepage(); });
-            writerpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is writerpage); }, (p) => { p.Content = new writerpage(); });
-            typepagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is typepage); }, (p) => { p.Content = new typepage(); });
-            publisherpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is publisherpage); }, (p) => { p.Content = new publisherpage(); });
-            lendpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is lendpage); }, (p) => { p.Content = new lendpage(); });
-            headerbookpagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is headerbookpage); }, (p) => { p.Content = new headerbookpage(); });
-            infopagecommand = new RelayCommand<Frame>((p) => { return !(p.Content is infoxaml); }, (p) => { p.Content = new infoxaml(); });
+            mainpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is mainpage); }, (p) => { p.Content = new mainpage(); });
+            bookpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is bookpage); }, (p) => { p.Content = new bookpage(); });
+            borrowpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is borrowpage); }, (p) => { p.Content = new borrowpage(); });
+            readerpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is readerpage); }, (p) => { p.Content = new readerpage(); });
+            employeepagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is employeepage); }, (p) => { p.Content = new employeepage(); });
+            writerpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is writerpage); }, (p) => { p.Content = new writerpage(); });
+            typepagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is typepage); }, (p) => { p.Content = new typepage(); });
+            publisherpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is publisherpage); }, (p) => { p.Content = new publisherpage(); });
+            lendpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is lendpage); }, (p) => { p.Content = new lendpage(); });
+            headerbookpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is headerbookpage); }, (p) => { p.Content = new headerbookpage(); });
+            infopagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is infoxaml); }, (p) => { p.Content = new infoxaml(); });
         }
         bool isLogin() { return true; }//kiem tra da dang nhap chua
         void logOut() { }

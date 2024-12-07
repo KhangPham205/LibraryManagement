@@ -25,7 +25,7 @@
         <Grid  Grid.Row="1"
                Background="#e6f3ff">
             <Grid.DataContext>
-                <local:SachViewModel/>
+                <local:DauSachViewModel/>
             </Grid.DataContext>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -64,7 +64,7 @@
                          Grid.Row="1"
                          Margin="5"
                          Style="{StaticResource textbox:style1}"
-                         Text="{Binding TenDSach, Mode=OneWayToSource}"/>
+                         Text="{Binding TenDauSach, Mode=OneWayToSource}"/>
 
                     <TextBlock Text="Tác giả: "
                            Style="{StaticResource textblock:style1}"
@@ -76,7 +76,8 @@
                           Grid.Column="1"
                           Grid.Row="3"
                           Background="White"
-                          Style="{StaticResource combobox:style1}"                        
+                          Style="{StaticResource combobox:style1}"
+                          Text="{Binding TenTG}"
                           Margin="5"/>
                     <TextBlock Text="Thể loại: "
                            Style="{StaticResource textblock:style1}"
@@ -88,7 +89,8 @@
                           Grid.Column="1"
                           Grid.Row="2"
                           Margin="5"
-                          Style="{StaticResource combobox:style1}"/>
+                          Style="{StaticResource combobox:style1}"
+                          Text="{Binding TenTL}"/>
                     <TextBlock Text="NXB: "
                            Style="{StaticResource textblock:style1}"
                            Grid.Column="2"
@@ -99,7 +101,8 @@
                           Grid.Column="3"
                           Grid.Row="1"
                           Margin="5"
-                          Style="{StaticResource combobox:style1}"/>
+                          Style="{StaticResource combobox:style1}"
+                          Text="{Binding TenNXB}"/>
                     <TextBlock Text="Năm XB: "
                            Style="{StaticResource textblock:style1}"
                            Grid.Column="2"
@@ -165,7 +168,7 @@
                     <DataGridTextColumn Header="Tác giả" Width="*" Binding="{Binding TacGia}" />
                     <DataGridTextColumn Header="Thể loại" Width="*" Binding="{Binding TheLoai}" />
                     <DataGridTextColumn Header="NXB" Width="*" Binding="{Binding NXB}" />
-                    <DataGridTextColumn Header="Năm XB" Width="*" Binding="{Binding NamXB}" />
+                    <DataGridTextColumn Header="Năm XB" Width="*" />
                     <DataGridTextColumn Header="Ngôn ngữ" Width="*" Binding="{Binding NgonNgu}" />
                 </DataGrid.Columns>
             </DataGrid>
