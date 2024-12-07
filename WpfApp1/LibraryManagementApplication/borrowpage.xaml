@@ -28,167 +28,18 @@
               Background="#e6f3ff">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Border Margin="20,20,20,10"
-                     BorderBrush="#07209e"
-                     BorderThickness="2"
-                     CornerRadius="20">
-                <Grid Margin="5"
-                      Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="110"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Mã độc giả:"
-                     Style="{StaticResource textblock:style1}"
-                     Grid.Column="0"
-                     Grid.Row="1"
-                     Margin="5"
-                     HorizontalAlignment="Right"/>
-                    <ComboBox x:Name="tentb"
-                     Grid.Column="1"
-                     Grid.Row="1"
-                     Grid.ColumnSpan="4"
-                     Style="{StaticResource combobox:style1}"
-                     Margin="5"/>
-                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button  x:Name="adddon"
-                              Content="Tạo"
-                              Margin="5"
-                              Grid.Column="0"
-                              Style="{DynamicResource button:add}"/>
-                        <RadioButton  x:Name="addSach"
-                              Content="Thêm"
-                              Margin="5"
-                              Grid.Column="1"
-                              Style="{DynamicResource rbutton:edit}"/>
-                        <Button  x:Name="deletedon"
-                            Content="Xóa"
-                            Margin="5"
-                            Grid.Column="3"
-                            Style="{DynamicResource button:delete}"/>
-                    </Grid>
-                </Grid>
-            </Border>
-            <Border Margin="20,20,20,10"
-                 BorderBrush="#07209e"
-                 BorderThickness="2"
-                 CornerRadius="20"
-                 Grid.Row="1">
-                <Border.Style>
-                    <Style TargetType="Border">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=addSach }" Value="True">
-                            <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=addSach }" Value="False">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-                <Grid x:Name="themsach"
-                  Margin="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="110"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Tên sách:"
-                    Style="{StaticResource textblock:style1}"
-                    Grid.Column="0"
-                    Grid.Row="1"
-                    Margin="5"
-                    HorizontalAlignment="Right"/>
-                    <ComboBox x:Name="tensachtb"
-                    Grid.Column="1"
-                    Grid.Row="1"
-                    Grid.ColumnSpan="3"
-                    Style="{StaticResource combobox:style1}"
-                    Margin="5"/>
-                    <TextBlock Text="ISBN: "
-                    Style="{StaticResource textblock:style1}"
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    Margin="5"
-                    HorizontalAlignment="Right"/>
-                    <ComboBox x:Name="isbn"
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    Style="{StaticResource combobox:style1}"
-                    Margin="5"/>
-                    <Button  x:Name="addsach"
-                      Content="Thêm"
+            <Frame x:Name="add" 
+                  Grid.Row="0" 
+                  Margin="5"
+                  NavigationUIVisibility="Hidden">
+            </Frame>
+            <Frame x:Name="table" 
+                      Grid.Row="1" 
                       Margin="5"
-                      Grid.Column="2"
-                      Grid.Row="2"
-                      Style="{DynamicResource button:add}"/>
-                    <Button  x:Name="deletesach"
-                    Content="Xóa"
-                    Margin="5"
-                    Grid.Column="3"
-                    Grid.Row="2"
-                    Style="{DynamicResource button:delete}"/>
-                </Grid>
-            </Border>
-            <DataGrid x:Name="sach" 
-                      Grid.Column="1" 
-                      Grid.RowSpan="2"
-                      Margin="5">
-                <DataGrid.Style>
-                    <Style TargetType="DataGrid">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=addSach }" Value="True">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsChecked, ElementName=addSach }" Value="False">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.Style>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Sách" Width="*" Binding="{Binding TenDSach}"/>
-                    <DataGridTextColumn Header="IBSN" Width="*" Binding="{Binding IBSN}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <DataGrid x:Name="muon"
-                Grid.Row="2" 
-                Grid.ColumnSpan="2"
-                Margin="5" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
-                    <DataGridTextColumn Header="Tên độc giả" Width="*" Binding="{Binding TenDG}"/>
-                    <DataGridTextColumn Header="Tên nhân viên" Width="*" Binding="{Binding TenNV}"/>
-                    <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon}"/>
-                    <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK}"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                      NavigationUIVisibility="Hidden">
+            </Frame>
         </Grid>
     </Grid>
 </Page>
