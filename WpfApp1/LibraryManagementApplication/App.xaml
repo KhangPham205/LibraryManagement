@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LibraryManagementApplication"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             StartupUri="Signin.xaml">
+             StartupUri="MainWindow1.xaml">
     <Application.Resources>
         <Style TargetType="Button" x:Key="RoundButton">
             <Setter Property="Template">
@@ -346,6 +346,7 @@
             <Setter Property="FontSize" Value="18" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
+        <!-- Style cho RadioButton trong Menu-->
         <Style TargetType="RadioButton" x:Key="rbutton:menu">
             <Setter Property="Height" Value="40"/>
             <Setter Property="Width" Value="190" />
@@ -394,6 +395,7 @@
             <Setter Property="FontSize" Value="18" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
+        
         <Style TargetType="RadioButton" x:Key="rbutton:submenu">
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="160" />
@@ -470,10 +472,43 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Height" Value="35"/>
             <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Padding" Value="10,0,10,0"/>
+            <Setter Property="Padding" Value="5,0,5,0"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <!--Style for rbutton của mainpage-->
+        <Style TargetType="RadioButton" x:Key="rbutton:main">
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="130" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Background" Value="#9acbff"/>
+            <Setter Property="Foreground" Value="#07209e"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Margin="5"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#07209e"/>
+                                <Setter Property="Foreground" Value="#d4ebf8"/>
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="#07209e"/>
+                                <Setter Property="Foreground" Value="#d4ebf8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <ResourceDictionary x:Key="MainVM">
             <ResourceDictionary.MergedDictionaries>

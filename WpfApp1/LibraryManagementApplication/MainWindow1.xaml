@@ -185,8 +185,7 @@
         </Border>
         <Frame x:Name="Mainpage" 
                Grid.Column="1"
-               NavigationUIVisibility="Hidden"
-               Content="{x:Null}">
+               NavigationUIVisibility="Hidden">
         </Frame>
     </Grid>
 </Window>

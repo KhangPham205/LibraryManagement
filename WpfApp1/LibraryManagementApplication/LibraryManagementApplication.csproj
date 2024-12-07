@@ -205,8 +205,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="addborrow.xaml.cs">
+      <DependentUpon>addborrow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="bookpage.xaml.cs">
       <DependentUpon>bookpage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="borrowinfo.xaml.cs">
+      <DependentUpon>borrowinfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="borrowtable.xaml.cs">
+      <DependentUpon>borrowtable.xaml</DependentUpon>
     </Compile>
     <Compile Include="headerbookpage.xaml.cs">
       <DependentUpon>headerbookpage.xaml</DependentUpon>
@@ -280,7 +289,19 @@
     <Compile Include="writerpage.xaml.cs">
       <DependentUpon>writerpage.xaml</DependentUpon>
     </Compile>
+    <Page Include="addborrow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="bookpage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="borrowinfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="borrowtable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

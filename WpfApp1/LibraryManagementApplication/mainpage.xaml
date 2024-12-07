@@ -23,144 +23,202 @@
                        />
         </Grid>
         <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="200"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Tìm kiếm sách:" 
-                               Style="{StaticResource textblock:style1}"
-                               Margin="10"/>
-                    <Border 
-                            Background="#ffffff"
-                            CornerRadius="10"
-                            BorderBrush="#07209e"
-                            BorderThickness="1"
-                            Grid.Column="2"
-                            Grid.Row="1"
-                            Margin="0,5,0,5" 
-                            Width="300">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="40"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox x:Name="timsach"
-                                FontSize="18"
-                                Margin="5"
-                                BorderBrush="Transparent"
-                                BorderThickness="0"></TextBox>
-                            <Button x:Name="finds"
-                                    Background="Transparent"
-                                    BorderThickness = "0"
-                                    BorderBrush="Transparent"
-                                    Margin="5"
-                                    Grid.Column="1">
-                                <Image Source="/icon/search.png"/>
-                            </Button>
-                                    
-                        </Grid>
-                     </Border>
-                </StackPanel>
-                <DataGrid x:Name="sach"
-                          Margin="5"
-                          Grid.Row="1"
-                          FontSize="18"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True"
-                          HeadersVisibility="Column"
-                          ItemsSource="{Binding danhsachSach}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Mã sách" Binding="{Binding MaSach}" />
-                        <DataGridTextColumn Header="Tên sách" Binding="{Binding TenSach}" />
-                        <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" />
-                        <DataGridTextColumn Header="Tác giả" Binding="{Binding TacGia}" />
-                        <DataGridTextColumn Header="Thể loại" Binding="{Binding TheLoai}" />
-                        <DataGridTextColumn Header="NXB" Binding="{Binding NXB}" />
-                        <DataGridTextColumn Header="Năm XB" Binding="{Binding NamXB}" />
-                        <DataGridTextColumn Header="Ngôn ngữ" Binding="{Binding NgonNgu}" />
-                        <DataGridTextColumn Header="Vị trí" Binding="{Binding ViTri}" />
-                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding TrangThai}" />
-                    </DataGrid.Columns>
-                </DataGrid>
-                <StackPanel Orientation="Horizontal"
-                            Grid.Row="2">
-                    <TextBlock Text="Tìm kiếm đơn mượn:" 
-                           Style="{StaticResource textblock:style1}"
-                           Margin="10"/>
-                    <Border 
-                        Background="#ffffff"
-                        CornerRadius="10"
-                        BorderBrush="#07209e"
-                        BorderThickness="1"
-                        Grid.Column="2"
-                        Grid.Row="1"
-                        Margin="0,5,0,5" 
-                        Width="300">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="40"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox x:Name="timdonmuon"
-                                FontSize="18"
-                                Margin="5"
-                                BorderBrush="Transparent"
-                                BorderThickness="0"></TextBox>
-                            <Button x:Name="finddm"
-                                    Background="Transparent"
-                                    BorderThickness = "0"
-                                    BorderBrush="Transparent"
-                                    Margin="5"
-                                    Grid.Column="1">
-                                <Image Source="/icon/search.png"/>
-                            </Button>
-
-                        </Grid>
-                    </Border>
-                </StackPanel>
-                <DataGrid x:Name="muon"
-                          Grid.Row="3" 
-                          Grid.ColumnSpan="2"
-                          FontSize="18"
-                          Margin="5" 
-                          AutoGenerateColumns="False"
-                          ItemsSource="{Binding danhsachDon}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Mã đơn mượn" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Tên độc giả" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Tên nhân viên" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Ngày mượn" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Ngày trả dự kiến" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Ngày trả thực tế" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Ngày trả phí phạt" IsReadOnly="True"/>
-                        <DataGridCheckBoxColumn Header="Trả"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton x:Name="sachcon"
+                             Style="{StaticResource rbutton:main}">
+                    <StackPanel>
+                        <TextBlock Text="Số sách còn:"
+                                  Style="{StaticResource textblock:menu}"
+                                   />
+                        <TextBlock x:Name="sosachcon"
+                                   Style="{StaticResource textblock:menu}"
+                                   FontSize="40"
+                                   Text="0000"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton x:Name="sachmuon"
+             Style="{StaticResource rbutton:main}"
+                             Grid.Column="1">
+                    <StackPanel>
+                        <TextBlock Text="Số sách mượn:"
+                  Style="{StaticResource textblock:menu}"
+                   />
+                        <TextBlock x:Name="sosachmuon"
+                   Style="{StaticResource textblock:menu}"
+                   FontSize="40"
+                   Text="0000"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton x:Name="sachmat"
+             Style="{StaticResource rbutton:main}"
+                             Grid.Column="2">
+                    <StackPanel>
+                        <TextBlock Text="Số sách mất:"
+                  Style="{StaticResource textblock:menu}"
+                   />
+                        <TextBlock x:Name="sosachmat"
+                   Style="{StaticResource textblock:menu}"
+                   FontSize="40"
+                   Text="0000"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton x:Name="donmuon"
+             Style="{StaticResource rbutton:main}"
+                             Grid.Column="3">
+                    <StackPanel>
+                        <TextBlock Text="Số đơn mượn:"
+                  Style="{StaticResource textblock:menu}"
+                   />
+                        <TextBlock x:Name="sodonmuon"
+                   Style="{StaticResource textblock:menu}"
+                   FontSize="40"
+                   Text="0000"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton x:Name="dontra"
+             Style="{StaticResource rbutton:main}"
+                             Grid.Column="4">
+                    <StackPanel>
+                        <TextBlock Text="Số đơn trả:"
+                  Style="{StaticResource textblock:menu}"
+                   />
+                        <TextBlock x:Name="sodontra"
+                   Style="{StaticResource textblock:menu}"
+                   FontSize="40"
+                   Text="0000"/>
+                    </StackPanel>
+                </RadioButton>
             </Grid>
-            <Border Grid.Column="1" 
-                    CornerRadius="10"
-                    Background="#cfcfcf"
-                    Margin="5">
-                <StackPanel Margin="10">
-                    <Calendar x:Name="calendar"
-                      Background="#e6f3ff"
-                      BorderBrush="#07209e"
-                      BorderThickness="1"
-                      Focusable="False"
-                      
-                      HorizontalContentAlignment="Center">
-                    </Calendar>
-                </StackPanel>
-            </Border>
+            <DataGrid x:Name="sachcontable"
+                      Margin="5"
+                      Grid.Row="1">
+                <DataGrid.Style>
+                    <Style TargetType="DataGrid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=sachcon }" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=sachcon }" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Style>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã đầu sách" Width="*" Binding="{Binding MaDSach}" />
+                    <DataGridTextColumn Header="Tên đầu sách" Width="2*" Binding="{Binding TenDSach}" />
+                    <DataGridTextColumn Header="ISBN" Width="*" Binding="{Binding ISBN}" />
+                    <DataGridTextColumn Header="Vị trí" Width="*" Binding="{Binding ViTri}" />
+                    <DataGridTextColumn Header="Trạng thái" Width="*" Binding="{Binding TrangThai}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="sachmuontable"
+                          Margin="5"
+                          Grid.Row="1">
+                <DataGrid.Style>
+                    <Style TargetType="DataGrid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=sachmuon }" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=sachmuon }" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Style>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã đầu sách" Width="*" Binding="{Binding MaDSach}" />
+                    <DataGridTextColumn Header="Tên đầu sách" Width="2*" Binding="{Binding TenDSach}" />
+                    <DataGridTextColumn Header="ISBN" Width="*" Binding="{Binding ISBN}" />
+                    <DataGridTextColumn Header="Vị trí" Width="*" Binding="{Binding ViTri}" />
+                    <DataGridTextColumn Header="Trạng thái" Width="*" Binding="{Binding TrangThai}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="sachmattable"
+                                  Margin="5"
+                                  Grid.Row="1">
+                <DataGrid.Style>
+                    <Style TargetType="DataGrid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=sachmat }" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=sachmat }" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Style>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã đầu sách" Width="*" Binding="{Binding MaDSach}" />
+                    <DataGridTextColumn Header="Tên đầu sách" Width="2*" Binding="{Binding TenDSach}" />
+                    <DataGridTextColumn Header="ISBN" Width="*" Binding="{Binding ISBN}" />
+                    <DataGridTextColumn Header="Vị trí" Width="*" Binding="{Binding ViTri}" />
+                    <DataGridTextColumn Header="Trạng thái" Width="*" Binding="{Binding TrangThai}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="donmuontable"
+                      Margin="5"
+                      Grid.Row="1">
+                <DataGrid.Style>
+                    <Style TargetType="DataGrid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=donmuon }" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=donmuon }" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Style>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
+                    <DataGridTextColumn Header="Tên độc giả" Width="*" Binding="{Binding TenDG}"/>
+                    <DataGridTextColumn Header="Tên nhân viên" Width="*" Binding="{Binding TenNV}"/>
+                    <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon}"/>
+                    <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK}"/>
+                    <DataGridTextColumn Header="Ngày trả thực tế" Width="*" Binding="{Binding NgayTraTT}"/>
+                    <DataGridTextColumn Header="Phí phạt (VND)" Width="*" Binding="{Binding PhiPhat}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="dontratable"
+           Margin="5"
+           Grid.Row="1">
+                <DataGrid.Style>
+                    <Style TargetType="DataGrid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=dontra }" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=dontra }" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Style>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
+                    <DataGridTextColumn Header="Tên độc giả" Width="*" Binding="{Binding TenDG}"/>
+                    <DataGridTextColumn Header="Tên nhân viên" Width="*" Binding="{Binding TenNV}"/>
+                    <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon}"/>
+                    <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK}"/>
+                    <DataGridTextColumn Header="Ngày trả thực tế" Width="*" Binding="{Binding NgayTraTT}"/>
+                    <DataGridTextColumn Header="Phí phạt (VND)" Width="*" Binding="{Binding PhiPhat}"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </Page>
