@@ -38,7 +38,8 @@
       "DocumentGroups": [
         {
           "DockedHeight": 248,
-          "SelectedChildIndex": 6,
+
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -51,6 +52,54 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+
+              "DocumentIndex": 0,
+              "Title": "BaseViewModel.cs",
+              "DocumentMoniker": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\ViewModel\\BaseViewModel.cs",
+              "RelativeDocumentMoniker": "LibraryManagementApplication\\ViewModel\\BaseViewModel.cs",
+              "ToolTip": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\ViewModel\\BaseViewModel.cs",
+              "RelativeToolTip": "LibraryManagementApplication\\ViewModel\\BaseViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T17:26:50.387Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "headerbookpage.xaml",
+              "DocumentMoniker": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\headerbookpage.xaml",
+              "RelativeDocumentMoniker": "LibraryManagementApplication\\headerbookpage.xaml",
+              "ToolTip": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\headerbookpage.xaml",
+              "RelativeToolTip": "LibraryManagementApplication\\headerbookpage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-06T16:58:09.839Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "bookpage.xaml",
+              "DocumentMoniker": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\bookpage.xaml",
+              "RelativeDocumentMoniker": "LibraryManagementApplication\\bookpage.xaml",
+              "ToolTip": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\bookpage.xaml",
+              "RelativeToolTip": "LibraryManagementApplication\\bookpage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-06T15:00:34.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "borrowpage.xaml.cs",
+              "DocumentMoniker": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\borrowpage.xaml.cs",
+              "RelativeDocumentMoniker": "LibraryManagementApplication\\borrowpage.xaml.cs",
+              "ToolTip": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\borrowpage.xaml.cs",
+              "RelativeToolTip": "LibraryManagementApplication\\borrowpage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T14:51:26.31Z"
             },
             {
               "$type": "Document",
@@ -146,102 +195,9 @@
               "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "bookpage.xaml",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\bookpage.xaml",
-              "RelativeDocumentMoniker": "LibraryManagementApplication\\bookpage.xaml",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\bookpage.xaml",
-              "RelativeToolTip": "LibraryManagementApplication\\bookpage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-07T05:31:55.445Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "borrowtable.xaml",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\borrowtable.xaml",
-              "RelativeDocumentMoniker": "LibraryManagementApplication\\borrowtable.xaml",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\borrowtable.xaml",
-              "RelativeToolTip": "LibraryManagementApplication\\borrowtable.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-07T05:20:23.042Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "mainpage.xaml",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\mainpage.xaml",
-              "RelativeDocumentMoniker": "LibraryManagementApplication\\mainpage.xaml",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\mainpage.xaml",
-              "RelativeToolTip": "LibraryManagementApplication\\mainpage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-07T04:51:54.455Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\App.xaml",
-              "RelativeDocumentMoniker": "LibraryManagementApplication\\App.xaml",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\App.xaml",
-              "RelativeToolTip": "LibraryManagementApplication\\App.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-07T04:44:41.211Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MainWindow1.xaml",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\MainWindow1.xaml",
-              "RelativeDocumentMoniker": "LibraryManagementApplication\\MainWindow1.xaml",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\MainWindow1.xaml",
-              "RelativeToolTip": "LibraryManagementApplication\\MainWindow1.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-07T04:09:38.604Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "headerbookpage.xaml",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\headerbookpage.xaml",
-              "RelativeDocumentMoniker": "LibraryManagementApplication\\headerbookpage.xaml",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\headerbookpage.xaml",
-              "RelativeToolTip": "LibraryManagementApplication\\headerbookpage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-06T14:40:20.963Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SachViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\ViewModel\\ClassViewModel\\SachViewModel.cs",
-              "RelativeDocumentMoniker": "LibraryManagementApplication\\ViewModel\\ClassViewModel\\SachViewModel.cs",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\ViewModel\\ClassViewModel\\SachViewModel.cs",
-              "RelativeToolTip": "LibraryManagementApplication\\ViewModel\\ClassViewModel\\SachViewModel.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAAAwwNQAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T07:47:58.63Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Sach.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\Model\\Class\\Sach.cs",
-              "RelativeDocumentMoniker": "LibraryManagementApplication\\Model\\Class\\Sach.cs",
-              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\Model\\Class\\Sach.cs",
-              "RelativeToolTip": "LibraryManagementApplication\\Model\\Class\\Sach.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T07:45:32.63Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+
             }
           ]
         }
