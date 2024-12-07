@@ -19,7 +19,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         public TheLoai SelectedTheLoai
         {
-            get { return _selectedTheLoai; }
+            get => _selectedTheLoai; 
             set
             {
                 if (_selectedTheLoai != value)

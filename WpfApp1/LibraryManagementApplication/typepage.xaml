@@ -7,6 +7,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1000"
       Title="typepage">
+    <Page.DataContext>
+        <local:TheLoaiViewModel/>
+    </Page.DataContext>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -60,6 +63,7 @@
                          Grid.Column="1"
                          Grid.Row="1"
                          Margin="5"
+                         Text="{Binding SelectedTheLoai, Mode=OneWayToSource}"
                          Style="{StaticResource textbox:style1}"
                          />
                     <Grid Grid.Row="3"
@@ -95,7 +99,9 @@
             </Border>
             <DataGrid x:Name="theloai"
                      Margin="5"
-                     Grid.Row="1">
+                     Grid.Row="1"
+                     SelectedItem="{Binding SelectedTheLoai, Mode=TwoWay}"
+                     ItemsSource="{Binding TheLoaiList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã thể loại" Width="*" Binding="{Binding MaTL}" />
                     <DataGridTextColumn Header="Tên thể loại" Width="5*" Binding="{Binding TenTL}" />

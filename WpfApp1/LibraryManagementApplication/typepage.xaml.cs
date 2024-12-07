@@ -24,14 +24,7 @@ namespace LibraryManagementApplication
         public typepage()
         {
             InitializeComponent();
-            List<TheLoai> danhSachTheLoai = new List<TheLoai>
-            {
-                new TheLoai { MaTL = "TL001", TenTL = "Văn học" },
-                new TheLoai { MaTL = "TL002", TenTL = "Khoa học" },
-                new TheLoai { MaTL = "TL003", TenTL = "Thiếu nhi" }
-            };
-            // Gán danh sách dữ liệu cho DataGrid
-            theloai.ItemsSource = danhSachTheLoai;
+           
         }
     }
 }

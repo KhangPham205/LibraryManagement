@@ -163,8 +163,8 @@
                       Grid.Row="1"
                       >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã đầu sách" Width="*" Binding="{Binding MaDSach}" />
-                    <DataGridTextColumn Header="Tên đầu sách" Width="*" Binding="{Binding TenDSach}" />
+                    <DataGridTextColumn Header="Mã đầu sách" Width="*" Binding="{Binding MaDauSach}" />
+                    <DataGridTextColumn Header="Tên đầu sách" Width="*" Binding="{Binding TenDauSach}" />
                     <DataGridTextColumn Header="Tác giả" Width="*" Binding="{Binding TacGia}" />
                     <DataGridTextColumn Header="Thể loại" Width="*" Binding="{Binding TheLoai}" />
                     <DataGridTextColumn Header="NXB" Width="*" Binding="{Binding NXB}" />
