@@ -3,12 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:LibraryManagementApplication"
+      xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel.ClassViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
       Height="auto" Width="auto"
       Title="borowtable">
-
+    <Page.DataContext>
+        <local:DonMuonViewModel/>
+    </Page.DataContext>
     <Grid>
         <DataGrid x:Name="muon"
     Grid.Row="2" 
