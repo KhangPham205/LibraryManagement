@@ -109,22 +109,27 @@
                         <Button  x:Name="adddg"
                          Content="Thêm"
                          Margin="5"        
-                         Style="{DynamicResource button:add}"/>
+                         Style="{DynamicResource button:add}"
+                         Command="{Binding AddCommand}"
+                         Click="adddg_Click"/>
                         <Button  x:Name="finddg"
                          Content="Tìm"
                          Grid.Column="1"
                          Margin="5"      
-                         Style="{DynamicResource button:find}"/>
+                         Style="{DynamicResource button:find}"
+                         Command="{Binding SearchCommand}"/>
                         <Button  x:Name="editdg"
                          Content="Sửa"
                          Grid.Column="2"
                          Margin="5"  
-                         Style="{DynamicResource button:edit}"/>
+                         Style="{DynamicResource button:edit}"
+                         Command="{Binding EditCommand}"/>
                         <Button  x:Name="deletedg"
                          Content="Xóa"
                          Grid.Column="3"
                          Margin="5"
-                         Style="{DynamicResource button:delete}"/>
+                         Style="{DynamicResource button:delete}"
+                         Command="{Binding DeleteCommand}"/>
                     </Grid>
                 </Grid>
             </Border>
@@ -132,7 +137,8 @@
                      AutoGenerateColumns="False"
                      IsReadOnly="True"
                      Margin="5"
-                     Grid.Row="1">
+                     Grid.Row="1"
+                     ItemsSource="{Binding DocGiaList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}" />
                     <DataGridTextColumn Header="Tên độc giả" Width="3*" Binding="{Binding TenDG}" />
