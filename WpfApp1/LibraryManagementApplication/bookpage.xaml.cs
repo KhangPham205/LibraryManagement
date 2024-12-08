@@ -23,6 +23,13 @@ namespace LibraryManagementApplication
         public bookpage()
         {
             InitializeComponent();
+
+            trangthaitb.ItemsSource = new List<string>() { "Có sẵn", "Được mượn", "Thất lạc" };
+        }
+
+        private void trangthaitb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

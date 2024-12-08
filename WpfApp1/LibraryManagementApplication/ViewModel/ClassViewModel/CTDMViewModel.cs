@@ -13,7 +13,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
     public class CTDMViewModel : BaseViewModel
     {
         public string MaMuon { get; set; }
-        public string MaSach { get; set; }
+        public string MaDauSach { get; set; }
+        public string ISBN { get; set; }
         public ObservableCollection<CTDM> CTDMList { get; set; }
         private CTDM _selectedCTDM;
         public CTDM SelectedCTDM
@@ -60,15 +61,17 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             var newCTDM = new CTDM()
             {
                 MaMuon = MaMuon,
-                MaSach = MaSach
+                MaDauSach = MaDauSach,
+                ISBN = ISBN
             };
-            CTDMList.Add(newCTDM);
 
             bool isSuccess = await AddCTDMToDatabaseAsync(newCTDM);
             if (!isSuccess)
             {
                 MessageBox.Show("Cannot save changes.");
             }
+            else
+                CTDMList.Add(newCTDM);
         }
 
         private async Task EditCTDM()
@@ -178,7 +181,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 using (var context = new LibraryDbContext())
                 {
                     var result = await context.CTDMs
-                                              .Where(s => s.MaMuon.Contains(keyword) || s.MaSach.Contains(keyword))
+                                              .Where(s => s.MaMuon.Contains(keyword) || s.MaDauSach.Contains(keyword))
                                               .ToListAsync();
                     return result;
                 }

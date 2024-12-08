@@ -144,30 +144,33 @@
                              Content="Tìm"
                              Grid.Column="1"
                              Margin="5"
-                             Style="{DynamicResource button:find}"/>
+                             Style="{DynamicResource button:find}"
+                             Command="{Binding SearchCommand}"/>
                         <Button  x:Name="editsach"
                              Content="Sửa"
                              Grid.Column="2"
                              Margin="5"
-                             Style="{DynamicResource button:edit}"/>
+                             Style="{DynamicResource button:edit}"
+                             Command="{Binding EditCommand}"/>
                         <Button  x:Name="deletesach"
                              Content="Xóa"
                              Grid.Column="3"
                              Margin="5"
-                             Style="{DynamicResource button:delete}"/>
+                             Style="{DynamicResource button:delete}"
+                             Command="{Binding DeleteCommand}"/>
                     </Grid>
                 </Grid>
             </Border>
             <DataGrid x:Name="sach"
                       Margin="5"
                       Grid.Row="1"
-                      >
+                      ItemsSource="{Binding DauSachList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã đầu sách" Width="*" Binding="{Binding MaDauSach}" />
                     <DataGridTextColumn Header="Tên đầu sách" Width="*" Binding="{Binding TenDauSach}" />
-                    <DataGridTextColumn Header="Tác giả" Width="*" Binding="{Binding TacGia}" />
-                    <DataGridTextColumn Header="Thể loại" Width="*" Binding="{Binding TheLoai}" />
-                    <DataGridTextColumn Header="NXB" Width="*" Binding="{Binding NXB}" />
+                    <DataGridTextColumn Header="Tác giả" Width="*" Binding="{Binding TenTG}" />
+                    <DataGridTextColumn Header="Thể loại" Width="*" Binding="{Binding TenTL}" />
+                    <DataGridTextColumn Header="NXB" Width="*" Binding="{Binding TenNXB}" />
                     <DataGridTextColumn Header="Năm XB" Width="*" />
                     <DataGridTextColumn Header="Ngôn ngữ" Width="*" Binding="{Binding NgonNgu}" />
                 </DataGrid.Columns>

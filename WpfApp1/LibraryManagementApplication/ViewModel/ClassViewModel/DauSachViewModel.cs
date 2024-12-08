@@ -13,7 +13,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class DauSachViewModel : BaseViewModel
     {
-        private Random random = new Random();
         public string MaDauSach { get; set; }
         public string TenDauSach { get; set; }
         public string TenTG { get; set; }
@@ -34,6 +33,30 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
+        private async Task<string> CreateMaDSAsync(string TenDauSach)
+        {
+            // Generate a hash from TenTL
+            using (var context = new LibraryDbContext())
+            {
+                // Lấy tất cả các mã "MaTL" hiện tại trong cơ sở dữ liệu có tiền tố "TL"
+                var existingCodes = await context.DauSachs
+                                                 .Where(tl => tl.MaDauSach.StartsWith("DS"))
+                                                 .Select(tl => tl.MaDauSach)
+                                                 .ToListAsync();
+
+                int maxCodeNumber = existingCodes
+                    .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "DS"
+                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
+                    .Max(); // Lấy số lớn nhất trong danh sách mã
+
+                // Tạo mã mới với số tăng dần
+                int newCodeNumber = maxCodeNumber + 1;
+
+                // Trả về mã mới với định dạng "DS" + số có 3 chữ số
+                return $"DS{newCodeNumber:D3}";
+            }
+        }
+
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
@@ -63,14 +86,14 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             var newDauSach = new DauSach()
             {
-                MaDauSach = "1",
+                MaDauSach = MaDauSach = await CreateMaDSAsync(TenDauSach),
                 TenDauSach = TenDauSach,
                 TenTG = TenTG,
                 NgonNgu = NgonNgu,
                 TenTL = TenTL,
-                TenNXB = TenNXB,
+                TenNXB = TenNXB
             };
-            MessageBox.Show(newDauSach.MaDauSach + " " + newDauSach.TenDauSach + " " + newDauSach.TenTL);
+            //MessageBox.Show(newDauSach.MaDauSach + " " + newDauSach.TenDauSach + " " + newDauSach.TenTL);
             bool isSuccess = await AddDauSachToDatabaseAsync(newDauSach);
             if (isSuccess)
             {
@@ -98,7 +121,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             if (SelectedDauSach != null)
             {
-                bool isSuccess = await DeleteDauSachFromDatabaseAsync(SelectedDauSach.MaDauSach);
+                bool isSuccess = await DeleteDauSachFromDatabaseAsync(SelectedDauSach);
                 if (isSuccess)
                 {
                     DauSachList.Remove(SelectedDauSach);
@@ -159,13 +182,13 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<bool> DeleteDauSachFromDatabaseAsync(string maDauSach)
+        public static async Task<bool> DeleteDauSachFromDatabaseAsync(DauSach dauSach)
         {
             try
             {
                 using (var context = new LibraryDbContext())
                 {
-                    var DauSachToDelete = await context.DauSachs.FirstOrDefaultAsync(s => s.MaDauSach == maDauSach);
+                    var DauSachToDelete = await context.DauSachs.FirstOrDefaultAsync(s => s == dauSach);
                     if (DauSachToDelete != null)
                     {
                         context.DauSachs.Remove(DauSachToDelete);

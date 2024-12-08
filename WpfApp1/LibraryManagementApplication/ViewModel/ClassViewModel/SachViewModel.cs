@@ -59,21 +59,26 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
         private async Task AddSach()
         {
-            var context = new LibraryDbContext();
-            var newSach = new Sach()
+            using (var context = new LibraryDbContext())
             {
-                MaDauSach = context.DauSachs.FirstOrDefault(s => s.TenDauSach == TenDauSach).MaDauSach,
-                ISBN = ISBN,
-                ViTri = ViTri,
-                TrangThai = TrangThai,
-                DauSach = context.DauSachs.FirstOrDefault(s => s.TenDauSach == TenDauSach),
-            };
-            SachList.Add(newSach);
+                DauSach ds = context.DauSachs.FirstOrDefault(s => s.TenDauSach == TenDauSach);
+                var newSach = new Sach()
+                {
+                    MaDauSach = ds.MaDauSach,
+                    ISBN = ISBN,
+                    ViTri = ViTri,
+                    TrangThai = TrangThai,
+                    NamXB = 2000,
+                    DauSach = ds,
+                };
 
-            bool isSuccess = await AddSachToDatabaseAsync(newSach);
-            if (!isSuccess)
-            {
-                MessageBox.Show("Cannot save changes.");
+                bool isSuccess = await AddSachToDatabaseAsync(newSach);
+                if (!isSuccess)
+                {
+                    MessageBox.Show("Cannot save changes.");
+                }
+                else
+                    SachList.Add(newSach);
             }
         }
         private async Task EditSach()
@@ -123,6 +128,11 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     await context.SaveChangesAsync();
                     return true;
                 }
+            }
+            catch (DbUpdateException ex)
+            {
+                MessageBox.Show($"Error adding books: {ex.Message}");
+                return false;
             }
             catch (Exception ex)
             {

@@ -3,12 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:LibraryManagementApplication"
+      xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel.ClassViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1000"
       Title="bookpage">
 
     <Grid Background="White">
+        <Grid.DataContext>
+            <local:SachViewModel/>
+        </Grid.DataContext>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
@@ -53,55 +56,54 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Tên đầu sách:"
-                           Style="{StaticResource textblock:style1}"
-                           Grid.Column="0"
-                           Grid.Row="1"
-                           Margin="5"
-                           HorizontalAlignment="Right"/>
+                               Style="{StaticResource textblock:style1}"
+                               Grid.Column="0"
+                               Grid.Row="1"
+                               Margin="5"
+                               HorizontalAlignment="Right"/>
                     <TextBox x:Name="tentb"
                          Grid.Column="1"
                          Grid.Row="1"
                          Margin="5"
                          Style="{StaticResource textbox:style1}"
-                         Text="{Binding TenDSach, Mode=OneWayToSource}"/>
+                         Text="{Binding TenDauSach, Mode=OneWayToSource}"/>
 
                     <TextBlock Text="ISBN: "
-           Style="{StaticResource textblock:style1}"
-           Grid.Column="0"
-           Grid.Row="2"
-           Margin="5"
-           HorizontalAlignment="Right"/>
+                               Style="{StaticResource textblock:style1}"
+                               Grid.Column="0"
+                               Grid.Row="2"
+                               Margin="5"
+                               HorizontalAlignment="Right"/>
                     <TextBox x:Name="isbn"
-         Grid.Column="1"
-         Grid.Row="2"
-         Margin="5"
-         Style="{StaticResource textbox:style1}"
-         Text="{Binding ISBN, Mode=OneWayToSource}"/>
+                             Grid.Column="1"
+                             Grid.Row="2"
+                             Margin="5"
+                             Style="{StaticResource textbox:style1}"
+                             Text="{Binding ISBN, Mode=OneWayToSource}"/>
                     <TextBlock Text="Vị trí: "
-           Style="{StaticResource textblock:style1}"
-           Grid.Column="2"
-           Grid.Row="1"
-           Margin="5"
-           HorizontalAlignment="Right"/>
+                               Style="{StaticResource textblock:style1}"
+                               Grid.Column="2"
+                               Grid.Row="1"
+                               Margin="5"
+                               HorizontalAlignment="Right"/>
                     <TextBox x:Name="vitritb"
-         Grid.Column="3"
-         Grid.Row="1"
-         Margin="5"
-         Style="{StaticResource textbox:style1}"
-         Text="{Binding ViTri, Mode=OneWayToSource}"/>
+                             Grid.Column="3"
+                             Grid.Row="1"
+                             Margin="5"
+                             Style="{StaticResource textbox:style1}"
+                             Text="{Binding ViTri, Mode=OneWayToSource}"/>
                     <TextBlock Text="Trạng thái: "
-           Style="{StaticResource textblock:style1}"
-           Grid.Column="2"
-           Grid.Row="2"
-           Margin="5"
-           HorizontalAlignment="Right"/>
+                               Style="{StaticResource textblock:style1}"
+                               Grid.Column="2"
+                               Grid.Row="2"
+                               Margin="5"
+                               HorizontalAlignment="Right"/>
                     <ComboBox x:Name="trangthaitb"
-          Grid.Column="3"
-          Grid.Row="2"
-          Margin="5"
-          Style="{StaticResource combobox:style1}"
-          Text="{Binding TrangThai, Mode=OneWayToSource}">
-                        <ComboBoxItem Content="Có Sẵn"/>
+                              Grid.Column="3"
+                              Grid.Row="2"
+                              Margin="5"
+                              Style="{StaticResource combobox:style1}"
+                              SelectedItem="{Binding TrangThai, Mode=OneWayToSource}">
                     </ComboBox>
                     <Grid Grid.Row="5"
                               Grid.Column="0"
@@ -121,17 +123,20 @@
                              Content="Tìm"
                              Grid.Column="1"
                              Margin="5"
-                             Style="{DynamicResource button:find}"/>
+                             Style="{DynamicResource button:find}"
+                             Command="{Binding SearchCommand}"/>
                         <Button  x:Name="editsach"
                              Content="Sửa"
                              Grid.Column="2"
                              Margin="5"
-                             Style="{DynamicResource button:edit}"/>
+                             Style="{DynamicResource button:edit}"
+                             Command="{Binding EditCommand}"/>
                         <Button  x:Name="deletesach"
                              Content="Xóa"
                              Grid.Column="3"
                              Margin="5"
-                             Style="{DynamicResource button:delete}"/>
+                             Style="{DynamicResource button:delete}"
+                             Command="{Binding DeleteCommand}"/>
                     </Grid>
                 </Grid>
             </Border>
@@ -140,8 +145,8 @@
                       Grid.Row="1"
                       >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã đầu sách" Width="*" Binding="{Binding MaDSach}" />
-                    <DataGridTextColumn Header="Tên đầu sách" Width="2*" Binding="{Binding TenDSach}" />
+                    <DataGridTextColumn Header="Mã đầu sách" Width="*" Binding="{Binding MaDauSach}" />
+                    <DataGridTextColumn Header="Tên đầu sách" Width="2*" Binding="{Binding TenDauSach}" />
                     <DataGridTextColumn Header="ISBN" Width="*" Binding="{Binding ISBN}" />
                     <DataGridTextColumn Header="Vị trí" Width="*" Binding="{Binding ViTri}" />
                     <DataGridTextColumn Header="Trạng thái" Width="*" Binding="{Binding TrangThai}" />

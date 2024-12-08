@@ -30,6 +30,29 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
+        private async Task<string> CreateMaTLAsync(string tenTL)
+        {
+            // Generate a hash from TenTL
+            using (var context = new LibraryDbContext())
+            {
+                // Lấy tất cả các mã "MaTL" hiện tại trong cơ sở dữ liệu có tiền tố "TL"
+                var existingCodes = await context.TheLoais
+                                                 .Where(tl => tl.MaTL.StartsWith("TL"))
+                                                 .Select(tl => tl.MaTL)
+                                                 .ToListAsync();
+
+                int maxCodeNumber = existingCodes
+                    .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "TL"
+                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
+                    .Max(); // Lấy số lớn nhất trong danh sách mã
+
+                // Tạo mã mới với số tăng dần
+                int newCodeNumber = maxCodeNumber + 1;
+
+                // Trả về mã mới với định dạng "TL" + số có 3 chữ số
+                return $"TL{newCodeNumber:D3}";
+            }
+        }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
@@ -41,7 +64,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddTheLoai());
             EditCommand = new RelayCommand<object>((p) => SelectedTheLoai != null, async (p) => await EditTheLoai());
             DeleteCommand = new RelayCommand<object>((p) => SelectedTheLoai != null, async (p) => await DeleteTheLoai());
-            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchTheLoai(p));
+            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchTheLoai());
             LoadTheLoaiList();
         }
 
@@ -56,24 +79,22 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async Task AddTheLoai()
         {
-            MessageBox.Show(TenTL);
             TheLoai newTheLoai = new TheLoai()
             {
-                MaTL = MaTL,
+                MaTL = MaTL = await CreateMaTLAsync(TenTL), // Generate unique MaTL
                 TenTL = TenTL
             };
 
             bool isSuccess = await AddTheLoaiToDatabaseAsync(newTheLoai);
             if (isSuccess)
             {
-                TheLoaiList.Add(newTheLoai); // Add to ObservableCollection only if DB operation succeeds
+                TheLoaiList.Add(newTheLoai);
             }
             else
             {
                 MessageBox.Show("Error adding The Loai.");
             }
         }
-
         private async Task EditTheLoai()
         {
             if (SelectedTheLoai != null)
@@ -90,7 +111,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             if (SelectedTheLoai != null)
             {
-                bool isSuccess = await DeleteTheLoaiFromDatabaseAsync(SelectedTheLoai.MaTL);
+                bool isSuccess = await DeleteTheLoaiFromDatabaseAsync(SelectedTheLoai);
                 if (isSuccess)
                 {
                     TheLoaiList.Remove(SelectedTheLoai);
@@ -102,9 +123,9 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        private async Task SearchTheLoai(string keyword)
+        private async Task SearchTheLoai()
         {
-            var filteredList = await SearchTheLoaiInDatabaseAsync(keyword);
+            var filteredList = await SearchTheLoaiInDatabaseAsync(TenTL);
             TheLoaiList.Clear();
             foreach (var theLoai in filteredList)
             {
@@ -150,13 +171,13 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<bool> DeleteTheLoaiFromDatabaseAsync(string maTL)
+        public static async Task<bool> DeleteTheLoaiFromDatabaseAsync(TheLoai theLoai)
         {
             try
             {
                 using (var context = new LibraryDbContext())
                 {
-                    var theLoaiToDelete = await context.TheLoais.FirstOrDefaultAsync(s => s.MaTL == maTL);
+                    var theLoaiToDelete = await context.TheLoais.FirstOrDefaultAsync(s => s == theLoai);
                     if (theLoaiToDelete != null)
                     {
                         context.TheLoais.Remove(theLoaiToDelete);

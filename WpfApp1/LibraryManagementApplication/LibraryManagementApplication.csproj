@@ -456,11 +456,8 @@
     <Resource Include="Icon\book %281%29.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\Database\DatabaseLibrary.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Model\Database\DatabaseLibrary.mdf" />
     <Content Include="Model\Database\DatabaseLibrary_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>DatabaseLibrary.mdf</DependentUpon>
     </Content>
   </ItemGroup>

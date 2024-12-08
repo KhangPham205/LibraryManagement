@@ -26,10 +26,5 @@ namespace LibraryManagementApplication
             InitializeComponent();
            
         }
-
-        private void adddg_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(tentb.Text);
-        }
     }
 }

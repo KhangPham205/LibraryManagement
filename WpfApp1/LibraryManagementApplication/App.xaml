@@ -321,6 +321,7 @@
                                 Background="white"
                                 BorderThickness ="0"
                                 Text="{Binding Path = Text, RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                ItemsSource="{Binding Path = ItemsSource, RelativeSource={RelativeSource AncestorType=ComboBox}}"
                                 IsEditable="True">
                             </ComboBox>
                         </Border>

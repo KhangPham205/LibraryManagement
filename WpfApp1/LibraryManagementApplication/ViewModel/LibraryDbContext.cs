@@ -19,59 +19,94 @@ namespace LibraryManagementApplication.ViewModel
         public DbSet<CTDM> CTDMs { get; set; }
         public DbSet<TaiKhoan> TaiKhoans { get; set; }
 
-        // Các bảng trung gian
-        //public DbSet<SachTacGia> SachTacGias { get; set; }
-        //public DbSet<SachTheLoai> SachTheLoais { get; set; }
-        //public DbSet<SachNhaXuatBan> SachNhaXuatBans { get; set; }
-
         // Cấu hình chuỗi kết nối đến cơ sở dữ liệu
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\ResourceXAML\MainResource.xaml;Integrated Security=True;MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\Model\Database\DatabaseLibrary.mdf;Integrated Security=True;MultipleActiveResultSets=True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<DauSach>()
-                .ToTable("DauSach")
-                .HasKey("MaDauSach");
 
-            modelBuilder.Entity<Sach>()
-                .ToTable("Sach")
-                .HasOne(s => s.DauSach)  // Sach has one DauSach
-                .WithMany(d => d.Sachs)   // DauSach has many Sachs
-                .HasForeignKey(s => s.MaDauSach);  // Foreign key in Sach is MaDauSach
+            // Configure DauSach table
+            modelBuilder.Entity<DauSach>(entity =>
+            {
+                entity.ToTable("DauSach");
+                entity.HasKey(e => e.MaDauSach);
+            });
 
-            modelBuilder.Entity<NhaXuatBan>()
-                .ToTable("NhaXuatBan");
+            // Configure Sach table
+            modelBuilder.Entity<Sach>(entity =>
+            {
+                entity.ToTable("Sach");
+                entity.HasKey(e => new { e.MaDauSach, e.ISBN });
+                entity.Property(e => e.TrangThai).IsRequired();
+                entity.HasOne(e => e.DauSach)
+                      .WithMany(d => d.Sachs)
+                      .HasForeignKey(e => e.MaDauSach);
+            });
 
-            modelBuilder.Entity<TheLoai>()
-                .ToTable("TheLoai");
+            // Configure NhaXuatBan table
+            modelBuilder.Entity<NhaXuatBan>(entity =>
+            {
+                entity.ToTable("NhaXuatBan");
+                entity.HasKey(e => e.MaNXB);
+            });
 
-            modelBuilder.Entity<TacGia>()
-                .ToTable("TacGia");
+            // Configure TheLoai table
+            modelBuilder.Entity<TheLoai>(entity =>
+            {
+                entity.ToTable("TheLoai");
+                entity.HasKey(e => e.MaTL);
+            });
 
-            modelBuilder.Entity<DocGia>()
-                .ToTable("DocGia");
+            // Configure TacGia table
+            modelBuilder.Entity<TacGia>(entity =>
+            {
+                entity.ToTable("TacGia");
+                entity.HasKey(e => e.MaTG);
+            });
 
-            modelBuilder.Entity<DonMuon>()
-                .ToTable("DonMuon");
+            // Configure DocGia table
+            modelBuilder.Entity<DocGia>(entity =>
+            {
+                entity.ToTable("DocGia");
+                entity.HasKey(e => e.MaDG);
+            });
 
-            modelBuilder.Entity<CTDM>()
-                .ToTable("CTDM").HasNoKey();
+            // Configure DonMuon table
+            modelBuilder.Entity<DonMuon>(entity =>
+            {
+                entity.ToTable("DonMuon");
+                entity.HasKey(e => e.MaMuon);
+                entity.HasOne(e => e.DocGia)
+                      .WithMany(d => d.DonMuons)
+                      .HasForeignKey(e => e.MaDG);
+                entity.HasOne(e => e.TaiKhoan)
+                      .WithMany(t => t.DonMuons)
+                      .HasForeignKey(e => e.MaNV);
+            });
 
-            modelBuilder.Entity<TaiKhoan>()
-                .ToTable("TaiKhoan");
+            // Configure CTDM table
+            modelBuilder.Entity<CTDM>(entity =>
+            {
+                entity.ToTable("CTDM");
+                entity.HasKey(e => new { e.MaMuon, e.MaDauSach, e.ISBN });
+                entity.HasOne(e => e.DonMuon)
+                      .WithMany(d => d.CTDMs)
+                      .HasForeignKey(e => e.MaMuon);
+                entity.HasOne(e => e.Sach)
+                      .WithMany(s => s.CTDMs)
+                      .HasForeignKey(e => new { e.MaDauSach, e.ISBN });
+            });
 
-            // Cấu hình các bảng trung gian, nếu cần
-            //modelBuilder.Entity<SachTacGia>()
-            //    .ToTable("SachTacGia");
-
-            //modelBuilder.Entity<SachTheLoai>()
-            //    .ToTable("SachTheLoai");
-
-            //modelBuilder.Entity<SachNhaXuatBan>()
-            //    .ToTable("SachNhaXuatBan");
+            // Configure TaiKhoan table
+            modelBuilder.Entity<TaiKhoan>(entity =>
+            {
+                entity.ToTable("TaiKhoan");
+                entity.HasKey(e => e.UserID);
+                entity.Property(e => e.Loai).IsRequired();
+            });
         }
     }
 }

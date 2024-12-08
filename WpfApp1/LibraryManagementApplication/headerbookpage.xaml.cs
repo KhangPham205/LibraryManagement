@@ -1,4 +1,5 @@
 ﻿using LibraryManagementApplication.Model.Class;
+using LibraryManagementApplication.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,13 +25,35 @@ namespace LibraryManagementApplication
         public headerbookpage()
         {
             InitializeComponent();
-            List<DauSach> danhSachSach = new List<DauSach> 
-            { 
-                new DauSach { MaDauSach = "S001", TenDauSach = "Sách A", NgonNgu = "Tiếng Việt" },
-                new DauSach {MaDauSach = "S002", TenDauSach = "Sách B", NgonNgu = "Tiếng Anh"}
+
+            this.Loaded += (s, e) =>
+            {
+                LoadTheLoai();
             };
-            // Gán danh sách dữ liệu cho DataGrid
-            sach.ItemsSource = danhSachSach;
+
+            //List<DauSach> danhSachSach = new List<DauSach> 
+            //{ 
+            //    new DauSach { MaDauSach = "S001", TenDauSach = "Sách A", NgonNgu = "Tiếng Việt" },
+            //    new DauSach {MaDauSach = "S002", TenDauSach = "Sách B", NgonNgu = "Tiếng Anh"}
+            //};
+            //// Gán danh sách dữ liệu cho DataGrid
+            //sach.ItemsSource = danhSachSach;
+        }
+        private void LoadTheLoai()
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    theloaitb.ItemsSource = context.TheLoais.Select(t => t.TenTL).ToList();
+                    nxbtb.ItemsSource = context.NhaXuatBans.Select(nxb => nxb.TenNXB).ToList();
+                    tacgiatb.ItemsSource = context.TacGias.Select(tg => tg.TenTG).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}");
+            }
         }
     }
 }
