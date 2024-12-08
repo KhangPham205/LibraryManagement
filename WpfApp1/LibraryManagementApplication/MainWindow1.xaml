@@ -117,7 +117,9 @@
                         </RadioButton>
                     </StackPanel>
                     <RadioButton x:Name="borrowlend" 
-                                 Style="{StaticResource rbutton:menu}">
+                                 Style="{StaticResource rbutton:menu}"
+                                 Command="{Binding borrowpagecommand}"
+                                 CommandParameter="{Binding ElementName=Mainpage}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="CalendarDay"
                                             Style="{StaticResource icon:menu}"/>
@@ -125,41 +127,7 @@
                                         Style="{StaticResource textblock:menu}"/>
                         </StackPanel>
                     </RadioButton>
-                    <StackPanel>
-                        <StackPanel.Style>
-                            <Style TargetType="StackPanel">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsChecked, ElementName=borrowlend }" Value="True">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IsChecked, ElementName=borrowlend }" Value="False">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </StackPanel.Style>
-                        <RadioButton Style="{StaticResource rbutton:submenu}"
-                                     Command="{Binding borrowpagecommand}"
-                                     CommandParameter="{Binding ElementName=Mainpage}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="ArrowAltCircleUp"
-                                              Style="{StaticResource icon:submenu}"/>
-                                <TextBlock Text="Đơn mượn"
-                                           Style="{StaticResource textblock:submenu}"/>
-                            </StackPanel>
-                        </RadioButton>
-                        <RadioButton Style="{StaticResource rbutton:submenu}"
-                                     Command="{Binding lendpagecommand}"
-                                     CommandParameter="{Binding ElementName=Mainpage}">
-                            <StackPanel Orientation="Horizontal">
-                                <fa:IconImage Icon="ArrowAltCircleDown"
-                                              Style="{StaticResource icon:submenu}"/>
-                                <TextBlock Text="Đơn trả"
-                                           Style="{StaticResource textblock:submenu}"/>
-                            </StackPanel>
-                        </RadioButton>
-                        </StackPanel>
-                        <RadioButton Style="{StaticResource rbutton:menu}"
+                    <RadioButton Style="{StaticResource rbutton:menu}"
                                  Command="{Binding readerpagecommand}"
                                  CommandParameter="{Binding ElementName=Mainpage}">
                         <StackPanel Orientation="Horizontal">
