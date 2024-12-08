@@ -35,7 +35,18 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
         private String _displayName;
-        public String DisplayName { get => _displayName; set { if (_displayName != value) {  _displayName = value; OnPropertyChanged(); } } }
+        public String DisplayName 
+        { 
+            get => _displayName; 
+            set 
+            { 
+                if (_displayName != value) 
+                {  
+                    _displayName = value; 
+                    OnPropertyChanged(); 
+                } 
+            } 
+        }
 
         private async Task<string> CreateMaTLAsync()
         {
@@ -72,8 +83,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             AddCommand = new RelayCommand<object>((p) => { if (string.IsNullOrEmpty(DisplayName)) return false; return true; }, async (p) => await AddTheLoai());
             EditCommand = new RelayCommand<object>((p) => SelectedTheLoai != null, async (p) => await EditTheLoai());
             DeleteCommand = new RelayCommand<object>((p) => SelectedTheLoai != null, async (p) => await DeleteTheLoai());
-            SearchCommand = new RelayCommand<DataGrid>((p) => true, (p) =>  SearchTheLoai(p));
-            ShowCommand = new RelayCommand<DataGrid>((p) => true, (p) => ShowTheLoai(p));
+            SearchCommand = new RelayCommand<DataGrid>((p) => true, async (p) => await SearchTheLoai(p));
+            ShowCommand = new RelayCommand<DataGrid>((p) => true, async (p) => await ShowTheLoai(p));
             LoadTheLoaiList();
         }
 
@@ -134,13 +145,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
-
-        private void  SearchTheLoai(DataGrid p)
+        private async Task SearchTheLoai(DataGrid p)
         {
-            var TempList = TheLoaiList.Where(tl=> tl.TenTL.StartsWith(TenTL));
+            var TempList = await SearchTheLoaiInDatabaseAsync(DisplayName);
             p.ItemsSource = TempList;
         }
-        private void ShowTheLoai(DataGrid p)
+        private async Task ShowTheLoai(DataGrid p)
         {
             p.ItemsSource = TheLoaiList;
         }
