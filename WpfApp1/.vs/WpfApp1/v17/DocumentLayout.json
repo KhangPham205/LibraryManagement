@@ -3,19 +3,27 @@
   "WorkspaceRootPath": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\users\\pc\\documents\\github\\librarymanagement\\wpfapp1\\librarymanagementapplication\\viewmodel\\librarydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\viewmodel\\librarydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\users\\pc\\documents\\github\\librarymanagement\\wpfapp1\\librarymanagementapplication\\model\\class\\donmuon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\model\\class\\donmuon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\users\\pc\\documents\\github\\librarymanagement\\wpfapp1\\librarymanagementapplication\\readerpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\readerpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\users\\pc\\documents\\github\\librarymanagement\\wpfapp1\\librarymanagementapplication\\publisherpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\librarymanagementapplication\\publisherpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\publisherpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\users\\pc\\documents\\github\\librarymanagement\\wpfapp1\\librarymanagementapplication\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\librarymanagementapplication\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|c:\\users\\pc\\documents\\github\\librarymanagement\\wpfapp1\\librarymanagementapplication\\employeepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\librarymanagementapplication\\employeepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{8C0CD0A0-D7A7-471D-8615-20A510A18572}|LibraryManagementApplication\\LibraryManagementApplication.csproj|solutionrelative:librarymanagementapplication\\employeepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
@@ -43,6 +51,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "LibraryDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\ViewModel\\LibraryDbContext.cs",
+              "RelativeDocumentMoniker": "LibraryManagementApplication\\ViewModel\\LibraryDbContext.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\ViewModel\\LibraryDbContext.cs",
+              "RelativeToolTip": "LibraryManagementApplication\\ViewModel\\LibraryDbContext.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-08T01:57:02.055Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DonMuon.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\Model\\Class\\DonMuon.cs",
+              "RelativeDocumentMoniker": "LibraryManagementApplication\\Model\\Class\\DonMuon.cs",
+              "ToolTip": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\Model\\Class\\DonMuon.cs",
+              "RelativeToolTip": "LibraryManagementApplication\\Model\\Class\\DonMuon.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA9wAkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-08T01:52:17.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "readerpage.xaml",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\readerpage.xaml",
               "RelativeDocumentMoniker": "LibraryManagementApplication\\readerpage.xaml",
@@ -54,7 +88,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "publisherpage.xaml",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\publisherpage.xaml",
               "RelativeDocumentMoniker": "LibraryManagementApplication\\publisherpage.xaml",
@@ -66,7 +100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "mainpage.xaml",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\mainpage.xaml",
               "RelativeDocumentMoniker": "LibraryManagementApplication\\mainpage.xaml",
@@ -78,7 +112,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "employeepage.xaml",
               "DocumentMoniker": "C:\\Users\\PC\\Documents\\GitHub\\LibraryManagement\\WpfApp1\\LibraryManagementApplication\\employeepage.xaml",
               "RelativeDocumentMoniker": "LibraryManagementApplication\\employeepage.xaml",
