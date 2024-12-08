@@ -63,48 +63,63 @@
                          Grid.Column="1"
                          Grid.Row="1"
                          Margin="5"
-                         Text="{Binding TenTL, Mode=OneWayToSource}"
+                         Text="{Binding DisplayName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource textbox:style1}"
                          />
                     <Grid Grid.Row="3"
                           Grid.Column="0"
-                          Grid.ColumnSpan="3">
+                          Grid.ColumnSpan="4">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
-                        <Button  x:Name="adddg"
+                        <Button  x:Name="addtl"
                          Content="Thêm"
                          Margin="5"        
                          Style="{DynamicResource button:add}"
                          Command="{Binding AddCommand}"/>
-                        <Button  x:Name="finddg"
-                         Content="Tìm"
-                         Grid.Column="1"
-                         Margin="5"      
-                         Style="{DynamicResource button:find}"
-                         Command="{Binding SearchCommand}"/>
-                        <Button  x:Name="editdg"
+                        <Button  x:Name="edittl"
                          Content="Sửa"
                          Grid.Column="2"
                          Margin="5"  
                          Style="{DynamicResource button:edit}"
-                         Command="{Binding EditCommand}"/>
-                        <Button  x:Name="deletedg"
+                         Command="{Binding EditCommand}"
+                         CommandParameter="{Binding ElementName=tentb}"/>
+                        <Button  x:Name="deletetl"
                          Content="Xóa"
-                         Grid.Column="3"
+                         Grid.Column="4"
                          Margin="5"
                          Style="{DynamicResource button:delete}"
                          Command="{Binding DeleteCommand}"/>
+                        <Button  x:Name="findtl"
+                                 Content="Tìm"
+                                 Grid.Column="6"
+                                 Margin="5"      
+                                 Style="{DynamicResource button:find}"
+                                 Command="{Binding SearchCommand}"
+                                 CommandParameter="{Binding ElementName=theloai}"/>
+                        <Button  x:Name="showtl"
+                                 Content="Hiển thị"
+                                 Grid.Column="8"
+                                 Margin="5"      
+                                 Style="{DynamicResource button:show}"
+                                 Command="{Binding ShowCommand}"
+                                 CommandParameter="{Binding ElementName=theloai}"/>
                     </Grid>
                 </Grid>
             </Border>
             <DataGrid x:Name="theloai"
                      Margin="5"
                      Grid.Row="1"
-                     SelectedItem="{Binding SelectedTheLoai, Mode=TwoWay}"
+                     SelectedItem="{Binding SelectedTheLoai, Mode=OneWayToSource}"
+                     
                      ItemsSource="{Binding TheLoaiList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã thể loại" Width="*" Binding="{Binding MaTL}" />

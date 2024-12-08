@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
@@ -25,12 +26,18 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (_selectedTheLoai != value)
                 {
                     _selectedTheLoai = value;
-                    OnPropertyChanged(nameof(SelectedTheLoai));
+                    OnPropertyChanged();
+                    if (SelectedTheLoai != null)
+                    {
+                        DisplayName = SelectedTheLoai.TenTL;
+                    }
                 }
             }
         }
+        private String _displayName;
+        public String DisplayName { get => _displayName; set { if (_displayName != value) {  _displayName = value; OnPropertyChanged(); } } }
 
-        private async Task<string> CreateMaTLAsync(string tenTL)
+        private async Task<string> CreateMaTLAsync()
         {
             // Generate a hash from TenTL
             using (var context = new LibraryDbContext())
@@ -57,14 +64,16 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
+        public ICommand ShowCommand { get; set; }
 
         public TheLoaiViewModel()
         {
             TheLoaiList = new ObservableCollection<TheLoai>();
-            AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddTheLoai());
+            AddCommand = new RelayCommand<object>((p) => { if (string.IsNullOrEmpty(DisplayName)) return false; return true; }, async (p) => await AddTheLoai());
             EditCommand = new RelayCommand<object>((p) => SelectedTheLoai != null, async (p) => await EditTheLoai());
             DeleteCommand = new RelayCommand<object>((p) => SelectedTheLoai != null, async (p) => await DeleteTheLoai());
-            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchTheLoai());
+            SearchCommand = new RelayCommand<DataGrid>((p) => true, (p) =>  SearchTheLoai(p));
+            ShowCommand = new RelayCommand<DataGrid>((p) => true, (p) => ShowTheLoai(p));
             LoadTheLoaiList();
         }
 
@@ -82,8 +91,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             TheLoai newTheLoai = new TheLoai()
             {
-                MaTL = MaTL = await CreateMaTLAsync(TenTL), // Generate unique MaTL
-                TenTL = TenTL
+                MaTL = await CreateMaTLAsync(), // Generate unique MaTL
+                TenTL = DisplayName
             };
 
             bool isSuccess = await AddTheLoaiToDatabaseAsync(newTheLoai);
@@ -100,11 +109,13 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             if (SelectedTheLoai != null)
             {
+                SelectedTheLoai.TenTL = DisplayName;
                 bool isSuccess = await UpdateTheLoaiInDatabaseAsync(SelectedTheLoai);
                 if (!isSuccess)
                 {
                     MessageBox.Show("Error updating The Loai.");
                 }
+                LoadTheLoaiList();
             }
         }
 
@@ -124,20 +135,21 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        private async Task SearchTheLoai()
+        private void  SearchTheLoai(DataGrid p)
         {
-            var filteredList = await SearchTheLoaiInDatabaseAsync(TenTL);
-            TheLoaiList.Clear();
-            foreach (var theLoai in filteredList)
-            {
-                TheLoaiList.Add(theLoai);
-            }
+            var TempList = TheLoaiList.Where(tl=> tl.TenTL.StartsWith(TenTL));
+            p.ItemsSource = TempList;
+        }
+        private void ShowTheLoai(DataGrid p)
+        {
+            p.ItemsSource = TheLoaiList;
         }
 
         #region MethodToDatabase
 
         public static async Task<bool> AddTheLoaiToDatabaseAsync(TheLoai theLoai)
         {
+            //kiểm tra bị trùng
             try
             {
                 using (var context = new LibraryDbContext())

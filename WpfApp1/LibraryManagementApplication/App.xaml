@@ -271,6 +271,45 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Style nút hiển thị-->
+        <Style TargetType="Button" x:Key="button:show">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder"
+         BorderBrush="#FF9E5E07"
+         Background="#FFFFE79A"
+         BorderThickness="1"
+         CornerRadius="20">
+                            <ContentPresenter  x:Name="text"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                TextElement.Foreground="#FF9E5E07"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#cfcfcf"
+                     Direction="45"
+                     ShadowDepth="4"
+                     Opacity="0.5"
+                     BlurRadius="10" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FF9E5E07"/>
+                                <Setter TargetName="text" Property="TextElement.Foreground" Value="#FFFFE79A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <!--Style textbox thông thường-->
         <Style TargetType="TextBox" x:Key="textbox:style1">
             <Setter Property="Template">
