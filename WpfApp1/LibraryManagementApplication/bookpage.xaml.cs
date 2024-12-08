@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibraryManagementApplication.Model.Class;
+using LibraryManagementApplication.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,11 +27,29 @@ namespace LibraryManagementApplication
             InitializeComponent();
 
             trangthaitb.ItemsSource = new List<string>() { "Có sẵn", "Được mượn", "Thất lạc" };
+            this.Loaded += (s, e) =>
+            {
+                LoadTheLoai();
+            };
         }
 
         private void trangthaitb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+        private void LoadTheLoai()
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    tentb.ItemsSource = context.DauSachs.Select(t => t.TenDauSach).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi tải dữ liệu: {ex.Message}");
+            }
         }
     }
 }
