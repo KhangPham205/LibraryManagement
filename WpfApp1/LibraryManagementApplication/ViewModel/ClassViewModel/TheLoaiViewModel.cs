@@ -56,6 +56,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async Task AddTheLoai()
         {
+            MessageBox.Show(TenTL);
             TheLoai newTheLoai = new TheLoai()
             {
                 MaTL = MaTL,

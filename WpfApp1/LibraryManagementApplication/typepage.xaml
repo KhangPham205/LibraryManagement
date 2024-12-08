@@ -63,7 +63,7 @@
                          Grid.Column="1"
                          Grid.Row="1"
                          Margin="5"
-                         Text="{Binding SelectedTheLoai, Mode=OneWayToSource}"
+                         Text="{Binding TenTL, Mode=OneWayToSource}"
                          Style="{StaticResource textbox:style1}"
                          />
                     <Grid Grid.Row="3"
@@ -78,7 +78,8 @@
                         <Button  x:Name="adddg"
                          Content="Thêm"
                          Margin="5"        
-                         Style="{DynamicResource button:add}"/>
+                         Style="{DynamicResource button:add}"
+                         Command="{Binding AddCommand}"/>
                         <Button  x:Name="finddg"
                          Content="Tìm"
                          Grid.Column="1"
