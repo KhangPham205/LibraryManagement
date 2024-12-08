@@ -61,13 +61,12 @@
                                Grid.Row="1"
                                Margin="5"
                                HorizontalAlignment="Right"/>
-                    <TextBox x:Name="tentb"
+                    <ComboBox x:Name="tentb"
                          Grid.Column="1"
                          Grid.Row="1"
                          Margin="5"
-                         Style="{StaticResource textbox:style1}"
+                         Style="{StaticResource combobox:style1}"
                          Text="{Binding TenDauSach, Mode=OneWayToSource}"/>
-
                     <TextBlock Text="ISBN: "
                                Style="{StaticResource textblock:style1}"
                                Grid.Column="0"
