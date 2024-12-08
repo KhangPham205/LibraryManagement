@@ -79,6 +79,18 @@
                              Margin="5"
                              Style="{StaticResource textbox:style1}"
                              Text="{Binding ISBN, Mode=OneWayToSource}"/>
+                    <TextBlock Text="Năm XB: "
+                               Style="{StaticResource textblock:style1}"
+                               Grid.Column="0"
+                               Grid.Row="3"
+                               Margin="5"
+                               HorizontalAlignment="Right"/>
+                    <TextBox x:Name="namxbtb"
+                             Grid.Column="1"
+                             Grid.Row="3"
+                             Style="{StaticResource textbox:style1}"
+                             Margin="5"
+                             Text="{Binding NamXB, Mode=OneWayToSource}"/>
                     <TextBlock Text="Vị trí: "
                                Style="{StaticResource textblock:style1}"
                                Grid.Column="2"

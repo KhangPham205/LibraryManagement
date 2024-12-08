@@ -78,7 +78,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     ISBN = ISBN,
                     ViTri = ViTri,
                     TrangThai = TrangThai,
-                    NamXB = 2000,
+                    NamXB = NamXB,
                     //DauSach = ds // Liên kết với DauSach đã có
                 };
 
