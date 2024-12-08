@@ -218,16 +218,27 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             {
                 using (var context = new LibraryDbContext())
                 {
-                    var result = await context.Sachs
-                                              .ToListAsync();
+                    var result = await context.Sachs.ToListAsync();
                     return result;
                 }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show($"Invalid Operation: {ex.Message}");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error getting all books: {ex.Message}");
-                return new List<Sach>();
             }
+            return new List<Sach>();
         }
         #endregion
     }

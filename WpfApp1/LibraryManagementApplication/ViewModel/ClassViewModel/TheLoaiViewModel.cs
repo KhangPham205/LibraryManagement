@@ -70,6 +70,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async void LoadTheLoaiList()
         {
+            TheLoaiList.Clear();
             var theLoais = await GetAllTheLoaisAsync();
             foreach (var theLoai in theLoais)
             {
