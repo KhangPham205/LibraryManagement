@@ -11,6 +11,7 @@ namespace LibraryManagementApplication.Model.Class
     {
         [Key]
         public string MaDauSach { get; set; }
+        public string TenDauSach { get; set; }
         public string ISBN { get; set; }
         public string ViTri { get; set; }
         public string TrangThai { get; set; }

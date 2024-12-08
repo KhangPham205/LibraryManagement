@@ -7,7 +7,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using LibraryManagementApplication.ViewModel.ClassViewModel;
+using System.Data.SqlClient;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
@@ -62,23 +64,29 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             using (var context = new LibraryDbContext())
             {
                 DauSach ds = context.DauSachs.FirstOrDefault(s => s.TenDauSach == TenDauSach);
+                if (ds == null)
+                {
+                    // Nếu không tìm thấy DauSach thì có thể thông báo lỗi hoặc xử lý
+                    MessageBox.Show("Không tìm thấy đầu sách.");
+                    return;
+                }
+
                 var newSach = new Sach()
                 {
-                    MaDauSach = ds.MaDauSach,
+                    MaDauSach = ds.MaDauSach, // Dùng MaDauSach của DauSach đã tồn tại
+                    TenDauSach = TenDauSach,
                     ISBN = ISBN,
                     ViTri = ViTri,
                     TrangThai = TrangThai,
                     NamXB = 2000,
-                    DauSach = ds,
+                    //DauSach = ds // Liên kết với DauSach đã có
                 };
 
                 bool isSuccess = await AddSachToDatabaseAsync(newSach);
                 if (!isSuccess)
-                {
                     MessageBox.Show("Cannot save changes.");
-                }
                 else
-                    SachList.Add(newSach);
+                    SachList.Add(newSach); // Thêm vào danh sách hiển thị
             }
         }
         private async Task EditSach()
@@ -129,16 +137,23 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     return true;
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException dbEx)
             {
-                MessageBox.Show($"Error adding books: {ex.Message}");
-                return false;
+                MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show($"Invalid Operation: {ex.Message}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding book: {ex.Message}");
-                return false;
+                MessageBox.Show($"Unexpected Error: {ex.Message}");
             }
+            return false;
         }
         public static async Task<bool> UpdateSachInDatabaseAsync(Sach sach)
         {
@@ -204,7 +219,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 using (var context = new LibraryDbContext())
                 {
                     var result = await context.Sachs
-                                              .Include(s => s.DauSach)
                                               .ToListAsync();
                     return result;
                 }
