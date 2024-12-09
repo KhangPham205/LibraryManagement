@@ -165,25 +165,36 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async Task AddDauSach()
         {
-            var newDauSach = new DauSach()
+            if (!string.IsNullOrEmpty(TenDauSach) && !string.IsNullOrEmpty(TenTG) &&
+                !string.IsNullOrEmpty(NgonNgu) &&
+                !string.IsNullOrEmpty(TenTL) &&
+                !string.IsNullOrEmpty(TenNXB))
             {
-                MaDauSach = MaDauSach = await CreateMaDSAsync(TenDauSach),
-                TenDauSach = TenDauSach,
-                TenTG = TenTG,
-                NgonNgu = NgonNgu,
-                TenTL = TenTL,
-                TenNXB = TenNXB
-            };
-            //MessageBox.Show(newDauSach.MaDauSach + " " + newDauSach.TenDauSach + " " + newDauSach.TenTL);
-            bool isSuccess = await AddDauSachToDatabaseAsync(newDauSach);
-            if (isSuccess)
-            {
-                DauSachList.Add(newDauSach);
+                bool exists = await IsDauSachExistsAsync(TenDauSach);
+                if (exists)
+                {
+                    MessageBox.Show("Thể loại này đã tồn tại.");
+                    return;
+                }
+
+                var newDauSach = new DauSach()
+                {
+                    MaDauSach = MaDauSach = await CreateMaDSAsync(TenDauSach),
+                    TenDauSach = TenDauSach,
+                    TenTG = TenTG,
+                    NgonNgu = NgonNgu,
+                    TenTL = TenTL,
+                    TenNXB = TenNXB
+                };
+                //MessageBox.Show(newDauSach.MaDauSach + " " + newDauSach.TenDauSach + " " + newDauSach.TenTL);
+                bool isSuccess = await AddDauSachToDatabaseAsync(newDauSach);
+                if (isSuccess)
+                    DauSachList.Add(newDauSach);
+                else
+                    MessageBox.Show("Cannot save changes.");
             }
             else
-            {
-                MessageBox.Show("Cannot save changes.");
-            }
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private async Task EditDauSach()
@@ -232,7 +243,24 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         #region MethodToDatabase
-
+        private static async Task<bool> IsDauSachExistsAsync(string tenDauSach)
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    // Chuyển cả hai về chữ thường trước khi so sánh
+                    string normalizedTenDS = tenDauSach.ToLower();
+                    return await context.DauSachs
+                                        .AnyAsync(ds => ds.TenDauSach.ToLower() == normalizedTenDS);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking existence of DauSach: {ex.Message}");
+                return false;
+            }
+        }
         private static async Task<bool> AddDauSachToDatabaseAsync(DauSach DauSach)
         {
             try

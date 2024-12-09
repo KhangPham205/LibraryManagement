@@ -68,7 +68,7 @@
                          Grid.Row="1"
                          Margin="5"
                          Style="{StaticResource combobox:style1}"
-                         Text="{Binding TenDauSach, Mode=OneWayToSource}"/>
+                         Text="{Binding TenDauSach, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="ISBN: "
                                Style="{StaticResource textblock:style1}"
                                Grid.Column="0"
@@ -80,7 +80,7 @@
                              Grid.Row="2"
                              Margin="5"
                              Style="{StaticResource textbox:style1}"
-                             Text="{Binding ISBN, Mode=OneWayToSource}"/>
+                             Text="{Binding ISBN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="Năm XB: "
                                Style="{StaticResource textblock:style1}"
                                Grid.Column="0"
@@ -92,7 +92,7 @@
                              Grid.Row="3"
                              Style="{StaticResource textbox:style1}"
                              Margin="5"
-                             Text="{Binding NamXB, Mode=OneWayToSource, Converter={StaticResource IntToStringConverter}}"/>
+                             Text="{Binding NamXB, Mode=TwoWay, Converter={StaticResource IntToStringConverter}, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="Vị trí: "
                                Style="{StaticResource textblock:style1}"
                                Grid.Column="2"
@@ -104,7 +104,7 @@
                              Grid.Row="1"
                              Margin="5"
                              Style="{StaticResource textbox:style1}"
-                             Text="{Binding ViTri, Mode=OneWayToSource}"/>
+                             Text="{Binding ViTri, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="Trạng thái: "
                                Style="{StaticResource textblock:style1}"
                                Grid.Column="2"
@@ -116,7 +116,7 @@
                               Grid.Row="2"
                               Margin="5"
                               Style="{StaticResource combobox:style1}"
-                              SelectedItem="{Binding TrangThai, Mode=OneWayToSource}">
+                              SelectedItem="{Binding TrangThai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
                     <Grid Grid.Row="4"
                            Grid.Column="0"
@@ -158,7 +158,7 @@
                         <Button  x:Name="showsach"
                                   Content="Hiển thị"
                                   Grid.Column="8"
-                                  Margin="5"      
+                                  Margin="5"
                                   Style="{DynamicResource button:show}"
                                   Command="{Binding ShowCommand}"/>
                     </Grid>
@@ -167,6 +167,7 @@
             <DataGrid x:Name="sach"
                       Margin="5"
                       Grid.Row="1"
+                      SelectedItem="{Binding SelectedSach, Mode=OneWayToSource}"
                       ItemsSource="{Binding SachList}"
                       >
                 <DataGrid.Columns>
