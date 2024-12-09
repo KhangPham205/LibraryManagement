@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using LibraryManagementApplication;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
@@ -19,6 +20,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public DateTime NgayTraDK { get; set; }
         public DateTime NgayTraTT { get; set; }
         public decimal PhiPhat { get; set; }
+        public string TenDSach { get; set; }
+        public string IBSN { get; set; }
         public ObservableCollection<DonMuon> DonMuonList { get; set; }
         private DonMuon _selectedDonMuon;
         public DonMuon SelectedDonMuon
@@ -33,7 +36,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
-        public Page page { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
@@ -48,8 +50,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             EditCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await EditDonMuon());
             DeleteCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await DeleteDonMuon());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDonMuon(p));
-            moveCommand = new RelayCommand<object>((p) => true, (p) => { page = new addborrow(); });
-            backCommand = new RelayCommand<object>((p) => true, (p) => { page = new borrowinfo(); });
+            moveCommand = new RelayCommand<Frame>((p) => true, (p) => { p.Content = new addborrow(); OnPropertyChanged(); });
+            backCommand = new RelayCommand<Frame>((p) => true, (p) => {  p.Content= new borrowinfo(); OnPropertyChanged(); });
             LoadDonMuonList();
         }
 
