@@ -31,7 +31,7 @@ namespace LibraryManagementApplication
             };
 
             // Gán dữ liệu cho DataGrid
-            sach.ItemsSource = danhSachNhanVien;
+            //sach.ItemsSource = danhSachNhanVien;
         }
     }
 }

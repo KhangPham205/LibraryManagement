@@ -207,7 +207,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                //MessageBox.Show($"Error getting all DocGia: {ex.Message}");
+                MessageBox.Show($"Error getting all DocGia: {ex.Message}");
                 return new List<DocGia>();
             }
         }

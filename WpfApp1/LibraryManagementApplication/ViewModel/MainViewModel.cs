@@ -45,6 +45,24 @@ namespace LibraryManagementApplication.ViewModel
             headerbookpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is headerbookpage); }, (p) => { p.Content = new headerbookpage(); });
             infopagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is infoxaml); }, (p) => { p.Content = new infoxaml(); });
         }
+        private TaiKhoan _taiKhoan;
+        public TaiKhoan TaiKhoan
+        {
+            get { return _taiKhoan; }
+            set
+            {
+                if (_taiKhoan != value)
+                {
+                    _taiKhoan = value;
+                    OnPropertyChanged(nameof(TaiKhoan));
+                }
+            }
+        }
+
+        public void SetTaiKhoan(TaiKhoan taiKhoan)
+        {
+            TaiKhoan = taiKhoan;
+        }
         bool isLogin() { return true; }//kiem tra da dang nhap chua
         void logOut() { }
     }

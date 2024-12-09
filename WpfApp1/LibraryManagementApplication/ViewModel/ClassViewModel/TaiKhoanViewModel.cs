@@ -6,20 +6,80 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class TaiKhoanViewModel : BaseViewModel
     {
-        public string UserID { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string Loai { get; set; }
-        public string Email { get; set; }
-        public string SDT { get; set; }
-        public string CCCD { get; set; }
+        private string userName;
+        private string password;
+        private string email;
+        private string sdt;
+        private string cccd;
+        public string UserName
+        {
+            get => userName;
+            set
+            {
+                if (userName != value)
+                {
+                    userName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string Password
+        {
+            get => password;
+            set
+            {
+                if (password != value)
+                {
+                    password = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string Email
+        {
+            get => email;
+            set
+            {
+                if (email != value)
+                {
+                    email = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string SDT
+        {
+            get => sdt;
+            set
+            {
+                if (sdt != value)
+                {
+                    sdt = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string CCCD
+        {
+            get => cccd;
+            set
+            {
+                if (cccd != value)
+                {
+                    cccd = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
+        public bool IsAdded;
         public ObservableCollection<TaiKhoan> TaiKhoanList { get; set; }
         private TaiKhoan _selectedTaiKhoan;
 
@@ -32,14 +92,45 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 {
                     _selectedTaiKhoan = value;
                     OnPropertyChanged(nameof(SelectedTaiKhoan));
+                    if (SelectedTaiKhoan != null)
+                    {
+                        UserName = SelectedTaiKhoan.UserName;
+                        Password = SelectedTaiKhoan.Password;
+                        Email = SelectedTaiKhoan.Email;
+                        SDT = SelectedTaiKhoan.SDT;
+                        CCCD = SelectedTaiKhoan.CCCD;
+                    }
                 }
             }
         }
+        private async Task<string> CreateMaNVAsync()
+        {
+            // Generate a hash from TenTL
+            using (var context = new LibraryDbContext())
+            {
+                // Lấy tất cả các mã UserID hiện tại trong cơ sở dữ liệu có tiền tố "NV"
+                var existingCodes = await context.TaiKhoans
+                                                 .Where(tl => tl.UserID.StartsWith("NV"))
+                                                 .Select(tl => tl.UserID)
+                                                 .ToListAsync();
 
+                int maxCodeNumber = existingCodes
+                    .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "NV"
+                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
+                    .Max(); // Lấy số lớn nhất trong danh sách mã
+
+                // Tạo mã mới với số tăng dần
+                int newCodeNumber = maxCodeNumber + 1;
+
+                // Trả về mã mới với định dạng "NV" + số có 3 chữ số
+                return $"NV{newCodeNumber:D3}";
+            }
+        }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
+        public ICommand ShowCommand { get; set; }
 
         public TaiKhoanViewModel()
         {
@@ -47,12 +138,15 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddTaiKhoan());
             EditCommand = new RelayCommand<object>((p) => SelectedTaiKhoan != null, async (p) => await EditTaiKhoan());
             DeleteCommand = new RelayCommand<object>((p) => SelectedTaiKhoan != null, async (p) => await DeleteTaiKhoan());
-            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchTaiKhoan(p));
+            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchTaiKhoan());
+            ShowCommand = new RelayCommand<DataGrid>((p) => true, (p) => ShowTaiKhoan());
+
             LoadTaiKhoanList();
         }
 
         private async void LoadTaiKhoanList()
         {
+            TaiKhoanList.Clear();
             var taiKhoans = await GetAllTaiKhoansAsync();
             foreach (var taiKhoan in taiKhoans)
             {
@@ -60,34 +154,56 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        private async Task AddTaiKhoan()
+        private async Task<bool> AddTaiKhoan()
         {
-            TaiKhoan newTaiKhoan = new TaiKhoan()
+            if (!string.IsNullOrEmpty(UserName) && 
+                !string.IsNullOrEmpty(Password) && 
+                !string.IsNullOrEmpty(Email) && 
+                !string.IsNullOrEmpty(SDT) && 
+                !string.IsNullOrEmpty(CCCD))
             {
-                UserID = UserID,
-                UserName = UserName,
-                Password = Password,
-                Loai = Loai,
-                Email = Email,
-                SDT = SDT,
-                CCCD = CCCD
-            };
+                bool exists = await IsTaiKhoanExistsAsync(CCCD, Email);
+                if (exists)
+                {
+                    MessageBox.Show("Nhân viên với email hoặc căn cước công dân đã được sử dụng.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
 
-            bool isSuccess = await AddTaiKhoanToDatabaseAsync(newTaiKhoan);
-            if (isSuccess)
-            {
-                TaiKhoanList.Add(newTaiKhoan); // Add to ObservableCollection only after DB operation succeeds
+                TaiKhoan newTaiKhoan = new TaiKhoan()
+                {
+                    UserID = await CreateMaNVAsync(),
+                    UserName = UserName,
+                    Password = Password,
+                    Loai = "NV",
+                    Email = Email,
+                    SDT = SDT,
+                    CCCD = CCCD
+                };
+
+                bool isSuccess = await AddTaiKhoanToDatabaseAsync(newTaiKhoan);
+                IsAdded = isSuccess;
+                if (isSuccess)
+                    TaiKhoanList.Add(newTaiKhoan);
+                else
+                    MessageBox.Show("Error adding Tai Khoan.");
+                return isSuccess;
             }
             else
             {
-                MessageBox.Show("Error adding Tai Khoan.");
-            }
+                MessageBox.Show("Vui lòng nhập thông tin", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }    
         }
 
         private async Task EditTaiKhoan()
         {
             if (SelectedTaiKhoan != null)
             {
+                SelectedTaiKhoan.UserName = UserName;
+                SelectedTaiKhoan.Password = Password;
+                SelectedTaiKhoan.SDT = SDT;
+                SelectedTaiKhoan.Email = Email;
+                SelectedTaiKhoan.CCCD = CCCD;
                 bool isSuccess = await UpdateTaiKhoanInDatabaseAsync(SelectedTaiKhoan);
                 if (!isSuccess)
                 {
@@ -102,28 +218,44 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             {
                 bool isSuccess = await DeleteTaiKhoanFromDatabaseAsync(SelectedTaiKhoan.UserID);
                 if (isSuccess)
-                {
                     TaiKhoanList.Remove(SelectedTaiKhoan);
-                }
                 else
-                {
                     MessageBox.Show("Error deleting Tai Khoan.");
-                }
             }
         }
 
-        private async Task SearchTaiKhoan(string keyword)
+        private async Task SearchTaiKhoan()
         {
-            var filteredList = await SearchTaiKhoanInDatabaseAsync(keyword);
+            var filteredList = await SearchTaiKhoanInDatabaseAsync(UserName);
             TaiKhoanList.Clear();
             foreach (var taiKhoan in filteredList)
             {
                 TaiKhoanList.Add(taiKhoan);
             }
         }
-
+        private void ShowTaiKhoan()
+        {
+            LoadTaiKhoanList();
+        }
         #region MethodToDatabase
-
+        private static async Task<bool> IsTaiKhoanExistsAsync(string cccd, string email)
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    // Kiểm tra xem có tồn tại tài khoản với CCCD hoặc email đã sử dụng hay không
+                    return await context.TaiKhoans
+                        .AnyAsync(tk => tk.CCCD == cccd ||
+                                        tk.Email.ToLower() == email.ToLower());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking existence of Tai Khoan: {ex.Message}");
+                return false;
+            }
+        }
         public static async Task<bool> AddTaiKhoanToDatabaseAsync(TaiKhoan taiKhoan)
         {
             try

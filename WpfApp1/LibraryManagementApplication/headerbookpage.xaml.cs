@@ -23,7 +23,6 @@ namespace LibraryManagementApplication
     /// </summary>
     public partial class headerbookpage : Page
     {
-        DauSach editedDauSach;
         public headerbookpage()
         {
             InitializeComponent();

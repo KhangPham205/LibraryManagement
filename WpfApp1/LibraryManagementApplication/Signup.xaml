@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel"
+        xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel.ClassViewModel"
         mc:Ignorable="d"
         Height="450" Width="650"
         WindowStartupLocation="CenterScreen"
@@ -12,7 +12,7 @@
         Icon="/Icon/book (1).png"
         >
     <Window.DataContext>
-        <local:SignupViewModel/>
+        <local:TaiKhoanViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -85,27 +85,28 @@
                     Style="{StaticResource textbox:style1}"
                     Grid.Column="2"
                     Grid.Row="1"
+                    Text="{Binding UserName}"
                     />
             <TextBox x:Name="password"
                     Style="{StaticResource textbox:style1}"
                     Grid.Column="2"
                     Grid.Row="2"
-                    />
+                    Text="{Binding Password}"/>
             <TextBox x:Name="email"
                     Style="{StaticResource textbox:style1}"
                     Grid.Column="2"
                     Grid.Row="3"
-                    />
+                    Text="{Binding Email}"/>
             <TextBox x:Name="sdt"
                     Style="{StaticResource textbox:style1}"
                     Grid.Column="2"
                     Grid.Row="4"
-                    />
+                    Text="{Binding SDT}"/>
             <TextBox x:Name="cccd"
                     Style="{StaticResource textbox:style1}"
                     Grid.Column="2"
                     Grid.Row="5"
-                    />
+                    Text="{Binding CCCD}"/>
 
             <Button x:Name="signup"
                     Content="Đăng ký"
@@ -113,7 +114,8 @@
                     Grid.Column="2"
                     Grid.Row="6"
                     HorizontalAlignment="Right"
-                    Command ="{Binding SignupCommand}"
+                    Command ="{Binding AddCommand}"
+                    Click="signup_Click"
                     CommandParameter="{Binding ElementName=signUpWindow}">
             </Button>
         </Grid>

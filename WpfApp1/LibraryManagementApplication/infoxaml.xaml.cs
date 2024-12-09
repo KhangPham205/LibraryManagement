@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagementApplication.Model.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace LibraryManagementApplication
         public infoxaml()
         {
             InitializeComponent();
+            MessageBox.Show($"UserName: {tentb.Text}");
         }
     }
 }

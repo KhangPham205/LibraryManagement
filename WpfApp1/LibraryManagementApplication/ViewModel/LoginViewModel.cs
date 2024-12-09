@@ -14,15 +14,15 @@ namespace LibraryManagementApplication.ViewModel
     public class LoginViewModel : BaseViewModel
     {
         // Properties for binding to the UI
-        private string _userid;
+        private string _userID;
         public string UserID
         {
-            get { return _userid; }
+            get { return _userID; }
             set
             {
-                if (_userid == "" || _userid != value)
+                if (_userID == "" || _userID != value)
                 {
-                    _userid = value;
+                    _userID = value;
                     OnPropertyChanged(nameof(UserID));
                 }
             }
@@ -56,6 +56,21 @@ namespace LibraryManagementApplication.ViewModel
             }
         }
 
+        private TaiKhoan _taiKhoan;
+        public TaiKhoan taiKhoan
+        {
+            get { return _taiKhoan; }
+            set
+            {
+                if (_taiKhoan != value)
+                {
+                    _taiKhoan = value;
+                    OnPropertyChanged(nameof(taiKhoan));
+                }
+            }
+        }
+
+
         // Command for login action
         public ICommand LoginCommand { get; set; }
         public ICommand SignupCommand { get; set; }
@@ -72,7 +87,7 @@ namespace LibraryManagementApplication.ViewModel
             using (var context = new LibraryDbContext())
             {
                 Window mainwindow;
-                // Tìm người dùng dựa vào Username và Password (cần hash password nếu sử dụng trong thực tế)
+                // Tìm người dùng dựa vào UserName và Password (cần hash password nếu sử dụng trong thực tế)
                 //foreach (var item in context.TaiKhoans)
                 //{
                 //    if (item.UserID.ToString().Equals(UserID))
@@ -92,11 +107,26 @@ namespace LibraryManagementApplication.ViewModel
                 {
                     IsLoginSuccessful = true;
 
+                    taiKhoan = new TaiKhoan
+                    {
+                        UserID = user.UserID,
+                        UserName = user.UserName,
+                        Password = user.Password,
+                        Email = user.Email,
+                        CCCD = user.CCCD,
+                        SDT = user.SDT
+                    };
+
+                    var mainViewModel = new MainViewModel();
+                    mainViewModel.SetTaiKhoan(taiKhoan);
+
                     if (user.Loai == "AD")
                         mainwindow = new MainWindow1();
                     else
                         mainwindow = new MainWindow2();
+                    mainwindow.DataContext = mainViewModel;  // Gán DataContext cho MainWindow
                     mainwindow.Show();
+
                     p.Close();
                 }
                 else
@@ -105,28 +135,24 @@ namespace LibraryManagementApplication.ViewModel
                 }
 
                 if (IsLoginSuccessful)
-                    MessageBox.Show("Dang nhap thanh cong", "Thong bao");
+                    MessageBox.Show("Đăng nhập thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 else
-                    MessageBox.Show("Dang nhap that bai", "Thong bao");
+                    MessageBox.Show("Đăng nhập thất bại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
 
     public static class PasswordBoxHelper
     {
-        public static readonly DependencyProperty BindPasswordProperty =
-            DependencyProperty.RegisterAttached("BindPassword", typeof(string), typeof(PasswordBoxHelper), new PropertyMetadata(string.Empty, OnBindPasswordChanged));
-
+        public static readonly DependencyProperty BindPasswordProperty = DependencyProperty.RegisterAttached("BindPassword", typeof(string), typeof(PasswordBoxHelper), new PropertyMetadata(string.Empty, OnBindPasswordChanged));
         public static void SetBindPassword(DependencyObject element, string value)
         {
             element.SetValue(BindPasswordProperty, value);
         }
-
         public static string GetBindPassword(DependencyObject element)
         {
             return (string)element.GetValue(BindPasswordProperty);
         }
-
         private static void OnBindPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is PasswordBox passwordBox)
@@ -136,7 +162,6 @@ namespace LibraryManagementApplication.ViewModel
                 passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
             }
         }
-
         private static void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (sender is PasswordBox passwordBox)
@@ -146,5 +171,4 @@ namespace LibraryManagementApplication.ViewModel
             }
         }
     }
-
 }

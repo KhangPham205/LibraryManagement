@@ -70,14 +70,16 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
-
+        public ICommand ShowCommand { get; set; }
         public TacGiaViewModel()
         {
             TacGiaList = new ObservableCollection<TacGia>();
             AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddTacGia());
             EditCommand = new RelayCommand<object>((p) => SelectedTacGia != null, async (p) => await EditTacGia());
             DeleteCommand = new RelayCommand<object>((p) => SelectedTacGia != null, async (p) => await DeleteTacGia());
-            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchTacGia(p));
+            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchTacGia());
+            ShowCommand = new RelayCommand<object>((p) => true, (p) => ShowTacGia());
+
             LoadTacGiaList();
         }
 
@@ -143,9 +145,9 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
-        private async Task SearchTacGia(string keyword)
+        private async Task SearchTacGia()
         {
-            var filteredList = await SearchTacGiaInDatabaseAsync(keyword);
+            var filteredList = await SearchTacGiaInDatabaseAsync(DisplayName);
             TacGiaList.Clear();
             foreach (var tacGia in filteredList)
             {
@@ -153,6 +155,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
+        private void ShowTacGia()
+        {
+            LoadTacGiaList();
+        }
         #region MethodToDatabase
         private static async Task<bool> IsTacGiaExistsAsync(string tenTG)
         {
