@@ -125,6 +125,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 {
                     MessageBox.Show("Error updating the record.");
                 }
+                LoadTacGiaList();
             }
         }
         private async Task DeleteTacGia()

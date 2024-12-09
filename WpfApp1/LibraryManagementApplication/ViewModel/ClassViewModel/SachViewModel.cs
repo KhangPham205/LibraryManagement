@@ -128,7 +128,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         #region MethodToDatabase
-        public static async Task<bool> AddSachToDatabaseAsync(Sach sach)
+        private static async Task<bool> AddSachToDatabaseAsync(Sach sach)
         {
             try
             {
@@ -157,7 +157,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             return false;
         }
-        public static async Task<bool> UpdateSachInDatabaseAsync(Sach sach)
+        private static async Task<bool> UpdateSachInDatabaseAsync(Sach sach)
         {
             try
             {
@@ -174,7 +174,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-        public static async Task<bool> DeleteSachFromDatabaseAsync(string isbn)
+        private static async Task<bool> DeleteSachFromDatabaseAsync(string isbn)
         {
             try
             {
@@ -196,7 +196,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-        public static async Task<List<Sach>> SearchSachInDatabaseAsync(string keyword)
+        private static async Task<List<Sach>> SearchSachInDatabaseAsync(string keyword)
         {
             try
             {
@@ -214,7 +214,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return new List<Sach>();
             }
         }
-        public static async Task<List<Sach>> GetAllSachsAsync()
+        private static async Task<List<Sach>> GetAllSachsAsync()
         {
             try
             {

@@ -13,12 +13,84 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class DauSachViewModel : BaseViewModel
     {
-        public string MaDauSach { get; set; }
-        public string TenDauSach { get; set; }
-        public string TenTG { get; set; }
-        public string NgonNgu { get; set; }
-        public string TenTL { get; set; }
-        public string TenNXB { get; set; }
+        private string maDauSach;
+        private string tenDauSach;
+        private string tenTG;
+        private string ngonNgu;
+        private string tenTL;
+        private string tenNXB;
+        public string MaDauSach 
+        { 
+            get => maDauSach;
+            set 
+            {
+                if (maDauSach != value)
+                {
+                    maDauSach = value;
+                    OnPropertyChanged();
+                }
+            } 
+        }
+        public string TenDauSach
+        {
+            get => tenDauSach;
+            set
+            {
+                if (tenDauSach != value)
+                {
+                    tenDauSach = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string TenTG
+        {
+            get => tenTG;
+            set
+            {
+                if (tenTG != value)
+                {
+                    tenTG = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string NgonNgu
+        {
+            get => ngonNgu;
+            set
+            {
+                if (ngonNgu != value)
+                {
+                    ngonNgu = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string TenTL
+        {
+            get => tenTL;
+            set
+            {
+                if (tenTL != value)
+                {
+                    tenTL = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string TenNXB
+        {
+            get => tenNXB;
+            set
+            {
+                if (tenNXB != value)
+                {
+                    tenNXB = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public ObservableCollection<DauSach> DauSachList { get; set; }
         private DauSach _selectedDauSach;
         public DauSach SelectedDauSach
@@ -30,6 +102,15 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 {
                     _selectedDauSach = value;
                     OnPropertyChanged(nameof(SelectedDauSach));
+                    if (SelectedDauSach != null)
+                    {
+                        MaDauSach = SelectedDauSach.MaDauSach;
+                        TenDauSach = SelectedDauSach.TenDauSach;
+                        TenTG = SelectedDauSach.TenTG;
+                        NgonNgu = SelectedDauSach.NgonNgu;
+                        TenTL = SelectedDauSach.TenTL;
+                        TenNXB = SelectedDauSach.TenNXB;
+                    }
                 }
             }
         }
@@ -67,7 +148,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddDauSach());
             EditCommand = new RelayCommand<object>((p) => SelectedDauSach != null, async (p) => await EditDauSach());
             DeleteCommand = new RelayCommand<object>((p) => SelectedDauSach != null, async (p) => await DeleteDauSach());
-            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDauSach(p));
+            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDauSach());
 
             LoadDauSachList();
         }
@@ -109,11 +190,18 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             if (SelectedDauSach != null)
             {
+                SelectedDauSach.MaDauSach = MaDauSach;
+                SelectedDauSach.TenDauSach = TenDauSach;
+                SelectedDauSach.TenTG = TenTG;
+                SelectedDauSach.NgonNgu = NgonNgu;
+                SelectedDauSach.TenTL = TenTL;
+                SelectedDauSach.TenNXB = TenNXB;
                 bool isSuccess = await UpdateDauSachInDatabaseAsync(SelectedDauSach);
                 if (!isSuccess)
                 {
-                    // Handle failure (e.g. show error message to user)
+                    MessageBox.Show("Cannot edit DauSach");
                 }
+                LoadDauSachList();
             }
         }
 
@@ -133,9 +221,9 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        private async Task SearchDauSach(string keyword)
+        private async Task SearchDauSach()
         {
-            var filteredListFromDb = await SearchDauSachInDatabaseAsync(keyword);
+            var filteredListFromDb = await SearchDauSachInDatabaseAsync(TenDauSach, TenTG, NgonNgu, TenTL, TenNXB);
             DauSachList.Clear();
             foreach (var DauSach in filteredListFromDb)
             {
@@ -145,7 +233,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         #region MethodToDatabase
 
-        public static async Task<bool> AddDauSachToDatabaseAsync(DauSach DauSach)
+        private static async Task<bool> AddDauSachToDatabaseAsync(DauSach DauSach)
         {
             try
             {
@@ -163,8 +251,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); return false; }
         }
-
-        public static async Task<bool> UpdateDauSachInDatabaseAsync(DauSach DauSach)
+        private static async Task<bool> UpdateDauSachInDatabaseAsync(DauSach DauSach)
         {
             try
             {
@@ -181,8 +268,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-
-        public static async Task<bool> DeleteDauSachFromDatabaseAsync(DauSach dauSach)
+        private static async Task<bool> DeleteDauSachFromDatabaseAsync(DauSach dauSach)
         {
             try
             {
@@ -204,16 +290,31 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-
-        public static async Task<List<DauSach>> SearchDauSachInDatabaseAsync(string keyword)
+        private static async Task<List<DauSach>> SearchDauSachInDatabaseAsync(string tenDauSach, string tenTG, string ngonNgu, string tenTL, string nxb)
         {
             try
             {
                 using (var context = new LibraryDbContext())
                 {
-                    var result = await context.DauSachs
-                                              .Where(s => s.TenDauSach.Contains(keyword))
-                                              .ToListAsync();
+                    var query = context.DauSachs.AsQueryable();
+
+                    // Áp dụng các điều kiện tìm kiếm, chỉ áp dụng nếu các tham số có giá trị.
+                    if (!string.IsNullOrEmpty(tenDauSach))
+                        query = query.Where(s => s.TenDauSach.Contains(tenDauSach));
+
+                    if (!string.IsNullOrEmpty(tenTG))
+                        query = query.Where(s => s.TenTG.Contains(tenTG));
+
+                    if (!string.IsNullOrEmpty(ngonNgu))
+                        query = query.Where(s => s.NgonNgu.Contains(ngonNgu));
+
+                    if (!string.IsNullOrEmpty(tenTL))
+                        query = query.Where(s => s.TenTL.Contains(tenTL));
+
+                    if (!string.IsNullOrEmpty(nxb))
+                        query = query.Where(s => s.TenNXB.Contains(nxb));
+
+                    var result = await query.ToListAsync();
                     return result;
                 }
             }
@@ -223,8 +324,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return new List<DauSach>();
             }
         }
-
-        public static async Task<List<DauSach>> GetAllDauSachsAsync()
+        private static async Task<List<DauSach>> GetAllDauSachsAsync()
         {
             try
             {
