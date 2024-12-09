@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LibraryManagementApplication.ViewModel
 {
@@ -106,19 +107,8 @@ namespace LibraryManagementApplication.ViewModel
                 if (user != null)
                 {
                     IsLoginSuccessful = true;
-
-                    taiKhoan = new TaiKhoan
-                    {
-                        UserID = user.UserID,
-                        UserName = user.UserName,
-                        Password = user.Password,
-                        Email = user.Email,
-                        CCCD = user.CCCD,
-                        SDT = user.SDT
-                    };
-
+                    GlobalData.LoginUser = user;
                     var mainViewModel = new MainViewModel();
-                    mainViewModel.SetTaiKhoan(taiKhoan);
 
                     if (user.Loai == "AD")
                         mainwindow = new MainWindow1();

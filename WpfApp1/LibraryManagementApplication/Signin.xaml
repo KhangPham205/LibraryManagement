@@ -78,33 +78,56 @@
                 Grid.Column="2"
                 Grid.Row="2"
                 Margin="0,5,0,5">
-                <PasswordBox x:Name="password"
+                <Grid>
+                    <PasswordBox x:Name="password"
                              FontSize="28"
                              Margin="5"
                              BorderBrush="Transparent"
                              BorderThickness="0"
-                             local:PasswordBoxHelper.BindPassword="{Binding Password, Mode=TwoWay}">    
-                </PasswordBox>
-
-
+                             local:PasswordBoxHelper.BindPassword="{Binding Password, Mode=TwoWay}">
+                        <PasswordBox.Style>
+                            <Style TargetType="PasswordBox">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=see }" Value="True">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                        <Setter Property="Panel.ZIndex" Value="0"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=see }" Value="False">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Setter Property="Panel.ZIndex" Value="1"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </PasswordBox.Style>
+                    </PasswordBox>
+                    <TextBox x:Name="visiblepasswork"
+                    Text="{Binding Password,Mode=TwoWay}"
+                    FontSize="28"
+                    Margin="5"
+                    BorderBrush="Transparent">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=see }" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Setter Property="Panel.ZIndex" Value="1"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=see }" Value="False">
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                        <Setter Property="Panel.ZIndex" Value="0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Grid>
             </Border>
-
-            <TextBox x:Name="visiblepasswork"
-                FontSize="28"
-                Margin="5"
-                Grid.Column="2"
-                Grid.Row="2"
-                BorderBrush="Transparent"
-                IsEnabled="False"
-                Visibility="Hidden"></TextBox>
-            <Button x:Name="see"
-                Background="Transparent"
-                BorderBrush="White"
-                Grid.Row="2"
-                Grid.Column="3"
-                Margin="10,15,20,15">
-                <Image Source="/icon/hide.png"/>
-            </Button>
+            <CheckBox x:Name="see"
+                    Grid.Row="2"
+                    Grid.Column="3"
+                    Margin="10,15,20,15"
+                    Style="{StaticResource ImageCheckBoxStyle}">
+            </CheckBox>
             <Grid
                 Grid.Column="2"
                 Grid.Row="3">
