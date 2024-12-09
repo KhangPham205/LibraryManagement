@@ -12,17 +12,90 @@ using LibraryManagementApplication.ViewModel.ClassViewModel;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Controls;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class SachViewModel : BaseViewModel
     {
-        public string MaDauSach { get; set; }
-        public string TenDauSach { get; set; }
-        public string ISBN { get; set; }
-        public string ViTri { get; set; }
-        public string TrangThai { get; set; }
-        public int NamXB { get; set; }
+        private string maDauSach;
+        private string tenDauSach;
+        private string isbn;
+        private string viTri;
+        private string trangThai;
+        private int namXB;
+        public string MaDauSach 
+        { 
+            get => maDauSach; 
+            set
+            {
+                if (maDauSach != value)
+                {
+                    maDauSach = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string TenDauSach
+        {
+            get => tenDauSach;
+            set
+            {
+                if (tenDauSach != value)
+                {
+                    tenDauSach = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string ISBN
+        {
+            get => isbn;
+            set
+            {
+                if (isbn != value)
+                {
+                    isbn = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string ViTri
+        {
+            get => viTri;
+            set
+            {
+                if (viTri != value)
+                {
+                    viTri = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string TrangThai
+        {
+            get => trangThai;
+            set
+            {
+                if (trangThai != value)
+                {
+                    trangThai = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public int NamXB
+        {
+            get => namXB;
+            set
+            {
+                if (namXB != value)
+                {
+                    namXB = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public ObservableCollection<Sach> SachList { get; set; }
         private Sach _selectedSach;
         public Sach SelectedSach
@@ -34,6 +107,15 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 {
                     _selectedSach = value;
                     OnPropertyChanged(nameof(SelectedSach));
+                    if (SelectedSach != null)
+                    {
+                        MaDauSach = SelectedSach.MaDauSach;
+                        TenDauSach = SelectedSach.TenDauSach;
+                        ISBN = SelectedSach.ISBN;
+                        ViTri = SelectedSach.ViTri;
+                        TrangThai = SelectedSach.TrangThai;
+                        NamXB = SelectedSach.NamXB;
+                    }
                 }
             }
         }
@@ -41,14 +123,15 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
-
+        public ICommand ShowCommand { get; set; }
         public SachViewModel()
         {
             SachList = new ObservableCollection<Sach>();
             AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddSach());
             EditCommand = new RelayCommand<object>((p) => SelectedSach != null, async (p) => await EditSach());
             DeleteCommand = new RelayCommand<object>((p) => SelectedSach != null, async (p) => await DeleteSach());
-            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchSach(p));
+            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchSach());
+            ShowCommand = new RelayCommand<DataGrid>((p) => true, (p) => ShowDauSach(p));
 
             LoadSachList();
         }
@@ -95,38 +178,43 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             if (SelectedSach != null)
             {
+                SelectedSach.TenDauSach = TenDauSach;
+                SelectedSach.ISBN = ISBN;
+                SelectedSach.ViTri = ViTri;
+                SelectedSach.TrangThai = TrangThai;
+                SelectedSach.NamXB = NamXB;
                 bool isSuccess = await UpdateSachInDatabaseAsync(SelectedSach);
                 if (!isSuccess)
                 {
                     MessageBox.Show("Cannot edit sach");
                 }
+                LoadSachList();
             }
         }
         private async Task DeleteSach()
         {
             if (SelectedSach != null)
             {
-                bool isSuccess = await DeleteSachFromDatabaseAsync(SelectedSach.ISBN);
+                bool isSuccess = await DeleteSachFromDatabaseAsync(SelectedSach);
                 if (isSuccess)
-                {
                     SachList.Remove(SelectedSach);
-                }
                 else
-                {
                     MessageBox.Show("Cannot delete sach");
-                }
             }
         }
-        private async Task SearchSach(string keyword)
+        private async Task SearchSach()
         {
-            var filteredListFromDb = await SearchSachInDatabaseAsync(keyword);
+            var filteredListFromDb = await SearchSachInDatabaseAsync(tenDauSach, ISBN, ViTri, TrangThai, NamXB);
             SachList.Clear();
             foreach (var sach in filteredListFromDb)
             {
                 SachList.Add(sach);
             }
         }
-
+        private void ShowDauSach(DataGrid p)
+        {
+            LoadSachList();
+        }
         #region MethodToDatabase
         private static async Task<bool> AddSachToDatabaseAsync(Sach sach)
         {
@@ -174,13 +262,13 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-        private static async Task<bool> DeleteSachFromDatabaseAsync(string isbn)
+        private static async Task<bool> DeleteSachFromDatabaseAsync(Sach sach)
         {
             try
             {
                 using (var context = new LibraryDbContext())
                 {
-                    var sachToDelete = await context.Sachs.FirstOrDefaultAsync(s => s.ISBN == isbn);
+                    var sachToDelete = await context.Sachs.FirstOrDefaultAsync(s => s == sach);
                     if (sachToDelete != null)
                     {
                         context.Sachs.Remove(sachToDelete);
@@ -196,15 +284,31 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-        private static async Task<List<Sach>> SearchSachInDatabaseAsync(string keyword)
+        private static async Task<List<Sach>> SearchSachInDatabaseAsync(string tenDauSach, string isbn, string viTri, string trangThai, int namXB)
         {
             try
             {
                 using (var context = new LibraryDbContext())
                 {
-                    var result = await context.Sachs
-                                              .Where(s => s.MaDauSach.Contains(keyword))
-                                              .ToListAsync();
+                    // Build the query based on the search parameters
+                    var query = context.Sachs.AsQueryable();
+
+                    if (!string.IsNullOrEmpty(tenDauSach))
+                        query = query.Where(s => s.TenDauSach.Contains(tenDauSach));
+
+                    if (!string.IsNullOrEmpty(isbn))
+                        query = query.Where(s => s.ISBN.Contains(isbn));
+
+                    if (!string.IsNullOrEmpty(viTri))
+                        query = query.Where(s => s.ViTri.Contains(viTri));
+
+                    if (!string.IsNullOrEmpty(trangThai))
+                        query = query.Where(s => s.TrangThai.Contains(trangThai));
+
+                    if (namXB > 0)
+                        query = query.Where(s => s.NamXB == namXB);
+
+                    var result = await query.ToListAsync();
                     return result;
                 }
             }

@@ -115,7 +115,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     NhaXuatBanList.Add(newNhaXuatBan);
             }
             else
-                MessageBox.Show("Vui lòng nhập tên Nhà xuất bản");
+                MessageBox.Show("Vui lòng nhập tên nhà xuất bản", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         private async Task EditNhaXuatBan()
         {

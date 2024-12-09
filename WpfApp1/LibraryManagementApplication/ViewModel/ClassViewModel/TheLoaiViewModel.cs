@@ -120,7 +120,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     MessageBox.Show("Error adding The Loai.");
             }
             else
-                MessageBox.Show("Vui lòng nhập tên thể loại");
+                MessageBox.Show("Vui lòng nhập tên thể loại", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         private async Task EditTheLoai()
         {
