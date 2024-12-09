@@ -67,7 +67,7 @@
                             Grid.Column="1"
                             Style="{DynamicResource rbutton:edit}"/>
                     <Button  x:Name="deletedon"
-                          Content="Xóa"
+                          Content="Trở lại"
                           Margin="5"
                           Grid.Column="3"
                           Style="{DynamicResource button:delete}"/>
@@ -135,7 +135,7 @@
                     Grid.Row="2"
                     Style="{DynamicResource button:add}"/>
                 <Button  x:Name="deletesach"
-                  Content="Xóa"
+                  Content="Trở lại"
                   Margin="5"
                   Grid.Column="3"
                   Grid.Row="2"
