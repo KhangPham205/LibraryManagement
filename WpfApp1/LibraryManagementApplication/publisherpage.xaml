@@ -65,6 +65,7 @@
                          Grid.Row="1"
                          Margin="5"
                          Style="{StaticResource textbox:style1}"
+                         Text="{Binding DisplayName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          />
                     <Grid Grid.Row="3"
                           Grid.Column="0"
@@ -76,30 +77,36 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Button  x:Name="adddg"
-                         Content="Thêm"
-                         Margin="5"        
-                         Style="{DynamicResource button:add}"/>
+                                Content="Thêm"
+                                Margin="5"        
+                                Style="{DynamicResource button:add}"
+                                Command="{Binding AddCommand}"/>
                         <Button  x:Name="finddg"
-                         Content="Tìm"
-                         Grid.Column="1"
-                         Margin="5"      
-                         Style="{DynamicResource button:find}"/>
+                                Content="Tìm"
+                                Grid.Column="1"
+                                Margin="5"      
+                                Style="{DynamicResource button:find}"
+                                Command="{Binding SearchCommand}"/>
                         <Button  x:Name="editdg"
-                         Content="Sửa"
-                         Grid.Column="2"
-                         Margin="5"  
-                         Style="{DynamicResource button:edit}"/>
+                                Content="Sửa"
+                                Grid.Column="2"
+                                Margin="5"  
+                                Style="{DynamicResource button:edit}"
+                                Command="{Binding EditCommand}"/>
                         <Button  x:Name="deletedg"
-                         Content="Xóa"
-                         Grid.Column="3"
-                         Margin="5"
-                         Style="{DynamicResource button:delete}"/>
+                                Content="Xóa"
+                                Grid.Column="3"
+                                Margin="5"
+                                Style="{DynamicResource button:delete}"
+                                Command="{Binding DeleteCommand}"/>
                     </Grid>
                 </Grid>
             </Border>
             <DataGrid x:Name="nxb"
                      Margin="5"
-                     Grid.Row="1">
+                     Grid.Row="1"
+                     SelectedItem="{Binding SelectedNhaXuatBan, Mode=OneWayToSource}"
+                     ItemsSource="{Binding NhaXuatBanList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã NXB" Width="*" Binding="{Binding MaNXB}" />
                     <DataGridTextColumn Header="Tên NXB" Width="5*" Binding="{Binding TenNXB}" />

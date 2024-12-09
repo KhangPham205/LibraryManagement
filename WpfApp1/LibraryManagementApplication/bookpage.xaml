@@ -7,7 +7,9 @@
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1000"
       Title="bookpage">
-
+    <Page.Resources>
+        <local:IntToStringConverter x:Key="IntToStringConverter"/>
+    </Page.Resources>
     <Grid Background="White">
         <Grid.DataContext>
             <local:SachViewModel/>
@@ -90,7 +92,7 @@
                              Grid.Row="3"
                              Style="{StaticResource textbox:style1}"
                              Margin="5"
-                             Text="{Binding NamXB, Mode=OneWayToSource}"/>
+                             Text="{Binding NamXB, Mode=OneWayToSource, Converter={StaticResource IntToStringConverter}}"/>
                     <TextBlock Text="Vị trí: "
                                Style="{StaticResource textblock:style1}"
                                Grid.Column="2"

@@ -31,7 +31,7 @@ namespace LibraryManagementApplication
             new TacGia { MaTG = "TG003", TenTG = "Vũ Trọng Phụng"}
             };
             // Gán danh sách dữ liệu cho DataGrid
-            tacgia.ItemsSource = danhSachTacGia;
+            //tacgia.ItemsSource = danhSachTacGia;
         }
 
     }

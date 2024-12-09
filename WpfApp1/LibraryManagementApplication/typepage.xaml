@@ -81,23 +81,23 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Button  x:Name="addtl"
-                         Content="Thêm"
-                         Margin="5"        
-                         Style="{DynamicResource button:add}"
-                         Command="{Binding AddCommand}"/>
+                                 Content="Thêm"
+                                 Margin="5"        
+                                 Style="{DynamicResource button:add}"
+                                 Command="{Binding AddCommand}"/>
                         <Button  x:Name="edittl"
-                         Content="Sửa"
-                         Grid.Column="2"
-                         Margin="5"  
-                         Style="{DynamicResource button:edit}"
-                         Command="{Binding EditCommand}"
-                         CommandParameter="{Binding ElementName=tentb}"/>
+                                 Content="Sửa"
+                                 Grid.Column="2"
+                                 Margin="5"  
+                                 Style="{DynamicResource button:edit}"
+                                 Command="{Binding EditCommand}"
+                                 CommandParameter="{Binding ElementName=tentb}"/>
                         <Button  x:Name="deletetl"
-                         Content="Xóa"
-                         Grid.Column="4"
-                         Margin="5"
-                         Style="{DynamicResource button:delete}"
-                         Command="{Binding DeleteCommand}"/>
+                                 Content="Xóa"
+                                 Grid.Column="4"
+                                 Margin="5"
+                                 Style="{DynamicResource button:delete}"
+                                 Command="{Binding DeleteCommand}"/>
                         <Button  x:Name="findtl"
                                  Content="Tìm"
                                  Grid.Column="6"
@@ -119,7 +119,6 @@
                      Margin="5"
                      Grid.Row="1"
                      SelectedItem="{Binding SelectedTheLoai, Mode=OneWayToSource}"
-                     
                      ItemsSource="{Binding TheLoaiList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã thể loại" Width="*" Binding="{Binding MaTL}" />

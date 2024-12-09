@@ -10,6 +10,8 @@ using System.Windows.Input;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using LibraryManagementApplication.ViewModel.ClassViewModel;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Windows.Data;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
@@ -241,5 +243,22 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             return new List<Sach>();
         }
         #endregion
+    }
+
+    public class IntToStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            // Chuyển từ int sang string
+            return value?.ToString();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            // Chuyển từ string sang int, với xử lý lỗi
+            if (int.TryParse(value?.ToString(), out int result))
+                return result;
+            return 0; // Giá trị mặc định khi không thể chuyển đổi
+        }
     }
 }

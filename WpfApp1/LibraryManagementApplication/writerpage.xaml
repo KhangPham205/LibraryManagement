@@ -8,6 +8,9 @@
       d:DesignHeight="700" d:DesignWidth="1000"
       Title="writerpage">
     <Grid Background="White">
+        <Grid.DataContext>
+            <local:TacGiaViewModel/>
+        </Grid.DataContext>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
@@ -61,6 +64,7 @@
                          Grid.Row="1"
                          Margin="5"
                          Style="{StaticResource textbox:style1}"
+                         Text="{Binding DisplayName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          />
                     <Grid Grid.Row="3"
                           Grid.Column="0"
@@ -72,30 +76,36 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Button  x:Name="adddg"
-                         Content="Thêm"
-                         Margin="5"        
-                         Style="{DynamicResource button:add}"/>
+                                 Content="Thêm"
+                                 Margin="5"        
+                                 Style="{DynamicResource button:add}"
+                                 Command="{Binding AddCommand}"/>
                         <Button  x:Name="finddg"
-                         Content="Tìm"
-                         Grid.Column="1"
-                         Margin="5"      
-                         Style="{DynamicResource button:find}"/>
+                                 Content="Tìm"
+                                 Grid.Column="1"
+                                 Margin="5"      
+                                 Style="{DynamicResource button:find}"
+                                 Command="{Binding SearchCommand}"/>
                         <Button  x:Name="editdg"
-                         Content="Sửa"
-                         Grid.Column="2"
-                         Margin="5"  
-                         Style="{DynamicResource button:edit}"/>
+                                 Content="Sửa"
+                                 Grid.Column="2"
+                                 Margin="5"  
+                                 Style="{DynamicResource button:edit}"
+                                 Command="{Binding EditCommand}"/>
                         <Button  x:Name="deletedg"
-                         Content="Xóa"
-                         Grid.Column="3"
-                         Margin="5"
-                         Style="{DynamicResource button:delete}"/>
+                                 Content="Xóa"
+                                 Grid.Column="3"
+                                 Margin="5"
+                                 Style="{DynamicResource button:delete}"
+                                 Command="{Binding DeleteCommand}"/>
                     </Grid>
                 </Grid>
             </Border>
             <DataGrid x:Name="tacgia"
                      Margin="5"
-                     Grid.Row="1">
+                     Grid.Row="1"
+                      SelectedItem="{Binding SelectedTacGia, Mode=OneWayToSource}"
+                     ItemsSource="{Binding TacGiaList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã tác giả" Width="*" Binding="{Binding MaTG}" />
                     <DataGridTextColumn Header="Tên tác giả" Width="5*" Binding="{Binding TenTG}" />

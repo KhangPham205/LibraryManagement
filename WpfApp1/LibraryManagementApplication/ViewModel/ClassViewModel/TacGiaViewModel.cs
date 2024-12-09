@@ -25,10 +25,47 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 {
                     _selectedTacGia = value;
                     OnPropertyChanged(nameof(SelectedTacGia));
+                    if (SelectedTacGia != null)
+                        DisplayName = SelectedTacGia.TenTG;
                 }
             }
         }
+        private String _displayName;
+        public String DisplayName
+        {
+            get => _displayName;
+            set
+            {
+                if (_displayName != value)
+                {
+                    _displayName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private async Task<string> CreateMaTGAsync()
+        {
+            // Generate a hash from TenTL
+            using (var context = new LibraryDbContext())
+            {
+                // Lấy tất cả các mã "MaTG" hiện tại trong cơ sở dữ liệu có tiền tố "TG"
+                var existingCodes = await context.TacGias
+                                                 .Where(tl => tl.MaTG.StartsWith("TG"))
+                                                 .Select(tl => tl.MaTG)
+                                                 .ToListAsync();
 
+                int maxCodeNumber = existingCodes
+                    .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "TG"
+                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
+                    .Max(); // Lấy số lớn nhất trong danh sách mã
+
+                // Tạo mã mới với số tăng dần
+                int newCodeNumber = maxCodeNumber + 1;
+
+                // Trả về mã mới với định dạng "TG" + số có 3 chữ số
+                return $"TG{newCodeNumber:D3}";
+            }
+        }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
@@ -46,6 +83,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async void LoadTacGiaList()
         {
+            TacGiaList.Clear();
             var tacGias = await GetAllTacGiasAsync();
             foreach (var tacGia in tacGias)
             {
@@ -55,29 +93,33 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async Task AddTacGia()
         {
-            TacGia newTacGia = new TacGia()
+            if (!string.IsNullOrEmpty(DisplayName))
             {
-                MaTG = MaTG,  // Assume MaTG and TenTG are set from UI input.
-                TenTG = TenTG
-            };
+                bool exists = await IsTacGiaExistsAsync(DisplayName);
+                if (exists)
+                {
+                    MessageBox.Show("Tác giả đã tồn tại.");
+                    return;
+                }
 
+                TacGia newTacGia = new TacGia()
+                {
+                    MaTG = await CreateMaTGAsync(),
+                    TenTG = DisplayName
+                };
 
-            bool isSuccess = await AddTacGiaToDatabaseAsync(newTacGia); // Persist to DB
-            if (!isSuccess)
-            {
-                MessageBox.Show("Cannot save changes.");
-            }
-            else
-            {
-                TacGiaList.Add(newTacGia);
+                bool isSuccess = await AddTacGiaToDatabaseAsync(newTacGia);
+                if (!isSuccess)
+                    MessageBox.Show("Cannot save changes.");
+                else
+                    TacGiaList.Add(newTacGia);
             }
         }
-
         private async Task EditTacGia()
         {
             if (SelectedTacGia != null)
             {
-                // Update the selected TacGia in the database
+                SelectedTacGia.TenTG = DisplayName;
                 bool isSuccess = await UpdateTacGiaInDatabaseAsync(SelectedTacGia);
                 if (!isSuccess)
                 {
@@ -85,7 +127,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
-
         private async Task DeleteTacGia()
         {
             if (SelectedTacGia != null)
@@ -101,7 +142,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
-
         private async Task SearchTacGia(string keyword)
         {
             var filteredList = await SearchTacGiaInDatabaseAsync(keyword);
@@ -113,8 +153,25 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         #region MethodToDatabase
-
-        public static async Task<bool> AddTacGiaToDatabaseAsync(TacGia tacGia)
+        private static async Task<bool> IsTacGiaExistsAsync(string tenTG)
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    // Chuyển cả hai về chữ thường trước khi so sánh
+                    string normalizedTenTG = tenTG.ToLower();
+                    return await context.TacGias
+                                        .AnyAsync(tg => tg.TenTG.ToLower() == normalizedTenTG);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking existence of TcaGia: {ex.Message}");
+                return false;
+            }
+        }
+        private static async Task<bool> AddTacGiaToDatabaseAsync(TacGia tacGia)
         {
             try
             {
@@ -132,7 +189,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<bool> UpdateTacGiaInDatabaseAsync(TacGia tacGia)
+        private static async Task<bool> UpdateTacGiaInDatabaseAsync(TacGia tacGia)
         {
             try
             {
@@ -149,8 +206,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-
-        public static async Task<bool> DeleteTacGiaFromDatabaseAsync(string maTG)
+        private static async Task<bool> DeleteTacGiaFromDatabaseAsync(string maTG)
         {
             try
             {
@@ -172,8 +228,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-
-        public static async Task<List<TacGia>> SearchTacGiaInDatabaseAsync(string keyword)
+        private static async Task<List<TacGia>> SearchTacGiaInDatabaseAsync(string keyword)
         {
             try
             {
@@ -191,8 +246,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return new List<TacGia>();
             }
         }
-
-        public static async Task<List<TacGia>> GetAllTacGiasAsync()
+        private static async Task<List<TacGia>> GetAllTacGiasAsync()
         {
             try
             {

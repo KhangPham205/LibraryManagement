@@ -28,9 +28,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     _selectedTheLoai = value;
                     OnPropertyChanged();
                     if (SelectedTheLoai != null)
-                    {
                         DisplayName = SelectedTheLoai.TenTL;
-                    }
                 }
             }
         }
@@ -80,11 +78,11 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public TheLoaiViewModel()
         {
             TheLoaiList = new ObservableCollection<TheLoai>();
-            AddCommand = new RelayCommand<object>((p) => { if (string.IsNullOrEmpty(DisplayName)) return false; return true; }, async (p) => await AddTheLoai());
+            AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddTheLoai());
             EditCommand = new RelayCommand<object>((p) => SelectedTheLoai != null, async (p) => await EditTheLoai());
             DeleteCommand = new RelayCommand<object>((p) => SelectedTheLoai != null, async (p) => await DeleteTheLoai());
             SearchCommand = new RelayCommand<DataGrid>((p) => true, async (p) => await SearchTheLoai(p));
-            ShowCommand = new RelayCommand<DataGrid>((p) => true, async (p) => await ShowTheLoai(p));
+            ShowCommand = new RelayCommand<DataGrid>((p) => true, (p) => ShowTheLoai(p));
             LoadTheLoaiList();
         }
 
@@ -100,21 +98,29 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async Task AddTheLoai()
         {
-            TheLoai newTheLoai = new TheLoai()
+            if (!string.IsNullOrEmpty(DisplayName))
             {
-                MaTL = await CreateMaTLAsync(), // Generate unique MaTL
-                TenTL = DisplayName
-            };
+                bool exists = await IsTheLoaiExistsAsync(DisplayName);
+                if (exists)
+                {
+                    MessageBox.Show("Thể loại này đã tồn tại.");
+                    return;
+                }
 
-            bool isSuccess = await AddTheLoaiToDatabaseAsync(newTheLoai);
-            if (isSuccess)
-            {
-                TheLoaiList.Add(newTheLoai);
+                TheLoai newTheLoai = new TheLoai()
+                {
+                    MaTL = await CreateMaTLAsync(), // Generate unique MaTL
+                    TenTL = DisplayName
+                };
+
+                bool isSuccess = await AddTheLoaiToDatabaseAsync(newTheLoai);
+                if (isSuccess)
+                    TheLoaiList.Add(newTheLoai);
+                else
+                    MessageBox.Show("Error adding The Loai.");
             }
             else
-            {
-                MessageBox.Show("Error adding The Loai.");
-            }
+                MessageBox.Show("Vui lòng nhập tên thể loại");
         }
         private async Task EditTheLoai()
         {
@@ -150,14 +156,31 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             var TempList = await SearchTheLoaiInDatabaseAsync(DisplayName);
             p.ItemsSource = TempList;
         }
-        private async Task ShowTheLoai(DataGrid p)
+        private void ShowTheLoai(DataGrid p)
         {
             p.ItemsSource = TheLoaiList;
         }
 
         #region MethodToDatabase
-
-        public static async Task<bool> AddTheLoaiToDatabaseAsync(TheLoai theLoai)
+        private static async Task<bool> IsTheLoaiExistsAsync(string tenTL)
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    // Chuyển cả hai về chữ thường trước khi so sánh
+                    string normalizedTenTL = tenTL.ToLower();
+                    return await context.TheLoais
+                                        .AnyAsync(nxb => nxb.TenTL.ToLower() == normalizedTenTL);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking existence of TheLoai: {ex.Message}");
+                return false;
+            }
+        }
+        private static async Task<bool> AddTheLoaiToDatabaseAsync(TheLoai theLoai)
         {
             //kiểm tra bị trùng
             try
@@ -176,7 +199,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<bool> UpdateTheLoaiInDatabaseAsync(TheLoai theLoai)
+        private static async Task<bool> UpdateTheLoaiInDatabaseAsync(TheLoai theLoai)
         {
             try
             {
@@ -194,7 +217,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<bool> DeleteTheLoaiFromDatabaseAsync(TheLoai theLoai)
+        private static async Task<bool> DeleteTheLoaiFromDatabaseAsync(TheLoai theLoai)
         {
             try
             {
@@ -217,7 +240,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<TheLoai>> SearchTheLoaiInDatabaseAsync(string keyword)
+        private static async Task<List<TheLoai>> SearchTheLoaiInDatabaseAsync(string keyword)
         {
             try
             {
@@ -236,7 +259,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<TheLoai>> GetAllTheLoaisAsync()
+        private static async Task<List<TheLoai>> GetAllTheLoaisAsync()
         {
             try
             {

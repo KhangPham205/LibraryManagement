@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,10 +26,46 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 {
                     _selectedNhaXuatBan = value;
                     OnPropertyChanged(nameof(SelectedNhaXuatBan));
+                    if (SelectedNhaXuatBan != null)
+                        DisplayName = SelectedNhaXuatBan.TenNXB;
                 }
             }
         }
+        private String _displayName;
+        public String DisplayName
+        {
+            get => _displayName;
+            set
+            {
+                if (_displayName != value)
+                {
+                    _displayName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private async Task<string> CreateMaNXBAsync()
+        {
+            // Generate a hash from TenNXB
+            using (var context = new LibraryDbContext())
+            {
+                // Lấy tất cả các mã "MaNXB" hiện tại trong cơ sở dữ liệu có tiền tố "NXB"
+                var existingCodes = await context.NhaXuatBans
+                                                 .Where(tl => tl.MaNXB.StartsWith("NXB"))
+                                                 .Select(tl => tl.MaNXB)
+                                                 .ToListAsync();
 
+                int maxCodeNumber = existingCodes
+                    .Select(code => int.TryParse(code.Substring(3), out int num) ? num : 0) // Lấy phần số sau "NXB"
+                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
+                    .Max(); // Lấy số lớn nhất trong danh sách mã
+                // Tạo mã mới với số tăng dần
+                int newCodeNumber = maxCodeNumber + 1;
+
+                // Trả về mã mới với định dạng "NXB" + số có 3 chữ số
+                return $"NXB{newCodeNumber:D3}";
+            }
+        }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
@@ -42,46 +79,55 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             DeleteCommand = new RelayCommand<object>((p) => SelectedNhaXuatBan != null, async (p) => await DeleteNhaXuatBan());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchNhaXuatBan(p));
 
-            // Load data (or simulate loading data from database)
             LoadNhaXuatBanList();
         }
 
         private async void LoadNhaXuatBanList()
         {
+            NhaXuatBanList.Clear();
             var nhaXuatBans = await GetAllNhaXuatBanAsync();
             foreach (var nxb in nhaXuatBans)
             {
                 NhaXuatBanList.Add(nxb);
             }
         }
-
         private async Task AddNhaXuatBan()
         {
-            NhaXuatBan newNhaXuatBan = new NhaXuatBan()
+            if (!string.IsNullOrEmpty(DisplayName))
             {
-                MaNXB = MaNXB,
-                TenNXB = TenNXB,
-            };
+                bool exists = await IsNhaXuatBanExistsAsync(DisplayName);
+                if (exists)
+                {
+                    MessageBox.Show("Nhà xuất bản với tên này đã tồn tại.");
+                    return;
+                }
 
-            NhaXuatBanList.Add(newNhaXuatBan);
+                NhaXuatBan newNhaXuatBan = new NhaXuatBan()
+                {
+                    MaNXB = await CreateMaNXBAsync(),
+                    TenNXB = DisplayName,
+                };
 
-            bool isSuccess = await AddNhaXuatBanToDatabaseAsync(newNhaXuatBan);
-            if (!isSuccess)
-            {
-                MessageBox.Show("Cannot save changes.");
+                bool isSuccess = await AddNhaXuatBanToDatabaseAsync(newNhaXuatBan);
+                if (!isSuccess)
+                    MessageBox.Show("Cannot save changes.");
+                else
+                    NhaXuatBanList.Add(newNhaXuatBan);
             }
+            else
+                MessageBox.Show("Vui lòng nhập tên Nhà xuất bản");
         }
-
         private async Task EditNhaXuatBan()
         {
             if (SelectedNhaXuatBan != null)
             {
-                // Here you would bind the selected object to edit mode, so changes reflect
+                SelectedNhaXuatBan.TenNXB = DisplayName;
                 bool isSuccess = await UpdateNhaXuatBanInDatabaseAsync(SelectedNhaXuatBan);
                 if (!isSuccess)
                 {
-                    MessageBox.Show("Error updating the record.");
+                    MessageBox.Show("Error updating Nha xuat ban.");
                 }
+                LoadNhaXuatBanList();
             }
         }
 
@@ -112,8 +158,25 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         #region MethodToDatabase
-
-        public static async Task<bool> AddNhaXuatBanToDatabaseAsync(NhaXuatBan nhaXuatBan)
+        private static async Task<bool> IsNhaXuatBanExistsAsync(string tenNXB)
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    // Chuyển cả hai về chữ thường trước khi so sánh
+                    string normalizedTenNXB = tenNXB.ToLower();
+                    return await context.NhaXuatBans
+                                        .AnyAsync(nxb => nxb.TenNXB.ToLower() == normalizedTenNXB);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error checking existence of NhaXuatBan: {ex.Message}");
+                return false;
+            }
+        }
+        private static async Task<bool> AddNhaXuatBanToDatabaseAsync(NhaXuatBan nhaXuatBan)
         {
             try
             {
@@ -124,14 +187,26 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     return true;
                 }
             }
+            catch (DbUpdateException dbEx)
+            {
+                MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show($"Invalid Operation: {ex.Message}");
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding Nha Xuat ban: {ex.Message}");
-                return false;
+                MessageBox.Show($"Unexpected Error: {ex.Message}");
             }
+            return false;
         }
 
-        public static async Task<bool> UpdateNhaXuatBanInDatabaseAsync(NhaXuatBan nhaXuatBan)
+        private static async Task<bool> UpdateNhaXuatBanInDatabaseAsync(NhaXuatBan nhaXuatBan)
         {
             try
             {
@@ -149,7 +224,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<bool> DeleteNhaXuatBanFromDatabaseAsync(string maNXB)
+        private static async Task<bool> DeleteNhaXuatBanFromDatabaseAsync(string maNXB)
         {
             try
             {
@@ -172,7 +247,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<NhaXuatBan>> SearchNhaXuatBanInDatabaseAsync(string keyword)
+        private static async Task<List<NhaXuatBan>> SearchNhaXuatBanInDatabaseAsync(string keyword)
         {
             try
             {
@@ -191,7 +266,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<NhaXuatBan>> GetAllNhaXuatBanAsync()
+        private static async Task<List<NhaXuatBan>> GetAllNhaXuatBanAsync()
         {
             try
             {

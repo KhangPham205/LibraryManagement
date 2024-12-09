@@ -31,7 +31,7 @@ namespace LibraryManagementApplication
             new NhaXuatBan { MaNXB = "NXB003", TenNXB = "Khoa học Kỹ thuật" }
             };
             // Gán danh sách dữ liệu cho DataGrid
-            nxb.ItemsSource = danhSachNXB;
+            //nxb.ItemsSource = danhSachNXB;
         }
     }
 }
