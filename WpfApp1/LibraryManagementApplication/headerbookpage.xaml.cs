@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LibraryManagementApplication.ViewModel.ClassViewModel;
 
 namespace LibraryManagementApplication
 {
@@ -22,6 +23,7 @@ namespace LibraryManagementApplication
     /// </summary>
     public partial class headerbookpage : Page
     {
+        DauSach editedDauSach;
         public headerbookpage()
         {
             InitializeComponent();

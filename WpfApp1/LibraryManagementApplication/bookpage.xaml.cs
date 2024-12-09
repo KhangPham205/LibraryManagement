@@ -29,7 +29,7 @@ namespace LibraryManagementApplication
             trangthaitb.ItemsSource = new List<string>() { "Có sẵn", "Được mượn", "Thất lạc" };
             this.Loaded += (s, e) =>
             {
-                LoadTheLoai();
+                LoadDauSach();
             };
         }
 
@@ -37,7 +37,7 @@ namespace LibraryManagementApplication
         {
 
         }
-        private void LoadTheLoai()
+        private void LoadDauSach()
         {
             try
             {
