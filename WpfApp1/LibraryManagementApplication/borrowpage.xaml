@@ -32,12 +32,41 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Frame x:Name="add" 
-                  Grid.Row="0" 
-                  Margin="5"
-                  NavigationUIVisibility="Hidden"
-                  Content="{Binding page, Mode=OneWayToSource}">
-            </Frame>
+            <Border Margin="20,20,20,10"
+            BorderBrush="#07209e"
+            BorderThickness="2"
+            CornerRadius="20">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Frame x:Name="add" 
+                          Grid.Row="0" 
+                          Margin="5"
+                          NavigationUIVisibility="Hidden"
+                          Content="{Binding Page, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    </Frame>
+                    <Button  x:Name="adddon"
+                              Content="Tạo đơn"
+                              Margin="5"   
+                             Grid.Row="1"
+                              Style="{DynamicResource button:add}"
+                              Command="{Binding moveCommand}"
+                             CommandParameter="{Binding ElementName=add}"
+                             HorizontalAlignment="Left"
+                             />
+                    <Button  x:Name="deletedon"
+                              Content="Thông tin"
+                              Margin="5"
+                              Grid.Row="1"
+                              Style="{DynamicResource button:delete}"
+                              Command="{Binding backCommand}"
+                                CommandParameter="{Binding ElementName=add}"
+                             HorizontalAlignment="Right"/>
+                </Grid>
+            </Border>
+            
             <DataGrid x:Name="muon"
                         Grid.Row="1" 
                         Grid.ColumnSpan="2"
