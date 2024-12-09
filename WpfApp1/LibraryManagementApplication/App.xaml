@@ -552,6 +552,31 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!-- Template for the Image CheckBox -->
+        <Style TargetType="CheckBox" x:Key="ImageCheckBoxStyle" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <!-- Define the images for different states -->
+                            <Image x:Name="UncheckedImage" Source="/icon/hide.png" Stretch="Uniform"/>
+                            <Image x:Name="CheckedImage" Source="/icon/eye.png" Stretch="Uniform" Visibility="Collapsed"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <!-- Show the appropriate image based on IsChecked -->
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="CheckedImage" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="UncheckedImage" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="CheckedImage" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="UncheckedImage" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <ResourceDictionary x:Key="MainVM">
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ResourceXAML/MainResource.xaml"/>

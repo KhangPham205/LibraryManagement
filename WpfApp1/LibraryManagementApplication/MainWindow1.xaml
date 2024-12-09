@@ -14,15 +14,41 @@
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" Grid.RowSpan="2"
-                Background="#FF0867A6"
-                CornerRadius="0,0,20,0"
-                BorderBrush="Transparent"
-                BorderThickness="0"
-                Margin="0">
+        <Border x:Name="Menu"
+        Grid.Column="0" Grid.RowSpan="2"
+        Background="#FF36A4ED"
+        CornerRadius="0,20,20,0"
+        BorderBrush="Transparent"
+        BorderThickness="0"
+        Margin="-180,0,0,0"
+        Panel.ZIndex="1"
+        >
+            <Border.Triggers>
+                <!-- Khi di chuột vào -->
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                To="0,0,-180,0"
+                                Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+                <!-- Khi rời chuột -->
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                To="-180,0,0,0"
+                                Duration="0:0:0.5"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
             <Grid>
                 <StackPanel x:Name="listMainButton">
                     <Button Width="100" Height="100" Margin="0 15 0 15" 

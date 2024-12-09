@@ -24,7 +24,7 @@ namespace LibraryManagementApplication
         public infoxaml()
         {
             InitializeComponent();
-            MessageBox.Show($"UserName: {tentb.Text}");
+            DataContext = GlobalData.LoginUser;
         }
     }
 }

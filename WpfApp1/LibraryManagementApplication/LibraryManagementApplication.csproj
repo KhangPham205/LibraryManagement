@@ -245,6 +245,7 @@
     <Compile Include="Model\Class\DauSach.cs" />
     <Compile Include="Model\Class\DocGia.cs" />
     <Compile Include="Model\Class\DonMuon.cs" />
+    <Compile Include="Model\Class\GlobalData.cs" />
     <Compile Include="Model\Class\NhaXuatBan.cs" />
     <Compile Include="Model\Class\Sach.cs" />
     <Compile Include="Model\Class\SachNhaXuatBan.cs" />
