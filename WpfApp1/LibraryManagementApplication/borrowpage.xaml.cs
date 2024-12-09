@@ -23,8 +23,7 @@ namespace LibraryManagementApplication
         public borrowpage()
         {
             InitializeComponent();
-            table.Content=new borrowtable();
-            add.Content=new addborrow();
+            add.Content=new borrowinfo();
         }
     }
 }

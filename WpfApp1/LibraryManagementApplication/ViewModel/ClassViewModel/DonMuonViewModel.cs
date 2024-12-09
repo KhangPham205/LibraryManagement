@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
@@ -32,11 +33,13 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
-
+        public Page page { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
+        public ICommand moveCommand { get; set; }
+        public ICommand backCommand { get; set; }
 
         public DonMuonViewModel()
         {
@@ -45,7 +48,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             EditCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await EditDonMuon());
             DeleteCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await DeleteDonMuon());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDonMuon(p));
-
+            moveCommand = new RelayCommand<object>((p) => true, (p) => { page = new addborrow(); });
+            backCommand = new RelayCommand<object>((p) => true, (p) => { page = new borrowinfo(); });
             LoadDonMuonList();
         }
 

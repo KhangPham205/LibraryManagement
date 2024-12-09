@@ -24,7 +24,6 @@ namespace LibraryManagementApplication
         public readerpage()
         {
             InitializeComponent();
-            readerpage page = new readerpage();
         }
 
         private void adddg_Click(object sender, RoutedEventArgs e)

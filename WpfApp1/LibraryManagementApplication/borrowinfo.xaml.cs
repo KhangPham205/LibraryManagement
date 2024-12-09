@@ -24,5 +24,10 @@ namespace LibraryManagementApplication
         {
             InitializeComponent();
         }
+
+        private void addsach_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

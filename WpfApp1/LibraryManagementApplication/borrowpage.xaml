@@ -35,13 +35,23 @@
             <Frame x:Name="add" 
                   Grid.Row="0" 
                   Margin="5"
-                  NavigationUIVisibility="Hidden">
+                  NavigationUIVisibility="Hidden"
+                  Content="{Binding page, Mode=OneWayToSource}">
             </Frame>
-            <Frame x:Name="table" 
-                      Grid.Row="1" 
-                      Margin="5"
-                      NavigationUIVisibility="Hidden">
-            </Frame>
+            <DataGrid x:Name="muon"
+                        Grid.Row="1" 
+                        Grid.ColumnSpan="2"
+                        Margin="5" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
+                    <DataGridTextColumn Header="Tên độc giả" Width="*" Binding="{Binding TenDG}"/>
+                    <DataGridTextColumn Header="Tên nhân viên" Width="*" Binding="{Binding TenNV}"/>
+                    <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon}"/>
+                    <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK}"/>
+                    <DataGridTextColumn Header="Ngày trả thực tế" Width="*" Binding="{Binding NgayTraTT}"/>
+                    <DataGridTextColumn Header="Phí phạt (VND)" Width="*" Binding="{Binding PhiPhat}"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </Page>
