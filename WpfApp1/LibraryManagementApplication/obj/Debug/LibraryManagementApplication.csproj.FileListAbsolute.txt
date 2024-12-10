@@ -300,3 +300,6 @@ C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplicat
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.dll
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.Wpf.dll
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.xml
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.pdb
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.Wpf.xml
