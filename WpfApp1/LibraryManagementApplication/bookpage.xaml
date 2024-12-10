@@ -92,7 +92,7 @@
                              Grid.Row="3"
                              Style="{StaticResource textbox:style1}"
                              Margin="5"
-                             Text="{Binding NamXB, Mode=TwoWay, Converter={StaticResource IntToStringConverter}, UpdateSourceTrigger=PropertyChanged}"/>
+                             Text="{Binding NamXB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="Vị trí: "
                                Style="{StaticResource textblock:style1}"
                                Grid.Column="2"

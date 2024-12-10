@@ -23,7 +23,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         private string isbn;
         private string viTri;
         private string trangThai;
-        private int namXB;
+        private string namXB;
         public string MaDauSach 
         { 
             get => maDauSach; 
@@ -84,7 +84,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
-        public int NamXB
+        public string NamXB
         {
             get => namXB;
             set
@@ -114,7 +114,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                         ISBN = SelectedSach.ISBN;
                         ViTri = SelectedSach.ViTri;
                         TrangThai = SelectedSach.TrangThai;
-                        NamXB = SelectedSach.NamXB;
+                        NamXB = SelectedSach.NamXB.ToString();
                     }
                 }
             }
@@ -163,7 +163,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     ISBN = ISBN,
                     ViTri = ViTri,
                     TrangThai = TrangThai,
-                    NamXB = NamXB,
+                    NamXB = int.Parse(NamXB),
                     //DauSach = ds // Liên kết với DauSach đã có
                 };
 
@@ -182,7 +182,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 SelectedSach.ISBN = ISBN;
                 SelectedSach.ViTri = ViTri;
                 SelectedSach.TrangThai = TrangThai;
-                SelectedSach.NamXB = NamXB;
+                SelectedSach.NamXB = int.Parse(NamXB);
                 bool isSuccess = await UpdateSachInDatabaseAsync(SelectedSach);
                 if (!isSuccess)
                 {
@@ -204,7 +204,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
         private async Task SearchSach()
         {
-            var filteredListFromDb = await SearchSachInDatabaseAsync(tenDauSach, ISBN, ViTri, TrangThai, NamXB);
+            var filteredListFromDb = await SearchSachInDatabaseAsync(tenDauSach, ISBN, ViTri, TrangThai, int.Parse(NamXB));
             SachList.Clear();
             foreach (var sach in filteredListFromDb)
             {

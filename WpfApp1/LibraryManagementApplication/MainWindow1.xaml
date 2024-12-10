@@ -14,7 +14,7 @@
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border x:Name="Menu"
@@ -23,7 +23,7 @@
         CornerRadius="0,20,20,0"
         BorderBrush="Transparent"
         BorderThickness="0"
-        Margin="-180,0,0,0"
+        Margin="-190,0,0,0"
         Panel.ZIndex="1"
         >
             <Border.Triggers>
@@ -32,7 +32,7 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <ThicknessAnimation Storyboard.TargetProperty="Margin"
-                                To="0,0,-180,0"
+                                To="0,0,-190,0"
                                 Duration="0:0:0.3"/>
                         </Storyboard>
                     </BeginStoryboard>
@@ -43,7 +43,7 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <ThicknessAnimation Storyboard.TargetProperty="Margin"
-                                To="-180,0,0,0"
+                                To="-190,0,0,0"
                                 Duration="0:0:0.5"/>
                         </Storyboard>
                     </BeginStoryboard>
