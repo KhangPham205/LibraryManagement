@@ -1,13 +1,14 @@
-﻿<Page x:Class="LibraryManagementApplication.infoxaml"
+﻿<Page x:Name="Logoutpage"
+    x:Class="LibraryManagementApplication.infoxaml"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagementApplication.Model.Class"
+      xmlns:logout="clr-namespace:LibraryManagementApplication.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1000"
       Title="infoxaml">
-
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -124,8 +125,13 @@
                             Grid.Column="1"
                             Grid.Row="6"
                             HorizontalAlignment="Right"
-                            Click="logout_Click"
-                            />
+                            Command="{Binding signoutcommand}"
+                            CommandParameter="{Binding ElementName=Logoutpage}"
+                            >
+                        <Button.DataContext>
+                            <logout:MainViewModel/>
+                        </Button.DataContext>
+                    </Button>
                 </Grid>
             </Border>
         </Grid>

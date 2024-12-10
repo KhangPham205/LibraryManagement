@@ -22,6 +22,8 @@ namespace LibraryManagementApplication
         public MainWindow2()
         {
             InitializeComponent();
+            Mainpage.Content = new mainpage();
+            mainbutton.IsChecked = true;
         }
     }
 }
