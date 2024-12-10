@@ -171,7 +171,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     // Chuyển cả hai về chữ thường trước khi so sánh
                     string normalizedTenTL = tenTL.ToLower();
                     return await context.TheLoais
-                                        .AnyAsync(nxb => nxb.TenTL.ToLower() == normalizedTenTL);
+                                        .AnyAsync(tl => tl.TenTL.ToLower() == normalizedTenTL);
                 }
             }
             catch (Exception ex)
