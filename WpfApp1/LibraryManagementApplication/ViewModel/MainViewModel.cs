@@ -31,8 +31,8 @@ namespace LibraryManagementApplication.ViewModel
         #endregion
         public MainViewModel()
         { 
-            signincommand = new RelayCommand<Window> ( (p) => { return isLogin(); }, (p) => {  Signin window = new Signin(); window.Show(); p.Close(); } );
-            signoutcommand = new RelayCommand<object>((p) => { return !isLogin(); }, (p) => { logOut(); });
+            signincommand = new RelayCommand<Window> ( (p) => { return true; }, (p) => {  Signin window = new Signin(); window.Show(); p.Close(); } );
+            signoutcommand = new RelayCommand<Page>((p) => { return true; }, (p) => { logOut(p); });
             mainpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is mainpage); }, (p) => { p.Content = new mainpage(); });
             bookpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is bookpage); }, (p) => { p.Content = new bookpage(); });
             borrowpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is borrowpage); }, (p) => { p.Content = new borrowpage(); });
@@ -45,7 +45,10 @@ namespace LibraryManagementApplication.ViewModel
             headerbookpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is headerbookpage); }, (p) => { p.Content = new headerbookpage(); });
             infopagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is infoxaml); }, (p) => { p.Content = new infoxaml(); });
         }
-        bool isLogin() { return true; }//kiem tra da dang nhap chua
-        void logOut() { }
+        public void logOut(Page p) {
+            Window window = new Signin();
+            window.Show();
+            Window.GetWindow(p).Close();
+        }
     }
 }

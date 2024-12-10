@@ -79,8 +79,8 @@ namespace LibraryManagementApplication.ViewModel
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand<Window>((p) => true, (p) => Login(p));
-            SignupCommand = new RelayCommand<Window>((p) => true, (p) => { Signup window = new Signup(); window.ShowDialog(); });
-            RecoverCommand = new RelayCommand<object>((p) => true, (p) => { Window window = new Recover(); window.ShowDialog(); });
+            SignupCommand = new RelayCommand<Window>((p) => true, (p) => { Signup window = new Signup(); window.Show(); });
+            RecoverCommand = new RelayCommand<object>((p) => true, (p) => { Window window = new Recover(); window.Show(); });
         }
 
         private void Login(Window p)
@@ -124,10 +124,10 @@ namespace LibraryManagementApplication.ViewModel
                     IsLoginSuccessful = false;
                 }
 
-                if (IsLoginSuccessful)
-                    MessageBox.Show("Đăng nhập thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-                else
-                    MessageBox.Show("Đăng nhập thất bại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                //if (IsLoginSuccessful)
+                //    MessageBox.Show("Đăng nhập thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                //else
+                //    MessageBox.Show("Đăng nhập thất bại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

@@ -12,9 +12,9 @@
     <Window.DataContext>
         <local:MainViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="#e6f3ff">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border x:Name="Menu"
@@ -33,7 +33,7 @@
                         <Storyboard>
                             <ThicknessAnimation Storyboard.TargetProperty="Margin"
                                 To="0,0,-190,0"
-                                Duration="0:0:0.3"/>
+                                Duration="0:0:0.2"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -58,7 +58,8 @@
                             >
                         <Image Source="/Icon/user.png"/>
                     </Button>
-                    <RadioButton Style="{StaticResource rbutton:menu}"
+                    <RadioButton x:Name="mainbutton"
+                                 Style="{StaticResource rbutton:menu}"
                                 Command="{Binding mainpagecommand}"
                                 CommandParameter="{Binding ElementName=Mainpage}">
                         <StackPanel Orientation="Horizontal">
