@@ -79,24 +79,28 @@
                 Grid.Column="2"
                 Grid.Row="4"
                 IsReadOnly="True"
+                Text="{Binding password, UpdateSourceTrigger=PropertyChanged}"
                 />
             <TextBox x:Name="email"
                 Style="{StaticResource textbox:style1}"
                 BorderBrush="#07209e"
                 Grid.Column="2"
                 Grid.Row="1"
+                Text="{Binding email}"
                 />
             <TextBox x:Name="sdt"
                 Style="{StaticResource textbox:style1}"
                 BorderBrush="#07209e"
                 Grid.Column="2"
                 Grid.Row="2"
+                Text="{Binding sdt}"
                 />
             <TextBox x:Name="cccd"
                 Style="{StaticResource textbox:style1}"
                 BorderBrush="#07209e"
                 Grid.Column="2"
                 Grid.Row="3"
+                Text="{Binding cccd}"
                 />
 
             <Button x:Name="recover"
