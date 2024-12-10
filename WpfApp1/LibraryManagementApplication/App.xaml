@@ -374,6 +374,37 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Style datpicker thông thường-->
+        <Style TargetType="DatePicker" x:Key="datepick:style1">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DatePicker">
+                        <Border
+                             Background="White"
+                             BorderBrush="#07209e"
+                             BorderThickness="1"
+                             CornerRadius="10"
+                             Height="40">
+                            <DatePicker x:Name="tb"
+                               FontSize="18"
+                               FontWeight="Medium"
+                               Margin="5"
+                               BorderBrush="Transparent"
+                               Background="white"
+                               BorderThickness ="0"
+                               SelectedDate="{Binding Path = SelectedDate, RelativeSource={RelativeSource AncestorType=DatePicker}}"
+                       ></DatePicker>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="tb" Property="BorderBrush" Value="#07209e"/>
+                                <Setter TargetName="tb" Property="BorderThickness" Value="0,0,0,2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <!--Style cho icon trong menu-->
         <Style TargetType="fa:IconImage" x:Key="icon:menu">
             <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />

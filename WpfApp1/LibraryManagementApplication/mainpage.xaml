@@ -4,8 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagementApplication"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
-      d:DesignHeight="465" d:DesignWidth="730">
+      d:DesignHeight="700" d:DesignWidth="1180">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -22,31 +23,167 @@
                        HorizontalAlignment="Right"
                        />
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1"
+              Background="#e6f3ff">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="300"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
+            <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid x:Name="donmuontable"
-                      Margin="5"
-                      Grid.Column="0"
-                      Grid.Row="1">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
-                        <DataGridTextColumn Header="Tên độc giả" Width="*" Binding="{Binding TenDG}"/>
-                        <DataGridTextColumn Header="Tên nhân viên" Width="*" Binding="{Binding TenNV}"/>
-                        <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon}"/>
-                        <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK}"/>
-                        <DataGridTextColumn Header="Ngày trả thực tế" Width="*" Binding="{Binding NgayTraTT}"/>
-                        <DataGridTextColumn Header="Phí phạt (VND)" Width="*" Binding="{Binding PhiPhat}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <TextBlock Text="Ngày bắt đầu: "
+                               Style="{StaticResource textblock:style1}"/>
+                    <DatePicker x:Name="startdate" 
+                                Style="{StaticResource datepick:style1}"
+                                SelectedDate="{Binding start}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="5" Orientation="Horizontal">
+                    <TextBlock Text="Ngày kết thúc: "
+                        Style="{StaticResource textblock:style1}"/>
+                    <DatePicker x:Name="enddate" 
+                        Style="{StaticResource datepick:style1}"
+                        SelectedDate="{Binding start}"/>
+                    </StackPanel>
+                <Button x:Name="show"
+                        Grid.Column="4"
+                        Content="Hiển thị"
+                        Style="{StaticResource button:find}"
+                        Command="{Binding ShowCommand}"/>
+            </Grid>
+            <Border Grid.Column="1"
+                    Grid.RowSpan="2"
+                    CornerRadius="30"
+                    Background="#9acbff"
+                    Opacity="0.3"
+                    Margin="10"
+                    />
+            <Grid Panel.ZIndex="1"
+                    Grid.Column="1"
+                    Grid.RowSpan="2"
+                  Margin="10"
+                    >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Thống kê tình trạng sách"
+                               Margin="5"
+                               HorizontalAlignment="Center"
+                               Style="{StaticResource textblock:style1}"/>
+                    <lvc:PieChart LegendLocation="Bottom"        
+                                    Margin="0"
+                                  Grid.Row="1">
+                        <lvc:PieChart.Series>
+                            <lvc:PieSeries Title="Có sẵn"
+                               Values="6" 
+                               FontSize="14"
+                               Fill="#9acbff"
+                               DataLabels="True"
+                               LabelPoint="{Binding PointLabel}"/>
+                            <lvc:PieSeries Title="Đang mượn" 
+                               Values="1" 
+                               FontSize="14"
+                               Fill="#FF36A4ED"
+                               DataLabels="True"
+                               LabelPoint="{Binding PointLabel}"/>
+                            <lvc:PieSeries Title="Thất lạc" 
+                                Values="3" 
+                                FontSize="14"
+                                Fill="#07209e"
+                                DataLabels="True"
+                                LabelPoint="{Binding PointLabel}"/>
+                        </lvc:PieChart.Series>
+                        <lvc:PieChart.ChartLegend>
+                            <lvc:DefaultLegend Foreground="#07209e" FontSize="18" BulletSize="18"/>
+                        </lvc:PieChart.ChartLegend>
+                    </lvc:PieChart>
+                </Grid>
+            <Border Grid.Column="1"
+                    Grid.Row="2"
+                    CornerRadius="30"
+                    Background="#9acbff"
+                    Opacity="0.3"
+                    Margin="10"
+                    />
+            <Grid Grid.Column="1"
+                      Grid.Row="2"
+                      Margin="10"
+                      Panel.ZIndex="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Top 5 thể loại sách phổ biến nhất"
+                           Margin="5"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource textblock:style1}"/>
+                <lvc:CartesianChart Margin="5" Grid.Row="1" Width="500" Series="{Binding Series}">
+                    <lvc:CartesianChart.AxisX >
+                        <lvc:Axis Foreground="#07209e" FontSize="18" LabelFormatter="{Binding Formatter}"/>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Foreground="#07209e" FontSize="18" Labels="{Binding Labels}" />
+                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.DataTooltip>
+                        <lvc:DefaultTooltip SelectionMode="SharedYValues" />
+                    </lvc:CartesianChart.DataTooltip>
+                </lvc:CartesianChart>
+            </Grid>
+            <DataGrid x:Name="muon"
+                Grid.Row="1" 
+                Margin="5" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
+                    <DataGridTextColumn Header="Tên độc giả" Width="*" Binding="{Binding TenDG}"/>
+                    <DataGridTextColumn Header="Tên nhân viên" Width="*" Binding="{Binding TenNV}"/>
+                    <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon}"/>
+                    <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK}"/>
+                    <DataGridTextColumn Header="Ngày trả thực tế" Width="*" Binding="{Binding NgayTraTT}"/>
+                    <DataGridTextColumn Header="Phí phạt (VND)" Width="*" Binding="{Binding PhiPhat}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Border Grid.Column="0"
+                    Grid.Row="2"
+                    CornerRadius="30"
+                    Background="#9acbff"
+                    Opacity="0.3"
+                    Margin="10"
+                    />
+            <Grid Grid.Column="0"
+                  Grid.Row="2"
+                  Margin="10"
+                  Panel.ZIndex="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Thống kê số độc giả mượn sách hàng tháng"
+                           Margin="5"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource textblock:style1}"/>
+                <lvc:CartesianChart Margin="5" Grid.Row="1" Width="500" Series="{Binding lineSeries}">
+                    <lvc:CartesianChart.AxisX >
+                        <lvc:Axis Foreground="#07209e" FontSize="18" Labels="{Binding Months}"/>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Foreground="#07209e" FontSize="18" LabelFormatter="{Binding Formatter}" />
+                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.DataTooltip>
+                        <lvc:DefaultTooltip SelectionMode="SharedXValues" />
+                    </lvc:CartesianChart.DataTooltip>
+                </lvc:CartesianChart>
             </Grid>
         </Grid>
     </Grid>
