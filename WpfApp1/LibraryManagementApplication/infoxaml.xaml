@@ -124,6 +124,7 @@
                             Grid.Column="1"
                             Grid.Row="6"
                             HorizontalAlignment="Right"
+                            Click="logout_Click"
                             />
                 </Grid>
             </Border>

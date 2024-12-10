@@ -25,6 +25,12 @@ namespace LibraryManagementApplication
         {
             InitializeComponent();
             DataContext = GlobalData.LoginUser;
+            MessageBox.Show($"User: {GlobalData.LoginUser.UserName}, Name: {tentb.Text}");
+        }
+
+        private void logout_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"User: {GlobalData.LoginUser.UserName}, Name: {tentb.Text}");
         }
     }
 }
