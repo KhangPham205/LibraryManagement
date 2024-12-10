@@ -12,8 +12,9 @@ namespace LibraryManagementApplication
         {
             base.OnStartup(e);
 
-            // Thiết lập đường dẫn cho |DataDirectory|
-            AppDomain.CurrentDomain.SetData("DataDirectory", AppDomain.CurrentDomain.BaseDirectory);
+            // Đặt đường dẫn chính xác đến thư mục chứa DatabaseLibrary.mdf
+            string customPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Model\Database");
+            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Path.GetFullPath(customPath));
         }
     }
 }

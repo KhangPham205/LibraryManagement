@@ -63,6 +63,7 @@
                          Grid.Row="1"
                          Margin="5"
                          Style="{StaticResource textbox:style1}"
+                         Text="{Binding TenDG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          />
                     <TextBlock Text="Email: "
                          Style="{StaticResource textblock:style1}"
@@ -73,8 +74,9 @@
                     <TextBox x:Name="emailtb"
                          Grid.Column="1"
                          Grid.Row="2"
-                          Style="{StaticResource textbox:style1}"
-                         Margin="5"/>
+                         Style="{StaticResource textbox:style1}"
+                         Margin="5"
+                         Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="CCCD: "
                          Style="{StaticResource textblock:style1}"
                          Grid.Column="2"
@@ -84,8 +86,9 @@
                     <TextBox x:Name="cccdtb"
                          Grid.Column="3"
                          Grid.Row="1"
-                          Style="{StaticResource textbox:style1}"
-                         Margin="5"/>
+                         Style="{StaticResource textbox:style1}"
+                         Margin="5"
+                         Text="{Binding CCCD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="SDT: "
                          Style="{StaticResource textblock:style1}"
                          Grid.Column="2"
@@ -95,8 +98,9 @@
                     <TextBox x:Name="sdttb"
                          Grid.Column="3"
                          Grid.Row="2"
-                          Style="{StaticResource textbox:style1}"
-                         Margin="5"/>
+                         Style="{StaticResource textbox:style1}"
+                         Margin="5"
+                         Text="{Binding SDT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Grid Grid.Row="3"
                           Grid.Column="0"
                           Grid.ColumnSpan="4">
@@ -144,11 +148,12 @@
                     </Grid>
                 </Grid>
             </Border>
-            <DataGrid x:Name="sach"
+            <DataGrid x:Name="docgia"
                      AutoGenerateColumns="False"
                      IsReadOnly="True"
                      Margin="5"
                      Grid.Row="1"
+                     SelectedItem="{Binding SelectedDocGia, Mode=OneWayToSource}"
                      ItemsSource="{Binding DocGiaList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}" />
