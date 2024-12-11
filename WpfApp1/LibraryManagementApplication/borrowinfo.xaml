@@ -17,8 +17,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="sach" 
-  Grid.Column="1" 
-  Margin="5">
+                  Grid.Column="1" 
+                  Margin="5">
             <DataGrid.Style>
                 <Style TargetType="DataGrid">
                     <Style.Triggers>
@@ -37,11 +37,11 @@
             </DataGrid.Columns>
         </DataGrid>
         <Border Margin="20,20,20,10"
-         BorderBrush="#07209e"
-         BorderThickness="2"
-         CornerRadius="20">
+                BorderBrush="#07209e"
+                BorderThickness="2"
+                CornerRadius="20">
             <Grid Margin="5"
-          Grid.Column="0">
+                  Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10"/>
                     <RowDefinition Height="auto"/>

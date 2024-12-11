@@ -421,9 +421,6 @@
     <Resource Include="Icon\user.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\Map.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
@@ -463,6 +460,7 @@
     <Resource Include="Icon\book %281%29.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Image\UI Library.png" />
     <Content Include="Model\Database\DatabaseLibrary.mdf" />
     <Content Include="Model\Database\DatabaseLibrary_log.ldf">
       <DependentUpon>DatabaseLibrary.mdf</DependentUpon>
