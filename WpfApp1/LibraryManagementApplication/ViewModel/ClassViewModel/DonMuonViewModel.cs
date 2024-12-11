@@ -14,14 +14,16 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class DonMuonViewModel : BaseViewModel
     {
+        public List<BorrowedBook> DanhSachMuon;
+        public string TenDauSach {  get; set; }
+        public string ISBN { get; set; }
+
         public string MaMuon { get; set; }
         public string MaDG { get; set; }
         public DateTime NgayMuon { get; set; }
         public DateTime NgayTraDK { get; set; }
         public DateTime NgayTraTT { get; set; }
         public decimal PhiPhat { get; set; }
-        public string TenDSach { get; set; }
-        public string IBSN { get; set; }
         public ObservableCollection<DonMuon> DonMuonList { get; set; }
         private DonMuon _selectedDonMuon;
         public DonMuon SelectedDonMuon
@@ -43,8 +45,11 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public ICommand moveCommand { get; set; }
         public ICommand backCommand { get; set; }
 
+        private CTDMViewModel _ctdmViewModel;
         public DonMuonViewModel()
         {
+            _ctdmViewModel = new CTDMViewModel();
+
             DonMuonList = new ObservableCollection<DonMuon>();
             AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddDonMuon());
             EditCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await EditDonMuon());
@@ -52,6 +57,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDonMuon(p));
             moveCommand = new RelayCommand<Frame>((p) => true, (p) => { p.Content = new addborrow(); OnPropertyChanged(); });
             backCommand = new RelayCommand<Frame>((p) => true, (p) => {  p.Content= new borrowinfo(); OnPropertyChanged(); });
+
             LoadDonMuonList();
         }
 
@@ -66,22 +72,46 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async Task AddDonMuon()
         {
-            DonMuon newDonMuon = new DonMuon()
+            using (var context = new LibraryDbContext())
             {
-                MaMuon = MaMuon,
-                MaDG = MaDG,
-                NgayMuon = DateTime.Now,
-                NgayTraDK = DateTime.Now.AddDays(7),
-                NgayTraTT = DateTime.MinValue,
-                PhiPhat = 0
-            };
+                DonMuon newDonMuon = new DonMuon()
+                {
+                    MaMuon = MaMuon,
+                    MaDG = MaDG,
+                    NgayMuon = DateTime.Now,
+                    NgayTraDK = DateTime.Now.AddMonths(1),
+                    NgayTraTT = null,
+                    PhiPhat = 0
+                };
 
-            DonMuonList.Add(newDonMuon);
+                bool isAddedToCTDM = false;
+                if (TenDauSach != null && ISBN != null)
+                {
+                    var newCTDM = new CTDM
+                    {
+                        MaMuon = newDonMuon.MaMuon,
+                        MaDauSach = context.DauSachs.Where(t => t.TenDauSach == TenDauSach).Select(t => t.MaDauSach).FirstOrDefault().ToString(),
+                        ISBN = context.Sachs.Where(t => t.TenDauSach == TenDauSach).Select(t => t.ISBN).FirstOrDefault().ToString()
+                    };
+                    isAddedToCTDM = await _ctdmViewModel.AddCTDMToDatabaseAsync(newCTDM);
 
-            bool isSuccess = await AddDonMuonToDatabaseAsync(newDonMuon);
-            if (!isSuccess)
-            {
-                MessageBox.Show("Cannot save changes.");
+                    if (!isAddedToCTDM)
+                        MessageBox.Show("Cannot save changes to CTDM.");
+                    else
+                        DanhSachMuon.Add(new BorrowedBook
+                        {
+                            TenDauSach = TenDauSach,
+                            ISBN = ISBN
+                        });
+                }
+
+
+                bool isSuccess = await AddDonMuonToDatabaseAsync(newDonMuon);
+                if (!isSuccess)
+                    MessageBox.Show("Cannot save changes to DonMuon.");
+                else
+                    DonMuonList.Add(newDonMuon);
+
             }
         }
 
@@ -222,5 +252,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         #endregion
+    }
+    public class BorrowedBook
+    {
+        public string TenDauSach { get; set; }
+        public string ISBN { get; set; }
     }
 }

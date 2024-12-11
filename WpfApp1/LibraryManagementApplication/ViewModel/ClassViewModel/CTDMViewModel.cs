@@ -43,7 +43,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             DeleteCommand = new RelayCommand<object>((p) => SelectedCTDM != null, async (p) => await DeleteCTDM());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchCTDM(p));
 
-            LoadCTDMList();
+            //LoadCTDMList();
         }
 
         private async void LoadCTDMList()
@@ -115,7 +115,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         #region MethodToDatabase
 
-        public static async Task<bool> AddCTDMToDatabaseAsync(CTDM ctdm)
+        public async Task<bool> AddCTDMToDatabaseAsync(CTDM ctdm)
         {
             try
             {
@@ -133,7 +133,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<bool> UpdateCTDMInDatabaseAsync(CTDM ctdm)
+        public async Task<bool> UpdateCTDMInDatabaseAsync(CTDM ctdm)
         {
             try
             {
@@ -151,7 +151,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<bool> DeleteCTDMFromDatabaseAsync(string maMuon)
+        public async Task<bool> DeleteCTDMFromDatabaseAsync(string maMuon)
         {
             try
             {
@@ -174,7 +174,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<CTDM>> SearchCTDMInDatabaseAsync(string keyword)
+        public async Task<List<CTDM>> SearchCTDMInDatabaseAsync(string keyword)
         {
             try
             {
@@ -193,7 +193,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<CTDM>> GetAllCTDMsAsync()
+        public async Task<List<CTDM>> GetAllCTDMsAsync()
         {
             try
             {

@@ -23,12 +23,10 @@ namespace LibraryManagementApplication
     public partial class addborrow : Page
     {
         private LibraryDbContext _context;
-        private List<BorrowedBook> DanhSachMuon;
         public addborrow() 
         { 
             InitializeComponent();
 
-            DanhSachMuon = new List<BorrowedBook>();
             _context = new LibraryDbContext(); 
             LoadBookTitles(); 
         }
@@ -47,24 +45,6 @@ namespace LibraryManagementApplication
 
         private void addsach_Click(object sender, RoutedEventArgs e)
         {
-            if (tensachtb.SelectedItem != null && isbn.SelectedItem != null) 
-            {
-                DanhSachMuon.Add(new BorrowedBook 
-                { 
-                    TenDauSach = tensachtb.SelectedItem.ToString(), 
-                    ISBN = isbn.SelectedItem.ToString() 
-                });
-            }
-            sachlist.ItemsSource = null; // Reset the ItemsSource to refresh the UI
-            sachlist.AutoGenerateColumns = false;
-            sachlist.ItemsSource = DanhSachMuon;
         }
     }
-
-    public class BorrowedBook
-    {
-        public string TenDauSach { get; set; }
-        public string ISBN { get; set; }
-    }
-
 }
