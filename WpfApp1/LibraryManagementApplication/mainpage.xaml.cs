@@ -40,15 +40,16 @@ namespace LibraryManagementApplication
             {
                 new RowSeries
                 {
-                    Title = "Được mượn",
+                    Title = "Được mượn:",
                     Values = new ChartValues<int> {15,35,60,90,120}
                 }
             };
+            //
             lineSeries = new SeriesCollection() { 
                 new LineSeries
                 {
-                    Title = "Độc giả",
-                    Values = new ChartValues<int> {15,20,30,20,34,60,12,22,33,91,14,21}
+                    Title = "Độc giả:",
+                    Values = new ChartValues<int> {15,20,30,20,34,60,12,22,33,91,14,21}  
                 }
             
             };

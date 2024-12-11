@@ -295,8 +295,6 @@ C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplicat
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.dll
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.Wpf.dll
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.xml
-C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\Model\Database\DatabaseLibrary.mdf
-C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\Model\Database\DatabaseLibrary_log.ldf
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.dll
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.Wpf.dll
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\LiveCharts.xml
