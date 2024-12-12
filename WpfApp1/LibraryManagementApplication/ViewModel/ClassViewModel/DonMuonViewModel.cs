@@ -28,13 +28,14 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public string TenDauSach {  get; set; }
         public string ISBN { get; set; }
 
+
         public string MaMuon { get; set; }
         public string MaDG { get; set; }
-        private string MaNV {  get; set; }
+        public string MaNV {  get; set; }
         public DateTime NgayMuon { get; set; }
         public DateTime NgayTraDK { get; set; }
-        public DateTime NgayTraTT { get; set; }
-        public decimal PhiPhat { get; set; }
+        public DateTime? NgayTraTT { get; set; }
+        public decimal? PhiPhat { get; set; }
         public ObservableCollection<DonMuon> DonMuonList { get; set; }
         private DonMuon _selectedDonMuon;
         public DonMuon SelectedDonMuon
@@ -46,6 +47,16 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 {
                     _selectedDonMuon = value;
                     OnPropertyChanged(nameof(SelectedDonMuon));
+                    if (SelectedDonMuon != null)
+                    {
+                        MaMuon = SelectedDonMuon.MaMuon;
+                        MaDG = SelectedDonMuon.MaDG;
+                        MaNV = SelectedDonMuon.MaNV;
+                        NgayMuon = SelectedDonMuon.NgayMuon;
+                        NgayTraDK = SelectedDonMuon.NgayTraDK;
+                        NgayTraTT = SelectedDonMuon.NgayTraTT;
+                        PhiPhat = SelectedDonMuon.PhiPhat;
+                    }
                 }
             }
         }
