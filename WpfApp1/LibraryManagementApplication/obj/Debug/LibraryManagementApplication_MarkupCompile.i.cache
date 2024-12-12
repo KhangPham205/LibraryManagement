@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\App.xaml
-2095056810
+211066648198
 2-1692351808
-52-232283760
+531963293328
 62-449948318
-addborrow.xaml;bookpage.xaml;borrowinfo.xaml;headerbookpage.xaml;borrowpage.xaml;employeepage.xaml;infoxaml.xaml;lendpage.xaml;mainpage.xaml;MainWindow.xaml;MainWindow1.xaml;MainWindow2.xaml;publisherpage.xaml;readerpage.xaml;Recover.xaml;ResourceXAML\MainResource.xaml;Signin.xaml;Signup.xaml;typepage.xaml;writerpage.xaml;
+addborrow.xaml;addborrowwindow.xaml;bookpage.xaml;borrowinfo.xaml;headerbookpage.xaml;borrowpage.xaml;employeepage.xaml;infoxaml.xaml;lendpage.xaml;mainpage.xaml;MainWindow.xaml;MainWindow1.xaml;MainWindow2.xaml;publisherpage.xaml;readerpage.xaml;Recover.xaml;ResourceXAML\MainResource.xaml;Signin.xaml;Signup.xaml;typepage.xaml;writerpage.xaml;
 
 True
 

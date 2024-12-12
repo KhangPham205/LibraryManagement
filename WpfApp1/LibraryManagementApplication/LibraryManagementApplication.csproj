@@ -214,6 +214,9 @@
     <Compile Include="addborrow.xaml.cs">
       <DependentUpon>addborrow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="addborrowwindow.xaml.cs">
+      <DependentUpon>addborrowwindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="bookpage.xaml.cs">
       <DependentUpon>bookpage.xaml</DependentUpon>
     </Compile>
@@ -294,6 +297,10 @@
       <DependentUpon>writerpage.xaml</DependentUpon>
     </Compile>
     <Page Include="addborrow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="addborrowwindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

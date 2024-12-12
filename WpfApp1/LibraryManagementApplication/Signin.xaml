@@ -47,9 +47,6 @@
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
-            <Image Source="/Image/UI Library.png"
-                   Grid.RowSpan="4"
-                   Grid.ColumnSpan="5"/>
             <Image Source="/icon/user.png"
                 Grid.Column="1"
                 Grid.Row="1"
