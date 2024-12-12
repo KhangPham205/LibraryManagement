@@ -29,7 +29,6 @@ namespace LibraryManagementApplication
         public borrowpage()
         {
             InitializeComponent();
-            add.Content=new borrowinfo();
 
             ttdonmuons = new ObservableCollection<ThongTinDonMuon>();
             _context = new LibraryDbContext();
@@ -61,6 +60,11 @@ namespace LibraryManagementApplication
             datagridMuon.ItemsSource = ttdonmuons;
         }
 
+        private void adddon_Click(object sender, RoutedEventArgs e)
+        {
+            addborrowwindow addborrowwindow = new addborrowwindow();
+            addborrowwindow.ShowDialog();
+        }
     }
 
     public class ThongTinDonMuon
