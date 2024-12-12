@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -126,11 +127,23 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     return true;
                 }
             }
+            catch (DbUpdateException dbEx)
+            {
+                MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show($"Invalid Operation: {ex.Message}");
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding CTDM: {ex.Message}");
-                return false;
+                MessageBox.Show($"Unexpected Error CTDM: {ex.Message}");
             }
+            return false;
         }
 
         public async Task<bool> UpdateCTDMInDatabaseAsync(CTDM ctdm)

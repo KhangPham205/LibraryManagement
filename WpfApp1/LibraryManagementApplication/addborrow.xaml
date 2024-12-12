@@ -43,11 +43,12 @@
                    Grid.Row="1"
                    Margin="5"
                    HorizontalAlignment="Right"/>
-                <ComboBox x:Name="tentb"
+                <ComboBox x:Name="tendg"
                    Grid.Column="1"
                    Grid.Row="1"
                    Grid.ColumnSpan="4"
                    Style="{StaticResource combobox:style1}"
+                   Text="{Binding MaDG}"
                    Margin="5"/>
                 <Grid Grid.Row="2" Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
@@ -65,7 +66,8 @@
                             Content="Thêm"
                             Margin="5"
                             Grid.Column="1"
-                            Style="{DynamicResource rbutton:edit}"/>
+                            Style="{DynamicResource rbutton:edit}"
+                            Command="{Binding AddCommand}"/>
                     
                 </Grid>
             </Grid>
@@ -113,7 +115,7 @@
                   Grid.ColumnSpan="3"
                   Style="{StaticResource combobox:style1}"
                   SelectionChanged="Tensachtb_SelectionChanged"
-                  SelectedItem="{Binding TenDauSach}"
+                  Text="{Binding TenDauSach}"
                   Margin="5"/>
                 <TextBlock Text="ISBN: "
                   Style="{StaticResource textblock:style1}"
@@ -125,7 +127,7 @@
                   Grid.Column="1"
                   Grid.Row="2"
                   Style="{StaticResource combobox:style1}"
-                  SelectedItem="{Binding ISBN}"
+                  Text="{Binding ISBN}"
                   Margin="5"/>
                 <Button  x:Name="addsach"
                     Content="Thêm sách"
@@ -133,7 +135,7 @@
                     Grid.Column="2"
                     Grid.Row="2"
                     Style="{DynamicResource button:add}"
-                    Click="addsach_Click"/>
+                    Command="{Binding AddSachCommand}"/>
                 <Button  x:Name="deletesach"
                   Content="Xóa sách"
                   Margin="5"

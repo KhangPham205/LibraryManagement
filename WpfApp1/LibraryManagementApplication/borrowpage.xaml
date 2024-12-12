@@ -51,8 +51,8 @@
                               Content="Tạo đơn"
                               Margin="5"   
                              Grid.Row="1"
-                              Style="{DynamicResource button:add}"
-                              Command="{Binding moveCommand}"
+                             Style="{DynamicResource button:add}"
+                             Command="{Binding moveCommand}"
                              CommandParameter="{Binding ElementName=add}"
                              HorizontalAlignment="Left"
                              />

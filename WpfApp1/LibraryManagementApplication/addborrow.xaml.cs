@@ -1,5 +1,6 @@
 ﻿using LibraryManagementApplication.Model.Class;
 using LibraryManagementApplication.ViewModel;
+using LibraryManagementApplication.ViewModel.ClassViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,8 @@ namespace LibraryManagementApplication
         }
         private void LoadBookTitles() 
         { 
-            tensachtb.ItemsSource = _context.DauSachs.Select(t => t.TenDauSach).ToList(); 
+            tensachtb.ItemsSource = _context.DauSachs.Select(t => t.TenDauSach).ToList();
+            tendg.ItemsSource= _context.DocGias.Select(t => t.MaDG).ToList();
         }
         private void Tensachtb_SelectionChanged(object sender, SelectionChangedEventArgs e) 
         { 
@@ -41,10 +43,6 @@ namespace LibraryManagementApplication
                 string selectedBookTitle = tensachtb.SelectedItem.ToString(); 
                 isbn.ItemsSource = _context.Sachs.Where(t => t.TenDauSach == selectedBookTitle).Select(t => t.ISBN).ToList(); 
             } 
-        }
-
-        private void addsach_Click(object sender, RoutedEventArgs e)
-        {
         }
     }
 }
