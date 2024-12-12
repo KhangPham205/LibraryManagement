@@ -15,7 +15,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class DonMuonViewModel : BaseViewModel
     {
-        public List<BorrowedBook> DanhSachMuon;
+        public ObservableCollection<BorrowedBook> DanhSachMuon;
         public string TenDauSach {  get; set; }
         public string ISBN { get; set; }
 
@@ -76,7 +76,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             _ctdmViewModel = new CTDMViewModel();
             context = new LibraryDbContext();
-            DanhSachMuon = new List<BorrowedBook>();
+            DanhSachMuon = new ObservableCollection<BorrowedBook>();
 
             DonMuonList = new ObservableCollection<DonMuon>();
             AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddDonMuon());
@@ -87,7 +87,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             moveCommand = new RelayCommand<Frame>((p) => true, (p) => { p.Content = new addborrow(); OnPropertyChanged(); });
             backCommand = new RelayCommand<Frame>((p) => true, (p) => {  p.Content= new borrowinfo(); OnPropertyChanged(); });
 
-            LoadDonMuonList();
+            //LoadDonMuonList();
         }
 
         private async void LoadDonMuonList()
@@ -130,18 +130,21 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     {
                         MaMuon = MaMuon,
                         MaDauSach = context.DauSachs.Where(t => t.TenDauSach == TenDauSach).Select(t => t.MaDauSach).FirstOrDefault().ToString(),
-                        ISBN = context.Sachs.Where(t => t.TenDauSach == TenDauSach).Select(t => t.ISBN).FirstOrDefault().ToString()
+                        ISBN = ISBN
                     };
                     isAddedToCTDM = await _ctdmViewModel.AddCTDMToDatabaseAsync(newCTDM);
 
                     if (!isAddedToCTDM)
                         MessageBox.Show("Cannot save changes to CTDM.");
                     else
+                    {
                         DanhSachMuon.Add(new BorrowedBook
                         {
                             TenDauSach = TenDauSach,
                             ISBN = ISBN
                         });
+                        OnPropertyChanged(nameof(DanhSachMuon));
+                    }
                 }
                 foreach (var item in DanhSachMuon)
                     MessageBox.Show(item.TenDauSach + " " + item.ISBN);

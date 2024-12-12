@@ -94,7 +94,6 @@ C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplicat
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\addborrow.g.cs
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\bookpage.g.cs
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\borrowinfo.g.cs
-C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\borrowtable.g.cs
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\headerbookpage.g.cs
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\borrowpage.g.cs
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\employeepage.g.cs
@@ -120,7 +119,6 @@ C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplicat
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\addborrow.baml
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\bookpage.baml
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\borrowinfo.baml
-C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\borrowtable.baml
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\headerbookpage.baml
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\borrowpage.baml
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\employeepage.baml

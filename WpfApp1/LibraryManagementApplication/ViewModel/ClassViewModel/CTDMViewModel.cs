@@ -44,7 +44,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             DeleteCommand = new RelayCommand<object>((p) => SelectedCTDM != null, async (p) => await DeleteCTDM());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchCTDM(p));
 
-            //LoadCTDMList();
+            LoadCTDMList();
         }
 
         private async void LoadCTDMList()
