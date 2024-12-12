@@ -27,7 +27,7 @@ namespace LibraryManagementApplication
         public addborrow() 
         { 
             InitializeComponent();
-
+            this.DataContext = new DonMuonViewModel();
             _context = new LibraryDbContext(); 
             LoadBookTitles(); 
         }

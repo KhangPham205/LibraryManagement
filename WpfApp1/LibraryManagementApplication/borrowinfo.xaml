@@ -19,18 +19,6 @@
         <DataGrid x:Name="sach" 
                   Grid.Column="1" 
                   Margin="5">
-            <DataGrid.Style>
-                <Style TargetType="DataGrid">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsChecked, ElementName=addSach }" Value="True">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsChecked, ElementName=addSach }" Value="False">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.Style>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Sách" Width="*" Binding="{Binding TenDSach}"/>
                 <DataGridTextColumn Header="IBSN" Width="*" Binding="{Binding IBSN}"/>

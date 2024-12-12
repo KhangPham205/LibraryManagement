@@ -220,9 +220,6 @@
     <Compile Include="borrowinfo.xaml.cs">
       <DependentUpon>borrowinfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="borrowtable.xaml.cs">
-      <DependentUpon>borrowtable.xaml</DependentUpon>
-    </Compile>
     <Compile Include="headerbookpage.xaml.cs">
       <DependentUpon>headerbookpage.xaml</DependentUpon>
     </Compile>
@@ -305,10 +302,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="borrowinfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="borrowtable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

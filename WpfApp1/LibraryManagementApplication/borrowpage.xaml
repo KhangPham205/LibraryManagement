@@ -70,7 +70,8 @@
             <DataGrid x:Name="muon"
                         Grid.Row="1" 
                         Grid.ColumnSpan="2"
-                        Margin="5" >
+                        Margin="5" 
+                      ItemsSource="{Binding DonMuonList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
                     <DataGridTextColumn Header="Tên độc giả" Width="*" Binding="{Binding TenDG}"/>
