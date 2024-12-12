@@ -15,7 +15,16 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class DonMuonViewModel : BaseViewModel
     {
-        public ObservableCollection<BorrowedBook> DanhSachMuon;
+        private ObservableCollection<BorrowedBook> _danhSachMuon; 
+        public ObservableCollection<BorrowedBook> DanhSachMuon 
+        { 
+            get { return _danhSachMuon; } 
+            set 
+            { 
+                _danhSachMuon = value; 
+                OnPropertyChanged(nameof(DanhSachMuon)); 
+            } 
+        }
         public string TenDauSach {  get; set; }
         public string ISBN { get; set; }
 

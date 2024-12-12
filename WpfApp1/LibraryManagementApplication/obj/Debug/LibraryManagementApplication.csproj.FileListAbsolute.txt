@@ -251,7 +251,6 @@ C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplicat
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\addborrow.g.cs
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\bookpage.g.cs
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\borrowinfo.g.cs
-C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\borrowtable.g.cs
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\headerbookpage.g.cs
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\borrowpage.g.cs
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\employeepage.g.cs
@@ -277,7 +276,6 @@ C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplicat
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\addborrow.baml
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\bookpage.baml
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\borrowinfo.baml
-C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\borrowtable.baml
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\headerbookpage.baml
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\borrowpage.baml
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\employeepage.baml
