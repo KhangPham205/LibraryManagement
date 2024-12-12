@@ -16,7 +16,7 @@ namespace LibraryManagementApplication.Model.Class
         public DateTime NgayMuon { get; set; }
         public DateTime NgayTraDK { get; set; }
         public DateTime? NgayTraTT { get; set; } // Nullable for optional values
-        public decimal PhiPhat { get; set; }
+        public decimal? PhiPhat { get; set; }
 
         // Navigation properties
         public DocGia DocGia { get; set; }
