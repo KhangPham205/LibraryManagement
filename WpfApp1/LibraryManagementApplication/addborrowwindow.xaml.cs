@@ -22,15 +22,16 @@ namespace LibraryManagementApplication
     /// </summary>
     public partial class addborrowwindow : Window
     {
-        private ObservableCollection<ThongTinDonMuon> ttdonmuons;
+        private string MaDG;
         private LibraryDbContext _context;
         public addborrowwindow()
         {
             InitializeComponent();
-            this.DataContext = new DonMuonViewModel();
+
             _context = new LibraryDbContext();
             LoadBookTitles();
         }
+
         private void LoadBookTitles()
         {
             tensachtb.ItemsSource = _context.DauSachs.Select(t => t.TenDauSach).ToList();
@@ -43,6 +44,11 @@ namespace LibraryManagementApplication
                 string selectedBookTitle = tensachtb.SelectedItem.ToString();
                 isbn.ItemsSource = _context.Sachs.Where(t => t.TenDauSach == selectedBookTitle).Select(t => t.ISBN).ToList();
             }
+        }
+
+        private void okeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

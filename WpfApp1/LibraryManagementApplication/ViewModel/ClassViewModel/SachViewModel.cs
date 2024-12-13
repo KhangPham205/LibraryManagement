@@ -349,20 +349,20 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         #endregion
     }
 
-    public class IntToStringConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            // Chuyển từ int sang string
-            return value?.ToString();
-        }
+    //public class IntToStringConverter : IValueConverter
+    //{
+    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        // Chuyển từ int sang string
+    //        return value?.ToString();
+    //    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            // Chuyển từ string sang int, với xử lý lỗi
-            if (int.TryParse(value?.ToString(), out int result))
-                return result;
-            return 0; // Giá trị mặc định khi không thể chuyển đổi
-        }
-    }
+    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        // Chuyển từ string sang int, với xử lý lỗi
+    //        if (int.TryParse(value?.ToString(), out int result))
+    //            return result;
+    //        return 0; // Giá trị mặc định khi không thể chuyển đổi
+    //    }
+    //}
 }

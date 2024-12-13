@@ -110,6 +110,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             //LoadDonMuonList();
         }
 
+        #region Method
         private async void LoadDonMuonList()
         {
             var donMuons = await GetAllDonMuonAsync();
@@ -143,31 +144,34 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             try
             {
-                bool isAddedToCTDM = false;
-                if (TenDauSach != null && ISBN != null)
+                if (MaDG == null)
+                    MessageBox.Show("Vui lòng chọn thông tin mã độc giả", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
                 {
-                    var newCTDM = new CTDM
+                    bool isAddedToCTDM = false;
+                    if (TenDauSach != null && ISBN != null)
                     {
-                        MaMuon = MaMuon,
-                        MaDauSach = context.DauSachs.Where(t => t.TenDauSach == TenDauSach).Select(t => t.MaDauSach).FirstOrDefault().ToString(),
-                        ISBN = ISBN
-                    };
-                    isAddedToCTDM = await _ctdmViewModel.AddCTDMToDatabaseAsync(newCTDM);
-
-                    if (!isAddedToCTDM)
-                        MessageBox.Show("Cannot save changes to CTDM.");
-                    else
-                    {
-                        DanhSachMuon.Add(new BorrowedBook
+                        var newCTDM = new CTDM
                         {
-                            TenDauSach = TenDauSach,
+                            MaMuon = MaMuon,
+                            MaDauSach = context.DauSachs.Where(t => t.TenDauSach == TenDauSach).Select(t => t.MaDauSach).FirstOrDefault().ToString(),
                             ISBN = ISBN
-                        });
-                        OnPropertyChanged(nameof(DanhSachMuon));
+                        };
+                        isAddedToCTDM = await _ctdmViewModel.AddCTDMToDatabaseAsync(newCTDM);
+
+                        if (!isAddedToCTDM)
+                            MessageBox.Show("Cannot save changes to CTDM.");
+                        else
+                        {
+                            DanhSachMuon.Add(new BorrowedBook
+                            {
+                                TenDauSach = TenDauSach,
+                                ISBN = ISBN
+                            });
+                            OnPropertyChanged(nameof(DanhSachMuon));
+                        }
                     }
                 }
-                foreach (var item in DanhSachMuon)
-                    MessageBox.Show(item.TenDauSach + " " + item.ISBN);
             }
             catch (DbUpdateException dbEx)
             {
@@ -225,10 +229,11 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 DonMuonList.Add(donMuon);
             }
         }
+        #endregion
 
         #region MethodToDatabase
 
-        public static async Task<bool> AddDonMuonToDatabaseAsync(DonMuon donMuon)
+        public async Task<bool> AddDonMuonToDatabaseAsync(DonMuon donMuon)
         {
             try
             {
@@ -258,7 +263,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             return false;
         }
 
-        public static async Task<bool> UpdateDonMuonInDatabaseAsync(DonMuon donMuon)
+        public async Task<bool> UpdateDonMuonInDatabaseAsync(DonMuon donMuon)
         {
             try
             {
@@ -276,7 +281,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<bool> DeleteDonMuonFromDatabaseAsync(string maMuon)
+        public async Task<bool> DeleteDonMuonFromDatabaseAsync(string maMuon)
         {
             try
             {
@@ -299,7 +304,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<DonMuon>> SearchDonMuonInDatabaseAsync(string keyword)
+        public async Task<List<DonMuon>> SearchDonMuonInDatabaseAsync(string keyword)
         {
             try
             {
@@ -318,7 +323,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public static async Task<List<DonMuon>> GetAllDonMuonAsync()
+        public async Task<List<DonMuon>> GetAllDonMuonAsync()
         {
             try
             {

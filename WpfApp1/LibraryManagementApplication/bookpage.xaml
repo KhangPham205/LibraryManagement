@@ -7,9 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1000"
       Title="bookpage">
-    <Page.Resources>
-        <local:IntToStringConverter x:Key="IntToStringConverter"/>
-    </Page.Resources>
     <Grid Background="White">
         <Grid.DataContext>
             <local:SachViewModel/>
