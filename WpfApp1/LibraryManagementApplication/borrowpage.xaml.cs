@@ -1,5 +1,6 @@
 ﻿using LibraryManagementApplication.Model.Class;
 using LibraryManagementApplication.ViewModel;
+using LibraryManagementApplication.ViewModel.ClassViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,37 +34,51 @@ namespace LibraryManagementApplication
             ttdonmuons = new ObservableCollection<ThongTinDonMuon>();
             _context = new LibraryDbContext();
 
-            LoadThongTin();
+            _ = LoadThongTin();
         }
 
-        private void LoadThongTin()
+        private async Task<bool> LoadThongTin()
         {
-            foreach (var item in _context.DonMuons.ToList())
+            ttdonmuons.Clear();
+            var donMuons = await _context.DonMuons.ToListAsync();
+
+            foreach (var item in donMuons)
             {
-                var tenDocGia = _context.DocGias
+                var tenDocGia = await _context.DocGias
                     .Where(t => t.MaDG == item.MaDG)
                     .Select(x => x.TenDG)
-                    .FirstOrDefault(); // Lấy tên độc giả, nếu không có sẽ trả về null
+                    .FirstOrDefaultAsync();
 
                 ttdonmuons.Add(new ThongTinDonMuon
                 {
                     MaMuon = item.MaMuon,
-                    TenDG = tenDocGia ?? "Không xác định", // Xử lý trường hợp tên độc giả bị null
+                    TenDG = tenDocGia ?? "Unknown",
                     TenNV = GlobalData.LoginUser.UserName,
                     NgayMuon = item.NgayMuon.ToShortDateString(),
                     NgayTraDK = item.NgayTraDK.ToShortDateString(),
-                    NgayTraTT = item.NgayTraTT.ToString() ?? null,
-                    PhiPhat = item.PhiPhat.ToString() ?? null,
+                    NgayTraTT = item.NgayTraTT?.ToShortDateString() ?? "",
+                    PhiPhat = item.PhiPhat?.ToString() ?? "",
                 });
+                MessageBox.Show(item.NgayTraTT.ToString());
             }
 
+            datagridMuon.ItemsSource = null;
             datagridMuon.ItemsSource = ttdonmuons;
+
+            return true;
         }
 
-        private void adddon_Click(object sender, RoutedEventArgs e)
+        private async void adddon_Click(object sender, RoutedEventArgs e)
         {
-            addborrowwindow addborrowwindow = new addborrowwindow();
+            var addborrowwindow = new addborrowwindow();
             addborrowwindow.ShowDialog();
+
+            await LoadThongTin();
+        }
+
+        private async void showdon_Click(object sender, RoutedEventArgs e)
+        {
+            await LoadThongTin();
         }
     }
 

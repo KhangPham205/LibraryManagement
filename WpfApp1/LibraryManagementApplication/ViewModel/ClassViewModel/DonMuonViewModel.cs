@@ -25,20 +25,102 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 OnPropertyChanged(nameof(DanhSachMuon)); 
             } 
         }
-        public string TenDauSach {  get; set; }
-        public string ISBN { get; set; }
 
+        private string maMuon;
+        private string maDG;
+        private string maNV;
+        private string ngayMuon;
+        private string ngayTraDK;
+        private string ngayTraTT;
+        private string phiPhat;
+        public string MaMuon 
+        { 
+            get => maMuon; 
+            set
+            {
+                if (maMuon != value)
+                {
+                    maMuon = value;
+                    OnPropertyChanged(nameof(MaMuon));
+                }
+            }
+        }
+        public string MaDG
+        {
+            get => maDG;
+            set
+            {
+                if (maDG != value)
+                {
+                    maDG = value;
+                    OnPropertyChanged(nameof(MaDG));
+                }
+            }
+        }
+        public string MaNV
+        {
+            get => maNV;
+            set
+            {
+                if (maNV != value)
+                {
+                    maNV = value;
+                    OnPropertyChanged(nameof(MaNV));
+                }
+            }
+        }
+        public string NgayMuon
+        {
+            get => ngayMuon;
+            set
+            {
+                if (ngayMuon != value)
+                {
+                    ngayMuon = value;
+                    OnPropertyChanged(nameof(NgayMuon));
+                }
+            }
+        }
+        public string NgayTraDK
+        {
+            get => ngayTraDK;
+            set
+            {
+                if (ngayTraDK != value)
+                {
+                    ngayTraDK = value;
+                    OnPropertyChanged(nameof(NgayTraDK));
+                }
+            }
+        }
+        public string NgayTraTT
+        {
+            get => ngayTraTT;
+            set
+            {
+                if (ngayTraTT != value)
+                {
+                    ngayTraTT = value;
+                    OnPropertyChanged(nameof(NgayTraTT));
+                }
+            }
+        }
+        public string PhiPhat
+        {
+            get => phiPhat;
+            set
+            {
+                if (phiPhat != value)
+                {
+                    phiPhat = value;
+                    OnPropertyChanged(nameof(PhiPhat));
+                }
+            }
+        }
 
-        public string MaMuon { get; set; }
-        public string MaDG { get; set; }
-        public string MaNV {  get; set; }
-        public DateTime NgayMuon { get; set; }
-        public DateTime NgayTraDK { get; set; }
-        public DateTime? NgayTraTT { get; set; }
-        public decimal? PhiPhat { get; set; }
         public ObservableCollection<DonMuon> DonMuonList { get; set; }
-        private DonMuon _selectedDonMuon;
-        public DonMuon SelectedDonMuon
+        private ThongTinDonMuon _selectedDonMuon;
+        public ThongTinDonMuon SelectedDonMuon
         {
             get { return _selectedDonMuon; }
             set
@@ -50,23 +132,33 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     if (SelectedDonMuon != null)
                     {
                         MaMuon = SelectedDonMuon.MaMuon;
-                        MaDG = SelectedDonMuon.MaDG;
-                        MaNV = SelectedDonMuon.MaNV;
+                        MaDG = context.DocGias.Where(t => t.TenDG == SelectedDonMuon.TenDG).Select(t => t.MaDG).FirstOrDefault();
+                        MaNV = context.TaiKhoans.Where(nv => nv.UserName == SelectedDonMuon.TenNV).Select(nv => nv.UserID).FirstOrDefault();
                         NgayMuon = SelectedDonMuon.NgayMuon;
                         NgayTraDK = SelectedDonMuon.NgayTraDK;
-                        NgayTraTT = SelectedDonMuon.NgayTraTT;
-                        PhiPhat = SelectedDonMuon.PhiPhat;
+                        NgayTraTT = SelectedDonMuon.NgayTraTT.ToString();
+                        PhiPhat = SelectedDonMuon.PhiPhat.ToString();
+
+                        DanhSachMuon.Clear();
+                        foreach (var item in context.CTDMs)
+                            if (item != null && item.MaMuon ==  SelectedDonMuon.MaMuon)
+                            {
+                                Sach sach = context.Sachs.Where(s => s.MaDauSach == item.MaDauSach && s.ISBN == item.ISBN).FirstOrDefault();
+                                DanhSachMuon.Add(new BorrowedBook()
+                                {
+                                    TenDauSach = sach.TenDauSach,
+                                    ISBN = sach.ISBN
+                                });
+                            }
                     }
                 }
             }
         }
         public ICommand AddCommand { get; set; }
-        public ICommand AddSachCommand {  get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
-        public ICommand moveCommand { get; set; }
-        public ICommand backCommand { get; set; }
+        public ICommand RestoreCommand { get; set; }
         private async Task<string> CreateMaDMAsync()
         {
             // Generate a hash from MaMuon
@@ -91,7 +183,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
         private CTDMViewModel _ctdmViewModel;
-        LibraryDbContext context;
+        private LibraryDbContext context;
         public DonMuonViewModel()
         {
             _ctdmViewModel = new CTDMViewModel();
@@ -100,12 +192,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
             DonMuonList = new ObservableCollection<DonMuon>();
             AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddDonMuon());
-            AddSachCommand = new RelayCommand<object>((p) => true, async (p) => await AddSachToCTDM());
             EditCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await EditDonMuon());
             DeleteCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await DeleteDonMuon());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDonMuon(p));
-            moveCommand = new RelayCommand<Frame>((p) => true, (p) => { p.Content = new addborrow(); OnPropertyChanged(); });
-            backCommand = new RelayCommand<Frame>((p) => true, (p) => {  p.Content= new borrowinfo(); OnPropertyChanged(); });
+            RestoreCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await TraDonMuon());
 
             //LoadDonMuonList();
         }
@@ -140,63 +230,86 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 DonMuonList.Add(newDonMuon);
         }
 
-        private async Task AddSachToCTDM()
+        private async Task TraDonMuon()
         {
-            try
+            if (SelectedDonMuon != null)
             {
-                if (MaDG == null)
-                    MessageBox.Show("Vui lòng chọn thông tin mã độc giả", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
-                else
+                DonMuon donMuon = new DonMuon()
                 {
-                    bool isAddedToCTDM = false;
-                    if (TenDauSach != null && ISBN != null)
-                    {
-                        var newCTDM = new CTDM
-                        {
-                            MaMuon = MaMuon,
-                            MaDauSach = context.DauSachs.Where(t => t.TenDauSach == TenDauSach).Select(t => t.MaDauSach).FirstOrDefault().ToString(),
-                            ISBN = ISBN
-                        };
-                        isAddedToCTDM = await _ctdmViewModel.AddCTDMToDatabaseAsync(newCTDM);
+                    MaMuon = SelectedDonMuon.MaMuon,
+                    MaDG = context.DonMuons.Where(t => t.MaMuon == SelectedDonMuon.MaMuon).Select(t => t.MaDG).FirstOrDefault(),
+                    MaNV = GlobalData.LoginUser.UserID,
+                    NgayMuon = DateTime.Parse(SelectedDonMuon.NgayMuon),
+                    NgayTraDK = DateTime.Parse(SelectedDonMuon.NgayTraDK),
+                    NgayTraTT = DateTime.Now,
+                    PhiPhat = 0
+                };
 
-                        if (!isAddedToCTDM)
-                            MessageBox.Show("Cannot save changes to CTDM.");
-                        else
-                        {
-                            DanhSachMuon.Add(new BorrowedBook
-                            {
-                                TenDauSach = TenDauSach,
-                                ISBN = ISBN
-                            });
-                            OnPropertyChanged(nameof(DanhSachMuon));
-                        }
-                    }
-                }
-            }
-            catch (DbUpdateException dbEx)
-            {
-                MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
-            }
-            catch (SqlException sqlEx)
-            {
-                MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
-            }
-            catch (InvalidOperationException ex)
-            {
-                MessageBox.Show($"Invalid Operation: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Unexpected Error CTDM: {ex.Message}");
+                bool isSuccess = await UpdateDonMuonInDatabaseAsync(donMuon);
+                if (!isSuccess)
+                    MessageBox.Show("Cannot update DonMuon");
+                else
+                    MessageBox.Show("Update DonMuon Successfully");
             }
         }
+
+        //private async Task AddSachToCTDM()
+        //{
+        //    try
+        //    {
+        //        if (MaDG == null)
+        //            MessageBox.Show("Vui lòng chọn thông tin mã độc giả", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+        //        else
+        //        {
+        //            bool isAddedToCTDM = false;
+        //            if (TenDauSach != null && ISBN != null)
+        //            {
+        //                var newCTDM = new CTDM
+        //                {
+        //                    MaMuon = MaMuon,
+        //                    MaDauSach = context.DauSachs.Where(t => t.TenDauSach == TenDauSach).Select(t => t.MaDauSach).FirstOrDefault().ToString(),
+        //                    ISBN = ISBN
+        //                };
+        //                isAddedToCTDM = await _ctdmViewModel.AddCTDMToDatabaseAsync(newCTDM);
+
+        //                if (!isAddedToCTDM)
+        //                    MessageBox.Show("Cannot save changes to CTDM.");
+        //                else
+        //                {
+        //                    DanhSachMuon.Add(new BorrowedBook
+        //                    {
+        //                        TenDauSach = TenDauSach,
+        //                        ISBN = ISBN
+        //                    });
+        //                    OnPropertyChanged(nameof(DanhSachMuon));
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (DbUpdateException dbEx)
+        //    {
+        //        MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
+        //    }
+        //    catch (SqlException sqlEx)
+        //    {
+        //        MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
+        //    }
+        //    catch (InvalidOperationException ex)
+        //    {
+        //        MessageBox.Show($"Invalid Operation: {ex.Message}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Unexpected Error CTDM: {ex.Message}");
+        //    }
+        //}
 
         private async Task EditDonMuon()
         {
             if (SelectedDonMuon != null)
             {
                 // Here you would bind the selected object to edit mode, so changes reflect
-                bool isSuccess = await UpdateDonMuonInDatabaseAsync(SelectedDonMuon);
+                bool isSuccess = await UpdateDonMuonInDatabaseAsync(new DonMuon());
                 if (!isSuccess)
                 {
                     MessageBox.Show("Error updating the record.");
@@ -211,7 +324,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool isSuccess = await DeleteDonMuonFromDatabaseAsync(SelectedDonMuon.MaMuon);
                 if (isSuccess)
                 {
-                    DonMuonList.Remove(SelectedDonMuon);
+                    //DonMuonList.Remove(SelectedDonMuon);
                 }
                 else
                 {

@@ -198,7 +198,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-
         private static async Task<bool> UpdateTheLoaiInDatabaseAsync(TheLoai theLoai)
         {
             try
@@ -216,7 +215,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-
         private static async Task<bool> DeleteTheLoaiFromDatabaseAsync(TheLoai theLoai)
         {
             try
@@ -239,7 +237,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-
         private static async Task<List<TheLoai>> SearchTheLoaiInDatabaseAsync(string keyword)
         {
             try
@@ -258,7 +255,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return new List<TheLoai>();
             }
         }
-
         private static async Task<List<TheLoai>> GetAllTheLoaisAsync()
         {
             try
@@ -275,7 +271,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return new List<TheLoai>();
             }
         }
-
         #endregion
     }
 }
