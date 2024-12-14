@@ -141,6 +141,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async void LoadDocGiaList()
         {
+                        DocGiaList.Clear();
             var docGias = await GetAllDocGiasAsync();
             foreach (var docGia in docGias)
             {
@@ -219,7 +220,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
         private void ShowTheLoai()
         {
-            DocGiaList.Clear();
             LoadDocGiaList();
         }
 
