@@ -59,7 +59,7 @@ namespace LibraryManagementApplication
                     NgayTraTT = item.NgayTraTT?.ToShortDateString() ?? "",
                     PhiPhat = item.PhiPhat?.ToString() ?? "",
                 });
-                MessageBox.Show(item.NgayTraTT.ToString());
+                //MessageBox.Show(item.NgayTraTT.ToString());
             }
 
             datagridMuon.ItemsSource = null;

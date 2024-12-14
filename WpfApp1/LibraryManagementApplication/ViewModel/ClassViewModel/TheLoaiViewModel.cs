@@ -81,8 +81,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddTheLoai());
             EditCommand = new RelayCommand<object>((p) => SelectedTheLoai != null, async (p) => await EditTheLoai());
             DeleteCommand = new RelayCommand<object>((p) => SelectedTheLoai != null, async (p) => await DeleteTheLoai());
-            SearchCommand = new RelayCommand<DataGrid>((p) => true, async (p) => await SearchTheLoai(p));
-            ShowCommand = new RelayCommand<DataGrid>((p) => true, (p) => ShowTheLoai(p));
+            SearchCommand = new RelayCommand<object>((p) => true, async (p) => await SearchTheLoai());
+            ShowCommand = new RelayCommand<object>((p) => true,  (p) => ShowTheLoai());
             LoadTheLoaiList();
         }
 
@@ -151,14 +151,18 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
-        private async Task SearchTheLoai(DataGrid p)
+        private async Task SearchTheLoai()
         {
-            var TempList = await SearchTheLoaiInDatabaseAsync(DisplayName);
-            p.ItemsSource = TempList;
+            var filteredListFrormDB = await SearchTheLoaiInDatabaseAsync(DisplayName);
+            TheLoaiList.Clear();
+            foreach (var theloai in filteredListFrormDB)
+            {
+                TheLoaiList.Add(theloai);
+            }
         }
-        private void ShowTheLoai(DataGrid p)
+        private void ShowTheLoai()
         {
-            p.ItemsSource = TheLoaiList;
+            LoadTheLoaiList();
         }
 
         #region MethodToDatabase
