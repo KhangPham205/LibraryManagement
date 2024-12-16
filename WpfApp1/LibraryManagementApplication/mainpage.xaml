@@ -99,7 +99,8 @@
                                     Margin="0"
                                   Grid.Row="1">
                         <lvc:PieChart.Series>
-                            <lvc:PieSeries Title="Có sẵn"
+                            <lvc:PieSeries 
+                                Title="Có sẵn"
                                Values="6" 
                                FontSize="14"
                                Fill="#9acbff"

@@ -223,6 +223,9 @@
     <Compile Include="borrowinfo.xaml.cs">
       <DependentUpon>borrowinfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="headerbookpage.xaml.cs">
       <DependentUpon>headerbookpage.xaml</DependentUpon>
     </Compile>
@@ -309,6 +312,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="borrowinfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

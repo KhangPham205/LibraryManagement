@@ -32,10 +32,10 @@ namespace LibraryManagementApplication
             //    new Sach { MaSach = "S001", TenSach = "Sách A", ISBN = "1234567890", NgonNgu = "Tiếng Việt", ViTri = "Kệ A1", TrangThai = "Còn" },
             //    new Sach {MaSach = "S002", TenSach = "Sách B", ISBN = "0987654321", NgonNgu = "Tiếng Anh", ViTri = "Kệ B2", TrangThai = "Mượn"}
             //};
-            // Gán danh sách dữ liệu cho DataGrid
+            // PieChart 
             PointLabel = chartPoint => string.Format("{0},({1:p})", chartPoint.Y, chartPoint.Participation);
             DataContext = this;
-            //
+            //BarChart
             Series = new SeriesCollection()
             {
                 new RowSeries
@@ -44,7 +44,7 @@ namespace LibraryManagementApplication
                     Values = new ChartValues<int> {15,35,60,90,120}
                 }
             };
-            //
+            //LineChart
             lineSeries = new SeriesCollection() { 
                 new LineSeries
                 {

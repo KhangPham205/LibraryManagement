@@ -26,5 +26,11 @@ namespace LibraryManagementApplication
             InitializeComponent();
             DataContext = GlobalData.LoginUser;
         }
+
+        private void changemk_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePassword changePassword = new ChangePassword();
+            changePassword.ShowDialog();
+        }
     }
 }

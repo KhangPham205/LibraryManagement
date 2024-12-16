@@ -286,7 +286,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (!isSuccess)
                     MessageBox.Show("Cannot update DonMuon");
                 else
+                {
                     MessageBox.Show("Update DonMuon Successfully");
+                    LoadDonMuonList();
+                }
             }
         }
 

@@ -126,8 +126,19 @@
                             Grid.Row="6"
                             HorizontalAlignment="Right"
                             Command="{Binding signoutcommand}"
-                            CommandParameter="{Binding ElementName=Logoutpage}"
-                            >
+                            CommandParameter="{Binding ElementName=Logoutpage}"                            >
+                        <Button.DataContext>
+                            <logout:MainViewModel/>
+                        </Button.DataContext>
+                    </Button>
+                    <Button x:Name="changemk"
+                             Style="{StaticResource button:style1}"
+                             Content="Đổi mật khẩu"
+                             Margin="5"
+                             Grid.Column="1"
+                             Grid.Row="6"
+                             HorizontalAlignment="Left"
+                             Click="changemk_Click">
                         <Button.DataContext>
                             <logout:MainViewModel/>
                         </Button.DataContext>

@@ -66,8 +66,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="110"/>
-                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="160"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Mã độc giả:"
@@ -79,7 +78,6 @@
                         <TextBox x:Name="madgtb"
                                  Grid.Column="1"
                                  Grid.Row="1"
-                                 Grid.ColumnSpan="2"
                                  Style="{StaticResource textbox:style1}"
                                  Margin="5"
                                  Text="{Binding MaDG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -87,8 +85,7 @@
                                    Style="{StaticResource textblock:style1}"
                                    Grid.Column="0"
                                    Grid.Row="3"
-                                   Grid.ColumnSpan="2"
-                                   HorizontalAlignment="Left" Margin="8,0,0,0"/>
+                                   HorizontalAlignment="Right" Margin="8,0,0,0"/>
                         <TextBox x:Name="tennvtb"
                                  Grid.Column="2"
                                  Grid.Row="3"
@@ -99,7 +96,7 @@
                                    Style="{StaticResource textblock:style1}"
                                    Grid.Column="0"
                                    Grid.Row="4"
-                                   HorizontalAlignment="Left" Margin="9,0,0,0"/>
+                                   HorizontalAlignment="Right" Margin="9,0,0,0"/>
                         <TextBox x:Name="ngaymuontb"
                                  Grid.Column="2"
                                  Grid.Row="4"
@@ -110,8 +107,7 @@
                                    Style="{StaticResource textblock:style1}"
                                    Grid.Column="0"
                                    Grid.Row="5"
-                                   Grid.ColumnSpan="2"
-                                   HorizontalAlignment="Center"/>
+                                   HorizontalAlignment="Right"/>
                         <TextBox x:Name="ngaytradktb"
                                  Grid.Column="2"
                                  Grid.Row="5"
@@ -122,8 +118,7 @@
                                    Style="{StaticResource textblock:style1}"
                                    Grid.Column="0"
                                    Grid.Row="6"
-                                   Grid.ColumnSpan="2"
-                                   HorizontalAlignment="Left" Margin="9,0,0,0"/>
+                                   HorizontalAlignment="Right" Margin="9,0,0,0"/>
                         <TextBox x:Name="ngaytratttb"
                                  Grid.Column="2"
                                  Grid.Row="6"
@@ -133,11 +128,10 @@
                         <TextBlock Text="Phí phạt:"
                                    Style="{StaticResource textblock:style1}"
                                    Grid.Row="7"
-                                   HorizontalAlignment="Left" Margin="9,0,0,0"/>
+                                   HorizontalAlignment="Right" Margin="9,0,0,0"/>
                         <TextBox x:Name="phiphattb"
                                  Grid.Column="1"
                                  Grid.Row="7"
-                                 Grid.ColumnSpan="2"
                                  Style="{StaticResource textbox:style1}"
                                  Margin="5"
                                  Text="{Binding PhiPhat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
