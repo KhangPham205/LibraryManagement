@@ -185,22 +185,23 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         private void AddCTDM()
         {
             // Kiểm tra xem sách và ISBN đã tồn tại trong danh sách chưa
-            var existingBook = danhSachMuon.FirstOrDefault(book => book.TenDauSach == TenDauSach && book.ISBN == ISBN);
+            using (var context = new LibraryDbContext()) {
+                var existingBook = danhSachMuon.FirstOrDefault(book => book.TenDauSach == TenDauSach && book.ISBN == ISBN);
+                if (existingBook != null)
+                {
+                    // Hiển thị thông báo nếu đã tồn tại
+                    MessageBox.Show("Sách với tên và ISBN này đã được mượn!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
 
-            if (existingBook != null)
-            {
-                // Hiển thị thông báo nếu đã tồn tại
-                MessageBox.Show("Sách với tên và ISBN này đã tồn tại trong danh sách mượn!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                // Nếu không tồn tại, thêm mới vào danh sách
+                var newBorrowedBook = new BorrowedBook()
+                {
+                    TenDauSach = TenDauSach,
+                    ISBN = ISBN
+                };
+                danhSachMuon.Add(newBorrowedBook);
             }
-
-            // Nếu không tồn tại, thêm mới vào danh sách
-            var newBorrowedBook = new BorrowedBook()
-            {
-                TenDauSach = TenDauSach,
-                ISBN = ISBN
-            };
-            danhSachMuon.Add(newBorrowedBook);
         }
 
         private async Task EditCTDM()

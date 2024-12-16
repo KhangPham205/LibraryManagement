@@ -42,7 +42,7 @@ namespace LibraryManagementApplication
             if (tensachtb.SelectedItem != null)
             {
                 string selectedBookTitle = tensachtb.SelectedItem.ToString();
-                isbn.ItemsSource = _context.Sachs.Where(t => t.TenDauSach == selectedBookTitle).Select(t => t.ISBN).ToList();
+                isbn.ItemsSource = _context.Sachs.Where(t => t.TenDauSach == selectedBookTitle && t.TrangThai == "Có sẵn").Select(t => t.ISBN).ToList();
             }
         }
 
