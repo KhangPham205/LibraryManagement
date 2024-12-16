@@ -6,32 +6,41 @@
              StartupUri="SignIn.xaml">
     <Application.Resources>
         <Style TargetType="Button" x:Key="RoundButton">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Background" Value="#9acbff"/>
+            <Setter Property="Foreground" Value="#07209e"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Ellipse x:Name="btn"
-                                Fill="{TemplateBinding Background}" 
-                                Stroke="{TemplateBinding BorderBrush}" 
-                                StrokeThickness="{TemplateBinding BorderThickness}"/>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
+                        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                CornerRadius="20">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center"/>
+                        </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#07209e"/>
+                                <Setter Property="Foreground" Value="#d4ebf8"/>
+                            </Trigger>
+
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="btn" Property="Effect">
-                                    <Setter.Value>
-                                        <DropShadowEffect Color="black"
-                                                  Direction="45"
-                                                  ShadowDepth="4"
-                                                  Opacity="0.5"
-                                                  BlurRadius="10" />
-                                    </Setter.Value>
-                                </Setter>
+                                <Setter Property="Background" Value="#07209e"/>
+                                <Setter Property="Foreground" Value="#d4ebf8"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <Style TargetType="fa:IconImage" x:Key="icon:main">
+            <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
         </Style>
         <!--style button thông thường-->
         <Style TargetType="Button" x:Key="button:style1">
@@ -455,6 +464,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Style cho Icon trong submenu-->
         <Style TargetType="fa:IconImage" x:Key="icon:submenu">
             <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RadioButton}}" />
             <Setter Property="Width" Value="20" />

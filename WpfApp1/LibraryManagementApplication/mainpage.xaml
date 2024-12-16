@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagementApplication"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1180">
     <Grid Background="White">
@@ -44,34 +45,34 @@
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <TextBlock Text="Ngày bắt đầu: "
                                Style="{StaticResource textblock:style1}"/>
-                    <DatePicker x:Name="startdate" 
+                    <DatePicker x:Name="Startdate" 
                                 Style="{StaticResource datepick:style1}"
-                                SelectedDate="{Binding start}"/>
+                                SelectedDate="{Binding startdate}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Margin="5" Orientation="Horizontal">
                     <TextBlock Text="Ngày kết thúc: "
                         Style="{StaticResource textblock:style1}"/>
-                    <DatePicker x:Name="enddate" 
+                    <DatePicker x:Name="Enddate" 
                         Style="{StaticResource datepick:style1}"
-                        SelectedDate="{Binding start}"/>
+                        SelectedDate="{Binding enddate}"/>
                 </StackPanel>
                 <Button x:Name="show"
                         Grid.Column="4"
                         Content="Hiển thị"
                         Style="{StaticResource button:find}"
-                        Command="{Binding ShowCommand}"/>
+                        Click="show_Click"/>
             </Grid>
             <DataGrid x:Name="datagridDSMuon"
                       Grid.Row="1"
                       Margin="5" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã đơn mượn" Width="3*" Binding="{Binding MaMuon}"/>
-                    <DataGridTextColumn Header="Tên độc giả" Width="3*" Binding="{Binding MaDG}"/>
-                    <DataGridTextColumn Header="Tên nhân viên" Width="3*" Binding="{Binding MaNV}"/>
-                    <DataGridTextColumn Header="Ngày mượn" Width="3*" Binding="{Binding NgayMuon}"/>
-                    <DataGridTextColumn Header="Ngày trả dự kiến" Width="4*" Binding="{Binding NgayTraDK}"/>
-                    <DataGridTextColumn Header="Ngày trả thực tế" Width="4*" Binding="{Binding NgayTraTT}"/>
-                    <DataGridTextColumn Header="Phí phạt (VND)" Width="3*" Binding="{Binding PhiPhat}"/>
+                    <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
+                    <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}"/>
+                    <DataGridTextColumn Header="Mã nhân viên" Width="*" Binding="{Binding MaNV}"/>
+                    <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon, StringFormat='dd/MM/yyyy'}"/>
+                    <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK, StringFormat='dd/MM/yyyy'}"/>
+                    <DataGridTextColumn Header="Ngày trả thực tế" Width="*" Binding="{Binding NgayTraTT, StringFormat='dd/MM/yyyy'}"/>
+                    <DataGridTextColumn Header="Phí phạt (VND)" Width="*" Binding="{Binding PhiPhat}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Border Grid.Column="1"
@@ -173,13 +174,41 @@
                   Panel.ZIndex="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="backyear" 
+                            Grid.Row="1"
+                            Style="{StaticResource RoundButton}"
+                            HorizontalAlignment="Right"
+                            Click="backyear_Click">
+                            <fa:IconImage Style="{StaticResource icon:main}" Icon="CircleArrowLeft"/>
+                    </Button>
+                    <Button x:Name="nextyear" Grid.Column="2" 
+                            Grid.Row="1"
+                            Style="{StaticResource RoundButton}"
+                            HorizontalAlignment="Left"
+                            Click="nextyear_Click">
+                        <fa:IconImage Style="{StaticResource icon:main}" Icon="CircleArrowRight"/>
+                    </Button>
+                    <TextBlock x:Name="Namthongke"
+                               Grid.Row="1"
+                                Text="{Binding namthongke,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                Margin="5"
+                                HorizontalAlignment="Center"
+                                Grid.Column="1"
+                                Style="{StaticResource textblock:style1}"/>
                     <TextBlock Text="Thống kê số độc giả mượn sách hàng tháng"
                            Margin="5"
                            HorizontalAlignment="Center"
+                           Grid.ColumnSpan="3"
                            Style="{StaticResource textblock:style1}"/>
-                    <lvc:CartesianChart Margin="5" Grid.Row="1" Width="500" Series="{Binding lineSeries}">
+                        <lvc:CartesianChart Margin="5" Grid.Row="2" Grid.ColumnSpan="4" Width="500" Series="{Binding lineSeries,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <lvc:CartesianChart.AxisX >
                             <lvc:Axis Foreground="#07209e" FontSize="18" Labels="{Binding Months}" />
                         </lvc:CartesianChart.AxisX>
