@@ -23,5 +23,10 @@ namespace LibraryManagementApplication
         {
             InitializeComponent();
         }
+
+        private void changepassword_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

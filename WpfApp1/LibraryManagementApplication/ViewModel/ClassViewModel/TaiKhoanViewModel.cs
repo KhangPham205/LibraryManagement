@@ -78,6 +78,33 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
+        // Mật khẩu mới
+        private string newPassWord;
+        public string NewPassWord
+        {
+            get => newPassWord;
+            set
+            {
+                if (newPassWord != value)
+                {
+                    newPassWord = value; 
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string newPassWord2;
+        public string NewPassWord2
+        {
+            get => newPassWord2;
+            set
+            {
+                if (newPassWord2 != value)
+                {
+                    newPassWord2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public bool IsAdded;
         public ObservableCollection<TaiKhoan> TaiKhoanList { get; set; }
@@ -131,6 +158,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand ShowCommand { get; set; }
+        public ICommand ChangePasswordCommand { get; set; }
 
         public TaiKhoanViewModel()
         {
@@ -140,6 +168,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             DeleteCommand = new RelayCommand<object>((p) => SelectedTaiKhoan != null, async (p) => await DeleteTaiKhoan());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchTaiKhoan());
             ShowCommand = new RelayCommand<DataGrid>((p) => true, (p) => ShowTaiKhoan());
+            ChangePasswordCommand = new RelayCommand<DataGrid>((p) => true, async (p) => await ChangePassWord());
 
             LoadTaiKhoanList();
         }
@@ -236,6 +265,32 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         private void ShowTaiKhoan()
         {
             LoadTaiKhoanList();
+        }
+        private async Task ChangePassWord()
+        {
+            if (!string.IsNullOrEmpty(Password) &&
+                !string.IsNullOrEmpty(NewPassWord) &&
+                !string.IsNullOrEmpty(NewPassWord2) &&
+                NewPassWord.Equals(NewPassWord2))
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    TaiKhoan taiKhoan = context.TaiKhoans.Where(tk => tk.SDT == SDT && tk.Email == Email && tk.CCCD == CCCD && tk.Password == Password).FirstOrDefault();
+                    if (taiKhoan != null)
+                    {
+                        taiKhoan.Password = NewPassWord;
+                        bool isSuccess = await UpdateTaiKhoanInDatabaseAsync(taiKhoan);
+                        if (!isSuccess)
+                            MessageBox.Show("Error updating Tai Khoan.");
+                        else
+                            MessageBox.Show("Cập nhật mật khẩu thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                        MessageBox.Show("Mật khẩu cũ sai hoặc thông tin không trùng khớp", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+                MessageBox.Show("Vui lòng điền lại mật khẩu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         #region MethodToDatabase
         private static async Task<bool> IsTaiKhoanExistsAsync(string cccd, string email)
