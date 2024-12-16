@@ -20,8 +20,7 @@
                        FontFamily="roboto"
                        Foreground="#07209e"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Right"
-                       />
+                       HorizontalAlignment="Right"/>
         </Grid>
         <Grid Grid.Row="1"
               Background="#e6f3ff">
@@ -62,13 +61,13 @@
                         Style="{StaticResource button:find}"
                         Command="{Binding ShowCommand}"/>
             </Grid>
-            <DataGrid x:Name="muon"
+            <DataGrid x:Name="datagridDSMuon"
                       Grid.Row="1"
-                        Margin="5" >
+                      Margin="5" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã đơn mượn" Width="3*" Binding="{Binding MaMuon}"/>
-                    <DataGridTextColumn Header="Tên độc giả" Width="3*" Binding="{Binding TenDG}"/>
-                    <DataGridTextColumn Header="Tên nhân viên" Width="3*" Binding="{Binding TenNV}"/>
+                    <DataGridTextColumn Header="Tên độc giả" Width="3*" Binding="{Binding MaDG}"/>
+                    <DataGridTextColumn Header="Tên nhân viên" Width="3*" Binding="{Binding MaNV}"/>
                     <DataGridTextColumn Header="Ngày mượn" Width="3*" Binding="{Binding NgayMuon}"/>
                     <DataGridTextColumn Header="Ngày trả dự kiến" Width="4*" Binding="{Binding NgayTraDK}"/>
                     <DataGridTextColumn Header="Ngày trả thực tế" Width="4*" Binding="{Binding NgayTraTT}"/>
@@ -96,23 +95,27 @@
                                HorizontalAlignment="Center"
                                Style="{StaticResource textblock:style1}"/>
                     <lvc:PieChart LegendLocation="Bottom"        
-                                    Margin="0"
-                                  Grid.Row="1">
+                                  Margin="0"
+                                  Grid.Row="1"
+                                  >
                         <lvc:PieChart.Series>
                             <lvc:PieSeries Title="Có sẵn"
-                               Values="6" 
+                               x:Name="PieSeriesAvailable"
+                               Values="{Binding availableBooksCount}"
                                FontSize="14"
                                Fill="#9acbff"
                                DataLabels="True"
                                LabelPoint="{Binding PointLabel}"/>
                             <lvc:PieSeries Title="Đang mượn" 
-                               Values="1" 
+                               x:Name="PieSeriesBorrowed"
+                               Values="{Binding borrowedBooksCount}"
                                FontSize="14"
                                Fill="#FF36A4ED"
                                DataLabels="True"
                                LabelPoint="{Binding PointLabel}"/>
                             <lvc:PieSeries Title="Thất lạc" 
-                                Values="3" 
+                                x:Name="PieSeriesLost"
+                                Values="{Binding lostBooksCount}"
                                 FontSize="14"
                                 Fill="#07209e"
                                 DataLabels="True"

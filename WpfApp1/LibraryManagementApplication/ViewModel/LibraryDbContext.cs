@@ -1,15 +1,4 @@
-﻿
-
-
-
-
-
-
-
-
-
-
-using LibraryManagementApplication.Model.Class;
+﻿using LibraryManagementApplication.Model.Class;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
