@@ -130,8 +130,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                         MaMuon = MaMuon,
                         MaDG = MaDG,
                         MaNV = GlobalData.LoginUser.UserID,
-                        NgayMuon = DateTime.Now,
-                        NgayTraDK = DateTime.Now.AddMonths(1),
+                        NgayMuon = DateTime.Now.Date,
+                        NgayTraDK = DateTime.Now.AddMonths(1).Date,
                         NgayTraTT = null,
                         PhiPhat = 0
                     };
@@ -151,13 +151,21 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                             MaDauSach = maDauSach,
                             ISBN = item.ISBN,
                         };
+
                         context.CTDMs.Add(ctdm);
+
+                        var sachToUpdate = context.Sachs
+                                          .FirstOrDefault(t => t.MaDauSach == maDauSach && t.ISBN == item.ISBN);
+                        if (sachToUpdate != null)
+                        {
+                            sachToUpdate.TrangThai = "Được mượn"; // Cập nhật trạng thái
+                        }
                     }
 
                     // Lưu thay đổi vào cơ sở dữ liệu
                     await context.SaveChangesAsync();
                 }
-                MessageBox.Show("Thêm đơn mượn và chi tiết đơn mượn thành công!");
+                //MessageBox.Show("Thêm đơn mượn và chi tiết đơn mượn thành công!");
             }
             catch (DbUpdateException dbEx)
             {

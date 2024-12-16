@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManagementApplication.Model.Class
 {
@@ -13,9 +10,28 @@ namespace LibraryManagementApplication.Model.Class
         public string MaMuon { get; set; }
         public string MaDG { get; set; }
         public string MaNV { get; set; }
-        public DateTime NgayMuon { get; set; }
-        public DateTime NgayTraDK { get; set; }
-        public DateTime? NgayTraTT { get; set; } // Nullable for optional values
+
+        private DateTime _ngayMuon;
+        public DateTime NgayMuon
+        {
+            get => _ngayMuon.Date;  // Trả về chỉ phần ngày
+            set => _ngayMuon = value.Date;  // Gán chỉ phần ngày
+        }
+
+        private DateTime _ngayTraDK;
+        public DateTime NgayTraDK
+        {
+            get => _ngayTraDK.Date;  // Trả về chỉ phần ngày
+            set => _ngayTraDK = value.Date;  // Gán chỉ phần ngày
+        }
+
+        private DateTime? _ngayTraTT;
+        public DateTime? NgayTraTT
+        {
+            get => _ngayTraTT?.Date;  // Trả về chỉ phần ngày (nếu không null)
+            set => _ngayTraTT = value?.Date;  // Gán chỉ phần ngày (nếu không null)
+        }
+
         public decimal? PhiPhat { get; set; }
 
         // Navigation properties
@@ -30,9 +46,9 @@ namespace LibraryManagementApplication.Model.Class
             MaMuon = maMuon;
             MaDG = maDG;
             MaNV = maNV;
-            NgayMuon = ngayMuon;
-            NgayTraDK = ngayTraDK;
-            NgayTraTT = ngayTraTT;
+            NgayMuon = ngayMuon.Date; // Đảm bảo chỉ phần ngày được lưu
+            NgayTraDK = ngayTraDK.Date; // Đảm bảo chỉ phần ngày được lưu
+            NgayTraTT = ngayTraTT?.Date; // Đảm bảo chỉ phần ngày được lưu nếu không null
             PhiPhat = phiPhat;
         }
     }

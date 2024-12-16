@@ -10,6 +10,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using LibraryManagementApplication;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Windows.Data;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
@@ -119,8 +121,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         public ObservableCollection<DonMuon> DonMuonList { get; set; }
-        private ThongTinDonMuon _selectedDonMuon;
-        public ThongTinDonMuon SelectedDonMuon
+        private DonMuon _selectedDonMuon;
+        public DonMuon SelectedDonMuon
         {
             get { return _selectedDonMuon; }
             set
@@ -132,11 +134,14 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     if (SelectedDonMuon != null)
                     {
                         MaMuon = SelectedDonMuon.MaMuon;
-                        MaDG = context.DocGias.Where(t => t.TenDG == SelectedDonMuon.TenDG).Select(t => t.MaDG).FirstOrDefault();
-                        MaNV = context.TaiKhoans.Where(nv => nv.UserName == SelectedDonMuon.TenNV).Select(nv => nv.UserID).FirstOrDefault();
-                        NgayMuon = SelectedDonMuon.NgayMuon;
-                        NgayTraDK = SelectedDonMuon.NgayTraDK;
-                        NgayTraTT = SelectedDonMuon.NgayTraTT.ToString();
+                        MaDG = SelectedDonMuon.MaDG;
+                        MaNV = SelectedDonMuon.MaNV;
+                        NgayMuon = SelectedDonMuon.NgayMuon.ToShortDateString();
+                        NgayTraDK = SelectedDonMuon.NgayTraDK.ToShortDateString();
+                        if (SelectedDonMuon.NgayTraTT != null)
+                            NgayTraTT = DateTime.Parse(SelectedDonMuon.NgayTraTT.ToString()).ToShortDateString();
+                        else
+                            NgayTraTT = "";
                         PhiPhat = SelectedDonMuon.PhiPhat.ToString();
 
                         DanhSachMuon.Clear();
@@ -159,6 +164,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand RestoreCommand { get; set; }
+        public ICommand ShowCommand { get; set; }
         private async Task<string> CreateMaDMAsync()
         {
             // Generate a hash from MaMuon
@@ -196,13 +202,15 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             DeleteCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await DeleteDonMuon());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDonMuon(p));
             RestoreCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await TraDonMuon());
-
-            //LoadDonMuonList();
+            ShowCommand = new RelayCommand<object>((p) => true, async (p) => await LoadDonMuonList());
+            
+            LoadDonMuonList();
         }
 
         #region Method
-        private async void LoadDonMuonList()
+        private async Task LoadDonMuonList()
         {
+            DonMuonList.Clear();
             var donMuons = await GetAllDonMuonAsync();
             foreach (var donMuon in donMuons)
             {
@@ -214,15 +222,15 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             DonMuon newDonMuon = new DonMuon()
             {
-                MaMuon = MaMuon = await CreateMaDMAsync(),
+                MaMuon = await CreateMaDMAsync(),
                 MaDG = MaDG,
                 MaNV = MaNV = GlobalData.LoginUser.UserID,
-                NgayMuon = DateTime.Now,
-                NgayTraDK = DateTime.Now.AddMonths(1),
+                NgayMuon = DateTime.Now.Date,  // Chỉ lấy phần ngày, tháng, năm
+                NgayTraDK = DateTime.Now.AddMonths(1).Date,  // Chỉ lấy phần ngày, tháng, năm
                 NgayTraTT = null,
                 PhiPhat = 0
             };
-            //MessageBox.Show(newDonMuon.MaMuon + " " + newDonMuon.NgayMuon);
+            MessageBox.Show(newDonMuon.NgayMuon + " " + newDonMuon.NgayTraDK);
             bool isSuccess = await AddDonMuonToDatabaseAsync(newDonMuon);
             if (!isSuccess)
                 MessageBox.Show("Cannot save changes to DonMuon.");
@@ -234,16 +242,43 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             if (SelectedDonMuon != null)
             {
+                DateTime ngayTraTT = DateTime.Now.Date; // Ngày trả thực tế
+                DateTime ngayTraDK = SelectedDonMuon.NgayTraDK.Date; // Ngày trả dự kiến
+
+                int soNgayTre = (ngayTraTT - ngayTraDK).Days; // Tính số ngày trễ
+                decimal phiPhat = 0;
+
+                if (soNgayTre > 0)
+                {
+                    // Mức phạt là 5000 mỗi ngày trễ
+                    phiPhat = soNgayTre * 5000;
+                }
+
                 DonMuon donMuon = new DonMuon()
                 {
                     MaMuon = SelectedDonMuon.MaMuon,
                     MaDG = context.DonMuons.Where(t => t.MaMuon == SelectedDonMuon.MaMuon).Select(t => t.MaDG).FirstOrDefault(),
                     MaNV = GlobalData.LoginUser.UserID,
-                    NgayMuon = DateTime.Parse(SelectedDonMuon.NgayMuon),
-                    NgayTraDK = DateTime.Parse(SelectedDonMuon.NgayTraDK),
-                    NgayTraTT = DateTime.Now,
-                    PhiPhat = 0
+                    NgayMuon = SelectedDonMuon.NgayMuon,
+                    NgayTraDK = SelectedDonMuon.NgayTraDK,
+                    NgayTraTT = DateTime.Now.Date,  // Chỉ lấy phần ngày, tháng, năm
+                    PhiPhat = phiPhat
                 };
+
+                // Cập nhật trạng thái sách thành "Có sẵn"
+                var ctdmsToUpdate = context.CTDMs.Where(ctdm => ctdm.MaMuon == SelectedDonMuon.MaMuon).ToList();
+
+                foreach (var item in ctdmsToUpdate)
+                {
+                    var sachToUpdate = context.Sachs
+                                              .FirstOrDefault(s => s.MaDauSach == item.MaDauSach && s.ISBN == item.ISBN);
+                    if (sachToUpdate != null)
+                    {
+                        sachToUpdate.TrangThai = "Có sẵn"; // Cập nhật trạng thái sách
+                    }
+                }
+                // Lưu thay đổi vào cơ sở dữ liệu
+                await context.SaveChangesAsync();
 
                 bool isSuccess = await UpdateDonMuonInDatabaseAsync(donMuon);
                 if (!isSuccess)
