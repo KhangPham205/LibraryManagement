@@ -5,7 +5,9 @@ using LiveCharts.Wpf;
 using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,15 +26,99 @@ namespace LibraryManagementApplication
     /// <summary>
     /// Interaction logic for mainpage.xaml
     /// </summary>
-    public partial class mainpage : Page
+    public partial class mainpage : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         public LibraryDbContext context = new LibraryDbContext();
         public int availableBooksCount { get; set; }
         public int borrowedBooksCount { get; set; }
         public int lostBooksCount { get; set; }
+        public Func<ChartPoint, string> PointLabel { get; set; }
+        public SeriesCollection Series { get; set; }
+        public List<string> Labels { get; set; }
+        public string[] Months { get; set; }
+        public Func<double, string> Formatter { get; set; }
+        private string _namthongke;
+        public string namthongke
+        {
+            get => _namthongke;
+            set
+            {
+                if (_namthongke != value)
+                {
+                    _namthongke = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private SeriesCollection _lineSeries;
+        public SeriesCollection lineSeries
+        {
+            get => _lineSeries;
+            set
+            {
+                if (_lineSeries != value)
+                {
+                    _lineSeries = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int _yearthongke;
+        public int yearthongke
+        {
+            get => _yearthongke;
+            set
+            {
+                if (_yearthongke != value)
+                {
+                    _yearthongke = value;
+                    namthongke = $"Năm {value}";
+                    lineSeries = new SeriesCollection
+                {
+                    new LineSeries
+                    {
+                        Title = "Số sách mượn",
+                        Values = new ChartValues<int>(GetBooksBorrowedByMonth())
+                    }
+                };
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private DateTime? _startdate;
+        public DateTime? startdate
+        {
+            get { return _startdate; }
+            set
+            {
+                if (_startdate != value)
+                {
+                    _startdate = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private DateTime? _enddate;
+        public DateTime? enddate
+        {
+            get { return _enddate; }
+            set
+            {
+                if (_enddate != value)
+                {
+                    _enddate = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public mainpage()
         {
             InitializeComponent();
+            _yearthongke = int.Parse(DateTime.Now.Year.ToString());
+            _namthongke = $"Năm {_yearthongke.ToString()}";
             datagridDSMuon.ItemsSource = context.DonMuons.ToList();
             
             // Gán danh sách dữ liệu cho DataGrid
@@ -50,13 +136,7 @@ namespace LibraryManagementApplication
             Labels = Top5TheLoaiSachs().Select(t => t.TenTL).ToList();
 
             // Biểu đồ đường
-            lineSeries = new SeriesCollection() { 
-                new LineSeries
-                {
-                    Title = "Số sách mượn",
-                    Values = new ChartValues<int>(GetBooksBorrowedByMonth())
-                }
-            };
+            UpdateLineSeries();
             Months = new[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" };
             Formatter = value => value.ToString();
 
@@ -75,15 +155,6 @@ namespace LibraryManagementApplication
             PieSeriesBorrowed.Values = new ChartValues<int> { borrowedBooksCount };
             PieSeriesLost.Values = new ChartValues<int> { lostBooksCount };
         }
-        
-        public Func<ChartPoint, string> PointLabel { get; set; }
-        public SeriesCollection Series { get; set; }
-        public SeriesCollection lineSeries { get; set; }
-        public List<string> Labels { get; set; }
-        public string[] Months { get; set; }
-
-        public Func<double, string> Formatter { get; set; }
-
         public List<TheLoaiReport> Top5TheLoaiSachs()
         {
             // Kết nối các bảng: CTDM, Sach, DauSach, TheLoai
@@ -117,7 +188,7 @@ namespace LibraryManagementApplication
             // Lấy dữ liệu từ bảng DonMuon và nhóm theo tháng
             var query = from donMuon in context.DonMuons
                         join ctdm in context.CTDMs on new {donMuon.MaMuon} equals new {ctdm.MaMuon}
-                        where donMuon.NgayMuon != null
+                        where donMuon.NgayMuon != null && donMuon.NgayMuon.Year == _yearthongke
                         group donMuon by donMuon.NgayMuon.Month into grouped
                         select new
                         {
@@ -132,6 +203,44 @@ namespace LibraryManagementApplication
             }
 
             return borrowData;
+        }
+       
+
+        public void backyear_Click(object sender, RoutedEventArgs e)
+        {
+            yearthongke--;
+            UpdateLineSeries();
+
+        }
+
+        public void nextyear_Click(object sender, RoutedEventArgs e)
+        {
+            yearthongke++;
+            UpdateLineSeries();
+
+        }
+        private void UpdateLineSeries()
+        {
+            lineSeries = new SeriesCollection()
+            {
+                new LineSeries
+                {
+                    Title = "Số sách mượn",
+                    Values = new ChartValues<int>(GetBooksBorrowedByMonth())
+                }
+            };
+        }
+       protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void show_Click(object sender, RoutedEventArgs e)
+        {
+            datagridDSMuon.ItemsSource= context.DonMuons
+                .Where(d => d.NgayMuon >= startdate.Value && d.NgayMuon <= enddate.Value)
+                .ToList();
+
         }
     }
 
