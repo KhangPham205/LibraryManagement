@@ -197,13 +197,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             DanhSachMuon = new ObservableCollection<BorrowedBook>();
 
             DonMuonList = new ObservableCollection<DonMuon>();
-            AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddDonMuon());
+            AddCommand = new RelayCommand<object>((p) => true, (p) => AddDonMuon());
             EditCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await EditDonMuon());
             DeleteCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await DeleteDonMuon());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDonMuon(p));
             RestoreCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await TraDonMuon());
             ShowCommand = new RelayCommand<object>((p) => true, async (p) => await LoadDonMuonList());
-            
             LoadDonMuonList();
         }
 
@@ -218,24 +217,27 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        private async Task AddDonMuon()
+        private void AddDonMuon()
         {
-            DonMuon newDonMuon = new DonMuon()
-            {
-                MaMuon = await CreateMaDMAsync(),
-                MaDG = MaDG,
-                MaNV = MaNV = GlobalData.LoginUser.UserID,
-                NgayMuon = DateTime.Now.Date,  // Chỉ lấy phần ngày, tháng, năm
-                NgayTraDK = DateTime.Now.AddMonths(1).Date,  // Chỉ lấy phần ngày, tháng, năm
-                NgayTraTT = null,
-                PhiPhat = 0
-            };
-            MessageBox.Show(newDonMuon.NgayMuon + " " + newDonMuon.NgayTraDK);
-            bool isSuccess = await AddDonMuonToDatabaseAsync(newDonMuon);
-            if (!isSuccess)
-                MessageBox.Show("Cannot save changes to DonMuon.");
-            else
-                DonMuonList.Add(newDonMuon);
+            var addborrowwindow = new addborrowwindow();
+            addborrowwindow.ShowDialog();
+            LoadDonMuonList();
+            //DonMuon newDonMuon = new DonMuon()
+            //{
+            //    MaMuon = await CreateMaDMAsync(),
+            //    MaDG = MaDG,
+            //    MaNV = MaNV = GlobalData.LoginUser.UserID,
+            //    NgayMuon = DateTime.Now.Date,  // Chỉ lấy phần ngày, tháng, năm
+            //    NgayTraDK = DateTime.Now.AddMonths(1).Date,  // Chỉ lấy phần ngày, tháng, năm
+            //    NgayTraTT = null,
+            //    PhiPhat = 0
+            //};
+            //MessageBox.Show(newDonMuon.NgayMuon + " " + newDonMuon.NgayTraDK);
+            //bool isSuccess = await AddDonMuonToDatabaseAsync(newDonMuon);
+            //if (!isSuccess)
+            //    MessageBox.Show("Cannot save changes to DonMuon.");
+            //else
+            //    DonMuonList.Add(newDonMuon);
         }
 
         private async Task TraDonMuon()

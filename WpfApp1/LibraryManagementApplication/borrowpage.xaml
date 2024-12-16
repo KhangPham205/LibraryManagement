@@ -159,7 +159,7 @@
                                     Margin="5"   
                                     Style="{DynamicResource button:add}"
                                     HorizontalAlignment="Left"
-                                    Click="adddon_Click"/>
+                                    Command="{Binding AddCommand}"/>
                             <Button x:Name="traddon"
                                     Content="Trả"
                                     Grid.Column="2"
