@@ -10,10 +10,10 @@ namespace LibraryManagementApplication.Model.Class
     {
         public string MaDauSach { get; set; }
         public string TenDauSach { get; set; }
-        public string TenTG { get; set; }
+        public string MaTG { get; set; }
         public string NgonNgu {  get; set; }
-        public string TenTL { get; set; }
-        public string TenNXB { get; set; }
+        public string MaTL { get; set; }
+        public string MaNXB { get; set; }
         public ICollection<Sach> Sachs { get; set; }
 
         public DauSach() { }

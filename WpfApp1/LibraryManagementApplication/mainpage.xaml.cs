@@ -161,8 +161,8 @@ namespace LibraryManagementApplication
             var query = from ctdm in context.CTDMs
                         join sach in context.Sachs on new { ctdm.MaDauSach, ctdm.ISBN } equals new { sach.MaDauSach, sach.ISBN }
                         join dausach in context.DauSachs on sach.MaDauSach equals dausach.MaDauSach
-                        join theloai in context.TheLoais on dausach.TenTL equals theloai.TenTL // Giả sử bạn kết nối theo TenTL
-                        group theloai by theloai.TenTL into grouped
+                        join theloai in context.TheLoais on dausach.MaTL equals theloai.MaTL
+                        group theloai by theloai.MaTL into grouped
                         select new
                         {
                             TheLoai = grouped.Key,

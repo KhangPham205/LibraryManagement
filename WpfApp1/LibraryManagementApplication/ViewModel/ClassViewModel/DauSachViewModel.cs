@@ -13,15 +13,13 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
     public class DauSachViewModel : BaseViewModel
     {
+        private LibraryDbContext dbContext;
         private string maDauSach;
         private string tenDauSach;
         private string tenTG;
         private string ngonNgu;
         private string tenTL;
         private string tenNXB;
-        private string textTL;
-        private string textNXB;
-        private string textTG;
         public string MaDauSach 
         { 
             get => maDauSach;
@@ -94,7 +92,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
-        public ObservableCollection<DauSach> DauSachList { get; set; }
+        public ObservableCollection<ThongTinDauSach> DauSachList { get; set; }
         private DauSach _selectedDauSach;
         public DauSach SelectedDauSach
         {
@@ -109,10 +107,32 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     {
                         MaDauSach = SelectedDauSach.MaDauSach;
                         TenDauSach = SelectedDauSach.TenDauSach;
-                        TenTG = SelectedDauSach.TenTG;
+                        TenTG = dbContext.TacGias.Where(t => t.MaTG == SelectedDauSach.MaTG).Select(t => t.TenTG).FirstOrDefault();
                         NgonNgu = SelectedDauSach.NgonNgu;
-                        TenTL = SelectedDauSach.TenTL;
-                        TenNXB = SelectedDauSach.TenNXB;
+                        TenTL = dbContext.TheLoais.Where(t => t.MaTL == SelectedDauSach.MaTL).Select(t => t.TenTL).FirstOrDefault();
+                        TenNXB = dbContext.NhaXuatBans.Where(t => t.MaNXB == SelectedDauSach.MaNXB).Select(t => t.TenNXB).FirstOrDefault();
+                    }
+                }
+            }
+        }
+        private ThongTinDauSach _selectedRow;
+        public ThongTinDauSach SelectedRow
+        {
+            get { return _selectedRow; }
+            set
+            {
+                if (_selectedRow != value)
+                {
+                    _selectedRow = value;
+                    OnPropertyChanged(nameof(SelectedRow));
+                    if (SelectedRow != null)
+                    {
+                        MaDauSach = SelectedRow.MaDauSach;
+                        TenDauSach = SelectedRow.TenDauSach;
+                        TenTG = SelectedRow.TenTG;
+                        NgonNgu = SelectedRow.NgonNgu;
+                        TenTL = SelectedRow.TenTL;
+                        TenNXB = SelectedRow.TenNXB;
                     }
                 }
             }
@@ -147,10 +167,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public ICommand SearchCommand { get; set; }
         public DauSachViewModel()
         {
-            DauSachList = new ObservableCollection<DauSach>();
+            dbContext = new LibraryDbContext();
+
+            DauSachList = new ObservableCollection<ThongTinDauSach>();
             AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddDauSach());
-            EditCommand = new RelayCommand<object>((p) => SelectedDauSach != null, async (p) => await EditDauSach());
-            DeleteCommand = new RelayCommand<object>((p) => SelectedDauSach != null, async (p) => await DeleteDauSach());
+            EditCommand = new RelayCommand<object>((p) => SelectedRow != null, async (p) => await EditDauSach());
+            DeleteCommand = new RelayCommand<object>((p) => SelectedRow != null, async (p) => await DeleteDauSach());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDauSach());
 
             LoadDauSachList();
@@ -160,15 +182,25 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             DauSachList.Clear();
             var DauSachs = await GetAllDauSachsAsync();
+            ThongTinDauSach thongTinDauSach;
             foreach (var DauSach in DauSachs)
             {
-                DauSachList.Add(DauSach);
+                DauSachList.Add(thongTinDauSach = new ThongTinDauSach()
+                {
+                    MaDauSach = DauSach.MaDauSach,
+                    TenDauSach = DauSach.TenDauSach,
+                    TenTG = dbContext.TacGias.FirstOrDefault(t => t.MaTG == DauSach.MaTG).TenTG,
+                    NgonNgu = DauSach.NgonNgu,
+                    TenTL = dbContext.TheLoais.FirstOrDefault(t => t.MaTL == DauSach.MaTL).TenTL,
+                    TenNXB = dbContext.NhaXuatBans.FirstOrDefault(t => t.MaNXB == DauSach.MaNXB).TenNXB,
+                });
             }
         }
 
         private async Task AddDauSach()
         {
-            if (!string.IsNullOrEmpty(TenDauSach) && !string.IsNullOrEmpty(TenTG) &&
+            if (!string.IsNullOrEmpty(TenDauSach) && 
+                !string.IsNullOrEmpty(TenTG) &&
                 !string.IsNullOrEmpty(NgonNgu) &&
                 !string.IsNullOrEmpty(TenTL) &&
                 !string.IsNullOrEmpty(TenNXB))
@@ -180,19 +212,66 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     return;
                 }
 
+                TacGia tacGia = dbContext.TacGias.FirstOrDefault(t => t.TenTG == TenTG); 
+                if (tacGia == null)
+                {
+                    tacGia = new TacGia()
+                    {
+                        MaTG = await CreateMaTGAsync(),
+                        TenTG = TenTG 
+                    }; 
+                    // Thêm tacGia mới vào dbContext
+                    dbContext.TacGias.Add(tacGia); 
+                    await dbContext.SaveChangesAsync(); 
+                }
+
+                TheLoai theLoai = dbContext.TheLoais.FirstOrDefault(t => t.TenTL == TenTL);
+                if (theLoai == null)
+                {
+                    theLoai = new TheLoai()
+                    {
+                        MaTL = await CreateMaTLAsync(),
+                        TenTL = TenTL
+                    };
+                    dbContext.TheLoais.Add(theLoai);
+                    await dbContext.SaveChangesAsync();
+                }
+
+                NhaXuatBan nhaXuatBan = dbContext.NhaXuatBans.FirstOrDefault(t => t.TenNXB == TenNXB);
+                if (nhaXuatBan == null)
+                {
+                    nhaXuatBan = new NhaXuatBan()
+                    {
+                        MaNXB = await CreateMaNXBAsync(),
+                        TenNXB = TenNXB
+                    };
+                    dbContext.Add(nhaXuatBan);
+                    await dbContext.SaveChangesAsync();
+                }
+
                 var newDauSach = new DauSach()
                 {
                     MaDauSach = MaDauSach = await CreateMaDSAsync(TenDauSach),
                     TenDauSach = TenDauSach,
-                    TenTG = TenTG,
+                    MaTG = tacGia.MaTG,
                     NgonNgu = NgonNgu,
-                    TenTL = TenTL,
-                    TenNXB = TenNXB
+                    MaTL = theLoai.MaTL,
+                    MaNXB = nhaXuatBan.MaNXB,
                 };
+
+                ThongTinDauSach thongTinDauSach;
                 //EXMessagebox.Show(newDauSach.MaDauSach + " " + newDauSach.TenDauSach + " " + newDauSach.TenTL);
                 bool isSuccess = await AddDauSachToDatabaseAsync(newDauSach);
                 if (isSuccess)
-                    DauSachList.Add(newDauSach);
+                    DauSachList.Add(thongTinDauSach = new ThongTinDauSach()
+                    {
+                        MaDauSach = newDauSach.MaDauSach,
+                        TenDauSach = newDauSach.TenDauSach,
+                        TenTG = dbContext.TacGias.FirstOrDefault(t => t.MaTG == newDauSach.MaTG).TenTG,
+                        NgonNgu = NgonNgu,
+                        TenTL = dbContext.TheLoais.FirstOrDefault(t => t.MaTL == newDauSach.MaTL).TenTL,
+                        TenNXB = dbContext.NhaXuatBans.FirstOrDefault(t => t.MaNXB == newDauSach.MaNXB).TenNXB,
+                    });
                 else
                     EXMessagebox.Show("Cannot save changes.");
             }
@@ -206,10 +285,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             {
                 SelectedDauSach.MaDauSach = MaDauSach;
                 SelectedDauSach.TenDauSach = TenDauSach;
-                SelectedDauSach.TenTG = TenTG;
+                SelectedDauSach.MaTG = dbContext.TacGias.Where(t => t.TenTG == TenTG).Select(t => t.MaTG).FirstOrDefault();
                 SelectedDauSach.NgonNgu = NgonNgu;
-                SelectedDauSach.TenTL = TenTL;
-                SelectedDauSach.TenNXB = TenNXB;
+                SelectedDauSach.MaTL = dbContext.TheLoais.Where(t => t.TenTL == TenTL).Select(t => t.MaTL).FirstOrDefault();
+                SelectedDauSach.MaNXB = dbContext.NhaXuatBans.Where(t => t.TenNXB == TenNXB).Select(t => t.MaNXB).FirstOrDefault();
                 bool isSuccess = await UpdateDauSachInDatabaseAsync(SelectedDauSach);
                 if (!isSuccess)
                 {
@@ -226,7 +305,18 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool isSuccess = await DeleteDauSachFromDatabaseAsync(SelectedDauSach);
                 if (isSuccess)
                 {
-                    DauSachList.Remove(SelectedDauSach);
+                    ThongTinDauSach thongTinDauSach = new ThongTinDauSach()
+                    {
+                        MaDauSach = SelectedDauSach.MaDauSach,
+                        TenDauSach = SelectedDauSach.TenDauSach,
+                        TenTG = dbContext.TacGias.FirstOrDefault(t => t.MaTG == SelectedDauSach.MaTG).TenTG,
+                        NgonNgu = NgonNgu,
+                        TenTL = dbContext.TheLoais.FirstOrDefault(t => t.MaTL == SelectedDauSach.MaTL).TenTL,
+                        TenNXB = dbContext.NhaXuatBans.FirstOrDefault(t => t.MaNXB == SelectedDauSach.MaNXB).TenNXB,
+                    };
+                    bool flag = DauSachList.Remove(thongTinDauSach);
+                    if (!flag)
+                        EXMessagebox.Show("Không xóa phần tử trong DauSachList được");
                 }
                 else
                 {
@@ -237,11 +327,24 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async Task SearchDauSach()
         {
-            var filteredListFromDb = await SearchDauSachInDatabaseAsync(TenDauSach, TenTG, NgonNgu, TenTL, TenNXB);
+            var filteredListFromDb = await SearchDauSachInDatabaseAsync(TenDauSach,
+                                                                        dbContext.TacGias.Where(t => t.TenTG == TenTG).Select(t => t.MaTG).FirstOrDefault(), 
+                                                                        NgonNgu, 
+                                                                        dbContext.TheLoais.Where(t => t.TenTL == TenTL).Select(t => t.MaTL).FirstOrDefault(),
+                                                                        dbContext.NhaXuatBans.Where(t => t.TenNXB == TenNXB).Select(t => t.MaNXB).FirstOrDefault());
             DauSachList.Clear();
+            ThongTinDauSach thongTinDauSach;
             foreach (var DauSach in filteredListFromDb)
             {
-                DauSachList.Add(DauSach);
+                DauSachList.Add(thongTinDauSach = new ThongTinDauSach()
+                {
+                    MaDauSach = DauSach.MaDauSach,
+                    TenDauSach = DauSach.TenDauSach,
+                    TenTG = dbContext.TacGias.FirstOrDefault(t => t.MaTG == DauSach.MaTG).TenTG,
+                    NgonNgu = NgonNgu,
+                    TenTL = dbContext.TheLoais.FirstOrDefault(t => t.MaTL == DauSach.MaTL).TenTL,
+                    TenNXB = dbContext.NhaXuatBans.FirstOrDefault(t => t.MaNXB == DauSach.MaNXB).TenNXB,
+                });
             }
         }
 
@@ -321,7 +424,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-        private static async Task<List<DauSach>> SearchDauSachInDatabaseAsync(string tenDauSach, string tenTG, string ngonNgu, string tenTL, string nxb)
+        private static async Task<List<DauSach>> SearchDauSachInDatabaseAsync(string tenDauSach, string maTG, string ngonNgu, string maTL, string maNXB)
         {
             try
             {
@@ -333,17 +436,17 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     if (!string.IsNullOrEmpty(tenDauSach))
                         query = query.Where(s => s.TenDauSach.Contains(tenDauSach));
 
-                    if (!string.IsNullOrEmpty(tenTG))
-                        query = query.Where(s => s.TenTG.Contains(tenTG));
+                    if (!string.IsNullOrEmpty(maTG))
+                        query = query.Where(s => s.MaTG.Contains(maTG));
 
                     if (!string.IsNullOrEmpty(ngonNgu))
                         query = query.Where(s => s.NgonNgu.Contains(ngonNgu));
 
-                    if (!string.IsNullOrEmpty(tenTL))
-                        query = query.Where(s => s.TenTL.Contains(tenTL));
+                    if (!string.IsNullOrEmpty(maTL))
+                        query = query.Where(s => s.MaTL.Contains(maTL));
 
-                    if (!string.IsNullOrEmpty(nxb))
-                        query = query.Where(s => s.TenNXB.Contains(nxb));
+                    if (!string.IsNullOrEmpty(maNXB))
+                        query = query.Where(s => s.MaNXB.Contains(maNXB));
 
                     var result = await query.ToListAsync();
                     return result;
@@ -372,6 +475,84 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
+        private async Task<string> CreateMaTGAsync()
+        {
+            // Generate a hash from TenTL
+            using (var context = new LibraryDbContext())
+            {
+                // Lấy tất cả các mã "MaTG" hiện tại trong cơ sở dữ liệu có tiền tố "TG"
+                var existingCodes = await context.TacGias
+                                                .Where(tl => tl.MaTG.StartsWith("TG"))
+                                                .Select(tl => tl.MaTG)
+                                                .ToListAsync();
+
+                int maxCodeNumber = existingCodes
+                    .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "TG"
+                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
+                    .Max(); // Lấy số lớn nhất trong danh sách mã
+
+                // Tạo mã mới với số tăng dần
+                int newCodeNumber = maxCodeNumber + 1;
+
+                // Trả về mã mới với định dạng "TG" + số có 3 chữ số
+                return $"TG{newCodeNumber:D3}";
+            }
+        }
+        private async Task<string> CreateMaTLAsync()
+        {
+            // Generate a hash from TenTL
+            using (var context = new LibraryDbContext())
+            {
+                // Lấy tất cả các mã "MaTL" hiện tại trong cơ sở dữ liệu có tiền tố "TL"
+                var existingCodes = await context.TheLoais
+                                                 .Where(tl => tl.MaTL.StartsWith("TL"))
+                                                 .Select(tl => tl.MaTL)
+                                                 .ToListAsync();
+
+                int maxCodeNumber = existingCodes
+                    .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "TL"
+                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
+                    .Max(); // Lấy số lớn nhất trong danh sách mã
+
+                // Tạo mã mới với số tăng dần
+                int newCodeNumber = maxCodeNumber + 1;
+
+                // Trả về mã mới với định dạng "TL" + số có 3 chữ số
+                return $"TL{newCodeNumber:D3}";
+            }
+        }
+        private async Task<string> CreateMaNXBAsync()
+        {
+            // Generate a hash from TenNXB
+            using (var context = new LibraryDbContext())
+            {
+                // Lấy tất cả các mã "MaNXB" hiện tại trong cơ sở dữ liệu có tiền tố "NXB"
+                var existingCodes = await context.NhaXuatBans
+                                                 .Where(tl => tl.MaNXB.StartsWith("NXB"))
+                                                 .Select(tl => tl.MaNXB)
+                                                 .ToListAsync();
+
+                int maxCodeNumber = existingCodes
+                    .Select(code => int.TryParse(code.Substring(3), out int num) ? num : 0) // Lấy phần số sau "NXB"
+                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
+                    .Max(); // Lấy số lớn nhất trong danh sách mã
+                // Tạo mã mới với số tăng dần
+                int newCodeNumber = maxCodeNumber + 1;
+
+                // Trả về mã mới với định dạng "NXB" + số có 3 chữ số
+                return $"NXB{newCodeNumber:D3}";
+            }
+        }
         #endregion
+    }
+
+    public partial class ThongTinDauSach
+    {
+        public string MaDauSach {  get; set; }
+        public string TenDauSach { get; set; }
+        public string TenTG {  get; set; }
+        public string NgonNgu {  get; set; }
+        public string TenTL { get; set; }
+        public string TenNXB { get; set; }
     }
 }

@@ -31,14 +31,6 @@ namespace LibraryManagementApplication
             {
                 LoadTheLoai();
             };
-
-            //List<DauSach> danhSachSach = new List<DauSach> 
-            //{ 
-            //    new DauSach { MaDauSach = "S001", TenDauSach = "Sách A", NgonNgu = "Tiếng Việt" },
-            //    new DauSach {MaDauSach = "S002", TenDauSach = "Sách B", NgonNgu = "Tiếng Anh"}
-            //};
-            //// Gán danh sách dữ liệu cho DataGrid
-            //sach.ItemsSource = danhSachSach;
         }
         private void LoadTheLoai()
         {

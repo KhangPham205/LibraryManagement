@@ -37,37 +37,6 @@ namespace LibraryManagementApplication
             //_ = LoadThongTin();
         }
 
-        //private async Task<bool> LoadThongTin()
-        //{
-        //    //ttdonmuons.Clear();
-        //    //var donMuons = await _context.DonMuons.ToListAsync();
-
-        //    //foreach (var item in donMuons)
-        //    //{
-        //    //    var tenDocGia = await _context.DocGias
-        //    //        .Where(t => t.MaDG == item.MaDG)
-        //    //        .Select(x => x.TenDG)
-        //    //        .FirstOrDefaultAsync();
-
-        //    //    ttdonmuons.Add(new ThongTinDonMuon
-        //    //    {
-        //    //        MaMuon = item.MaMuon,
-        //    //        TenDG = tenDocGia ?? "Unknown",
-        //    //        TenNV = GlobalData.LoginUser.UserID,
-        //    //        NgayMuon = item.NgayMuon.ToShortDateString(),
-        //    //        NgayTraDK = item.NgayTraDK.ToShortDateString(),
-        //    //        NgayTraTT = item.NgayTraTT?.ToShortDateString() ?? "",
-        //    //        PhiPhat = item.PhiPhat?.ToString() ?? "",
-        //    //    });
-        //    //    //MessageBox.Show(item.NgayTraTT.ToString());
-        //    //}
-
-        //    //datagridMuon.ItemsSource = null;
-        //    //datagridMuon.ItemsSource = ttdonmuons;
-
-        //    return true;
-        //}
-
         private async void adddon_Click(object sender, RoutedEventArgs e)
         {
             var addborrowwindow = new addborrowwindow();
