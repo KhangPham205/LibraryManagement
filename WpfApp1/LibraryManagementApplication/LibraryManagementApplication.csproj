@@ -211,20 +211,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="addborrow.xaml.cs">
-      <DependentUpon>addborrow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="addborrowwindow.xaml.cs">
       <DependentUpon>addborrowwindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="bookpage.xaml.cs">
       <DependentUpon>bookpage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="borrowinfo.xaml.cs">
-      <DependentUpon>borrowinfo.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EXMessagebox.xaml.cs">
+      <DependentUpon>EXMessagebox.xaml</DependentUpon>
     </Compile>
     <Compile Include="headerbookpage.xaml.cs">
       <DependentUpon>headerbookpage.xaml</DependentUpon>
@@ -237,9 +234,6 @@
     </Compile>
     <Compile Include="infoxaml.xaml.cs">
       <DependentUpon>infoxaml.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="lendpage.xaml.cs">
-      <DependentUpon>lendpage.xaml</DependentUpon>
     </Compile>
     <Compile Include="mainpage.xaml.cs">
       <DependentUpon>mainpage.xaml</DependentUpon>
@@ -299,10 +293,6 @@
     <Compile Include="writerpage.xaml.cs">
       <DependentUpon>writerpage.xaml</DependentUpon>
     </Compile>
-    <Page Include="addborrow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="addborrowwindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -311,11 +301,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="borrowinfo.xaml">
+    <Page Include="ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ChangePassword.xaml">
+    <Page Include="EXMessagebox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -335,24 +325,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="lendpage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="mainpage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MainWindow1.xaml">

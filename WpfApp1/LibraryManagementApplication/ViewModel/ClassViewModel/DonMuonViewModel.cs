@@ -284,10 +284,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
                 bool isSuccess = await UpdateDonMuonInDatabaseAsync(donMuon);
                 if (!isSuccess)
-                    MessageBox.Show("Cannot update DonMuon");
+                    EXMessagebox.Show("Cannot update DonMuon");
                 else
                 {
-                    MessageBox.Show("Update DonMuon Successfully");
+                    EXMessagebox.Show("Update DonMuon Successfully");
                     LoadDonMuonList();
                 }
             }
@@ -352,7 +352,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool isSuccess = await UpdateDonMuonInDatabaseAsync(new DonMuon());
                 if (!isSuccess)
                 {
-                    MessageBox.Show("Error updating the record.");
+                    EXMessagebox.Show("Error updating the record.");
                 }
             }
         }
@@ -368,7 +368,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
                 else
                 {
-                    MessageBox.Show("Error deleting the record.");
+                    EXMessagebox.Show("Error deleting the record.");
                 }
             }
         }
@@ -399,19 +399,19 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (DbUpdateException dbEx)
             {
-                MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
+                EXMessagebox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
+                EXMessagebox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show($"Invalid Operation: {ex.Message}");
+                EXMessagebox.Show($"Invalid Operation: {ex.Message}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Unexpected Error DonMuon: {ex.Message}");
+                EXMessagebox.Show($"Unexpected Error DonMuon: {ex.Message}");
             }
             return false;
         }
@@ -429,7 +429,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating DonMuon: {ex.Message}");
+                EXMessagebox.Show($"Error updating DonMuon: {ex.Message}");
                 return false;
             }
         }
@@ -452,7 +452,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting DonMuon: {ex.Message}");
+                EXMessagebox.Show($"Error deleting DonMuon: {ex.Message}");
                 return false;
             }
         }
@@ -471,7 +471,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching DonMuon: {ex.Message}");
+                EXMessagebox.Show($"Error searching DonMuon: {ex.Message}");
                 return new List<DonMuon>();
             }
         }

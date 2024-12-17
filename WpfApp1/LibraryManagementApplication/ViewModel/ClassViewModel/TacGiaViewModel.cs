@@ -100,7 +100,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool exists = await IsTacGiaExistsAsync(DisplayName);
                 if (exists)
                 {
-                    MessageBox.Show("Tác giả đã tồn tại.");
+                    EXMessagebox.Show("Tác giả đã tồn tại.");
                     return;
                 }
 
@@ -112,7 +112,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
                 bool isSuccess = await AddTacGiaToDatabaseAsync(newTacGia);
                 if (!isSuccess)
-                    MessageBox.Show("Cannot save changes.");
+                    EXMessagebox.Show("Cannot save changes.");
                 else
                     TacGiaList.Add(newTacGia);
             }
@@ -125,7 +125,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool isSuccess = await UpdateTacGiaInDatabaseAsync(SelectedTacGia);
                 if (!isSuccess)
                 {
-                    MessageBox.Show("Error updating the record.");
+                    EXMessagebox.Show("Error updating the record.");
                 }
                 LoadTacGiaList();
             }
@@ -141,7 +141,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
                 else
                 {
-                    MessageBox.Show("Error deleting the record.");
+                    EXMessagebox.Show("Error deleting the record.");
                 }
             }
         }
@@ -174,7 +174,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error checking existence of TcaGia: {ex.Message}");
+                EXMessagebox.Show($"Error checking existence of TcaGia: {ex.Message}");
                 return false;
             }
         }
@@ -191,7 +191,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding Tac gia: {ex.Message}");
+                EXMessagebox.Show($"Error adding Tac gia: {ex.Message}");
                 return false;
             }
         }
@@ -209,7 +209,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating Tac gia: {ex.Message}");
+                EXMessagebox.Show($"Error updating Tac gia: {ex.Message}");
                 return false;
             }
         }
@@ -231,7 +231,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting Tac gia: {ex.Message}");
+                EXMessagebox.Show($"Error deleting Tac gia: {ex.Message}");
                 return false;
             }
         }
@@ -249,7 +249,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching Tac gia: {ex.Message}");
+                EXMessagebox.Show($"Error searching Tac gia: {ex.Message}");
                 return new List<TacGia>();
             }
         }
@@ -265,7 +265,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error getting all Tac gia: {ex.Message}");
+                EXMessagebox.Show($"Error getting all Tac gia: {ex.Message}");
                 return new List<TacGia>();
             }
         }

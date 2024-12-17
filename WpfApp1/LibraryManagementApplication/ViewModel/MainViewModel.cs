@@ -41,7 +41,6 @@ namespace LibraryManagementApplication.ViewModel
             writerpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is writerpage); }, (p) => { p.Content = new writerpage(); });
             typepagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is typepage); }, (p) => { p.Content = new typepage(); });
             publisherpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is publisherpage); }, (p) => { p.Content = new publisherpage(); });
-            lendpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is lendpage); }, (p) => { p.Content = new lendpage(); });
             headerbookpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is headerbookpage); }, (p) => { p.Content = new headerbookpage(); });
             infopagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is infoxaml); }, (p) => { p.Content = new infoxaml(); });
         }

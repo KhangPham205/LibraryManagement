@@ -226,7 +226,7 @@ namespace LibraryManagementApplication
                 new LineSeries
                 {
                     Title = "Số sách mượn",
-                    Values = new ChartValues<int>(GetBooksBorrowedByMonth())
+                    Values = new ChartValues<int>(GetBooksBorrowedByMonth()),
                 }
             };
         }

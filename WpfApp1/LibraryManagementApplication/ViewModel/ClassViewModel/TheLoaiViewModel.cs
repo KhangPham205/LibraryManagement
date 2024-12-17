@@ -103,7 +103,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool exists = await IsTheLoaiExistsAsync(DisplayName);
                 if (exists)
                 {
-                    MessageBox.Show("Thể loại này đã tồn tại.");
+                    EXMessagebox.Show("Thể loại này đã tồn tại.");
                     return;
                 }
 
@@ -117,10 +117,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (isSuccess)
                     TheLoaiList.Add(newTheLoai);
                 else
-                    MessageBox.Show("Error adding The Loai.");
+                    EXMessagebox.Show("Error adding The Loai.");
             }
             else
-                MessageBox.Show("Vui lòng nhập tên thể loại", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                EXMessagebox.Show("Vui lòng nhập tên thể loại", "Cảnh báo");
         }
         private async Task EditTheLoai()
         {
@@ -130,7 +130,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool isSuccess = await UpdateTheLoaiInDatabaseAsync(SelectedTheLoai);
                 if (!isSuccess)
                 {
-                    MessageBox.Show("Error updating The Loai.");
+                    EXMessagebox.Show("Error updating The Loai.");
                 }
                 LoadTheLoaiList();
             }
@@ -147,7 +147,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
                 else
                 {
-                    MessageBox.Show("Error deleting The Loai.");
+                    EXMessagebox.Show("Error deleting The Loai.");
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error checking existence of TheLoai: {ex.Message}");
+                EXMessagebox.Show($"Error checking existence of TheLoai: {ex.Message}");
                 return false;
             }
         }
@@ -198,7 +198,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding The loai: {ex.Message}");
+                EXMessagebox.Show($"Error adding The loai: {ex.Message}");
                 return false;
             }
         }
@@ -215,7 +215,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating The loai: {ex.Message}");
+                EXMessagebox.Show($"Error updating The loai: {ex.Message}");
                 return false;
             }
         }
@@ -237,7 +237,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting The loai: {ex.Message}");
+                EXMessagebox.Show($"Error deleting The loai: {ex.Message}");
                 return false;
             }
         }
@@ -255,7 +255,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching The loai: {ex.Message}");
+                EXMessagebox.Show($"Error searching The loai: {ex.Message}");
                 return new List<TheLoai>();
             }
         }
@@ -271,7 +271,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error getting all The loai: {ex.Message}");
+                EXMessagebox.Show($"Error getting all The loai: {ex.Message}");
                 return new List<TheLoai>();
             }
         }

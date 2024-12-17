@@ -124,10 +124,10 @@ namespace LibraryManagementApplication.ViewModel
                     IsLoginSuccessful = false;
                 }
 
-                //if (IsLoginSuccessful)
+                if (!IsLoginSuccessful)
                 //    MessageBox.Show("Đăng nhập thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 //else
-                //    MessageBox.Show("Đăng nhập thất bại", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    EXMessagebox.Show("Đăng nhập thất bại", "Thông báo");
             }
         }
     }

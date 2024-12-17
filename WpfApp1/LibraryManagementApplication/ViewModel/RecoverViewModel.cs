@@ -50,19 +50,19 @@ namespace LibraryManagementApplication.ViewModel
                         password = taiKhoan.Password;
 
                         // Hiển thị mật khẩu lên giao diện
-                        MessageBox.Show("Tìm thấy tài khoản. Mật khẩu đã được hiển thị.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        EXMessagebox.Show("Tìm thấy tài khoản. Mật khẩu đã được hiển thị.", "Thông báo");
                     }
                     else
                     {
                         // Nếu không tìm thấy tài khoản, hiển thị thông báo lỗi
-                        MessageBox.Show("Không tìm thấy tài khoản với thông tin đã cung cấp!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                        EXMessagebox.Show("Không tìm thấy tài khoản với thông tin đã cung cấp!", "Lỗi");
                     }
                 }
             }
             catch (Exception ex)
             {
                 // Xử lý lỗi trong quá trình tương tác với cơ sở dữ liệu
-                MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                EXMessagebox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi");
             }
         }//xu ly khoi phuc dung ca 3 thong tin thi tra ra matkhau
     }

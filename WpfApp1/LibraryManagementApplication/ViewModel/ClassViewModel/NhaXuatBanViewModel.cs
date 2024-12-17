@@ -98,7 +98,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool exists = await IsNhaXuatBanExistsAsync(DisplayName);
                 if (exists)
                 {
-                    MessageBox.Show("Nhà xuất bản với tên này đã tồn tại.");
+                    EXMessagebox.Show("Nhà xuất bản với tên này đã tồn tại.");
                     return;
                 }
 
@@ -110,12 +110,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
                 bool isSuccess = await AddNhaXuatBanToDatabaseAsync(newNhaXuatBan);
                 if (!isSuccess)
-                    MessageBox.Show("Cannot save changes.");
+                    EXMessagebox.Show("Cannot save changes.");
                 else
                     NhaXuatBanList.Add(newNhaXuatBan);
             }
             else
-                MessageBox.Show("Vui lòng nhập tên nhà xuất bản", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                EXMessagebox.Show("Vui lòng nhập tên nhà xuất bản", "Cảnh báo");
         }
         private async Task EditNhaXuatBan()
         {
@@ -125,7 +125,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool isSuccess = await UpdateNhaXuatBanInDatabaseAsync(SelectedNhaXuatBan);
                 if (!isSuccess)
                 {
-                    MessageBox.Show("Error updating Nha xuat ban.");
+                    EXMessagebox.Show("Error updating Nha xuat ban.");
                 }
                 LoadNhaXuatBanList();
             }
@@ -142,7 +142,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
                 else
                 {
-                    MessageBox.Show("Error deleting the record.");
+                    EXMessagebox.Show("Error deleting the record.");
                 }
             }
         }
@@ -172,7 +172,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error checking existence of NhaXuatBan: {ex.Message}");
+                EXMessagebox.Show($"Error checking existence of NhaXuatBan: {ex.Message}");
                 return false;
             }
         }
@@ -189,19 +189,19 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (DbUpdateException dbEx)
             {
-                MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
+                EXMessagebox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
+                EXMessagebox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show($"Invalid Operation: {ex.Message}");
+                EXMessagebox.Show($"Invalid Operation: {ex.Message}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Unexpected Error: {ex.Message}");
+                EXMessagebox.Show($"Unexpected Error: {ex.Message}");
             }
             return false;
         }
@@ -219,7 +219,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating Nha xuat ban: {ex.Message}");
+                EXMessagebox.Show($"Error updating Nha xuat ban: {ex.Message}");
                 return false;
             }
         }
@@ -242,7 +242,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting DonMuon: {ex.Message}");
+                EXMessagebox.Show($"Error deleting DonMuon: {ex.Message}");
                 return false;
             }
         }
@@ -261,7 +261,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching DonMuon: {ex.Message}");
+                EXMessagebox.Show($"Error searching DonMuon: {ex.Message}");
                 return new List<NhaXuatBan>();
             }
         }
@@ -278,7 +278,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error getting all DonMuon: {ex.Message}");
+                EXMessagebox.Show($"Error getting all DonMuon: {ex.Message}");
                 return new List<NhaXuatBan>();
             }
         }
