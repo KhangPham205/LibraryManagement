@@ -169,15 +169,15 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (DbUpdateException dbEx)
             {
-                MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
+                EXMessagebox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
+                EXMessagebox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Unexpected Error: {ex.Message}");
+                EXMessagebox.Show($"Unexpected Error: {ex.Message}");
             }
         }
 
@@ -190,7 +190,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (existingBook != null)
                 {
                     // Hiển thị thông báo nếu đã tồn tại
-                    MessageBox.Show("Sách với tên và ISBN này đã được mượn!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    EXMessagebox.Show("Sách với tên và ISBN này đã được mượn!", "Thông báo");
                     return;
                 }
 
@@ -212,7 +212,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool isSuccess = await UpdateCTDMInDatabaseAsync(SelectedCTDM);
                 if (!isSuccess)
                 {
-                    MessageBox.Show("Error updating the record.");
+                    EXMessagebox.Show("Error updating the record.");
                 }
             }
         }
@@ -225,12 +225,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 DanhSachMuon.Remove(SelectedBorrowedBook);
 
                 // Hiển thị thông báo
-                MessageBox.Show("Xóa sách thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                EXMessagebox.Show("Xóa sách thành công!", "Thông báo");
             }
             else
             {
                 // Thông báo nếu không có sách nào được chọn
-                MessageBox.Show("Vui lòng chọn sách để xóa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                EXMessagebox.Show("Vui lòng chọn sách để xóa!", "Thông báo");
             }
         }
         private async Task SearchCTDM(string keyword)
@@ -258,19 +258,19 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (DbUpdateException dbEx)
             {
-                MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
+                EXMessagebox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
+                EXMessagebox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show($"Invalid Operation: {ex.Message}");
+                EXMessagebox.Show($"Invalid Operation: {ex.Message}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Unexpected Error CTDM: {ex.Message}");
+                EXMessagebox.Show($"Unexpected Error CTDM: {ex.Message}");
             }
             return false;
         }
@@ -288,7 +288,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating CTDM: {ex.Message}");
+                EXMessagebox.Show($"Error updating CTDM: {ex.Message}");
                 return false;
             }
         }
@@ -311,7 +311,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting CTDM: {ex.Message}");
+                EXMessagebox.Show($"Error deleting CTDM: {ex.Message}");
                 return false;
             }
         }
@@ -330,7 +330,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching CTDM: {ex.Message}");
+                EXMessagebox.Show($"Error searching CTDM: {ex.Message}");
                 return new List<CTDM>();
             }
         }
@@ -347,7 +347,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error getting all CTDM: {ex.Message}");
+                EXMessagebox.Show($"Error getting all CTDM: {ex.Message}");
                 return new List<CTDM>();
             }
         }

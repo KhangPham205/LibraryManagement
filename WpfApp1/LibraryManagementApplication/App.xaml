@@ -81,6 +81,45 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--Style nút message-->
+        <Style TargetType="Button" x:Key="button:message">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder"
+                        BorderBrush="#07209e"
+                        Background="#9acbff"
+                        BorderThickness="1"
+                        CornerRadius="15">
+                            <ContentPresenter  x:Name="text"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               TextElement.Foreground="#07209e"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#cfcfcf"
+                                    Direction="45"
+                                    ShadowDepth="4"
+                                    Opacity="0.5"
+                                    BlurRadius="10" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#07209e"/>
+                                <Setter TargetName="text" Property="TextElement.Foreground" Value="#9acbff"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <!--Style nút tìm-->
         <Style TargetType="Button" x:Key="button:find">
             <Setter Property="FontSize" Value="18"/>
@@ -597,8 +636,8 @@
                     <ControlTemplate TargetType="CheckBox">
                         <Grid>
                             <!-- Define the images for different states -->
-                            <Image x:Name="UncheckedImage" Source="/icon/hide.png" Stretch="Uniform"/>
-                            <Image x:Name="CheckedImage" Source="/icon/eye.png" Stretch="Uniform" Visibility="Collapsed"/>
+                            <fa:IconImage x:Name="UncheckedImage" Icon="EyeLowVision" Foreground="#07209e" Stretch="Uniform"/>
+                            <fa:IconImage x:Name="CheckedImage" Icon="Eye" Foreground="#07209e" Stretch="Uniform" Visibility="Collapsed"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <!-- Show the appropriate image based on IsChecked -->

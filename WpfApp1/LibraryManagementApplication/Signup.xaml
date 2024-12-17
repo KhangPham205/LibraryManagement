@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel.ClassViewModel"
         mc:Ignorable="d"
         Height="450" Width="650"
+        Title="Đăng ký"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Icon="/Icon/book (1).png"

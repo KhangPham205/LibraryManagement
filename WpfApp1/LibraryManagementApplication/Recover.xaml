@@ -6,10 +6,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel"
         mc:Ignorable="d"
-        Height="450" Width="650"
+        Height="400" Width="650"
+        Title="Khôi phục mật khẩu"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Icon="{x:Null}">
+        Icon="/Icon/book (1).png">
     <Window.DataContext>
         <local:RecoverViewModel/>
     </Window.DataContext>

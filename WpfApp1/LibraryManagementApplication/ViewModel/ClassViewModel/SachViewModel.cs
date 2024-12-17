@@ -152,7 +152,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (ds == null)
                 {
                     // Nếu không tìm thấy DauSach thì có thể thông báo lỗi hoặc xử lý
-                    MessageBox.Show("Không tìm thấy đầu sách.");
+                    EXMessagebox.Show("Không tìm thấy đầu sách.");
                     return;
                 }
 
@@ -169,7 +169,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
                 bool isSuccess = await AddSachToDatabaseAsync(newSach);
                 if (!isSuccess)
-                    MessageBox.Show("Cannot save changes.");
+                    EXMessagebox.Show("Cannot save changes.");
                 else
                     SachList.Add(newSach); // Thêm vào danh sách hiển thị
             }
@@ -186,7 +186,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool isSuccess = await UpdateSachInDatabaseAsync(SelectedSach);
                 if (!isSuccess)
                 {
-                    MessageBox.Show("Cannot edit sach");
+                    EXMessagebox.Show("Cannot edit sach");
                 }
                 LoadSachList();
             }
@@ -199,7 +199,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (isSuccess)
                     SachList.Remove(SelectedSach);
                 else
-                    MessageBox.Show("Cannot delete sach");
+                    EXMessagebox.Show("Cannot delete sach");
             }
         }
         private async Task SearchSach()
@@ -229,19 +229,19 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (DbUpdateException dbEx)
             {
-                MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
+                EXMessagebox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
+                EXMessagebox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show($"Invalid Operation: {ex.Message}");
+                EXMessagebox.Show($"Invalid Operation: {ex.Message}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Unexpected Error: {ex.Message}");
+                EXMessagebox.Show($"Unexpected Error: {ex.Message}");
             }
             return false;
         }
@@ -258,7 +258,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating book: {ex.Message}");
+                EXMessagebox.Show($"Error updating book: {ex.Message}");
                 return false;
             }
         }
@@ -280,7 +280,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting book: {ex.Message}");
+                EXMessagebox.Show($"Error deleting book: {ex.Message}");
                 return false;
             }
         }
@@ -314,7 +314,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching books: {ex.Message}");
+                EXMessagebox.Show($"Error searching books: {ex.Message}");
                 return new List<Sach>();
             }
         }
@@ -330,19 +330,19 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (DbUpdateException dbEx)
             {
-                MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
+                EXMessagebox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
             }
             catch (SqlException sqlEx)
             {
-                MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
+                EXMessagebox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show($"Invalid Operation: {ex.Message}");
+                EXMessagebox.Show($"Invalid Operation: {ex.Message}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error getting all books: {ex.Message}");
+                EXMessagebox.Show($"Error getting all books: {ex.Message}");
             }
             return new List<Sach>();
         }

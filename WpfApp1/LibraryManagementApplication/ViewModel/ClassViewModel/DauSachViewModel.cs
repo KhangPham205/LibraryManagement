@@ -19,6 +19,9 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         private string ngonNgu;
         private string tenTL;
         private string tenNXB;
+        private string textTL;
+        private string textNXB;
+        private string textTG;
         public string MaDauSach 
         { 
             get => maDauSach;
@@ -173,7 +176,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool exists = await IsDauSachExistsAsync(TenDauSach);
                 if (exists)
                 {
-                    MessageBox.Show("Thể loại này đã tồn tại.");
+                    EXMessagebox.Show("Thể loại này đã tồn tại.");
                     return;
                 }
 
@@ -186,15 +189,15 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     TenTL = TenTL,
                     TenNXB = TenNXB
                 };
-                //MessageBox.Show(newDauSach.MaDauSach + " " + newDauSach.TenDauSach + " " + newDauSach.TenTL);
+                //EXMessagebox.Show(newDauSach.MaDauSach + " " + newDauSach.TenDauSach + " " + newDauSach.TenTL);
                 bool isSuccess = await AddDauSachToDatabaseAsync(newDauSach);
                 if (isSuccess)
                     DauSachList.Add(newDauSach);
                 else
-                    MessageBox.Show("Cannot save changes.");
+                    EXMessagebox.Show("Cannot save changes.");
             }
             else
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                EXMessagebox.Show("Vui lòng nhập đầy đủ thông tin", "Cảnh báo");
         }
 
         private async Task EditDauSach()
@@ -210,7 +213,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool isSuccess = await UpdateDauSachInDatabaseAsync(SelectedDauSach);
                 if (!isSuccess)
                 {
-                    MessageBox.Show("Cannot edit DauSach");
+                    EXMessagebox.Show("Cannot edit DauSach");
                 }
                 LoadDauSachList();
             }
@@ -257,7 +260,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error checking existence of DauSach: {ex.Message}");
+                EXMessagebox.Show($"Error checking existence of DauSach: {ex.Message}");
                 return false;
             }
         }
@@ -274,10 +277,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (DbUpdateException ex)
             {
-                MessageBox.Show($"Error adding header book: {ex.InnerException?.Message ?? ex.Message}");
+                EXMessagebox.Show($"Error adding header book: {ex.InnerException?.Message ?? ex.Message}");
                 return false;
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); return false; }
+            catch (Exception ex) { EXMessagebox.Show(ex.Message); return false; }
         }
         private static async Task<bool> UpdateDauSachInDatabaseAsync(DauSach DauSach)
         {
@@ -292,7 +295,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating header book: {ex.Message}");
+                EXMessagebox.Show($"Error updating header book: {ex.Message}");
                 return false;
             }
         }
@@ -314,7 +317,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting header book: {ex.Message}");
+                EXMessagebox.Show($"Error deleting header book: {ex.Message}");
                 return false;
             }
         }
@@ -348,7 +351,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching header books: {ex.Message}");
+                EXMessagebox.Show($"Error searching header books: {ex.Message}");
                 return new List<DauSach>();
             }
         }
@@ -364,7 +367,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error getting all dau sach: {ex.Message}");
+                EXMessagebox.Show($"Error getting all dau sach: {ex.Message}");
                 return new List<DauSach>();
             }
         }

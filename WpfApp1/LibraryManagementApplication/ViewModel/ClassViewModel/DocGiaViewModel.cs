@@ -159,7 +159,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool exists = await IsDocGiaExistsAsync(TenDG, CCCD);
                 if (exists)
                 {
-                    MessageBox.Show("Thông tin tên độc giả và căn cước công dân tương ứng đã tồn tại.");
+                    EXMessagebox.Show("Thông tin tên độc giả và căn cước công dân tương ứng đã tồn tại.");
                     return;
                 }
 
@@ -174,12 +174,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
                 bool isSuccess = await AddDocGiaToDatabaseAsync(newDocGia);
                 if (!isSuccess)
-                    MessageBox.Show("Cannot save changes.");
+                    EXMessagebox.Show("Cannot save changes.");
                 else
                     DocGiaList.Add(newDocGia);
             }
             else
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin của độc giả", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                EXMessagebox.Show("Vui lòng nhập đầy đủ thông tin của độc giả", "Cảnh báo");
         }
         private async Task EditDocGia()
         {
@@ -193,7 +193,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
                 bool isSuccess = await UpdateDocGiaInDatabaseAsync(SelectedDocGia);
                 if (!isSuccess)
-                    MessageBox.Show("Error updating the record.");
+                    EXMessagebox.Show("Error updating the record.");
                 else
                     LoadDocGiaList();
             }
@@ -206,7 +206,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (isSuccess)
                     DocGiaList.Remove(SelectedDocGia);
                 else
-                    MessageBox.Show("Error deleting the record.");
+                    EXMessagebox.Show("Error deleting the record.");
             }
         }
         private async Task SearchDocGia()
@@ -238,7 +238,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error checking existence of DocGia: {ex.Message}");
+                EXMessagebox.Show($"Error checking existence of DocGia: {ex.Message}");
                 return false;
             }
         }
@@ -250,13 +250,13 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 {
                     context.DocGias.Add(docGia);
                     await context.SaveChangesAsync();
-                    MessageBox.Show("Đang thêm vào cơ sở dữ liệu.");
+                    EXMessagebox.Show("Đang thêm vào cơ sở dữ liệu.");
                     return true;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding DocGia: {ex.Message}");
+                EXMessagebox.Show($"Error adding DocGia: {ex.Message}");
                 return false;
             }
         }
@@ -274,7 +274,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating DocGia: {ex.Message}");
+                EXMessagebox.Show($"Error updating DocGia: {ex.Message}");
                 return false;
             }
         }
@@ -297,7 +297,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting DocGia: {ex.Message}");
+                EXMessagebox.Show($"Error deleting DocGia: {ex.Message}");
                 return false;
             }
         }
@@ -316,7 +316,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching DocGia: {ex.Message}");
+                EXMessagebox.Show($"Error searching DocGia: {ex.Message}");
                 return new List<DocGia>();
             }
         }
@@ -333,7 +333,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error getting all DocGia: {ex.Message}");
+                EXMessagebox.Show($"Error getting all DocGia: {ex.Message}");
                 return new List<DocGia>();
             }
         }
