@@ -28,11 +28,33 @@
         <Grid 
         Background="#e6f3ff"
         Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Border HorizontalAlignment="Center"  Height="300" Width="300" CornerRadius="150"
+                    BorderBrush="#07209e" BorderThickness="2">
+                <Border.Background>
+                    <ImageBrush x:Name="pictureprofile" ImageSource="Icon/snapedit_1700659653749.jpg" Stretch="UniformToFill" />
+                </Border.Background>
+            </Border>
+            <Button x:Name="changeprofile"
+                     Style="{StaticResource button:style1}"
+                     Content="Đổi ảnh"
+                     Margin="5"
+                     VerticalAlignment="Bottom"
+                     HorizontalAlignment="Center"
+                     Click="changemk_Click">
+                <Button.DataContext>
+                    <logout:MainViewModel/>
+                </Button.DataContext>
+            </Button>
             <Border
+                Grid.Column="1"
                 BorderBrush="#07209e"
                 BorderThickness="2"
                 CornerRadius="20"
@@ -143,6 +165,7 @@
                             <logout:MainViewModel/>
                         </Button.DataContext>
                     </Button>
+                    
                 </Grid>
             </Border>
         </Grid>
