@@ -2,6 +2,7 @@
 using LibraryManagementApplication.ViewModel;
 using LiveCharts;
 using LiveCharts.Wpf;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
@@ -174,7 +175,7 @@ namespace LibraryManagementApplication
                                    .Take(5)
                                    .Select(x => new TheLoaiReport
                                    {
-                                       TenTL = x.TheLoai,
+                                       TenTL = context.TheLoais.FirstOrDefault(t => t.MaTL == x.TheLoai).TenTL,
                                        SoLuongMuon = x.SoLuongMuon // Trả về số lượng mượn cùng với tên thể loại
                                    })
                                    .ToList();

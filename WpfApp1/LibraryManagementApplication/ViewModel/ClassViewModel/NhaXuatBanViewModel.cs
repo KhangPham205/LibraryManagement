@@ -55,12 +55,21 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                                                  .Select(tl => tl.MaNXB)
                                                  .ToListAsync();
 
-                int maxCodeNumber = existingCodes
-                    .Select(code => int.TryParse(code.Substring(3), out int num) ? num : 0) // Lấy phần số sau "NXB"
-                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
-                    .Max(); // Lấy số lớn nhất trong danh sách mã
+                var minUnusedNumber = existingCodes
+                    .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "NXB"
+                    .OrderBy(number => number) // Sắp xếp tăng dần
+                    .ToList(); // Lấy số lớn nhất trong danh sách mã
+
                 // Tạo mã mới với số tăng dần
-                int newCodeNumber = maxCodeNumber + 1;
+                int newCodeNumber = 1;
+                foreach (var number in minUnusedNumber)
+                {
+                    if (number != newCodeNumber)
+                    {
+                        break; // Nếu phát hiện khoảng trống
+                    }
+                    newCodeNumber++;
+                }
 
                 // Trả về mã mới với định dạng "NXB" + số có 3 chữ số
                 return $"NXB{newCodeNumber:D3}";
