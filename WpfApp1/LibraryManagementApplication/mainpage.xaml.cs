@@ -118,12 +118,16 @@ namespace LibraryManagementApplication
         public mainpage()
         {
             InitializeComponent();
+            SoDauSachTextBox.Text = $"{context.DauSachs.Count()}";
+            SoSachTextBox.Text = $"{context.Sachs.Count()}";
+            SoDocGiaTextBox.Text = $"{context.DocGias.Count()}";
+            SoDonMuonTextBox.Text = $"{context.DonMuons.Count()}";
             _yearthongke = int.Parse(DateTime.Now.Year.ToString());
             _namthongke = $"Năm {_yearthongke.ToString()}";
             datagridDSMuon.ItemsSource = context.DonMuons.ToList();
             
             // Gán danh sách dữ liệu cho DataGrid
-            PointLabel = chartPoint => string.Format("{0},({1:p})", chartPoint.Y, chartPoint.Participation);
+            PointLabel = chartPoint => string.Format("{0},({1:p0})", chartPoint.Y, chartPoint.Participation);
             DataContext = this;
             //Biểu đồ cột
             Series = new SeriesCollection()

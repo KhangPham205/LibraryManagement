@@ -51,7 +51,10 @@
             </Border.Triggers>
             <Grid>
                 <StackPanel x:Name="listMainButton">
-                    <Image Source="/Icon/book (1).png" Width="150" Height="150" Margin="20"/>
+                    <Border Background="#9acbff" HorizontalAlignment="Center" Margin="20" Height="150" Width="150" CornerRadius="75"
+                            BorderBrush="#07209e" BorderThickness="2">
+                        <Image Source="/Icon/book (1).png"  Margin="20"/>
+                    </Border>
                     <RadioButton Height="auto"
                             Style="{StaticResource rbutton:menu}"
                             Command="{Binding infopagecommand}"
