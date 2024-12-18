@@ -273,7 +273,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                         TenNXB = dbContext.NhaXuatBans.FirstOrDefault(t => t.MaNXB == newDauSach.MaNXB).TenNXB,
                     });
                 else
-                    EXMessagebox.Show("Cannot save changes.");
+                    EXMessagebox.Show("Không thể thêm đầu sách mới");
             }
             else
                 EXMessagebox.Show("Vui lòng nhập đầy đủ thông tin", "Cảnh báo");
@@ -281,69 +281,124 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async Task EditDauSach()
         {
-            if (SelectedDauSach != null)
+            if (SelectedRow != null)
             {
-                SelectedDauSach.MaDauSach = MaDauSach;
-                SelectedDauSach.TenDauSach = TenDauSach;
-                SelectedDauSach.MaTG = dbContext.TacGias.Where(t => t.TenTG == TenTG).Select(t => t.MaTG).FirstOrDefault();
-                SelectedDauSach.NgonNgu = NgonNgu;
-                SelectedDauSach.MaTL = dbContext.TheLoais.Where(t => t.TenTL == TenTL).Select(t => t.MaTL).FirstOrDefault();
-                SelectedDauSach.MaNXB = dbContext.NhaXuatBans.Where(t => t.TenNXB == TenNXB).Select(t => t.MaNXB).FirstOrDefault();
-                bool isSuccess = await UpdateDauSachInDatabaseAsync(SelectedDauSach);
-                if (!isSuccess)
+                var ds = await dbContext.DauSachs.FirstOrDefaultAsync(x => x.MaDauSach == SelectedRow.MaDauSach);
+                if (ds != null)
                 {
-                    EXMessagebox.Show("Cannot edit DauSach");
+                    TacGia tacGia = dbContext.TacGias.FirstOrDefault(t => t.TenTG == TenTG);
+                    if (tacGia == null)
+                    {
+                        tacGia = new TacGia()
+                        {
+                            MaTG = await CreateMaTGAsync(),
+                            TenTG = TenTG
+                        };
+                        // Thêm tacGia mới vào dbContext
+                        dbContext.TacGias.Add(tacGia);
+                        await dbContext.SaveChangesAsync();
+                    }
+
+                    TheLoai theLoai = dbContext.TheLoais.FirstOrDefault(t => t.TenTL == TenTL);
+                    if (theLoai == null)
+                    {
+                        theLoai = new TheLoai()
+                        {
+                            MaTL = await CreateMaTLAsync(),
+                            TenTL = TenTL
+                        };
+                        dbContext.TheLoais.Add(theLoai);
+                        await dbContext.SaveChangesAsync();
+                    }
+
+                    NhaXuatBan nhaXuatBan = dbContext.NhaXuatBans.FirstOrDefault(t => t.TenNXB == TenNXB);
+                    if (nhaXuatBan == null)
+                    {
+                        nhaXuatBan = new NhaXuatBan()
+                        {
+                            MaNXB = await CreateMaNXBAsync(),
+                            TenNXB = TenNXB
+                        };
+                        dbContext.Add(nhaXuatBan);
+                        await dbContext.SaveChangesAsync();
+                    }
+
+                    ds.TenDauSach = TenDauSach;
+                    ds.MaTG = tacGia.MaTG;
+                    ds.NgonNgu = NgonNgu;
+                    ds.MaTL = theLoai.MaTL;
+                    ds.MaNXB = nhaXuatBan.MaNXB;
+
+                    bool isSuccess = await UpdateDauSachInDatabaseAsync(ds);
+                    if (!isSuccess)
+                    {
+                        EXMessagebox.Show("Cannot edit DauSach");
+                    }
+                    // Reload list sau khi cập nhật
+                    LoadDauSachList();
                 }
-                LoadDauSachList();
             }
         }
 
         private async Task DeleteDauSach()
         {
-            if (SelectedDauSach != null)
+            if (SelectedRow != null)
             {
-                bool isSuccess = await DeleteDauSachFromDatabaseAsync(SelectedDauSach);
-                if (isSuccess)
+                var ds = await dbContext.DauSachs.FirstOrDefaultAsync(t => t.MaDauSach == SelectedRow.MaDauSach);
+                if (ds != null)
                 {
-                    ThongTinDauSach thongTinDauSach = new ThongTinDauSach()
+                    bool isSuccess = await DeleteDauSachFromDatabaseAsync(ds);
+                    if (isSuccess)
                     {
-                        MaDauSach = SelectedDauSach.MaDauSach,
-                        TenDauSach = SelectedDauSach.TenDauSach,
-                        TenTG = dbContext.TacGias.FirstOrDefault(t => t.MaTG == SelectedDauSach.MaTG).TenTG,
-                        NgonNgu = NgonNgu,
-                        TenTL = dbContext.TheLoais.FirstOrDefault(t => t.MaTL == SelectedDauSach.MaTL).TenTL,
-                        TenNXB = dbContext.NhaXuatBans.FirstOrDefault(t => t.MaNXB == SelectedDauSach.MaNXB).TenNXB,
-                    };
-                    bool flag = DauSachList.Remove(thongTinDauSach);
-                    if (!flag)
-                        EXMessagebox.Show("Không xóa phần tử trong DauSachList được");
-                }
-                else
-                {
-                    // Handle failure (e.g. show error message to user)
-                }
+                        if (!DauSachList.Remove(SelectedRow))
+                            EXMessagebox.Show("Không xóa được phần tử trong danh sách đầu sách");
+                    }
+                    else
+                        EXMessagebox.Show("Không thể xóa đầu sách trong CSDL");
+                }                
             }
         }
 
         private async Task SearchDauSach()
         {
-            var filteredListFromDb = await SearchDauSachInDatabaseAsync(TenDauSach,
-                                                                        dbContext.TacGias.Where(t => t.TenTG == TenTG).Select(t => t.MaTG).FirstOrDefault(), 
-                                                                        NgonNgu, 
-                                                                        dbContext.TheLoais.Where(t => t.TenTL == TenTL).Select(t => t.MaTL).FirstOrDefault(),
-                                                                        dbContext.NhaXuatBans.Where(t => t.TenNXB == TenNXB).Select(t => t.MaNXB).FirstOrDefault());
+            // Lấy mã tác giả, thể loại, NXB tương ứng nếu có
+            var maTG = !string.IsNullOrEmpty(TenTG)
+                        ? dbContext.TacGias.Where(t => t.TenTG == TenTG).Select(t => t.MaTG).FirstOrDefault()
+                        : null;
+
+            var maTL = !string.IsNullOrEmpty(TenTL)
+                        ? dbContext.TheLoais.Where(t => t.TenTL == TenTL).Select(t => t.MaTL).FirstOrDefault()
+                        : null;
+
+            var maNXB = !string.IsNullOrEmpty(TenNXB)
+                        ? dbContext.NhaXuatBans.Where(t => t.TenNXB == TenNXB).Select(t => t.MaNXB).FirstOrDefault()
+                        : null;
+
+            // Tìm kiếm trong CSDL
+            var filteredListFromDb = await SearchDauSachInDatabaseAsync(TenDauSach, maTG, NgonNgu, maTL, maNXB);
+
+            // Để tránh nhiều truy vấn lặp lại trong vòng lặp, load toàn bộ dữ liệu liên quan sẵn
+            var allTacGias = dbContext.TacGias.ToDictionary(t => t.MaTG, t => t.TenTG);
+            var allTheLoais = dbContext.TheLoais.ToDictionary(t => t.MaTL, t => t.TenTL);
+            var allNhaXuatBans = dbContext.NhaXuatBans.ToDictionary(t => t.MaNXB, t => t.TenNXB);
+
+            // Xóa danh sách cũ
             DauSachList.Clear();
-            ThongTinDauSach thongTinDauSach;
-            foreach (var DauSach in filteredListFromDb)
+            foreach (var ds in filteredListFromDb)
             {
-                DauSachList.Add(thongTinDauSach = new ThongTinDauSach()
+                // Lấy tên tương ứng từ dictionary
+                var tg = allTacGias.ContainsKey(ds.MaTG) ? allTacGias[ds.MaTG] : null;
+                var tl = allTheLoais.ContainsKey(ds.MaTL) ? allTheLoais[ds.MaTL] : null;
+                var nxb = allNhaXuatBans.ContainsKey(ds.MaNXB) ? allNhaXuatBans[ds.MaNXB] : null;
+
+                DauSachList.Add(new ThongTinDauSach()
                 {
-                    MaDauSach = DauSach.MaDauSach,
-                    TenDauSach = DauSach.TenDauSach,
-                    TenTG = dbContext.TacGias.FirstOrDefault(t => t.MaTG == DauSach.MaTG).TenTG,
-                    NgonNgu = NgonNgu,
-                    TenTL = dbContext.TheLoais.FirstOrDefault(t => t.MaTL == DauSach.MaTL).TenTL,
-                    TenNXB = dbContext.NhaXuatBans.FirstOrDefault(t => t.MaNXB == DauSach.MaNXB).TenNXB,
+                    MaDauSach = ds.MaDauSach,
+                    TenDauSach = ds.TenDauSach,
+                    TenTG = tg,
+                    NgonNgu = ds.NgonNgu,
+                    TenTL = tl,
+                    TenNXB = nxb
                 });
             }
         }
