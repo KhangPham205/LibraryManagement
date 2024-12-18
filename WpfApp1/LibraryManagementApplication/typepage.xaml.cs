@@ -56,6 +56,7 @@ namespace LibraryManagementApplication
 
             try
             {
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 using (ExcelPackage p = new ExcelPackage())
                 {
                     //Tạo một sheet để làm việc trên đó
@@ -143,10 +144,22 @@ namespace LibraryManagementApplication
                         ws.Cells[rowIndex, colIndex++].Value = item.TenTL;
 
                     }
+                    ws.Cells.AutoFitColumns();
                     Byte[] bin = p.GetAsByteArray();
                     File.WriteAllBytes(filePath, bin);
                 }
-                EXMessagebox.Show("Xuất excel thành công!");
+                try
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = filePath,
+                        UseShellExecute = true
+                    });
+                }
+                catch (Exception openEx)
+                {
+                    EXMessagebox.Show($"File đã được lưu nhưng không thể mở: {openEx.Message}");
+                }
             }
             catch (Exception ex)
             {
