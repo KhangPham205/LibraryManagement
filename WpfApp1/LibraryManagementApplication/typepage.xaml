@@ -79,6 +79,8 @@
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="10"/>
                             <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Button  x:Name="addtl"
                                  Content="Thêm"
@@ -112,6 +114,12 @@
                                  Style="{DynamicResource button:show}"
                                  Command="{Binding ShowCommand}"
                                  CommandParameter="{Binding ElementName=theloai}"/>
+                        <Button x:Name="exporttl"
+                                Content="Xuất file"
+                                Grid.Column="10"
+                                Margin="5"
+                                Style="{StaticResource button:export}"
+                                Click="exporttl_Click"/>
                     </Grid>
                 </Grid>
             </Border>

@@ -296,3 +296,12 @@ C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplicat
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\EXMessagebox.baml
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\EXMessagebox.g.cs
 C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\EXMessagebox.baml
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\EPPlus.dll
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\EPPlus.Interfaces.dll
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\EPPlus.System.Drawing.dll
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\System.Drawing.Common.dll
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\EPPlus.xml
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\System.Drawing.Common.pdb
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\bin\Debug\System.Drawing.Common.xml
