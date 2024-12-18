@@ -25,7 +25,8 @@ namespace LibraryManagementApplication
             InitializeComponent();
             Mainpage.Content = new mainpage();
             mainbutton.IsChecked = true;
-            profile.Text = $"Xin chào,\n{GlobalData.LoginUser.UserName}";
+            profile.Text = $"{GlobalData.LoginUser.UserName}";
+            profileemail.Text = $"{GlobalData.LoginUser.Email}";
         }
     }
 }

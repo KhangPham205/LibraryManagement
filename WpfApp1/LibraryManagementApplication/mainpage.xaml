@@ -36,50 +36,50 @@
                 <ColumnDefinition Width="400"/>
             </Grid.ColumnDefinitions>
             <Border 
-                    Grid.Row="0" Grid.ColumnSpan="2"
+                    Grid.Row="0" Grid.ColumnSpan="1"
                     CornerRadius="10"
                     Background="#9acbff"
                     Opacity="0.3"
                     Margin="10"
                     />
-            <Grid Grid.Row="0" Grid.ColumnSpan="2" Panel.ZIndex="1">
+            <Grid Grid.Row="0" Grid.ColumnSpan="1" Panel.ZIndex="1" Margin="15,0,15,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Border BorderBrush="#07209e" Width="200" Grid.Column="1" BorderThickness="3" CornerRadius="10" Margin="15">
+                <Border BorderBrush="#07209e" Width="185" Grid.Column="1" BorderThickness="3" CornerRadius="10" Margin="0,15,0,15">
                     <StackPanel Orientation="Horizontal" >
-                        <fa:IconImage Icon="BookOpen" Foreground="#07209e" Margin="10"/>
+                        <fa:IconImage Icon="BookOpen" Foreground="#07209e" Margin="15"/>
                         <StackPanel>
                             <TextBlock x:Name="SoDauSachTextBox" FontSize="30" Style="{StaticResource textblock:style1}"/>
                             <TextBlock Text="Đầu Sách" Style="{StaticResource textblock:style1}"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
-                <Border BorderBrush="#07209e" Width="200" Grid.Column="2" BorderThickness="3" CornerRadius="10" Margin="15">
+                <Border BorderBrush="#07209e"  Width="185" Grid.Column="2" BorderThickness="3" CornerRadius="10" Margin="0,15,0,15">
                     <StackPanel Orientation="Horizontal" >
-                        <fa:IconImage Icon="Book" Foreground="#07209e" Margin="10"/>
+                        <fa:IconImage Icon="Book" Foreground="#07209e" Margin="15"/>
                         <StackPanel>
                             <TextBlock x:Name="SoSachTextBox" FontSize="30" Style="{StaticResource textblock:style1}"/>
                             <TextBlock Text="Cuốn Sách" Style="{StaticResource textblock:style1}"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
-                <Border BorderBrush="#07209e" Width="200" Grid.Column="3"  BorderThickness="3" CornerRadius="10" Margin="15">
+                <Border BorderBrush="#07209e"  Width="185" Grid.Column="3"  BorderThickness="3" CornerRadius="10" Margin="0,15,0,15">
                     <StackPanel Orientation="Horizontal" >
-                        <fa:IconImage Icon="BookOpenReader" Foreground="#07209e" Margin="10"/>
+                        <fa:IconImage Icon="BookOpenReader" Foreground="#07209e" Margin="15"/>
                         <StackPanel>
                             <TextBlock x:Name="SoDocGiaTextBox" FontSize="30" Style="{StaticResource textblock:style1}"/>
                             <TextBlock Text="Độc giả" Style="{StaticResource textblock:style1}"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
-                <Border BorderBrush="#07209e" Width="200" Grid.Column="4" BorderThickness="3" CornerRadius="10" Margin="15">
+                <Border BorderBrush="#07209e"  Width="185" Grid.Column="4" BorderThickness="3" CornerRadius="10" Margin="0,15,0,15">
                     <StackPanel Orientation="Horizontal" >
-                        <fa:IconImage Icon="CalendarDay" Foreground="#07209e" Margin="10"/>
+                        <fa:IconImage Icon="CalendarDay" Foreground="#07209e" Margin="15"/>
                         <StackPanel>
                             <TextBlock x:Name="SoDonMuonTextBox" FontSize="30" Style="{StaticResource textblock:style1}"/>
                             <TextBlock Text="Đơn mượn" Style="{StaticResource textblock:style1}"/>
@@ -138,8 +138,8 @@
                 </DataGrid.Columns>
             </DataGrid>
             <Border Grid.Column="1"
-                    Grid.RowSpan="2"
-                    Grid.Row="1"
+                    Grid.RowSpan="3"
+                    Grid.Row="0"
                     CornerRadius="10"
                     Background="#9acbff"
                     Opacity="0.3"
@@ -147,8 +147,8 @@
                     />
             <Grid Panel.ZIndex="1"
                     Grid.Column="1"
-                    Grid.RowSpan="2"
-                  Grid.Row="1"
+                    Grid.RowSpan="3"
+                  Grid.Row="0"
                   Margin="10"
                     >
                 <Grid.RowDefinitions>
@@ -159,7 +159,7 @@
                                Margin="5"
                                HorizontalAlignment="Center"
                                Style="{StaticResource textblock:style1}"/>
-                <lvc:PieChart LegendLocation="Right"        
+                <lvc:PieChart LegendLocation="Bottom"        
                                   Margin="0"
                                   Grid.Row="1"
                                   >

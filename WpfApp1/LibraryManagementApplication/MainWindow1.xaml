@@ -51,18 +51,19 @@
             </Border.Triggers>
             <Grid>
                 <StackPanel x:Name="listMainButton">
-                    <Border Background="#9acbff" HorizontalAlignment="Center" Margin="20" Height="150" Width="150" CornerRadius="75"
+                    <RadioButton Style="{StaticResource rbutton:profile}"
+                                 Command="{Binding infopagecommand}"
+                                CommandParameter="{Binding ElementName=Mainpage}">
+                        <StackPanel>
+                            <Border HorizontalAlignment="Center" Margin="10" Height="150" Width="150" CornerRadius="75"
                             BorderBrush="#07209e" BorderThickness="2">
-                        <Viewbox  Stretch="Uniform">
-                            <Image Source="/Icon/snapedit_1700659653749.jpg"/>
-                        </Viewbox>
-                    </Border>
-                    <RadioButton Height="auto"
-                            Style="{StaticResource rbutton:menu}"
-                            Command="{Binding infopagecommand}"
-                            CommandParameter="{Binding ElementName=Mainpage}">
-                        <TextBlock x:Name="profile" 
-                            Style="{StaticResource textblock:menu}" TextWrapping="Wrap"/>
+                                <Border.Background>
+                                    <ImageBrush x:Name="pictureprofile" ImageSource="Icon/snapedit_1700659653749.jpg" Stretch="UniformToFill" />
+                                </Border.Background>
+                            </Border>
+                            <TextBlock x:Name="profile" Margin="10,5,10,0" TextWrapping="Wrap" Style="{StaticResource textblock:menu}" FontSize="16" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="profileemail" Margin="10,0,10,5" TextWrapping="Wrap" Style="{StaticResource textblock:menu}" FontSize="14" HorizontalAlignment="Center"/>
+                        </StackPanel>
                     </RadioButton>
                     <RadioButton x:Name="mainbutton"
                                  Style="{StaticResource rbutton:menu}"
