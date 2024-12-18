@@ -51,13 +51,14 @@
             </Border.Triggers>
             <Grid>
                 <StackPanel x:Name="listMainButton">
-                    <Button Width="100" Height="100" Margin="0 15 0 15" 
-                            Style="{StaticResource RoundButton}"
+                    <Image Source="/Icon/book (1).png" Width="150" Height="150" Margin="20"/>
+                    <RadioButton Height="auto"
+                            Style="{StaticResource rbutton:menu}"
                             Command="{Binding infopagecommand}"
-                            CommandParameter="{Binding ElementName=Mainpage}"
-                            >
-                        <Image Source="/Icon/user.png"/>
-                    </Button>
+                            CommandParameter="{Binding ElementName=Mainpage}">
+                        <TextBlock x:Name="profile" 
+                            Style="{StaticResource textblock:menu}" TextWrapping="Wrap"/>
+                    </RadioButton>
                     <RadioButton x:Name="mainbutton"
                                  Style="{StaticResource rbutton:menu}"
                                 Command="{Binding mainpagecommand}"

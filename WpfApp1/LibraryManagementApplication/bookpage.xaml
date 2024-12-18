@@ -128,6 +128,8 @@
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="10"/>
                             <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Button  x:Name="addsach"
                                   Content="Thêm"
@@ -158,6 +160,12 @@
                                   Margin="5"
                                   Style="{DynamicResource button:show}"
                                   Command="{Binding ShowCommand}"/>
+                        <Button  x:Name="exportsach"
+                                  Content="Xuất file"
+                                  Grid.Column="10"
+                                  Margin="5"
+                                  Style="{DynamicResource button:export}"
+                                  Click="exportsach_Click"/>
                     </Grid>
                 </Grid>
             </Border>

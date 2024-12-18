@@ -56,7 +56,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                                                  .ToListAsync();
 
                 var minUnusedNumber = existingCodes
-                    .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "NXB"
+                    .Select(code => int.TryParse(code.Substring(3), out int num) ? num : 0) // Lấy phần số sau "NXB"
                     .OrderBy(number => number) // Sắp xếp tăng dần
                     .ToList(); // Lấy số lớn nhất trong danh sách mã
 

@@ -24,7 +24,6 @@ namespace LibraryManagementApplication
         {
             InitializeComponent();
             MessageText.Text = message;
-            Title = title;
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)

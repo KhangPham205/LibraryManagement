@@ -466,7 +466,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="DatePicker">
-                        <Border
+                        <Border 
                              Background="White"
                              BorderBrush="#07209e"
                              BorderThickness="1"
@@ -479,8 +479,9 @@
                                BorderBrush="Transparent"
                                Background="white"
                                BorderThickness ="0"
-                               SelectedDate="{Binding Path = SelectedDate, RelativeSource={RelativeSource AncestorType=DatePicker}}"
-                       ></DatePicker>
+                               IsHitTestVisible="False"
+                               SelectedDate="{Binding Path = SelectedDate, RelativeSource={RelativeSource AncestorType=DatePicker}}">
+                            </DatePicker>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
