@@ -23,7 +23,7 @@ namespace LibraryManagementApplication.ViewModel
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\Model\Database\DatabaseLibrary.mdf;Integrated Security=True;MultipleActiveResultSets=True");
-            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\Model\Database\DatabaseLibrary.mdf;Integrated Security=True;MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DatabaseLibrary.mdf;Integrated Security=True;MultipleActiveResultSets=True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,9 +32,31 @@ namespace LibraryManagementApplication.ViewModel
             // Configure DauSach table
             modelBuilder.Entity<DauSach>(entity =>
             {
+                // Định nghĩa bảng DauSach
                 entity.ToTable("DauSach");
+
+                // Định nghĩa khóa chính
                 entity.HasKey(e => e.MaDauSach);
+
+                // Thiết lập khóa ngoại liên kết với bảng TacGia
+                entity.HasOne(e => e.TacGia)
+                      .WithMany(t => t.DauSachs)
+                      .HasForeignKey(e => e.MaTG)
+                      .OnDelete(DeleteBehavior.Restrict); // Hành vi khi xóa (Restrict, Cascade, SetNull, NoAction)
+
+                // Thiết lập khóa ngoại liên kết với bảng TheLoai
+                entity.HasOne(e => e.TheLoai)
+                      .WithMany(t => t.DauSachs)
+                      .HasForeignKey(e => e.MaTL)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                // Thiết lập khóa ngoại liên kết với bảng NhaXuatBan
+                entity.HasOne(e => e.NhaXuatBan)
+                      .WithMany(n => n.DauSachs)
+                      .HasForeignKey(e => e.MaNXB)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
+
 
             // Configure Sach table
             modelBuilder.Entity<Sach>(entity =>

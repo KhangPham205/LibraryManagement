@@ -76,7 +76,7 @@
               "RelativeDocumentMoniker": "LibraryManagementApplication\\ViewModel\\ClassViewModel\\DauSachViewModel.cs",
               "ToolTip": "C:\\D\\Lecture\\IT008_LapTrinhTrucQuan\\DoAnCuoiKy\\WpfApp1\\LibraryManagementApplication\\ViewModel\\ClassViewModel\\DauSachViewModel.cs",
               "RelativeToolTip": "LibraryManagementApplication\\ViewModel\\ClassViewModel\\DauSachViewModel.cs",
-              "ViewState": "AgIAAG4BAAAAAAAAAAAiwIsBAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAG8BAAAAAAAAAAAiwH4BAABhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-18T06:16:46.454Z",
               "EditorCaption": ""
@@ -104,7 +104,8 @@
               "RelativeToolTip": "LibraryManagementApplication\\ViewModel\\LoginViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T09:19:07.038Z"
+              "WhenOpened": "2024-12-17T09:19:07.038Z",
+              "EditorCaption": ""
             }
           ]
         },
