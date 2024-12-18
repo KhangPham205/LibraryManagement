@@ -53,7 +53,9 @@
                 <StackPanel x:Name="listMainButton">
                     <Border Background="#9acbff" HorizontalAlignment="Center" Margin="20" Height="150" Width="150" CornerRadius="75"
                             BorderBrush="#07209e" BorderThickness="2">
-                        <Image Source="/Icon/book (1).png"  Margin="20"/>
+                        <Viewbox  Stretch="Uniform">
+                            <Image Source="/Icon/snapedit_1700659653749.jpg"/>
+                        </Viewbox>
                     </Border>
                     <RadioButton Height="auto"
                             Style="{StaticResource rbutton:menu}"
