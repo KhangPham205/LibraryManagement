@@ -252,6 +252,9 @@
     <Compile Include="infoxaml.xaml.cs">
       <DependentUpon>infoxaml.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="mainpage.xaml.cs">
       <DependentUpon>mainpage.xaml</DependentUpon>
     </Compile>
@@ -283,8 +286,17 @@
     <Compile Include="Recover.xaml.cs">
       <DependentUpon>Recover.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RecoverPage.xaml.cs">
+      <DependentUpon>RecoverPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Signin.xaml.cs">
       <DependentUpon>Signin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SignInPage.xaml.cs">
+      <DependentUpon>SignInPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="typepage.xaml.cs">
       <DependentUpon>typepage.xaml</DependentUpon>
@@ -342,6 +354,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="mainpage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -370,6 +386,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RecoverPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -378,7 +398,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SignInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Signup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SignUpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -464,6 +492,8 @@
   <ItemGroup>
     <Resource Include="Image\UI Library.png" />
     <Resource Include="Icon\snapedit_1700659653749.jpg" />
+    <Resource Include="Icon\banner %282%29.jpg" />
+    <Resource Include="Icon\bannerbook.jpg" />
     <Content Include="Model\Database\DatabaseLibrary.mdf" />
     <Content Include="Model\Database\DatabaseLibrary_log.ldf">
       <DependentUpon>DatabaseLibrary.mdf</DependentUpon>
