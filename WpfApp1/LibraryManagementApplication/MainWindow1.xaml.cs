@@ -1,6 +1,7 @@
 ﻿using LibraryManagementApplication.Model.Class;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,25 @@ namespace LibraryManagementApplication
             mainbutton.IsChecked = true;
             profile.Text = $"{GlobalData.LoginUser.UserName}";
             profileemail.Text = $"{GlobalData.LoginUser.Email}";
+        }
+
+        private void Menu_MouseEnter(object sender, MouseEventArgs e)
+        {
+            pictureprofile.ImageSource = ConvertByteArrayToBitmapImage(GlobalData.LoginUser.ProfileImage);
+        }
+        private BitmapImage ConvertByteArrayToBitmapImage(byte[] byteArray)
+        {
+            if (byteArray == null || byteArray.Length == 0) return null;
+
+            using (var memoryStream = new MemoryStream(byteArray))
+            {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memoryStream;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                return bitmapImage;
+            }
         }
     }
 }

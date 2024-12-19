@@ -144,7 +144,8 @@ namespace LibraryManagementApplication
 
                 EXMessagebox.Show("Ảnh đã được chọn và lưu thành công!", "Thông báo");
                 // Điều hướng lại chính trang hiện tại
-                NavigationService.Navigate(new infoxaml());
+                //NavigationService.Navigate(new infoxaml());
+                pictureprofile.ImageSource = ProfileImage;
             }
             catch (Exception ex)
             {
