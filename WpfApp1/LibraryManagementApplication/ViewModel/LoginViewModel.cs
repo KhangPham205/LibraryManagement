@@ -74,16 +74,18 @@ namespace LibraryManagementApplication.ViewModel
 
         // Command for login action
         public ICommand LoginCommand { get; set; }
+        public ICommand LoginPageCommand { get; set; }
         public ICommand SignupCommand { get; set; }
         public ICommand RecoverCommand { get; set; }
         public LoginViewModel()
         {
-            LoginCommand = new RelayCommand<Window>((p) => true, (p) => Login(p));
-            SignupCommand = new RelayCommand<Window>((p) => true, (p) => { Signup window = new Signup(); window.Show(); });
-            RecoverCommand = new RelayCommand<object>((p) => true, (p) => { Window window = new Recover(); window.Show(); });
+            LoginCommand = new RelayCommand<Page>((p) => true, (p) => Login(p));
+            LoginPageCommand = new RelayCommand<Frame>((p) => true, (p) => p.Content = new SignInPage());
+            SignupCommand = new RelayCommand<Frame>((p) => true, (p) => p.Content = new SignUpPage());
+            RecoverCommand = new RelayCommand<Frame>((p) => true, (p) => p.Content = new RecoverPage());
         }
 
-        private void Login(Window p)
+        private void Login(Page p)
         {
             using (var context = new LibraryDbContext())
             {
@@ -116,8 +118,7 @@ namespace LibraryManagementApplication.ViewModel
                         mainwindow = new MainWindow2();
                     mainwindow.DataContext = mainViewModel;  // Gán DataContext cho MainWindow
                     mainwindow.Show();
-
-                    p.Close();
+                    Window.GetWindow(p).Close();
                 }
                 else
                 {

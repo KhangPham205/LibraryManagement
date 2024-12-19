@@ -165,9 +165,17 @@
                             <logout:MainViewModel/>
                         </Button.DataContext>
                     </Button>
-                    
                 </Grid>
             </Border>
+            <Image Source="/icon/bannerbook.jpg"
+                   Grid.Row="0"
+                   Grid.RowSpan="2"
+                   Grid.ColumnSpan="2"
+                   Stretch="Uniform"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center"
+                   Opacity="0.5"
+                   Panel.ZIndex="-1"/>
         </Grid>
     </Grid>
 </Page>

@@ -33,10 +33,9 @@ namespace LibraryManagementApplication
             if (isSuccess)
             {
                 // Hiển thị thông báo thành công
-                MessageBox.Show("Nhân viên đã được thêm thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                EXMessagebox.Show("Nhân viên đã được thêm thành công.", "Thông báo");
 
                 // Đóng cửa sổ đăng ký
-                this.Close();
             }
         }
     }
