@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagementApplication.Model.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,8 @@ namespace LibraryManagementApplication
             InitializeComponent();
             Mainpage.Content = new mainpage();
             mainbutton.IsChecked = true;
+            profile.Text = $"{GlobalData.LoginUser.UserName}";
+            profileemail.Text = $"{GlobalData.LoginUser.Email}";
         }
     }
 }

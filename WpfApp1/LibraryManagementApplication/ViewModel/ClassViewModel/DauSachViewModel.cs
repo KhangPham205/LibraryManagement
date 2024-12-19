@@ -148,13 +148,21 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                                                  .Select(tl => tl.MaDauSach)
                                                  .ToListAsync();
 
-                int maxCodeNumber = existingCodes
+                var minUnusedNumber = existingCodes
                     .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "DS"
-                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
-                    .Max(); // Lấy số lớn nhất trong danh sách mã
+                    .OrderBy(number => number) // Sắp xếp tăng dần
+                    .ToList(); // Lấy số lớn nhất trong danh sách mã
 
                 // Tạo mã mới với số tăng dần
-                int newCodeNumber = maxCodeNumber + 1;
+                int newCodeNumber = 1;
+                foreach (var number in minUnusedNumber)
+                {
+                    if (number != newCodeNumber)
+                    {
+                        break; // Nếu phát hiện khoảng trống
+                    }
+                    newCodeNumber++;
+                }
 
                 // Trả về mã mới với định dạng "DS" + số có 3 chữ số
                 return $"DS{newCodeNumber:D3}";
@@ -165,6 +173,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
+        public ICommand ShowCommand { get; set; }
         public DauSachViewModel()
         {
             dbContext = new LibraryDbContext();
@@ -174,6 +183,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             EditCommand = new RelayCommand<object>((p) => SelectedRow != null, async (p) => await EditDauSach());
             DeleteCommand = new RelayCommand<object>((p) => SelectedRow != null, async (p) => await DeleteDauSach());
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDauSach());
+            ShowCommand = new RelayCommand<object>((p) => true, (p) => ShowDauSach());
 
             LoadDauSachList();
         }
@@ -402,7 +412,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 });
             }
         }
-
+        private void ShowDauSach()
+        {
+            LoadDauSachList();
+        }
         #region MethodToDatabase
         private static async Task<bool> IsDauSachExistsAsync(string tenDauSach)
         {
@@ -541,13 +554,21 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                                                 .Select(tl => tl.MaTG)
                                                 .ToListAsync();
 
-                int maxCodeNumber = existingCodes
-                    .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "TG"
-                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
-                    .Max(); // Lấy số lớn nhất trong danh sách mã
+                var minUnusedNumber = existingCodes
+                     .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "TG"
+                     .OrderBy(number => number) // Sắp xếp tăng dần
+                     .ToList(); // Lấy số lớn nhất trong danh sách mã
 
                 // Tạo mã mới với số tăng dần
-                int newCodeNumber = maxCodeNumber + 1;
+                int newCodeNumber = 1;
+                foreach (var number in minUnusedNumber)
+                {
+                    if (number != newCodeNumber)
+                    {
+                        break; // Nếu phát hiện khoảng trống
+                    }
+                    newCodeNumber++;
+                }
 
                 // Trả về mã mới với định dạng "TG" + số có 3 chữ số
                 return $"TG{newCodeNumber:D3}";
@@ -564,13 +585,21 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                                                  .Select(tl => tl.MaTL)
                                                  .ToListAsync();
 
-                int maxCodeNumber = existingCodes
+                var minUnusedNumber = existingCodes
                     .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "TL"
-                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
-                    .Max(); // Lấy số lớn nhất trong danh sách mã
+                    .OrderBy(number => number) // Sắp xếp tăng dần
+                    .ToList(); // Lấy số lớn nhất trong danh sách mã
 
                 // Tạo mã mới với số tăng dần
-                int newCodeNumber = maxCodeNumber + 1;
+                int newCodeNumber = 1;
+                foreach (var number in minUnusedNumber)
+                {
+                    if (number != newCodeNumber)
+                    {
+                        break; // Nếu phát hiện khoảng trống
+                    }
+                    newCodeNumber++;
+                }
 
                 // Trả về mã mới với định dạng "TL" + số có 3 chữ số
                 return $"TL{newCodeNumber:D3}";
@@ -587,12 +616,21 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                                                  .Select(tl => tl.MaNXB)
                                                  .ToListAsync();
 
-                int maxCodeNumber = existingCodes
-                    .Select(code => int.TryParse(code.Substring(3), out int num) ? num : 0) // Lấy phần số sau "NXB"
-                    .DefaultIfEmpty(0) // Nếu không có mã nào, mặc định là 0
-                    .Max(); // Lấy số lớn nhất trong danh sách mã
+                var minUnusedNumber = existingCodes
+                     .Select(code => int.TryParse(code.Substring(3), out int num) ? num : 0) // Lấy phần số sau "NXB"
+                     .OrderBy(number => number) // Sắp xếp tăng dần
+                     .ToList(); // Lấy số lớn nhất trong danh sách mã
+
                 // Tạo mã mới với số tăng dần
-                int newCodeNumber = maxCodeNumber + 1;
+                int newCodeNumber = 1;
+                foreach (var number in minUnusedNumber)
+                {
+                    if (number != newCodeNumber)
+                    {
+                        break; // Nếu phát hiện khoảng trống
+                    }
+                    newCodeNumber++;
+                }
 
                 // Trả về mã mới với định dạng "NXB" + số có 3 chữ số
                 return $"NXB{newCodeNumber:D3}";

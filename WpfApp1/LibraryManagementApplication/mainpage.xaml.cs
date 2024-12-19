@@ -2,6 +2,7 @@
 using LibraryManagementApplication.ViewModel;
 using LiveCharts;
 using LiveCharts.Wpf;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
@@ -117,12 +118,16 @@ namespace LibraryManagementApplication
         public mainpage()
         {
             InitializeComponent();
+            SoDauSachTextBox.Text = $"{context.DauSachs.Count()}";
+            SoSachTextBox.Text = $"{context.Sachs.Count()}";
+            SoDocGiaTextBox.Text = $"{context.DocGias.Count()}";
+            SoDonMuonTextBox.Text = $"{context.DonMuons.Count()}";
             _yearthongke = int.Parse(DateTime.Now.Year.ToString());
             _namthongke = $"Năm {_yearthongke.ToString()}";
             datagridDSMuon.ItemsSource = context.DonMuons.ToList();
             
             // Gán danh sách dữ liệu cho DataGrid
-            PointLabel = chartPoint => string.Format("{0},({1:p})", chartPoint.Y, chartPoint.Participation);
+            PointLabel = chartPoint => string.Format("{0},({1:p0})", chartPoint.Y, chartPoint.Participation);
             DataContext = this;
             //Biểu đồ cột
             Series = new SeriesCollection()
@@ -174,7 +179,7 @@ namespace LibraryManagementApplication
                                    .Take(5)
                                    .Select(x => new TheLoaiReport
                                    {
-                                       TenTL = x.TheLoai,
+                                       TenTL = context.TheLoais.FirstOrDefault(t => t.MaTL == x.TheLoai).TenTL,
                                        SoLuongMuon = x.SoLuongMuon // Trả về số lượng mượn cùng với tên thể loại
                                    })
                                    .ToList();
