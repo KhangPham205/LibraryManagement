@@ -17,6 +17,7 @@ namespace LibraryManagementApplication.Model.Class
         public string Email { get; set; }
         public string SDT { get; set; }
         public string CCCD { get; set; }
+        public byte[] ProfileImage { get; set; } // Dữ liệu ảnh
 
         // Navigation properties
         public ICollection<DonMuon> DonMuons { get; set; }

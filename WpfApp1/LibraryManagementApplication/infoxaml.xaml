@@ -5,6 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagementApplication.Model.Class"
+      xmlns:viewmodel="clr-namespace:LibraryManagementApplication.ViewModel.ClassViewModel"
       xmlns:logout="clr-namespace:LibraryManagementApplication.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1000"
@@ -15,19 +16,17 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"
-         Background="#e6f3ff">
+              Background="#e6f3ff">
             <TextBlock Text="Thông tin cá nhân " 
-         FontSize="50" 
-         FontWeight="Bold" 
-         FontFamily="roboto"
-         Foreground="#07209e"
-         VerticalAlignment="Center"
-         HorizontalAlignment="Right"
-         />
+                       FontSize="50" 
+                       FontWeight="Bold" 
+                       FontFamily="roboto"
+                       Foreground="#07209e"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"/>
         </Grid>
-        <Grid 
-        Background="#e6f3ff"
-        Grid.Row="1">
+        <Grid Background="#e6f3ff"
+              Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="400"/>
                 <ColumnDefinition Width="*"/>
@@ -39,26 +38,28 @@
             <Border HorizontalAlignment="Center"  Height="300" Width="300" CornerRadius="150"
                     BorderBrush="#07209e" BorderThickness="2">
                 <Border.Background>
-                    <ImageBrush x:Name="pictureprofile" ImageSource="Icon/snapedit_1700659653749.jpg" Stretch="UniformToFill" />
+                    <ImageBrush x:Name="pictureprofile" ImageSource="{Binding ProfileImage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" />
                 </Border.Background>
+                <Border.DataContext>
+                    <viewmodel:TaiKhoanViewModel></viewmodel:TaiKhoanViewModel>
+                </Border.DataContext>
             </Border>
             <Button x:Name="changeprofile"
-                     Style="{StaticResource button:style1}"
-                     Content="Đổi ảnh"
-                     Margin="5"
-                     VerticalAlignment="Bottom"
-                     HorizontalAlignment="Center"
-                     Click="changemk_Click">
+                    Style="{StaticResource button:style1}"
+                    Content="Đổi ảnh"
+                    Margin="5"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center"
+                    Command="{Binding SelectImageCommand}">
                 <Button.DataContext>
-                    <logout:MainViewModel/>
+                    <viewmodel:TaiKhoanViewModel/>
                 </Button.DataContext>
             </Button>
-            <Border
-                Grid.Column="1"
-                BorderBrush="#07209e"
-                BorderThickness="2"
-                CornerRadius="20"
-                Margin="40">
+            <Border Grid.Column="1"
+                    BorderBrush="#07209e"
+                    BorderThickness="2"
+                    CornerRadius="20"
+                    Margin="40">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>

@@ -1,6 +1,9 @@
 ﻿using LibraryManagementApplication.Model.Class;
+using LibraryManagementApplication.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +24,12 @@ namespace LibraryManagementApplication
     /// </summary>
     public partial class infoxaml : Page
     {
+        private LibraryDbContext context;
+        private BitmapImage _profileImage;
         public infoxaml()
         {
+            context = new LibraryDbContext();
+
             InitializeComponent();
             DataContext = GlobalData.LoginUser;
         }
