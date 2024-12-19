@@ -38,10 +38,10 @@
             <Border HorizontalAlignment="Center"  Height="300" Width="300" CornerRadius="150"
                     BorderBrush="#07209e" BorderThickness="2">
                 <Border.Background>
-                    <ImageBrush x:Name="pictureprofile" ImageSource="{Binding ProfileImage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" />
+                    <ImageBrush x:Name="pictureprofile" ImageSource="{Binding ProfileImage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
                 </Border.Background>
                 <Border.DataContext>
-                    <viewmodel:TaiKhoanViewModel></viewmodel:TaiKhoanViewModel>
+                    <viewmodel:TaiKhoanViewModel/>
                 </Border.DataContext>
             </Border>
             <Button x:Name="changeprofile"
@@ -50,7 +50,8 @@
                     Margin="5"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Center"
-                    Command="{Binding SelectImageCommand}">
+                    Command="{Binding SelectImageCommand}"
+                    Click="changeprofile_Click">
                 <Button.DataContext>
                     <viewmodel:TaiKhoanViewModel/>
                 </Button.DataContext>

@@ -184,7 +184,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public ICommand SearchCommand { get; set; }
         public ICommand ShowCommand { get; set; }
         public ICommand ChangePasswordCommand { get; set; }
-        public ICommand SelectImageCommand { get; set; }
+        //public ICommand SelectImageCommand { get; set; }
 
         public TaiKhoanViewModel()
         {
@@ -195,9 +195,9 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchTaiKhoan());
             ShowCommand = new RelayCommand<DataGrid>((p) => true, (p) => ShowTaiKhoan());
             ChangePasswordCommand = new RelayCommand<DataGrid>((p) => true, async (p) => await ChangePassWord());
-            SelectImageCommand = new RelayCommand<object>((p) => true, (p) => SelectImage());
+            //SelectImageCommand = new RelayCommand<object>((p) => true, (p) => SelectImage());
 
-            if (GlobalData.LoginUser != null)
+            if (GlobalData.LoginUser != null && GlobalData.LoginUser.ProfileImage != null)
             {
                 ProfileImage = ConvertByteArrayToBitmapImage(GlobalData.LoginUser.ProfileImage);
             }
@@ -439,95 +439,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         #endregion
-
-        private void SelectImage()
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|All files (*.*)|*.*"
-            };
-
-            if (openFileDialog.ShowDialog() != true)
-            {
-                MessageBox.Show("Bạn chưa chọn tệp nào.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            try
-            {
-                var selectedFilePath = openFileDialog.FileName;
-
-                // Kiểm tra nếu tệp không tồn tại
-                if (!File.Exists(selectedFilePath))
-                {
-                    throw new FileNotFoundException("Tệp đã chọn không tồn tại.");
-                }
-
-                // Kiểm tra kích thước tệp (giới hạn kích thước nếu cần)
-                var fileInfo = new FileInfo(selectedFilePath);
-                if (fileInfo.Length > 5 * 1024 * 1024) // Ví dụ: Giới hạn 5MB
-                {
-                    throw new Exception("Tệp quá lớn. Vui lòng chọn ảnh có dung lượng nhỏ hơn 5MB.");
-                }
-
-                // Tải ảnh vào `BitmapImage`
-                var bitmapImage = new BitmapImage();
-                using (var stream = new FileStream(selectedFilePath, FileMode.Open, FileAccess.Read))
-                {
-                    bitmapImage.BeginInit();
-                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmapImage.StreamSource = stream;
-                    bitmapImage.EndInit();
-                }
-
-                // Cập nhật thuộc tính `ProfileImage`
-                ProfileImage = bitmapImage;
-
-                // Chuyển ảnh sang byte[] để lưu vào CSDL
-                byte[] imageData = ConvertBitmapImageToByteArray(ProfileImage);
-
-                // Lưu vào cơ sở dữ liệu
-                using (var context = new LibraryDbContext())
-                {
-                    TaiKhoan taiKhoan = context.TaiKhoans.FirstOrDefault(t => t.UserID == GlobalData.LoginUser.UserID);
-                    taiKhoan.ProfileImage = imageData;
-                    context.TaiKhoans.Update(taiKhoan);
-                    context.SaveChanges();
-                    GlobalData.LoginUser.ProfileImage = imageData;
-                    if (GlobalData.LoginUser != null)
-                    {
-                        ProfileImage = ConvertByteArrayToBitmapImage(GlobalData.LoginUser.ProfileImage);
-                    }
-                }
-
-                MessageBox.Show("Ảnh đã được chọn và lưu thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (FileNotFoundException ex)
-            {
-                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi chọn tệp", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                MessageBox.Show($"Không có quyền truy cập tệp: {ex.Message}", "Lỗi quyền truy cập", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (NotSupportedException ex)
-            {
-                MessageBox.Show($"Tệp không được hỗ trợ: {ex.Message}", "Lỗi định dạng", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null)
-                {
-                    MessageBox.Show($"Lỗi nội bộ: {ex.InnerException.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                    System.Diagnostics.Debug.WriteLine($"Inner Exception: {ex.InnerException}");
-                }
-                else
-                {
-                    MessageBox.Show($"Lỗi không xác định: {ex.Message}\nChi tiết: {ex.StackTrace}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-
-        }
 
         private byte[] ConvertBitmapImageToByteArray(BitmapImage bitmapImage)
         {

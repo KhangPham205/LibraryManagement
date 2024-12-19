@@ -32,8 +32,8 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <ThicknessAnimation Storyboard.TargetProperty="Margin"
-                                To="0,0,-190,0"
-                                Duration="0:0:0.2"/>
+                                                To="0,0,-190,0"
+                                                Duration="0:0:0.2"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -53,14 +53,14 @@
                 <StackPanel x:Name="listMainButton">
                     <RadioButton Style="{StaticResource rbutton:profile}"
                                  Command="{Binding infopagecommand}"
-                                CommandParameter="{Binding ElementName=Mainpage}">
+                                 CommandParameter="{Binding ElementName=Mainpage}">
                         <StackPanel>
                             <Border HorizontalAlignment="Center" Margin="10" Height="150" Width="150" CornerRadius="75"
                             BorderBrush="#07209e" BorderThickness="2">
                                 <Border.Background>
-                                    <ImageBrush x:Name="pictureprofile" ImageSource="Icon/snapedit_1700659653749.jpg" Stretch="UniformToFill" />
+                                    <ImageBrush x:Name="pictureprofile" ImageSource="{Binding ProfileImage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" />
                                 </Border.Background>
-                            </Border>
+                            </Border>                            
                             <TextBlock x:Name="profile" Margin="10,5,10,0" TextWrapping="Wrap" Style="{StaticResource textblock:menu}" FontSize="16" HorizontalAlignment="Center"/>
                             <TextBlock x:Name="profileemail" Margin="10,0,10,5" TextWrapping="Wrap" Style="{StaticResource textblock:menu}" FontSize="14" HorizontalAlignment="Center"/>
                         </StackPanel>
@@ -71,9 +71,9 @@
                                 CommandParameter="{Binding ElementName=Mainpage}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="Home"
-                                                Style="{StaticResource icon:menu}"/>
+                                          Style="{StaticResource icon:menu}"/>
                             <TextBlock Text="Trang chủ"
-                                            Style="{StaticResource textblock:menu}"/>
+                                       Style="{StaticResource textblock:menu}"/>
                         </StackPanel>
 
                     </RadioButton>
@@ -81,9 +81,9 @@
                         Style="{StaticResource rbutton:menu}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="BookOpen"
-                                            Style="{StaticResource icon:menu}"/>
+                                          Style="{StaticResource icon:menu}"/>
                             <TextBlock Text="Thông tin sách"
-                                        Style="{StaticResource textblock:menu}"/>
+                                       Style="{StaticResource textblock:menu}"/>
                         </StackPanel>
                     </RadioButton>
                     <StackPanel>
@@ -104,9 +104,9 @@
                                         CommandParameter="{Binding ElementName=Mainpage}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="BookOpen"
-                                                Style="{StaticResource icon:submenu}"/>
+                                              Style="{StaticResource icon:submenu}"/>
                                 <TextBlock Text="Đầu Sách"
-                                            Style="{StaticResource textblock:submenu}"/>
+                                           Style="{StaticResource textblock:submenu}"/>
                             </StackPanel>
                         </RadioButton>
                         <RadioButton Style="{StaticResource rbutton:submenu}"
