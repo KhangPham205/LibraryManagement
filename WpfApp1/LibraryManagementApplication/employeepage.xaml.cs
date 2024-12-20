@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using LibraryManagementApplication.ViewModel.ClassViewModel;
 
 namespace LibraryManagementApplication
 {
@@ -172,21 +173,48 @@ namespace LibraryManagementApplication
                 EXMessagebox.Show($"Có lỗi khi lưu file!. {ex.Message}");
             }
         }
-
         private void export_Click(object sender, RoutedEventArgs e)
         {
             ExportFile();
         }
-
         private void taikhoan_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            history.Visibility = Visibility.Visible;
+            if (taikhoan.SelectedItem != null)
+            {
+                // Hiển thị nút lịch sử khi có dòng được chọn
+                history.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                // Ẩn nút lịch sử nếu không có dòng nào được chọn
+                history.Visibility = Visibility.Collapsed;
+            }
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            employeeinfowindow employeeinfowindow = new employeeinfowindow();
-            employeeinfowindow.ShowDialog();
+            var selectedEmployee = (TaiKhoan)taikhoan.SelectedItem;
+
+            if (selectedEmployee != null)
+            {
+                // Tạo cửa sổ chi tiết nhân viên và truyền dữ liệu
+                var detailWindow = new employeeinfowindow
+                {
+                    DataContext = new TaiKhoanViewModel
+                    {
+                        SelectedTaiKhoan = selectedEmployee
+                    }
+                };
+
+                // Đăng ký sự kiện Closed để ẩn nút History khi bị đóng
+                detailWindow.Closed += (s, args) =>
+                {
+                    // Ẩn nút lịch sử khi cửa sổ bị đóng
+                    history.Visibility = Visibility.Collapsed;
+                };
+
+                // Hiển thị cửa sổ chi tiết
+                detailWindow.ShowDialog();
+            }
         }
     }
 }

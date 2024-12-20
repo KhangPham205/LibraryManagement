@@ -148,12 +148,17 @@
                             <ColumnDefinition Width="10"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
+                        <Button  x:Name="addsach"
+                                 Content="Thêm"
+                                 Margin="5"        
+                                 Style="{DynamicResource button:add}"
+                                 Command="{Binding AddCommand}"/>
                         <Button x:Name="history"
                                 Content="Lịch sử"
+                                Grid.Column="2"
                                 Style="{StaticResource button:history}"
                                 Visibility="Collapsed"
                                 Click="Button_Click"/>
-
                         <Button  x:Name="findsach"
                                  Content="Tìm"
                                  Grid.Column="6"

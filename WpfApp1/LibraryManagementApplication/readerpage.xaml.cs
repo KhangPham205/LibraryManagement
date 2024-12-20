@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using LibraryManagementApplication.ViewModel.ClassViewModel;
 
 namespace LibraryManagementApplication
 {
@@ -188,13 +189,43 @@ namespace LibraryManagementApplication
 
         private void docgia_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            history.Visibility = Visibility.Visible;
+            if (docgia.SelectedItem != null)
+            {
+                // Hiển thị nút lịch sử khi có dòng được chọn
+                history.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                // Ẩn nút lịch sử nếu không có dòng nào được chọn
+                history.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            readerinfowindow readerinfowindow = new readerinfowindow();
-            readerinfowindow.ShowDialog();
+            var selectedEmployee = (DocGia)docgia.SelectedItem;
+
+            if (selectedEmployee != null)
+            {
+                // Tạo cửa sổ chi tiết nhân viên và truyền dữ liệu
+                var detailWindow = new readerinfowindow
+                {
+                    DataContext = new DocGiaViewModel
+                    {
+                        SelectedDocGia = selectedEmployee
+                    }
+                };
+
+                // Đăng ký sự kiện Closed để ẩn nút History khi bị đóng
+                detailWindow.Closed += (s, args) =>
+                {
+                    // Ẩn nút lịch sử khi cửa sổ bị đóng
+                    history.Visibility = Visibility.Collapsed;
+                };
+
+                // Hiển thị cửa sổ chi tiết
+                detailWindow.ShowDialog();
+            }
         }
     }
 }

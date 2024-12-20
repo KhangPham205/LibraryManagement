@@ -62,7 +62,7 @@
                                     <ImageBrush x:Name="pictureprofile" ImageSource="{Binding ProfileImage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" />
                                 </Border.Background>
                             </Border>
-                            <TextBlock x:Name="profile" Margin="10,5,10,0" TextWrapping="Wrap" Style="{StaticResource textblock:menu}" FontSize="16" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="profile" Margin="10,5,10,0" TextAlignment="Center" TextWrapping="Wrap" Style="{StaticResource textblock:menu}" FontSize="16" HorizontalAlignment="Center"/>
                             <TextBlock x:Name="profileemail" Margin="10,0,10,5" TextWrapping="Wrap" Style="{StaticResource textblock:menu}" FontSize="14" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </RadioButton>
