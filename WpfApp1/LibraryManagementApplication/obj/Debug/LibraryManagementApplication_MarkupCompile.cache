@@ -4,26 +4,17 @@
 winexe
 C#
 .cs
-C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\obj\Debug\
+C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\obj\Debug\
 LibraryManagementApplication
 none
 false
 DEBUG;TRACE
-<<<<<<< Updated upstream
-C:\D\Lecture\IT008_LapTrinhTrucQuan\DoAnCuoiKy\WpfApp1\LibraryManagementApplication\App.xaml
-241850896634
-2-1692351808
-55-1799873353
-69-637348671
-addborrowwindow.xaml;bookpage.xaml;ChangePassword.xaml;EXMessagebox.xaml;headerbookpage.xaml;borrowpage.xaml;employeepage.xaml;infoxaml.xaml;lendpagexaml.xaml;LoginWindow.xaml;mainpage.xaml;MainWindow1.xaml;MainWindow2.xaml;publisherpage.xaml;readerpage.xaml;Recover.xaml;RecoverPage.xaml;ResourceXAML\MainResource.xaml;Signin.xaml;SignInPage.xaml;Signup.xaml;SignUpPage.xaml;typepage.xaml;writerpage.xaml;
-=======
 C:\Users\PC\Documents\GitHub\LibraryManagement\WpfApp1\LibraryManagementApplication\App.xaml
 261385649993
 2-1692351808
 57-1926526572
 69-2105344652
 addborrowwindow.xaml;bookpage.xaml;ChangePassword.xaml;employeeinfowindow.xaml;EXMessagebox.xaml;headerbookpage.xaml;borrowpage.xaml;employeepage.xaml;infoxaml.xaml;lendpagexaml.xaml;LoginWindow.xaml;mainpage.xaml;MainWindow1.xaml;MainWindow2.xaml;publisherpage.xaml;readerinfowindow.xaml;readerpage.xaml;Recover.xaml;RecoverPage.xaml;ResourceXAML\MainResource.xaml;Signin.xaml;SignInPage.xaml;Signup.xaml;SignUpPage.xaml;typepage.xaml;writerpage.xaml;
->>>>>>> Stashed changes
 
 False
 
