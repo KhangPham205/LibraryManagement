@@ -170,22 +170,27 @@
                     </Grid>
                 </Grid>
             </Border>
-            <DataGrid x:Name="sach"
-                      Margin="5"
-                      Grid.Row="1"
-                      SelectedItem="{Binding SelectedSach, Mode=OneWayToSource}"
-                      ItemsSource="{Binding SachList}"
-                      >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã đầu sách" Width="*" Binding="{Binding MaDauSach}"/>
-                    <DataGridTextColumn Header="Tên đầu sách" Width="2*" Binding="{Binding TenDauSach}"/>
-                    <DataGridTextColumn Header="ISBN" Width="*" Binding="{Binding ISBN}"/>
-                    <DataGridTextColumn Header="Năm xuất bản" Width="*" Binding="{Binding NamXB}"/>
-                    <DataGridTextColumn Header="Vị trí" Width="*" Binding="{Binding ViTri}"/>
-                    <DataGridTextColumn Header="Trạng thái" Width="*" Binding="{Binding TrangThai}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
+            <Grid Margin="5"
+                  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Sách" Style="{StaticResource textblock:style1}"/>
+                <DataGrid x:Name="sach"
+                          Grid.Row="1"
+                          SelectedItem="{Binding SelectedSach, Mode=OneWayToSource}"
+                          ItemsSource="{Binding SachList}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã đầu sách" Width="*" Binding="{Binding MaDauSach}"/>
+                        <DataGridTextColumn Header="Tên đầu sách" Width="2*" Binding="{Binding TenDauSach}"/>
+                        <DataGridTextColumn Header="ISBN" Width="*" Binding="{Binding ISBN}"/>
+                        <DataGridTextColumn Header="Năm xuất bản" Width="*" Binding="{Binding NamXB}"/>
+                        <DataGridTextColumn Header="Vị trí" Width="*" Binding="{Binding ViTri}"/>
+                        <DataGridTextColumn Header="Trạng thái" Width="*" Binding="{Binding TrangThai}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

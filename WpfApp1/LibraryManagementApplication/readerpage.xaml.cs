@@ -188,14 +188,14 @@ namespace LibraryManagementApplication
 
         private void docgia_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            datagridMuon.Visibility = Visibility.Visible;
-            sach.Visibility = Visibility.Visible;
+            donmuongrid.Visibility = Visibility.Visible;
+            ctdmgrid.Visibility = Visibility.Visible;
         }
 
         private void Border_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            datagridMuon.Visibility = Visibility.Collapsed;
-            sach.Visibility = Visibility.Collapsed;
+            donmuongrid.Visibility = Visibility.Collapsed;
+            ctdmgrid.Visibility = Visibility.Collapsed;
         }
     }
 }

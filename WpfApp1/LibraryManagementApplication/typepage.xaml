@@ -123,16 +123,23 @@
                     </Grid>
                 </Grid>
             </Border>
-            <DataGrid x:Name="theloai"
-                     Margin="5"
+            <Grid Margin="5"
+      Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Thể loại" Style="{StaticResource textblock:style1}"/>
+                <DataGrid x:Name="theloai"
                      Grid.Row="1"
                      SelectedItem="{Binding SelectedTheLoai, Mode=OneWayToSource}"
                      ItemsSource="{Binding TheLoaiList}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã thể loại" Width="*" Binding="{Binding MaTL}" />
-                    <DataGridTextColumn Header="Tên thể loại" Width="5*" Binding="{Binding TenTL}" />
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã thể loại" Width="*" Binding="{Binding MaTL}" />
+                        <DataGridTextColumn Header="Tên thể loại" Width="5*" Binding="{Binding TenTL}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

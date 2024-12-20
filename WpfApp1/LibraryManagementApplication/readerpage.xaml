@@ -160,49 +160,70 @@
                     </Grid>
                 </Grid>
             </Border>
-            <DataGrid x:Name="datagridMuon"
-                      Grid.Row="1"
-                      Margin="5"
-                      Visibility="Collapsed"
-                      SelectedItem="{Binding SelectedDonMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding DonMuonList, UpdateSourceTrigger=PropertyChanged}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
-                    <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}"/>
-                    <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon, StringFormat='dd/MM/yyyy'}"/>
-                    <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK, StringFormat='dd/MM/yyyy'}"/>
-                    <DataGridTextColumn Header="Ngày trả thực tế" Width="*" Binding="{Binding NgayTraTT, StringFormat='dd/MM/yyyy'}"/>
-                    <DataGridTextColumn Header="Phí phạt (VND)" Width="*" Binding="{Binding PhiPhat}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <DataGrid x:Name="sach" 
-                      Grid.Row="1"
-                      Grid.Column="1" 
-                      Margin="5"
-                      Visibility="Collapsed"
-                      ItemsSource="{Binding DanhSachMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Sách" Width="*" Binding="{Binding TenDauSach}"/>
-                    <DataGridTextColumn Header="IBSN" Width="*" Binding="{Binding ISBN}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-            <DataGrid x:Name="docgia"
+            <Grid x:Name="donmuongrid" Margin="5"
+      Grid.Row="1"
+      Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Sách" Style="{StaticResource textblock:style1}"/>
+                <DataGrid x:Name="datagridMuon"
+          Grid.Row="1"
+          SelectedItem="{Binding SelectedDonMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding DonMuonList}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
+                        <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}"/>
+                        <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon, StringFormat='dd/MM/yyyy'}"/>
+                        <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK, StringFormat='dd/MM/yyyy'}"/>
+                        <DataGridTextColumn Header="Ngày trả thực tế" Width="*" Binding="{Binding NgayTraTT, StringFormat='dd/MM/yyyy'}"/>
+                        <DataGridTextColumn Header="Phí phạt (VND)" Width="*" Binding="{Binding PhiPhat}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid x:Name="ctdmgrid" Grid.Row="1"
+       Grid.Column="1" 
+       Margin="5"
+      Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Chi tiết đơn mượn" Style="{StaticResource textblock:style1}"/>
+                <DataGrid x:Name="sach" 
+          Grid.Row="1"
+          ItemsSource="{Binding DanhSachMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Sách" Width="*" Binding="{Binding TenDauSach}"/>
+                        <DataGridTextColumn Header="IBSN" Width="*" Binding="{Binding ISBN}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Margin="5"
+                  Grid.Row="2"
+                  Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Độc giả" Style="{StaticResource textblock:style1}"/>
+                <DataGrid x:Name="docgia"
                       AutoGenerateColumns="False"
                       IsReadOnly="True"
-                      Margin="5"
-                      Grid.Row="2"
-                      Grid.ColumnSpan="2"
+                      Grid.Row="1"
                       SelectedItem="{Binding SelectedDocGia, Mode=OneWayToSource}"
                       ItemsSource="{Binding DocGiaList}"
                       SelectedCellsChanged="docgia_SelectedCellsChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}" />
-                    <DataGridTextColumn Header="Tên độc giả" Width="3*" Binding="{Binding TenDG}" />
-                    <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Email}" />
-                    <DataGridTextColumn Header="CCCD" Width="*" Binding="{Binding CCCD}" />
-                    <DataGridTextColumn Header="SDT" Width="*" Binding="{Binding SDT}" />
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}" />
+                        <DataGridTextColumn Header="Tên độc giả" Width="3*" Binding="{Binding TenDG}" />
+                        <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Email}" />
+                        <DataGridTextColumn Header="CCCD" Width="*" Binding="{Binding CCCD}" />
+                        <DataGridTextColumn Header="SDT" Width="*" Binding="{Binding SDT}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

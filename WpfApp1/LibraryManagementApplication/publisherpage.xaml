@@ -121,16 +121,23 @@
                     </Grid>
                 </Grid>
             </Border>
-            <DataGrid x:Name="nxb"
-                     Margin="5"
-                     Grid.Row="1"
+            <Grid Margin="5"
+                  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Nhà xuất bản" Style="{StaticResource textblock:style1}"/>
+                <DataGrid x:Name="nxb"
                      SelectedItem="{Binding SelectedNhaXuatBan, Mode=OneWayToSource}"
-                     ItemsSource="{Binding NhaXuatBanList}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã NXB" Width="*" Binding="{Binding MaNXB}" />
-                    <DataGridTextColumn Header="Tên NXB" Width="5*" Binding="{Binding TenNXB}" />
-                </DataGrid.Columns>
-            </DataGrid>
+                     ItemsSource="{Binding NhaXuatBanList}"
+                     Grid.Row="1">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã NXB" Width="*" Binding="{Binding MaNXB}" />
+                        <DataGridTextColumn Header="Tên NXB" Width="5*" Binding="{Binding TenNXB}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

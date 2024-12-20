@@ -37,15 +37,22 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid x:Name="sach" 
-                          Grid.Column="1" 
-                          Margin="5"
+                <Grid Margin="5"
+                      Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Chi tiết đơn mượn" Style="{StaticResource textblock:style1}"/>
+                    <DataGrid x:Name="sach" 
+                          Grid.Row="1" 
                           ItemsSource="{Binding DanhSachMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Sách" Width="*" Binding="{Binding TenDauSach}"/>
-                        <DataGridTextColumn Header="IBSN" Width="*" Binding="{Binding ISBN}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Sách" Width="*" Binding="{Binding TenDauSach}"/>
+                            <DataGridTextColumn Header="IBSN" Width="*" Binding="{Binding ISBN}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
                 <Border Margin="20,20,20,10"
                         BorderBrush="#07209e"
                         BorderThickness="2"
@@ -98,9 +105,23 @@
                                    Grid.Column="0"
                                    Grid.Row="4"
                                    HorizontalAlignment="Right" Margin="9,0,0,0"/>
-                        <TextBox x:Name="ngaymuontb"
-                                 Grid.Column="2"
-                                 Grid.Row="4"
+                        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="4">
+                            <TextBlock Text="  BD: "
+                                       Margin="5"
+                                        Style="{StaticResource textblock:style1}"/>
+                            <DatePicker x:Name="StartBorrowdate" 
+                                        Margin="5"
+                                        Style="{StaticResource datepick:style1}"
+                                        SelectedDate="{Binding startborrowdate}"/>
+                            <TextBlock Text="KT: "
+                                       Margin="5"
+                                       Style="{StaticResource textblock:style1}"/>
+                            <DatePicker x:Name="EndBorrowdate" 
+                                        Margin="5"
+                                        Style="{StaticResource datepick:style1}"
+                                        SelectedDate="{Binding endborrowdate}"/>
+                        </StackPanel>
+                        <TextBox x:Name="ngaymuontb" 
                                  Style="{StaticResource textbox:style1}"
                                  Margin="5"
                                  Text="{Binding NgayMuon, Mode=TwoWay, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged}"/>
@@ -109,33 +130,22 @@
                                    Grid.Column="0"
                                    Grid.Row="5"
                                    HorizontalAlignment="Right"/>
-                        <TextBox x:Name="ngaytradktb"
-                                 Grid.Column="2"
-                                 Grid.Row="5"
-                                 Style="{StaticResource textbox:style1}"
-                                 Margin="5"
-                                 Text="{Binding NgayTraDK, Mode=TwoWay, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="Ngày trả thực tế:"
-                                   Style="{StaticResource textblock:style1}"
-                                   Grid.Column="0"
-                                   Grid.Row="6"
-                                   HorizontalAlignment="Right" Margin="9,0,0,0"/>
-                        <TextBox x:Name="ngaytratttb"
-                                 Grid.Column="2"
-                                 Grid.Row="6"
-                                 Style="{StaticResource textbox:style1}"
-                                 Margin="5"
-                                 Text="{Binding NgayTraTT, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="Phí phạt:"
-                                   Style="{StaticResource textblock:style1}"
-                                   Grid.Row="7"
-                                   HorizontalAlignment="Right" Margin="9,0,0,0"/>
-                        <TextBox x:Name="phiphattb"
-                                 Grid.Column="1"
-                                 Grid.Row="7"
-                                 Style="{StaticResource textbox:style1}"
-                                 Margin="5"
-                                 Text="{Binding PhiPhat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="5">
+                            <TextBlock Text="  BD: "
+                               Margin="5"
+                                Style="{StaticResource textblock:style1}"/>
+                            <DatePicker x:Name="StartLenddate" 
+                                Margin="5"
+                                Style="{StaticResource datepick:style1}"
+                                SelectedDate="{Binding startborrowdatedk}"/>
+                            <TextBlock Text="KT: "
+                               Margin="5"
+                               Style="{StaticResource textblock:style1}"/>
+                            <DatePicker x:Name="EndLenddate" 
+                                Margin="5"
+                                Style="{StaticResource datepick:style1}"
+                                SelectedDate="{Binding endlenddatedk}"/>
+                        </StackPanel>
                         <Grid Grid.Row="8"
                               Grid.Column="0"
                               Grid.ColumnSpan="4">
@@ -185,22 +195,26 @@
                     </Grid>
                 </Border>
             </Grid>
-            <DataGrid x:Name="datagridMuon"
+            <Grid Margin="5"
+                  Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Đơn mượn" Style="{StaticResource textblock:style1}"/>
+                <DataGrid x:Name="datagridMuon"
                       Grid.Row="1" 
-                      Grid.ColumnSpan="2"
-                      Margin="5"
                       SelectedItem="{Binding SelectedDonMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding DonMuonList}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
-                    <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}"/>
-                    <DataGridTextColumn Header="Mã nhân viên" Width="*" Binding="{Binding MaNV}"/>
-                    <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon, StringFormat='dd/MM/yyyy'}"/>
-                    <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK, StringFormat='dd/MM/yyyy'}"/>
-                    <DataGridTextColumn Header="Ngày trả thực tế" Width="*" Binding="{Binding NgayTraTT, StringFormat='dd/MM/yyyy'}"/>
-                    <DataGridTextColumn Header="Phí phạt (VND)" Width="*" Binding="{Binding PhiPhat}"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
+                        <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}"/>
+                        <DataGridTextColumn Header="Mã nhân viên" Width="*" Binding="{Binding MaNV}"/>
+                        <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon, StringFormat='dd/MM/yyyy'}"/>
+                        <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK, StringFormat='dd/MM/yyyy'}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

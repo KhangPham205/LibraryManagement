@@ -98,8 +98,6 @@ namespace LibraryManagementApplication
                                                 "Mã nhân viên",
                                                 "Ngày mượn",
                                                 "Ngày trả dự kiến",
-                                                "Ngày trả thực tế",
-                                                "Phí phạt VND",
                                                 "Sách",
                                                 "ISBN",
                                                 "Ghi chú"
@@ -192,21 +190,6 @@ namespace LibraryManagementApplication
                         ws.Cells[rowIndex, colIndex, rowIndex + rowctdm, colIndex++].Value = item.NgayTraDK.ToShortDateString();
                         ws.Cells[rowIndex, colIndex, rowIndex + rowctdm, colIndex].Merge = true;
                         ws.Cells[rowIndex, colIndex, rowIndex + rowctdm, colIndex].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                        if (item.NgayTraTT != null)
-                            ws.Cells[rowIndex, colIndex, rowIndex + rowctdm, colIndex++].Value = DateTime.Parse(item.NgayTraTT.ToString()).ToShortDateString();
-                        else
-                            ws.Cells[rowIndex, colIndex, rowIndex + rowctdm, colIndex++].Value = "";
-                        ws.Cells[rowIndex, colIndex, rowIndex + rowctdm, colIndex].Merge = true;
-                        ws.Cells[rowIndex, colIndex, rowIndex + rowctdm, colIndex].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                        ws.Cells[rowIndex, colIndex, rowIndex + rowctdm, colIndex++].Value = item.PhiPhat;
-                        int colstart = colIndex;
-                        foreach (var ctdm in ctdmList)
-                        {
-                            colIndex = colstart;
-                            ws.Cells[rowIndex, colIndex++].Value = ctdm.TenDauSach;
-                            ws.Cells[rowIndex, colIndex++].Value = ctdm.ISBN;
-                            rowIndex++;
-                        }
                     }
                     ws.Cells.AutoFitColumns();
                     Byte[] bin = p.GetAsByteArray();
@@ -246,7 +229,5 @@ namespace LibraryManagementApplication
         public string TenNV { get; set; }
         public string NgayMuon { get; set; }
         public string NgayTraDK { get; set; }
-        public string NgayTraTT { get; set; }
-        public string PhiPhat { get; set; }
     }
 }

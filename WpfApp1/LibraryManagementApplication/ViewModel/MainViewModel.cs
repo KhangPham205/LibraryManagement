@@ -59,6 +59,7 @@ namespace LibraryManagementApplication.ViewModel
             publisherpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is publisherpage); }, (p) => { p.Content = new publisherpage(); });
             headerbookpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is headerbookpage); }, (p) => { p.Content = new headerbookpage(); });
             infopagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is infoxaml); }, (p) => { p.Content = new infoxaml(); });
+            lendpagecommand = new RelayCommand<Frame>((p) => { return p == null || !(p.Content is lendpagexaml); }, (p) => { p.Content = new lendpagexaml(); });
 
             if (GlobalData.LoginUser != null && GlobalData.LoginUser.ProfileImage != null)
             {

@@ -120,16 +120,24 @@
                     </Grid>
                 </Grid>
             </Border>
-            <DataGrid x:Name="tacgia"
+            <Grid Margin="5"
+      Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Tác giả" Style="{StaticResource textblock:style1}"/>
+                <DataGrid x:Name="tacgia"
                      Margin="5"
                      Grid.Row="1"
                       SelectedItem="{Binding SelectedTacGia, Mode=OneWayToSource}"
                      ItemsSource="{Binding TacGiaList}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã tác giả" Width="*" Binding="{Binding MaTG}" />
-                    <DataGridTextColumn Header="Tên tác giả" Width="5*" Binding="{Binding TenTG}" />
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã tác giả" Width="*" Binding="{Binding MaTG}" />
+                        <DataGridTextColumn Header="Tên tác giả" Width="5*" Binding="{Binding TenTG}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

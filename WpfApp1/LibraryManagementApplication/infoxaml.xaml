@@ -28,14 +28,16 @@
         <Grid Background="#e6f3ff"
               Grid.Row="1">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="600"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border HorizontalAlignment="Center"  Height="300" Width="300" CornerRadius="150"
+            <Border HorizontalAlignment="Center" Grid.Column="1" Height="300" Width="300" CornerRadius="150"
                     BorderBrush="#07209e" BorderThickness="2">
                 <Border.Background>
                     <ImageBrush x:Name="pictureprofile" ImageSource="{Binding ProfileImage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
@@ -48,6 +50,7 @@
                     Style="{StaticResource button:style1}"
                     Content="Đổi ảnh"
                     Margin="5"
+                    Grid.Column="1"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Center"
                     Command="{Binding SelectImageCommand}"
@@ -56,11 +59,12 @@
                     <viewmodel:TaiKhoanViewModel/>
                 </Button.DataContext>
             </Button>
-            <Border Grid.Column="1"
+            <Border
                     BorderBrush="#07209e"
                     BorderThickness="2"
                     CornerRadius="20"
-                    HorizontalAlignment="Center"
+                    Grid.Column="2"
+                    HorizontalAlignment="Right"
                     Margin="40">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>

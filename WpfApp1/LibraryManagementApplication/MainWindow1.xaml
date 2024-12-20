@@ -158,8 +158,19 @@
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Icon="CalendarDay"
                                             Style="{StaticResource icon:menu}"/>
-                            <TextBlock Text="Mượn-Trả"
+                            <TextBlock Text="Đơn mượn"
                                         Style="{StaticResource textblock:menu}"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="lend" 
+             Style="{StaticResource rbutton:menu}"
+             Command="{Binding lendpagecommand}"
+             CommandParameter="{Binding ElementName=Mainpage}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="CalendarCheck"
+                        Style="{StaticResource icon:menu}"/>
+                            <TextBlock Text="Đơn trả"
+                    Style="{StaticResource textblock:menu}"/>
                         </StackPanel>
                     </RadioButton>
                     <RadioButton Style="{StaticResource rbutton:menu}"
