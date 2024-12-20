@@ -52,22 +52,6 @@
             <Frame x:Name="loginframe" Margin="10"
                    Grid.ColumnSpan="3"
                    NavigationUIVisibility="Hidden"/>
-            <TextBlock  x:Name="signup"
-            Foreground="#07209e"
-            Background="Transparent"
-            FontWeight="Medium"
-            Grid.Row="1"
-            HorizontalAlignment="Center"        
-            FontSize="13"
-            Margin="10">
-                <Run Text="Chưa có tài khoản? " />
-            <Hyperlink Command="{Binding SignupCommand}"
-                       CommandParameter="{Binding ElementName=loginframe}"
-                       Click="signup_Click"
-                       Cursor="Hand">
-                Đăng kí
-            </Hyperlink>
-            </TextBlock>
             <TextBlock  x:Name="forgot"
                 Foreground="#07209e"
                 Background="Transparent"
@@ -79,27 +63,8 @@
                 Margin="10">
                 <Hyperlink Command="{Binding RecoverCommand}"                            
                            CommandParameter="{Binding ElementName=loginframe}"
-                           Click="forgot_Click"
                            Cursor="Hand">
                     Quên mật khẩu?
-                </Hyperlink>
-            </TextBlock>
-            <TextBlock  x:Name="signin"
-                Foreground="#07209e"
-                Background="Transparent"
-                FontWeight="Medium"
-                Grid.Row="1"
-                Grid.Column="2"
-                HorizontalAlignment="Center"        
-                FontSize="13"
-                Margin="10"
-                Visibility="Collapsed">
-                    <Run Text="Đã có tài khoản? " />
-                <Hyperlink Command="{Binding LoginPageCommand}"                            
-                           CommandParameter="{Binding ElementName=loginframe}"
-                           Click="singin_Click"
-                           Cursor="Hand">
-                    Đăng nhập
                 </Hyperlink>
             </TextBlock>
         </Grid>

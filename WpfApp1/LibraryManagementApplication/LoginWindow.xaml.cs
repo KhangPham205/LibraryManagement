@@ -24,26 +24,5 @@ namespace LibraryManagementApplication
             InitializeComponent();
             loginframe.Content = new SignInPage();  
         }
-
-        private void signup_Click(object sender, RoutedEventArgs e)
-        {
-            signin.Visibility = Visibility.Visible;
-            forgot.Visibility = Visibility.Collapsed;
-            signup.Visibility = Visibility.Collapsed;
-        }
-
-        private void singin_Click(object sender, RoutedEventArgs e)
-        {
-            signin.Visibility = Visibility.Collapsed;
-            forgot.Visibility = Visibility.Visible;
-            signup.Visibility = Visibility.Visible;
-        }
-
-        private void forgot_Click(object sender, RoutedEventArgs e)
-        {
-            signin.Visibility = Visibility.Visible;
-            forgot.Visibility = Visibility.Collapsed;
-            signup.Visibility = Visibility.Visible;
-        }
     }
 }
