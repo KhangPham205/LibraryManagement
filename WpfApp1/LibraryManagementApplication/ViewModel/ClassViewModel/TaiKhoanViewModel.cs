@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Text.RegularExpressions;
 using System.Windows.Media.Imaging;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
@@ -242,7 +243,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public ICommand SearchCommand { get; set; }
         public ICommand ShowCommand { get; set; }
         public ICommand ChangePasswordCommand { get; set; }
-        //public ICommand SelectImageCommand { get; set; }
 
         public TaiKhoanViewModel()
         {
@@ -253,7 +253,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchTaiKhoan());
             ShowCommand = new RelayCommand<DataGrid>((p) => true, (p) => ShowTaiKhoan());
             ChangePasswordCommand = new RelayCommand<DataGrid>((p) => true, async (p) => await ChangePassWord());
-            //SelectImageCommand = new RelayCommand<object>((p) => true, (p) => SelectImage());
 
             if (GlobalData.LoginUser != null && GlobalData.LoginUser.ProfileImage != null)
             {
@@ -281,6 +280,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 !string.IsNullOrEmpty(SDT) && 
                 !string.IsNullOrEmpty(CCCD))
             {
+                if (!IsValidEmail(Email))
+                {
+                    EXMessagebox.Show("Email không hợp lệ.", "Thông báo");
+                    return false;
+                }
+
                 bool exists = await IsTaiKhoanExistsAsync(CCCD, Email);
                 if (exists)
                 {
@@ -318,6 +323,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             if (SelectedTaiKhoan != null)
             {
+                if (!IsValidEmail(Email))
+                {
+                    EXMessagebox.Show("Email không hợp lệ.", "Thông báo");
+                    return;
+                }
+
                 SelectedTaiKhoan.UserName = UserName;
                 SelectedTaiKhoan.Password = Password;
                 SelectedTaiKhoan.SDT = SDT;
@@ -328,6 +339,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 {
                     EXMessagebox.Show("Error updating Tai Khoan.");
                 }
+                else
+                    LoadTaiKhoanList();
             }
         }
 
@@ -522,6 +535,22 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapImage.EndInit();
                 return bitmapImage;
+            }
+        }
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                // Biểu thức chính quy kiểm tra email
+                string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+                return Regex.IsMatch(email, emailPattern);
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
             }
         }
     }
