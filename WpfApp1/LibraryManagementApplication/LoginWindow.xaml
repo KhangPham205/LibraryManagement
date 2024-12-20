@@ -63,9 +63,27 @@
                 Margin="10">
                 <Hyperlink Command="{Binding RecoverCommand}"                            
                            CommandParameter="{Binding ElementName=loginframe}"
-                           Cursor="Hand">
+                           Cursor="Hand"
+                           Click="Hyperlink_Click">
                     Quên mật khẩu?
                 </Hyperlink>
+            </TextBlock>
+            <TextBlock  x:Name="singin"
+                Foreground="#07209e"
+                Background="Transparent"
+                FontWeight="Medium"
+                Grid.Row="1"
+                Grid.Column="1"
+                Visibility="Collapsed"
+                HorizontalAlignment="Center"        
+                FontSize="13"
+                Margin="10">
+    <Hyperlink Command="{Binding LoginPageCommand}"                            
+               CommandParameter="{Binding ElementName=loginframe}"
+               Cursor="Hand"
+               Click="Hyperlink_Click_1">
+                Đăng nhập
+    </Hyperlink>
             </TextBlock>
         </Grid>
     </Grid>

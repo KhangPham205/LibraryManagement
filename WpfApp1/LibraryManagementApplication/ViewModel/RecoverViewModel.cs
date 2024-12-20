@@ -62,8 +62,30 @@ namespace LibraryManagementApplication.ViewModel
                 string senderPassword = "ttcs ttwh psdn izyw"; // Thay bằng App Password nếu đã tạo
 
                 // Nội dung email
-                string subject = "Khôi phục mật khẩu";
-                string body = $"Xin chào,\n\nMật khẩu của bạn là: {password}\n\nCảm ơn bạn đã sử dụng hệ thống của chúng tôi!";
+                string subject = "Thông báo khôi phục mật khẩu tài khoản";
+                string body = $@"
+Kính gửi Quý độc giả,
+
+Chúng tôi đã nhận được yêu cầu khôi phục mật khẩu từ Quý độc giả cho tài khoản của mình trên hệ thống quản lý thư viện.
+
+Dưới đây là thông tin mật khẩu của Quý độc giả:
+--------------------------------------------------
+Mật khẩu: {password}
+--------------------------------------------------
+
+Vui lòng sử dụng mật khẩu này để đăng nhập vào hệ thống. Chúng tôi khuyến nghị Quý độc giả đổi mật khẩu sau khi đăng nhập để đảm bảo an toàn thông tin tài khoản.
+
+Nếu Quý độc giả không yêu cầu khôi phục mật khẩu, vui lòng bỏ qua email này hoặc liên hệ ngay với chúng tôi qua email hỗ trợ: khonggian2k0520@gmail.com để được hỗ trợ kịp thời.
+
+Chân thành cảm ơn Quý độc giả đã tin tưởng và sử dụng dịch vụ của chúng tôi.
+
+Trân trọng,
+Đội ngũ hỗ trợ
+Thư viện điện tử LibraryService
+Email: khonggian2k0520@gmail.com
+Điện thoại: 0123 456 789
+";
+
 
                 // Cấu hình SMTP
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587)

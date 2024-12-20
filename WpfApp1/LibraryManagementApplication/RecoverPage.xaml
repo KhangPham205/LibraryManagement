@@ -36,7 +36,6 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <TextBlock Style="{StaticResource textblock:style1}"
                        Grid.Row="1"
