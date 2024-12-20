@@ -31,12 +31,20 @@
             Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto" MaxHeight="150"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border Margin="40,40,40,10"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Margin="40,20,40,10"
                     BorderBrush="#07209e"
                     BorderThickness="2"
-                    CornerRadius="20">
+                    HorizontalAlignment="Center"
+                    CornerRadius="20"
+                    Grid.ColumnSpan="2"
+                    MouseEnter="Border_MouseEnter">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>
@@ -47,9 +55,9 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="110"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="300"/>
                         <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Tên độc giả:"
@@ -155,13 +163,41 @@
                     </Grid>
                 </Grid>
             </Border>
+            <DataGrid x:Name="datagridMuon"
+                      Grid.Row="1"
+                      Margin="5"
+                      Visibility="Collapsed"
+                      SelectedItem="{Binding SelectedDonMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding DonMuonList}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
+                    <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}"/>
+                    <DataGridTextColumn Header="Ngày mượn" Width="*" Binding="{Binding NgayMuon, StringFormat='dd/MM/yyyy'}"/>
+                    <DataGridTextColumn Header="Ngày trả dự kiến" Width="*" Binding="{Binding NgayTraDK, StringFormat='dd/MM/yyyy'}"/>
+                    <DataGridTextColumn Header="Ngày trả thực tế" Width="*" Binding="{Binding NgayTraTT, StringFormat='dd/MM/yyyy'}"/>
+                    <DataGridTextColumn Header="Phí phạt (VND)" Width="*" Binding="{Binding PhiPhat}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="sach" 
+                      Grid.Row="1"
+                      Grid.Column="1" 
+                      Margin="5"
+                      Visibility="Collapsed"
+                      ItemsSource="{Binding DanhSachMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Sách" Width="*" Binding="{Binding TenDauSach}"/>
+                    <DataGridTextColumn Header="IBSN" Width="*" Binding="{Binding ISBN}"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <DataGrid x:Name="docgia"
                      AutoGenerateColumns="False"
                      IsReadOnly="True"
                      Margin="5"
-                     Grid.Row="1"
+                     Grid.Row="2"
+                     Grid.ColumnSpan="2"
                      SelectedItem="{Binding SelectedDocGia, Mode=OneWayToSource}"
-                     ItemsSource="{Binding DocGiaList}">
+                     ItemsSource="{Binding DocGiaList}"
+                     SelectedCellsChanged="docgia_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}" />
                     <DataGridTextColumn Header="Tên độc giả" Width="3*" Binding="{Binding TenDG}" />

@@ -36,7 +36,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        <!--style icon main-->
         <Style TargetType="fa:IconImage" x:Key="icon:main">
             <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=Button}}" />
             <Setter Property="Width" Value="30" />
@@ -417,36 +417,6 @@
                                BorderThickness ="0"
                                Text="{Binding Path = Text, RelativeSource={RelativeSource AncestorType=TextBox}}"
                                ></TextBox>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="tb" Property="BorderBrush" Value="#07209e"/>
-                                <Setter TargetName="tb" Property="BorderThickness" Value="0,0,0,2"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style TargetType="PasswordBox" x:Key="passwordbox:style1">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="PasswordBox">
-                        <Border
-                     Background="White"
-                     BorderBrush="#07209e"
-                     BorderThickness="1"
-                     CornerRadius="10"
-                     Height="40">
-                            <PasswordBox x:Name="tb"
-                       FontSize="18"
-                       FontWeight="Medium"
-                       Margin="5"
-                       BorderBrush="Transparent"
-                       Background="white"
-                       BorderThickness ="0"
-                       local:PasswordBoxHelper.BindPassword="{Binding Path = Password, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=PasswordBox}}"
-                       ></PasswordBox>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">

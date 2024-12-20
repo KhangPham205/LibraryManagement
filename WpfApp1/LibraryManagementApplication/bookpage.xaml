@@ -32,9 +32,10 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border Margin="40,40,40,10"
+            <Border Margin="40,20,40,10"
                  BorderBrush="#07209e"
                  BorderThickness="2"
+                 HorizontalAlignment="Center"
                  CornerRadius="20">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
@@ -49,9 +50,9 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="130"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="300"/>
                         <ColumnDefinition Width="110"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Tên đầu sách:"

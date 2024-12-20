@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagementApplication.ViewModel.ClassViewModel"
         mc:Ignorable="d"
-        Title="addborrowwindow" Height="450" Width="950"
-        ResizeMode="NoResize">
+        Height="auto" Width="950"
+        ResizeMode="NoResize"
+        Icon="/Icon/book (1).png">
     <Window.DataContext>
         <local:CTDMViewModel/>
     </Window.DataContext>
@@ -20,7 +21,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Border Grid.ColumnSpan="2"
                 CornerRadius="0,0,20,20"

@@ -49,6 +49,7 @@
                 <Border Margin="20,20,20,10"
                         BorderBrush="#07209e"
                         BorderThickness="2"
+                        HorizontalAlignment="Center"
                         CornerRadius="20">
                     <Grid Margin="5"
                           Grid.Column="0">
@@ -67,7 +68,7 @@
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="160"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="430"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Mã độc giả:"
                          Style="{StaticResource textblock:style1}"

@@ -60,6 +60,7 @@
                     BorderBrush="#07209e"
                     BorderThickness="2"
                     CornerRadius="20"
+                    HorizontalAlignment="Center"
                     Margin="40">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
@@ -74,7 +75,7 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="130"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Tên nhân viên:"
