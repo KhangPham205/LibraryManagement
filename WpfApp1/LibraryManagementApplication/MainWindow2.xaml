@@ -18,14 +18,14 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border x:Name="Menu"
- Grid.Column="0" Grid.RowSpan="2"
- Background="#FF36A4ED"
- CornerRadius="0,20,20,0"
- BorderBrush="Transparent"
- BorderThickness="0"
- Margin="-190,0,0,0"
- Panel.ZIndex="1"
- MouseEnter="Menu_MouseEnter"
+                Grid.Column="0" Grid.RowSpan="2"
+                Background="#FF36A4ED"
+                CornerRadius="0,20,20,0"
+                BorderBrush="Transparent"
+                BorderThickness="0"
+                Margin="-190,0,0,0"
+                Panel.ZIndex="1"
+                MouseEnter="Menu_MouseEnter"
  >
             <Border.Triggers>
                 <!-- Khi di chuột vào -->

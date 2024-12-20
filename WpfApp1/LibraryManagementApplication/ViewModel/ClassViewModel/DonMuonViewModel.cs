@@ -120,7 +120,93 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
+        // Ngày mượn
+        private DateTime? startBorrowDate;
+        public DateTime? StartBorrowDate
+        {
+            get => startBorrowDate;
+            set
+            {
+                if (startBorrowDate != value)
+                {
+                    startBorrowDate = value;
+                    OnPropertyChanged(nameof(StartBorrowDate));
+                }
+            }
+        }
+
+        private DateTime? endBorrowDate;
+        public DateTime? EndBorrowDate
+        {
+            get => endBorrowDate;
+            set
+            {
+                if (endBorrowDate != value)
+                {
+                    endBorrowDate = value;
+                    OnPropertyChanged(nameof(EndBorrowDate));
+                }
+            }
+        }
+        // Ngày trả dự kiến
+        private DateTime? startReturnDate;
+        public DateTime? StartReturnDate
+        {
+            get => startReturnDate;
+            set
+            {
+                if (startReturnDate != value)
+                {
+                    startReturnDate = value;
+                    OnPropertyChanged(nameof(StartReturnDate));
+                }
+            }
+        }
+
+        private DateTime? endReturnDate;
+        public DateTime? EndReturnDate
+        {
+            get => endReturnDate;
+            set
+            {
+                if (endReturnDate != value)
+                {
+                    endReturnDate = value;
+                    OnPropertyChanged(nameof(EndReturnDate));
+                }
+            }
+        }
+        // Ngày trả thực tế
+        private DateTime? realStartReturnDate;
+        public DateTime? RealStartReturnDate
+        {
+            get => realStartReturnDate;
+            set
+            {
+                if (realStartReturnDate != value)
+                {
+                    realStartReturnDate = value;
+                    OnPropertyChanged(nameof(RealStartReturnDate));
+                }
+            }
+        }
+
+        private DateTime? realEndReturnDate;
+        public DateTime? RealEndReturnDate
+        {
+            get => realEndReturnDate;
+            set
+            {
+                if (realEndReturnDate != value)
+                {
+                    realEndReturnDate = value;
+                    OnPropertyChanged(nameof(RealEndReturnDate));
+                }
+            }
+        }
+
         public ObservableCollection<DonMuon> DonMuonList { get; set; }
+        public ObservableCollection<DonMuon> DonTraList { get; set; }
         private DonMuon _selectedDonMuon;
         public DonMuon SelectedDonMuon
         {
@@ -162,7 +248,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        public ICommand SearchCommand { get; set; }
+        public ICommand SearchDonMuonCommand { get; set; }
+        public ICommand SearchDonTraCommand { get; set; }
         public ICommand RestoreCommand { get; set; }
         public ICommand ShowCommand { get; set; }
         private async Task<string> CreateMaDMAsync()
@@ -205,47 +292,142 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             DanhSachMuon = new ObservableCollection<BorrowedBook>();
 
             DonMuonList = new ObservableCollection<DonMuon>();
+            DonTraList = new ObservableCollection<DonMuon>();
+
             AddCommand = new RelayCommand<object>((p) => true, (p) => AddDonMuon());
             EditCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await EditDonMuon());
             DeleteCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await DeleteDonMuon());
-            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDonMuon(p));
+            SearchDonMuonCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDonMuon());
+            SearchDonTraCommand = new RelayCommand<string>((p) => true, async (p) => await SearchDonTra());
             RestoreCommand = new RelayCommand<object>((p) => SelectedDonMuon != null, async (p) => await TraDonMuon());
-            ShowCommand = new RelayCommand<object>((p) => true, async (p) => await LoadDonMuonList());
-            LoadDonMuonList();
+            ShowCommand = new RelayCommand<object>((p) => true, async (p) => await LoadDonMuonTraList());
+
+            LoadDonMuonTraList();
         }
 
         #region Method
         private async Task LoadDonMuonList()
         {
             DonMuonList.Clear();
+            DonTraList.Clear();
             var donMuons = await GetAllDonMuonAsync();
-            foreach (var donMuon in donMuons)
+            foreach (var item in donMuons.Where(t => t.NgayTraTT == null))
             {
-                DonMuonList.Add(donMuon);
+                DonMuonList.Add(item);
+            }
+            foreach (var item in donMuons.Where(t => t.NgayTraTT != null))
+            {
+                DonTraList.Add(item);
             }
         }
 
+        private async Task LoadDonMuonTraList()
+        {
+            var donMuons = await GetAllDonMuonAsync();
+
+            // Xử lý DonMuonList
+            DonMuonList.Clear();
+            if (StartBorrowDate.HasValue && EndBorrowDate.HasValue)
+            {
+                if (StartBorrowDate <= EndBorrowDate)
+                {
+                    foreach (var item in donMuons.Where(t => t.NgayTraTT == null && StartBorrowDate <= t.NgayMuon && t.NgayMuon <= EndBorrowDate))
+                    {
+                        DonMuonList.Add(item);
+                    }
+                }
+                else
+                {
+                    EXMessagebox.Show("Vui lòng chọn ngày bắt đầu không lớn hơn ngày kết thúc", "Cảnh báo");
+                }
+            }
+            else if (StartBorrowDate.HasValue)
+            {
+                foreach (var item in donMuons.Where(t => t.NgayTraTT == null && StartBorrowDate <= t.NgayMuon))
+                {
+                    DonMuonList.Add(item);
+                }
+            }
+            else if (EndBorrowDate.HasValue)
+            {
+                foreach (var item in donMuons.Where(t => t.NgayTraTT == null && t.NgayMuon <= EndBorrowDate))
+                {
+                    DonMuonList.Add(item);
+                }
+            }
+            else
+            {
+                foreach (var item in donMuons.Where(t => t.NgayTraTT == null))
+                {
+                    DonMuonList.Add(item);
+                }
+            }
+
+            // Xử lý DonTraList
+            DonTraList.Clear();
+            if (StartReturnDate.HasValue && EndReturnDate.HasValue)
+            {
+                if (StartReturnDate <= EndReturnDate)
+                {
+                    foreach (var item in donMuons.Where(t => t.NgayTraTT != null && StartReturnDate <= t.NgayTraTT && t.NgayTraTT <= EndReturnDate))
+                    {
+                        DonTraList.Add(item);
+                    }
+                }
+                else
+                {
+                    EXMessagebox.Show("Vui lòng chọn ngày bắt đầu không lớn hơn ngày kết thúc", "Cảnh báo");
+                }
+            }
+            else if (StartReturnDate.HasValue)
+            {
+                foreach (var item in donMuons.Where(t => t.NgayTraTT != null && StartReturnDate <= t.NgayTraTT))
+                {
+                    DonTraList.Add(item);
+                }
+            }
+            else if (EndReturnDate.HasValue)
+            {
+                foreach (var item in donMuons.Where(t => t.NgayTraTT != null && t.NgayTraTT <= EndReturnDate))
+                {
+                    DonTraList.Add(item);
+                }
+            }
+            else
+            {
+                foreach (var item in donMuons.Where(t => t.NgayTraTT != null))
+                {
+                    DonTraList.Add(item);
+                }
+            }
+
+            // Xử lý thêm điều kiện realStartReturnDate và realEndReturnDate nếu có
+            if (realStartReturnDate.HasValue || realEndReturnDate.HasValue)
+            {
+                var filteredDonTraList = DonTraList.ToList(); // Tạm lưu danh sách đã lọc ở trên
+
+                if (realStartReturnDate.HasValue)
+                {
+                    filteredDonTraList = filteredDonTraList.Where(t => t.NgayTraTT >= realStartReturnDate).ToList();
+                }
+
+                if (realEndReturnDate.HasValue)
+                {
+                    filteredDonTraList = filteredDonTraList.Where(t => t.NgayTraTT <= realEndReturnDate).ToList();
+                }
+
+                DonTraList.Clear();
+                foreach (var item in filteredDonTraList)
+                {
+                    DonTraList.Add(item);
+                }
+            }
+        }
         private void AddDonMuon()
         {
             var addborrowwindow = new addborrowwindow();
             addborrowwindow.ShowDialog();
-            LoadDonMuonList();
-            //DonMuon newDonMuon = new DonMuon()
-            //{
-            //    MaMuon = await CreateMaDMAsync(),
-            //    MaDG = MaDG,
-            //    MaNV = MaNV = GlobalData.LoginUser.UserID,
-            //    NgayMuon = DateTime.Now.Date,  // Chỉ lấy phần ngày, tháng, năm
-            //    NgayTraDK = DateTime.Now.AddMonths(1).Date,  // Chỉ lấy phần ngày, tháng, năm
-            //    NgayTraTT = null,
-            //    PhiPhat = 0
-            //};
-            //MessageBox.Show(newDonMuon.NgayMuon + " " + newDonMuon.NgayTraDK);
-            //bool isSuccess = await AddDonMuonToDatabaseAsync(newDonMuon);
-            //if (!isSuccess)
-            //    MessageBox.Show("Cannot save changes to DonMuon.");
-            //else
-            //    DonMuonList.Add(newDonMuon);
+            LoadDonMuonTraList();
         }
 
         private async Task TraDonMuon()
@@ -296,61 +478,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 else
                 {
                     EXMessagebox.Show("Update DonMuon Successfully");
-                    LoadDonMuonList();
+                    LoadDonMuonTraList();
                 }
             }
         }
-
-        //private async Task AddSachToCTDM()
-        //{
-        //    try
-        //    {
-        //        if (MaDG == null)
-        //            MessageBox.Show("Vui lòng chọn thông tin mã độc giả", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
-        //        else
-        //        {
-        //            bool isAddedToCTDM = false;
-        //            if (TenDauSach != null && ISBN != null)
-        //            {
-        //                var newCTDM = new CTDM
-        //                {
-        //                    MaMuon = MaMuon,
-        //                    MaDauSach = context.DauSachs.Where(t => t.TenDauSach == TenDauSach).Select(t => t.MaDauSach).FirstOrDefault().ToString(),
-        //                    ISBN = ISBN
-        //                };
-        //                isAddedToCTDM = await _ctdmViewModel.AddCTDMToDatabaseAsync(newCTDM);
-
-        //                if (!isAddedToCTDM)
-        //                    MessageBox.Show("Cannot save changes to CTDM.");
-        //                else
-        //                {
-        //                    DanhSachMuon.Add(new BorrowedBook
-        //                    {
-        //                        TenDauSach = TenDauSach,
-        //                        ISBN = ISBN
-        //                    });
-        //                    OnPropertyChanged(nameof(DanhSachMuon));
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (DbUpdateException dbEx)
-        //    {
-        //        MessageBox.Show($"Database Update Error: {dbEx.Message}\nInner Exception: {dbEx.InnerException?.Message}");
-        //    }
-        //    catch (SqlException sqlEx)
-        //    {
-        //        MessageBox.Show($"SQL Error: {sqlEx.Message}\nError Code: {sqlEx.Number}");
-        //    }
-        //    catch (InvalidOperationException ex)
-        //    {
-        //        MessageBox.Show($"Invalid Operation: {ex.Message}");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Unexpected Error CTDM: {ex.Message}");
-        //    }
-        //}
 
         private async Task EditDonMuon()
         {
@@ -381,15 +512,85 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        private async Task SearchDonMuon(string keyword)
+        private async Task SearchDonMuon()
         {
-            var filteredList = await SearchDonMuonInDatabaseAsync(keyword);
+            var filteredList = await SearchDonMuonInDatabaseAsync(MaDG, MaNV);
+
+            // Lọc theo ngày mượn
+            if (StartBorrowDate.HasValue && EndBorrowDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayMuon >= StartBorrowDate && dm.NgayMuon <= EndBorrowDate).ToList();
+            }
+            else if (StartBorrowDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayMuon >= StartBorrowDate).ToList();
+            }
+            else if (EndBorrowDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayMuon <= EndBorrowDate).ToList();
+            }
+
+            // Lọc theo ngày trả thực tế
+            if (StartReturnDate.HasValue && EndReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate && dm.NgayTraTT <= EndReturnDate).ToList();
+            }
+            else if (StartReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate).ToList();
+            }
+            else if (EndReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT <= EndReturnDate).ToList();
+            }
+
+            // Cập nhật danh sách
             DonMuonList.Clear();
             foreach (var donMuon in filteredList)
             {
                 DonMuonList.Add(donMuon);
             }
         }
+        private async Task SearchDonTra()
+        {
+            var filteredList = await SearchDonTraInDatabaseAsync(MaDG, MaNV);
+
+            // Lọc theo ngày trả thực tế
+            if (StartReturnDate.HasValue && EndReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate && dm.NgayTraTT <= EndReturnDate).ToList();
+            }
+            else if (StartReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate).ToList();
+            }
+            else if (EndReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT <= EndReturnDate).ToList();
+            }
+
+            // Lọc theo ngày trả thực tế cụ thể (realStartReturnDate và realEndReturnDate)
+            if (RealStartReturnDate.HasValue && RealEndReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= RealStartReturnDate && dm.NgayTraTT <= RealEndReturnDate).ToList();
+            }
+            else if (RealStartReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= RealStartReturnDate).ToList();
+            }
+            else if (RealEndReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT <= RealEndReturnDate).ToList();
+            }
+
+            // Cập nhật danh sách
+            DonTraList.Clear();
+            foreach (var donTra in filteredList)
+            {
+                DonTraList.Add(donTra);
+            }
+        }
+
         #endregion
 
         #region MethodToDatabase
@@ -465,16 +666,25 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
 
-        public async Task<List<DonMuon>> SearchDonMuonInDatabaseAsync(string keyword)
+        public async Task<List<DonMuon>> SearchDonMuonInDatabaseAsync(string maDG, string maNV)
         {
             try
             {
                 using (var context = new LibraryDbContext())
                 {
-                    var result = await context.DonMuons
-                                              .Where(dm => dm.MaMuon.Contains(keyword) || dm.MaDG.Contains(keyword))
-                                              .ToListAsync();
-                    return result;
+                    // Truy vấn theo MaMuon, MaDG và MaNV
+                    var query = context.DonMuons.AsQueryable();
+
+                    if (!string.IsNullOrEmpty(maDG))
+                    {
+                        query = query.Where(dm => dm.MaDG.Contains(maDG));
+                    }
+                    if (!string.IsNullOrEmpty(maNV))
+                    {
+                        query = query.Where(dm => dm.MaNV.Contains(maNV));
+                    }
+
+                    return await query.ToListAsync();
                 }
             }
             catch (Exception ex)
@@ -483,7 +693,36 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return new List<DonMuon>();
             }
         }
+        public async Task<List<DonMuon>> SearchDonTraInDatabaseAsync(string maDG, string maNV)
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    // Truy vấn theo MaMuon, MaDG và MaNV
+                    var query = context.DonMuons.AsQueryable();
 
+                    if (!string.IsNullOrEmpty(maDG))
+                    {
+                        query = query.Where(dm => dm.MaDG.Contains(maDG));
+                    }
+                    if (!string.IsNullOrEmpty(maNV))
+                    {
+                        query = query.Where(dm => dm.MaNV.Contains(maNV));
+                    }
+
+                    // Chỉ lấy những đơn đã trả (Ngày trả thực tế không null)
+                    query = query.Where(dm => dm.NgayTraTT.HasValue);
+
+                    return await query.ToListAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                EXMessagebox.Show($"Error searching DonTra: {ex.Message}");
+                return new List<DonMuon>();
+            }
+        }
         public async Task<List<DonMuon>> GetAllDonMuonAsync()
         {
             try

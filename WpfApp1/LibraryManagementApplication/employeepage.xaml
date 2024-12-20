@@ -19,13 +19,12 @@
         <Grid Grid.Row="0"
              Background="#e6f3ff">
             <TextBlock Text="Quản lý nhân viên " 
-             FontSize="50" 
-             FontWeight="Bold" 
-             FontFamily="roboto"
-             Foreground="#07209e"
-             VerticalAlignment="Center"
-             HorizontalAlignment="Right"
-             />
+                       FontSize="50" 
+                       FontWeight="Bold" 
+                       FontFamily="roboto"
+                       Foreground="#07209e"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"/>
         </Grid>
         <Grid 
             Background="#e6f3ff"
@@ -132,7 +131,8 @@
                               Grid.Column="3"
                               Grid.Row="3"
                               Style="{StaticResource combobox:style1}"
-                              Margin="5"/>
+                              Margin="5"
+                              Text="{Binding LoaiNV}"/>
                     <Grid Grid.Row="4"
                           Grid.Column="0"
                           Grid.ColumnSpan="4">

@@ -28,6 +28,7 @@ namespace LibraryManagementApplication
         public employeepage()
         {
             InitializeComponent();
+            loainv.ItemsSource = new List<string>() { "NV", "AD" };
         }
         private void ExportFile()
         {

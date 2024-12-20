@@ -18,13 +18,12 @@
         <Grid Grid.Row="0"
             Background="#e6f3ff">
             <TextBlock Text="Quản lý thông tin đơn trả " 
-               FontSize="50" 
-               FontWeight="Bold" 
-               FontFamily="roboto"
-               Foreground="#07209e"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Right"
-               />
+                       FontSize="50" 
+                       FontWeight="Bold" 
+                       FontFamily="roboto"
+                       Foreground="#07209e"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"/>
         </Grid>
         <Grid Grid.Row="1"
               Background="#e6f3ff">
@@ -45,8 +44,8 @@
                     </Grid.RowDefinitions>
                     <TextBlock Text="Chi tiết đơn trả" Style="{StaticResource textblock:style1}"/>
                     <DataGrid x:Name="sach" 
-                          Grid.Row="1" 
-                          ItemsSource="{Binding DanhSachMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                              Grid.Row="1" 
+                              ItemsSource="{Binding DanhSachMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Sách" Width="*" Binding="{Binding TenDauSach}"/>
                             <DataGridTextColumn Header="IBSN" Width="*" Binding="{Binding ISBN}"/>
@@ -78,8 +77,8 @@
                             <ColumnDefinition Width="430"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Mã độc giả:"
-                         Style="{StaticResource textblock:style1}"
-                         Grid.Column="0"
+                                   Style="{StaticResource textblock:style1}"
+                                   Grid.Column="0"
                          Grid.Row="1"
                          Margin="5"
                          HorizontalAlignment="Right"/>
@@ -107,19 +106,19 @@
                                    HorizontalAlignment="Right" Margin="9,0,0,0"/>
                         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="4">
                             <TextBlock Text="  BD: "
-               Margin="5"
-                Style="{StaticResource textblock:style1}"/>
+                                       Margin="5"
+                                       Style="{StaticResource textblock:style1}"/>
                             <DatePicker x:Name="StartBorrowdate" 
-                Margin="5"
-                Style="{StaticResource datepick:style1}"
-                SelectedDate="{Binding startborrowdate}"/>
+                                        Margin="5"
+                                        Style="{StaticResource datepick:style1}"
+                                        SelectedDate="{Binding StartBorrowDate}"/>
                             <TextBlock Text="KT: "
-               Margin="5"
-               Style="{StaticResource textblock:style1}"/>
+                                       Margin="5"
+                                       Style="{StaticResource textblock:style1}"/>
                             <DatePicker x:Name="EndBorrowdate" 
-                Margin="5"
-                Style="{StaticResource datepick:style1}"
-                SelectedDate="{Binding endborrowdate}"/>
+                                        Margin="5"
+                                        Style="{StaticResource datepick:style1}"
+                                        SelectedDate="{Binding EndBorrowDate}"/>
                         </StackPanel>
                         <TextBlock Text="Ngày trả dự kiến:"
                                    Style="{StaticResource textblock:style1}"
@@ -128,19 +127,19 @@
                                    HorizontalAlignment="Right"/>
                         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="5">
                             <TextBlock Text="  BD: "
-       Margin="5"
-        Style="{StaticResource textblock:style1}"/>
+                                       Margin="5"
+                                       Style="{StaticResource textblock:style1}"/>
                             <DatePicker x:Name="StartLenddatedk" 
-        Margin="5"
-        Style="{StaticResource datepick:style1}"
-        SelectedDate="{Binding startborrowdatedk}"/>
+                                        Margin="5"
+                                        Style="{StaticResource datepick:style1}"
+                                        SelectedDate="{Binding StartReturnDate}"/>
                             <TextBlock Text="KT: "
-       Margin="5"
-       Style="{StaticResource textblock:style1}"/>
+                                       Margin="5"
+                                       Style="{StaticResource textblock:style1}"/>
                             <DatePicker x:Name="EndLenddatedk" 
-        Margin="5"
-        Style="{StaticResource datepick:style1}"
-        SelectedDate="{Binding endlenddatedk}"/>
+                                        Margin="5"
+                                        Style="{StaticResource datepick:style1}"
+                                        SelectedDate="{Binding EndReturnDate}"/>
                         </StackPanel>
                         <TextBlock Text="Ngày trả thực tế:"
                                    Style="{StaticResource textblock:style1}"
@@ -149,19 +148,19 @@
                                    HorizontalAlignment="Right" Margin="9,0,0,0"/>
                         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="6">
                             <TextBlock Text="  BD: "
-       Margin="5"
-        Style="{StaticResource textblock:style1}"/>
+                                       Margin="5"
+                                       Style="{StaticResource textblock:style1}"/>
                             <DatePicker x:Name="StartLenddate" 
-        Margin="5"
-        Style="{StaticResource datepick:style1}"
-        SelectedDate="{Binding startborrowdatedk}"/>
+                                        Margin="5"
+                                        Style="{StaticResource datepick:style1}"
+                                        SelectedDate="{Binding RealStartReturnDate}"/>
                             <TextBlock Text="KT: "
-       Margin="5"
-       Style="{StaticResource textblock:style1}"/>
+                                       Margin="5"
+                                       Style="{StaticResource textblock:style1}"/>
                             <DatePicker x:Name="EndLenddate" 
-        Margin="5"
-        Style="{StaticResource datepick:style1}"
-        SelectedDate="{Binding endlenddatedk}"/>
+                                        Margin="5"
+                                        Style="{StaticResource datepick:style1}"
+                                        SelectedDate="{Binding RealEndReturnDate}"/>
                         </StackPanel>
                         <TextBlock Text="Phí phạt:"
                                    Style="{StaticResource textblock:style1}"
@@ -191,21 +190,21 @@
                             <Button x:Name="finddon"
                                     Content="Tìm"
                                     Grid.Column="5"
-                                    Margin="5"      
+                                    Margin="5"
                                     Style="{DynamicResource button:find}"
-                                    Command="{Binding SearchCommand}"/>
-                            <Button  x:Name="showdon"
+                                    Command="{Binding SearchDonTraCommand}"/>
+                            <Button x:Name="showdon"
                                     Content="Hiển thị"
                                     Grid.Column="7"
-                                    Margin="5"      
+                                    Margin="5"
                                     Style="{DynamicResource button:show}"
                                     Command="{Binding ShowCommand}"/>
-                            <Button  x:Name="exportsach"
-                                      Content="Xuất file"
-                                      Grid.Column="9"
-                                      Margin="5"
-                                      Style="{DynamicResource button:export}"
-                                      Click="export_Click"/>
+                            <Button x:Name="exportsach"
+                                    Content="Xuất file"
+                                    Grid.Column="9"
+                                    Margin="5"
+                                    Style="{DynamicResource button:export}"
+                                    Click="export_Click"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -218,9 +217,9 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="Đơn trả" Style="{StaticResource textblock:style1}"/>
                 <DataGrid x:Name="datagridMuon"
-                      Grid.Row="1" 
-                      SelectedItem="{Binding SelectedDonMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding DonMuonList}">
+                          Grid.Row="1" 
+                          SelectedItem="{Binding SelectedDonMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding DonTraList}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
                         <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}"/>

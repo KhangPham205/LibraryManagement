@@ -19,6 +19,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
     {
         private string userName;
         private string password;
+        private string loaiNV;
         private string email;
         private string sdt;
         private string cccd;
@@ -43,6 +44,18 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (password != value)
                 {
                     password = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string LoaiNV
+        {
+            get => loaiNV;
+            set
+            {
+                if (loaiNV != value)
+                {
+                    loaiNV = value;
                     OnPropertyChanged();
                 }
             }
@@ -206,23 +219,24 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 OnPropertyChanged(nameof(DanhSachMuon));
             }
         }
-        private async Task<string> CreateMaNVAsync()
+        private async Task<string> CreateMaTKAsync()
         {
-            // Generate a hash from TenTL
             using (var context = new LibraryDbContext())
             {
-                // Lấy tất cả các mã UserID hiện tại trong cơ sở dữ liệu có tiền tố "NV"
+                // Lấy tất cả các mã UserID hiện tại trong cơ sở dữ liệu có tiền tố LoaiNV
                 var existingCodes = await context.TaiKhoans
-                                                 .Where(tl => tl.UserID.StartsWith("NV"))
+                                                 .Where(tl => tl.UserID.StartsWith(LoaiNV))
                                                  .Select(tl => tl.UserID)
                                                  .ToListAsync();
 
+                // Lọc và chuyển đổi mã sang số, bỏ qua các giá trị không hợp lệ hoặc bằng 0
                 var minUnusedNumber = existingCodes
-                    .Select(code => int.TryParse(code.Substring(2), out int num) ? num : 0) // Lấy phần số sau "NV"
+                    .Select(code => int.TryParse(code.Substring(LoaiNV.Length), out int num) ? num : -1) // Lấy phần số sau tiền tố
+                    .Where(num => num > 0) // Chỉ lấy các số lớn hơn 0
                     .OrderBy(number => number) // Sắp xếp tăng dần
-                    .ToList(); // Lấy số lớn nhất trong danh sách mã
+                    .ToList();
 
-                // Tạo mã mới với số tăng dần
+                // Tìm số mới nhỏ nhất chưa được sử dụng
                 int newCodeNumber = 1;
                 foreach (var number in minUnusedNumber)
                 {
@@ -233,8 +247,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     newCodeNumber++;
                 }
 
-                // Trả về mã mới với định dạng "NV" + số có 3 chữ số
-                return $"NV{newCodeNumber:D3}";
+                // Trả về mã mới với định dạng "LoaiNV" + số có 3 chữ số
+                return $"{LoaiNV}{newCodeNumber:D3}";
             }
         }
         public ICommand AddCommand { get; set; }
@@ -277,7 +291,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             if (!string.IsNullOrEmpty(UserName) && 
                 !string.IsNullOrEmpty(Password) && 
                 !string.IsNullOrEmpty(Email) && 
-                !string.IsNullOrEmpty(SDT) && 
+                !string.IsNullOrEmpty(SDT) &&
+                !string.IsNullOrEmpty(LoaiNV) &&
                 !string.IsNullOrEmpty(CCCD))
             {
                 if (!IsValidEmail(Email))
@@ -295,10 +310,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
                 TaiKhoan newTaiKhoan = new TaiKhoan()
                 {
-                    UserID = await CreateMaNVAsync(),
+                    UserID = await CreateMaTKAsync(),
                     UserName = UserName,
                     Password = Password,
-                    Loai = "NV",
+                    Loai = LoaiNV,
                     Email = Email,
                     SDT = SDT,
                     CCCD = CCCD
