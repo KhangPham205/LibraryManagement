@@ -188,14 +188,13 @@ namespace LibraryManagementApplication
 
         private void docgia_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            donmuongrid.Visibility = Visibility.Visible;
-            ctdmgrid.Visibility = Visibility.Visible;
+            history.Visibility = Visibility.Visible;
         }
 
-        private void Border_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            donmuongrid.Visibility = Visibility.Collapsed;
-            ctdmgrid.Visibility = Visibility.Collapsed;
+            readerinfowindow readerinfowindow = new readerinfowindow();
+            readerinfowindow.ShowDialog();
         }
     }
 }

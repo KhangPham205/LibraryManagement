@@ -237,6 +237,9 @@
     <Compile Include="ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="employeeinfowindow.xaml.cs">
+      <DependentUpon>employeeinfowindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EXMessagebox.xaml.cs">
       <DependentUpon>EXMessagebox.xaml</DependentUpon>
     </Compile>
@@ -282,6 +285,9 @@
     <Compile Include="Model\Class\TheLoai.cs" />
     <Compile Include="publisherpage.xaml.cs">
       <DependentUpon>publisherpage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="readerinfowindow.xaml.cs">
+      <DependentUpon>readerinfowindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="readerpage.xaml.cs">
       <DependentUpon>readerpage.xaml</DependentUpon>
@@ -337,6 +343,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="employeeinfowindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EXMessagebox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -382,6 +392,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="publisherpage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="readerinfowindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -41,8 +41,7 @@
                     BorderThickness="2"
                     HorizontalAlignment="Center"
                     CornerRadius="20"
-                    Grid.ColumnSpan="2"
-                    MouseEnter="Border_MouseEnter">
+                    Grid.ColumnSpan="2">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>
@@ -122,23 +121,11 @@
                             <ColumnDefinition Width="10"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
-                        <Button  x:Name="addsach"
-                              Content="Thêm"
-                              Margin="5"        
-                              Style="{DynamicResource button:add}"
-                              Command="{Binding AddCommand}"/>
-                        <Button  x:Name="editsach"
-                              Content="Sửa"
-                              Grid.Column="2"
-                              Margin="5"  
-                              Style="{DynamicResource button:edit}"
-                              Command="{Binding EditCommand}"/>
-                        <Button  x:Name="deletesach"
-                              Content="Xóa"
-                              Grid.Column="4"
-                              Margin="5"
-                              Style="{DynamicResource button:delete}"
-                              Command="{Binding DeleteCommand}"/>
+                        <Button x:Name="history"
+                                Content="Lịch sử"
+                                Style="{StaticResource button:history}"
+                                Visibility="Collapsed"
+                                Click="Button_Click"/>
                         <Button  x:Name="findsach"
                               Content="Tìm"
                               Grid.Column="6"
