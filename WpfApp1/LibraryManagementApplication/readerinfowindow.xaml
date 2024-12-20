@@ -20,12 +20,12 @@
         <Border CornerRadius="0,0,20,20"
                 Background="#9acbff">
             <TextBlock Text="Thông tin độc giả"
-                   FontSize="50"
-                   FontWeight="Bold"
-                   FontFamily="roboto"
-                   Foreground="#07209e"
-                   HorizontalAlignment="Center"
-                   Margin="0,10,0,10"/>
+                       FontSize="50"
+                       FontWeight="Bold"
+                       FontFamily="roboto"
+                       Foreground="#07209e"
+                       HorizontalAlignment="Center"
+                       Margin="0,10,0,10"/>
         </Border>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -37,10 +37,10 @@
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Border Margin="40,20,40,10"
-              BorderBrush="#07209e"
-              BorderThickness="2"
-              HorizontalAlignment="Center"
-              CornerRadius="20">
+                    BorderBrush="#07209e"
+                    BorderThickness="2"
+                    HorizontalAlignment="Center"
+                    CornerRadius="20">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="10"/>

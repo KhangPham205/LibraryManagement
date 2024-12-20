@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Text.RegularExpressions;
 using System.Windows.Media.Imaging;
+using OfficeOpenXml.Table.PivotTable;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
@@ -300,6 +301,18 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     EXMessagebox.Show("Email không hợp lệ.", "Thông báo");
                     return false;
                 }
+                
+                if (!IsCitizenIDValid(CCCD))
+                {
+                    EXMessagebox.Show("CCCD không hợp lệ.", "Thông báo");
+                    return false;
+                }
+
+                if (!IsPhoneNumberValid(Email))
+                {
+                    EXMessagebox.Show("SDT không hợp lệ.", "Thông báo");
+                    return false;
+                }
 
                 bool exists = await IsTaiKhoanExistsAsync(CCCD, Email);
                 if (exists)
@@ -341,6 +354,18 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (!IsValidEmail(Email))
                 {
                     EXMessagebox.Show("Email không hợp lệ.", "Thông báo");
+                    return;
+                }
+
+                if (!IsCitizenIDValid(CCCD))
+                {
+                    EXMessagebox.Show("CCCD không hợp lệ.", "Thông báo");
+                    return;
+                }
+
+                if (!IsPhoneNumberValid(Email))
+                {
+                    EXMessagebox.Show("SDT không hợp lệ.", "Thông báo");
                     return;
                 }
 
@@ -568,5 +593,17 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
+
+        private bool IsPhoneNumberValid(string phoneNumber)
+        {
+            var phoneRegex = new Regex(@"^\d{10,11}$");
+            return phoneRegex.IsMatch(phoneNumber);
+        }
+        private bool IsCitizenIDValid(string citizenID)
+        {
+            var citizenIDRegex = new Regex(@"^\d{12}$");
+            return citizenIDRegex.IsMatch(citizenID);
+        }
+
     }
 }
