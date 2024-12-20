@@ -442,8 +442,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
                 if (soNgayTre > 0)
                 {
-                    // Mức phạt là 5000 mỗi ngày trễ
-                    phiPhat = soNgayTre * 5000;
+                    int soSach = context.CTDMs.Count(ctdm => ctdm.MaMuon == SelectedDonMuon.MaMuon);
+                    phiPhat = soNgayTre * soSach * 5000;
                 }
 
                 DonMuon donMuon = new DonMuon()
