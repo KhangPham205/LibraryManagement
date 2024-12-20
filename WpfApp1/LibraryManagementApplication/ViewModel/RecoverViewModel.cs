@@ -1,56 +1,43 @@
 ﻿using LibraryManagementApplication.Model.Class;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
+using System.Net.Mail;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
+
 namespace LibraryManagementApplication.ViewModel
 {
     public class RecoverViewModel : BaseViewModel
     {
-        public string email {  get; set; }
+        public string email { get; set; }
         public string sdt { get; set; }
         public string cccd { get; set; }
 
-        private string _password;
-        public string password
-        {
-            get => _password;
-            set
-            {
-                _password = value;
-                OnPropertyChanged(); // Thông báo giao diện cập nhật giá trị
-            }
-        }
         public ICommand RecoverCommand { get; set; }
+
         public RecoverViewModel()
         {
-            RecoverCommand = new RelayCommand<UIElement>((p) => true, (p) => { 
-                Window window = Window.GetWindow(p);
-                recover(p);
-                window.Close();
-                });
+            RecoverCommand = new RelayCommand<object>((p) => true, (p) =>
+            {
+                recover();
+            });
         }
-        public void recover(UIElement p)
+
+        public void recover()
         {
             try
             {
                 using (var context = new LibraryDbContext())
                 {
                     // Tìm tài khoản có thông tin khớp với email, số điện thoại và CCCD
-                    var taiKhoan = context.TaiKhoans
-                        .FirstOrDefault(tk => tk.Email == email && tk.SDT == sdt && tk.CCCD == cccd);
+                    var taiKhoan = context.TaiKhoans.FirstOrDefault(tk => tk.Email == email && tk.SDT == sdt && tk.CCCD == cccd);
 
                     if (taiKhoan != null)
                     {
-                        // Gán mật khẩu của tài khoản tìm thấy vào thuộc tính password
-                        password = taiKhoan.Password;
-
-                        // Hiển thị mật khẩu lên giao diện
-                        EXMessagebox.Show("Tìm thấy tài khoản. Mật khẩu đã được hiển thị.", "Thông báo");
+                        // Gửi email chứa mật khẩu
+                        SendEmail(taiKhoan.Email, taiKhoan.Password);
+                        EXMessagebox.Show("Mật khẩu đã được gửi qua email của bạn!", "Thông báo");
                     }
                     else
                     {
@@ -61,9 +48,48 @@ namespace LibraryManagementApplication.ViewModel
             }
             catch (Exception ex)
             {
-                // Xử lý lỗi trong quá trình tương tác với cơ sở dữ liệu
+                // Xử lý lỗi trong quá trình tương tác với cơ sở dữ liệu hoặc gửi email
                 EXMessagebox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi");
             }
-        }//xu ly khoi phuc dung ca 3 thong tin thi tra ra matkhau
+        }
+
+        private void SendEmail(string recipientEmail, string password)
+        {
+            try
+            {
+                // Thông tin tài khoản Gmail
+                string senderEmail = "khonggian2k0520@gmail.com";
+                string senderPassword = "ttcs ttwh psdn izyw"; // Thay bằng App Password nếu đã tạo
+
+                // Nội dung email
+                string subject = "Khôi phục mật khẩu";
+                string body = $"Xin chào,\n\nMật khẩu của bạn là: {password}\n\nCảm ơn bạn đã sử dụng hệ thống của chúng tôi!";
+
+                // Cấu hình SMTP
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    Credentials = new NetworkCredential(senderEmail, senderPassword),
+                    EnableSsl = true
+                };
+
+                // Tạo email
+                MailMessage mail = new MailMessage
+                {
+                    From = new MailAddress(senderEmail),
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = false // Gửi dạng text
+                };
+                mail.To.Add(recipientEmail);
+
+                // Gửi email
+                smtpClient.Send(mail);
+                Console.WriteLine("Email đã được gửi thành công!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi gửi email: {ex.Message}");
+            }
+        }
     }
 }

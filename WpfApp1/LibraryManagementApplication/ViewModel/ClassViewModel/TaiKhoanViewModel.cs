@@ -363,7 +363,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     return;
                 }
 
-                if (!IsPhoneNumberValid(Email))
+                if (!IsPhoneNumberValid(SDT))
                 {
                     EXMessagebox.Show("SDT không hợp lệ.", "Thông báo");
                     return;

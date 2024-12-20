@@ -16,15 +16,14 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Text="Khôi Phục Mật Khẩu"
-    FontSize="50"
-    FontWeight="Bold"
-    FontFamily="roboto"
-    Foreground="#07209e"
-    HorizontalAlignment="Center"
-    Margin="0,10,0,10"/>
-        <Grid
-    Grid.Row="1"
-    Margin="10,0,10,0">
+                   FontSize="50"
+                   FontWeight="Bold"
+                   FontFamily="roboto"
+                   Foreground="#07209e"
+                   HorizontalAlignment="Center"
+                   Margin="0,10,0,10"/>
+        <Grid Grid.Row="1"
+              Margin="10,0,10,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="160"/>
@@ -40,76 +39,55 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <TextBlock Style="{StaticResource textblock:style1}"
-    Grid.Row="5"
-    Grid.Column="1"
-    Text="Mật khẩu: "
-    Margin="10"
-    HorizontalAlignment="Right"/>
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Text="Email:"
+                       Margin="10"
+                       HorizontalAlignment="Right"/>
             <TextBlock Style="{StaticResource textblock:style1}"
-    Grid.Row="1"
-    Grid.Column="1"
-    Text="Email:"
-    Margin="10"
-    HorizontalAlignment="Right"/>
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       Text="Số điện thoại:"
+                       Margin="10"
+                       HorizontalAlignment="Right"/>
             <TextBlock Style="{StaticResource textblock:style1}"
-    Grid.Row="2"
-    Grid.Column="1"
-    Text="Số điện thoại:"
-    Margin="10"
-    HorizontalAlignment="Right"/>
-            <TextBlock Style="{StaticResource textblock:style1}"
-    Grid.Row="3"
-    Grid.Column="1"
-    Text="CCCD:"
-    Margin="10"
-    HorizontalAlignment="Right"/>
-            <TextBox x:Name="password"
-        Style="{StaticResource textbox:style1}"
-        Background="#cfcfcf"
-        BorderBrush="#07209e"
-        Grid.Column="2"
-        Grid.Row="5"
-        IsReadOnly="True"
-        Text="{Binding password, UpdateSourceTrigger=PropertyChanged}"
-        />
+                       Grid.Row="3"
+                       Grid.Column="1"
+                       Text="CCCD:"
+                       Margin="10"
+                       HorizontalAlignment="Right"/>
             <TextBox x:Name="email"
-        Style="{StaticResource textbox:style1}"
-        BorderBrush="#07209e"
-        Grid.Column="2"
-        Grid.Row="1"
-        Text="{Binding email}"
-        />
+                     Style="{StaticResource textbox:style1}"
+                     BorderBrush="#07209e"
+                     Grid.Column="2"
+                     Grid.Row="1"
+                     Text="{Binding email}"/>
             <TextBox x:Name="sdt"
-        Style="{StaticResource textbox:style1}"
-        BorderBrush="#07209e"
-        Grid.Column="2"
-        Grid.Row="2"
-        Text="{Binding sdt}"
-        />
+                     Style="{StaticResource textbox:style1}"
+                     BorderBrush="#07209e"
+                     Grid.Column="2"
+                     Grid.Row="2"
+                     Text="{Binding sdt}"/>
             <TextBox x:Name="cccd"
-        Style="{StaticResource textbox:style1}"
-        BorderBrush="#07209e"
-        Grid.Column="2"
-        Grid.Row="3"
-        Text="{Binding cccd}"
-        />
-
+                     Style="{StaticResource textbox:style1}"
+                     BorderBrush="#07209e"
+                     Grid.Column="2"
+                     Grid.Row="3"
+                     Text="{Binding cccd}"/>
             <Button x:Name="recover"
-        Content="Khôi phục"
-        Foreground="#07209e"
-        Background="#9acbff"
-        BorderBrush="#07209e"
-        BorderThickness="1"
-        FontSize="18"
-        Style="{StaticResource button:style1}"
-        Grid.Column="2"
-        Grid.Row="4"
-        Width="300"
-        Height="40"
-        HorizontalAlignment="Right"
-        Command="{Binding RecoverCommand}"
-        CommandParameter="{Binding ElementName=password}"
-        >
+                    Content="Gửi Mail"
+                    Foreground="#07209e"
+                    Background="#9acbff"
+                    BorderBrush="#07209e"
+                    BorderThickness="1"
+                    FontSize="18"
+                    Style="{StaticResource button:style1}"
+                    Grid.Column="2"
+                    Grid.Row="4"
+                    Width="300"
+                    Height="40"
+                    HorizontalAlignment="Right"
+                    Command="{Binding RecoverCommand}">
             </Button>
         </Grid>
     </Grid>
