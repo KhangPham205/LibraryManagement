@@ -14,7 +14,7 @@
     <Window.DataContext>
         <local:LoginViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="#e6f3ff">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>

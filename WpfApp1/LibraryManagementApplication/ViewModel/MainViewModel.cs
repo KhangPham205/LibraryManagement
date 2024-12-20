@@ -67,7 +67,7 @@ namespace LibraryManagementApplication.ViewModel
             }
         }
         public void logOut(Page p) {
-            Window window = new Signin();
+            Window window = new LoginWindow();
             window.Show();
             Window.GetWindow(p).Close();
         }

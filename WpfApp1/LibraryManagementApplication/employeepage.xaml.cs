@@ -28,6 +28,7 @@ namespace LibraryManagementApplication
         public employeepage()
         {
             InitializeComponent();
+            loainv.ItemsSource = new List<string>() { "NV", "AD" };
         }
         private void ExportFile()
         {
@@ -177,16 +178,15 @@ namespace LibraryManagementApplication
             ExportFile();
         }
 
-        private void Border_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            donmuongrid.Visibility = Visibility.Collapsed;
-            ctdmgrid.Visibility = Visibility.Collapsed;
-        }
-
         private void taikhoan_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            donmuongrid.Visibility = Visibility.Visible;
-            ctdmgrid.Visibility = Visibility.Visible;
+            history.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            employeeinfowindow employeeinfowindow = new employeeinfowindow();
+            employeeinfowindow.ShowDialog();
         }
     }
 }
