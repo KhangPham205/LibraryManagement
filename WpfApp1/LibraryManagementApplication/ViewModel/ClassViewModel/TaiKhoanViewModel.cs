@@ -126,7 +126,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         public bool IsAdded;
         public ObservableCollection<TaiKhoan> TaiKhoanList { get; set; }
         private TaiKhoan _selectedTaiKhoan;
-
+        public ObservableCollection<DonMuon> DonMuonList { get; set; }
         public TaiKhoan SelectedTaiKhoan
         {
             get { return _selectedTaiKhoan; }
@@ -143,8 +143,66 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                         Email = SelectedTaiKhoan.Email;
                         SDT = SelectedTaiKhoan.SDT;
                         CCCD = SelectedTaiKhoan.CCCD;
+
+                        using (var context = new LibraryDbContext())
+                        {
+                            DonMuonList = new ObservableCollection<DonMuon>(context.DonMuons.Where(t => t.MaNV == SelectedTaiKhoan.UserID));
+                            OnPropertyChanged(nameof(DonMuonList));
+                            if (DanhSachMuon == null)
+                            {
+                                DanhSachMuon = new ObservableCollection<BorrowedBook>();
+                            }
+                            DanhSachMuon.Clear();
+                        }
                     }
                 }
+            }
+        }
+        private DonMuon _selectedDonMuon;
+        public DonMuon SelectedDonMuon
+        {
+            get { return _selectedDonMuon; }
+            set
+            {
+                if (_selectedDonMuon != value)
+                {
+                    _selectedDonMuon = value;
+                    OnPropertyChanged(nameof(SelectedDonMuon));
+                    if (SelectedDonMuon != null)
+                    {
+                        using (var context = new LibraryDbContext())
+                        {
+                            if (DanhSachMuon == null)
+                            {
+                                DanhSachMuon = new ObservableCollection<BorrowedBook>();
+                            }
+                            DanhSachMuon.Clear();
+                            foreach (var item in context.CTDMs)
+                                if (item != null && item.MaMuon == SelectedDonMuon.MaMuon)
+                                {
+                                    Sach sach = context.Sachs.Where(s => s.MaDauSach == item.MaDauSach && s.ISBN == item.ISBN).FirstOrDefault();
+                                    if (sach != null)
+                                    {
+                                        DanhSachMuon.Add(new BorrowedBook()
+                                        {
+                                            TenDauSach = sach.TenDauSach,
+                                            ISBN = sach.ISBN
+                                        });
+                                    }
+                                }
+                        }
+                    }
+                }
+            }
+        }
+        private ObservableCollection<BorrowedBook> _danhSachMuon;
+        public ObservableCollection<BorrowedBook> DanhSachMuon
+        {
+            get { return _danhSachMuon; }
+            set
+            {
+                _danhSachMuon = value;
+                OnPropertyChanged(nameof(DanhSachMuon));
             }
         }
         private async Task<string> CreateMaNVAsync()
@@ -226,7 +284,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool exists = await IsTaiKhoanExistsAsync(CCCD, Email);
                 if (exists)
                 {
-                    MessageBox.Show("Nhân viên với email hoặc căn cước công dân đã được sử dụng.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    EXMessagebox.Show("Nhân viên với email hoặc căn cước công dân đã được sử dụng.", "Thông báo");
                     return false;
                 }
 
@@ -246,12 +304,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (isSuccess)
                     TaiKhoanList.Add(newTaiKhoan);
                 else
-                    MessageBox.Show("Error adding Tai Khoan.");
+                    EXMessagebox.Show("Error adding Tai Khoan.");
                 return isSuccess;
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập thông tin", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                EXMessagebox.Show("Vui lòng nhập thông tin", "Cảnh báo");
                 return false;
             }    
         }
@@ -268,7 +326,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 bool isSuccess = await UpdateTaiKhoanInDatabaseAsync(SelectedTaiKhoan);
                 if (!isSuccess)
                 {
-                    MessageBox.Show("Error updating Tai Khoan.");
+                    EXMessagebox.Show("Error updating Tai Khoan.");
                 }
             }
         }
@@ -281,7 +339,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (isSuccess)
                     TaiKhoanList.Remove(SelectedTaiKhoan);
                 else
-                    MessageBox.Show("Error deleting Tai Khoan.");
+                    EXMessagebox.Show("Error deleting Tai Khoan.");
             }
         }
 
@@ -295,7 +353,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
         }
         private void ShowTaiKhoan()
-        {
+        {           
             LoadTaiKhoanList();
         }
         private async Task ChangePassWord()
@@ -313,16 +371,16 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                         taiKhoan.Password = NewPassWord;
                         bool isSuccess = await UpdateTaiKhoanInDatabaseAsync(taiKhoan);
                         if (!isSuccess)
-                            MessageBox.Show("Error updating Tai Khoan.");
+                            EXMessagebox.Show("Error updating Tai Khoan.");
                         else
-                            MessageBox.Show("Cập nhật mật khẩu thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            EXMessagebox.Show("Cập nhật mật khẩu thành công", "Thông báo");
                     }
                     else
-                        MessageBox.Show("Mật khẩu cũ sai hoặc thông tin không trùng khớp", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                        EXMessagebox.Show("Mật khẩu cũ sai hoặc thông tin không trùng khớp", "Thông báo");
                 }
             }
             else
-                MessageBox.Show("Vui lòng điền lại mật khẩu", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                EXMessagebox.Show("Vui lòng điền lại mật khẩu", "Thông báo");
         }
         #region MethodToDatabase
         private static async Task<bool> IsTaiKhoanExistsAsync(string cccd, string email)
@@ -339,7 +397,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error checking existence of Tai Khoan: {ex.Message}");
+                EXMessagebox.Show($"Error checking existence of Tai Khoan: {ex.Message}");
                 return false;
             }
         }
@@ -356,7 +414,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error adding Tai khoan: {ex.Message}");
+                EXMessagebox.Show($"Error adding Tai khoan: {ex.Message}");
                 return false;
             }
         }
@@ -374,7 +432,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating Tai khoan: {ex.Message}");
+                EXMessagebox.Show($"Error updating Tai khoan: {ex.Message}");
                 return false;
             }
         }
@@ -397,7 +455,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error deleting Tai khoan: {ex.Message}");
+                EXMessagebox.Show($"Error deleting Tai khoan: {ex.Message}");
                 return false;
             }
         }
@@ -416,7 +474,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching Tai khoan: {ex.Message}");
+                EXMessagebox.Show($"Error searching Tai khoan: {ex.Message}");
                 return new List<TaiKhoan>();
             }
         }
@@ -433,7 +491,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error getting all Tai khoan: {ex.Message}");
+                EXMessagebox.Show($"Error getting all Tai khoan: {ex.Message}");
                 return new List<TaiKhoan>();
             }
         }

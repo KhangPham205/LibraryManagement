@@ -23,12 +23,10 @@
                 FontFamily="roboto"
                 Foreground="#07209e"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Right"
-                />
+                HorizontalAlignment="Right"/>
         </Grid>
-        <Grid 
-            Background="#e6f3ff"
-            Grid.Row="1">
+        <Grid Background="#e6f3ff"
+              Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto" MaxHeight="150"/>
@@ -71,8 +69,7 @@
                          Grid.Row="1"
                          Margin="5"
                          Style="{StaticResource textbox:style1}"
-                         Text="{Binding TenDG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         />
+                         Text="{Binding TenDG, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="Email: "
                          Style="{StaticResource textblock:style1}"
                          Grid.Column="0"
@@ -168,7 +165,7 @@
                       Margin="5"
                       Visibility="Collapsed"
                       SelectedItem="{Binding SelectedDonMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding DonMuonList}">
+                      ItemsSource="{Binding DonMuonList, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
                     <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}"/>
@@ -190,14 +187,14 @@
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid x:Name="docgia"
-                     AutoGenerateColumns="False"
-                     IsReadOnly="True"
-                     Margin="5"
-                     Grid.Row="2"
-                     Grid.ColumnSpan="2"
-                     SelectedItem="{Binding SelectedDocGia, Mode=OneWayToSource}"
-                     ItemsSource="{Binding DocGiaList}"
-                     SelectedCellsChanged="docgia_SelectedCellsChanged">
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      Margin="5"
+                      Grid.Row="2"
+                      Grid.ColumnSpan="2"
+                      SelectedItem="{Binding SelectedDocGia, Mode=OneWayToSource}"
+                      ItemsSource="{Binding DocGiaList}"
+                      SelectedCellsChanged="docgia_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}" />
                     <DataGridTextColumn Header="Tên độc giả" Width="3*" Binding="{Binding TenDG}" />

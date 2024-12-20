@@ -63,65 +63,65 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="Tên nhân viên:"
-                     Style="{StaticResource textblock:style1}"
-                     Grid.Column="0"
-                     Grid.Row="1"
-                     Margin="5"
-                     HorizontalAlignment="Right"/>
+                        Style="{StaticResource textblock:style1}"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Margin="5"
+                        HorizontalAlignment="Right"/>
                     <TextBox x:Name="tentb"
-                     Grid.Column="1"
-                     Grid.Row="1"
-                     Margin="5"
-                     Style="{StaticResource textbox:style1}"
-                     Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Margin="5"
+                        Style="{StaticResource textbox:style1}"
+                        Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="Mật khẩu:"
-                     Style="{StaticResource textblock:style1}"
-                     Grid.Column="0"
-                     Grid.Row="2"
-                     Margin="5"
-                     HorizontalAlignment="Right"/>
+                        Style="{StaticResource textblock:style1}"
+                        Grid.Column="0"
+                        Grid.Row="2"
+                        Margin="5"
+                        HorizontalAlignment="Right"/>
                     <TextBox x:Name="mktb"
-                     Grid.Column="1"
-                     Grid.Row="2"
-                      Style="{StaticResource textbox:style1}"
-                     Margin="5"
-                     Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Style="{StaticResource textbox:style1}"
+                        Margin="5"
+                        Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="Email: "
-                     Style="{StaticResource textblock:style1}"
-                     Grid.Column="0"
-                     Grid.Row="3"
-                     Margin="5"
-                     HorizontalAlignment="Right"/>
+                        Style="{StaticResource textblock:style1}"
+                        Grid.Column="0"
+                        Grid.Row="3"
+                        Margin="5"
+                        HorizontalAlignment="Right"/>
                     <TextBox x:Name="emailtb"
-                     Grid.Column="1"
-                     Grid.Row="3"
-                     Style="{StaticResource textbox:style1}"
-                     Margin="5"
-                     Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        Style="{StaticResource textbox:style1}"
+                        Margin="5"
+                        Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="CCCD: "
-                     Style="{StaticResource textblock:style1}"
-                     Grid.Column="2"
-                     Grid.Row="1"
-                     Margin="5"
-                     HorizontalAlignment="Right"/>
+                        Style="{StaticResource textblock:style1}"
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        Margin="5"
+                        HorizontalAlignment="Right"/>
                     <TextBox x:Name="cccdtb"
-                     Grid.Column="3"
-                     Grid.Row="1"
-                     Style="{StaticResource textbox:style1}"
-                     Margin="5"
-                     Text="{Binding CCCD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        Grid.Column="3"
+                        Grid.Row="1"
+                        Style="{StaticResource textbox:style1}"
+                        Margin="5"
+                        Text="{Binding CCCD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="SDT: "
-                     Style="{StaticResource textblock:style1}"
-                     Grid.Column="2"
-                     Grid.Row="2"
-                     Margin="5"
-                     HorizontalAlignment="Right"/>
+                        Style="{StaticResource textblock:style1}"
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        Margin="5"
+                        HorizontalAlignment="Right"/>
                     <TextBox x:Name="sdttb"
-                     Grid.Column="3"
-                     Grid.Row="2"
-                     Style="{StaticResource textbox:style1}"
-                     Margin="5"
-                     Text="{Binding SDT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        Grid.Column="3"
+                        Grid.Row="2"
+                        Style="{StaticResource textbox:style1}"
+                        Margin="5"
+                        Text="{Binding SDT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Grid Grid.Row="4"
                           Grid.Column="0"
                           Grid.ColumnSpan="4">
@@ -139,49 +139,49 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Button  x:Name="addsach"
-                                  Content="Thêm"
-                                  Margin="5"        
-                                  Style="{DynamicResource button:add}"
-                                  Command="{Binding AddCommand}"/>
+                                 Content="Thêm"
+                                 Margin="5"        
+                                 Style="{DynamicResource button:add}"
+                                 Command="{Binding AddCommand}"/>
                         <Button  x:Name="editsach"
-                                  Content="Sửa"
-                                  Grid.Column="2"
-                                  Margin="5"  
-                                  Style="{DynamicResource button:edit}"
-                                  Command="{Binding EditCommand}"/>
+                                 Content="Sửa"
+                                 Grid.Column="2"
+                                 Margin="5"  
+                                 Style="{DynamicResource button:edit}"
+                                 Command="{Binding EditCommand}"/>
                         <Button  x:Name="deletesach"
-                                  Content="Xóa"
-                                  Grid.Column="4"
-                                  Margin="5"
-                                  Style="{DynamicResource button:delete}"
-                                  Command="{Binding DeleteCommand}"/>
+                                 Content="Xóa"
+                                 Grid.Column="4"
+                                 Margin="5"
+                                 Style="{DynamicResource button:delete}"
+                                 Command="{Binding DeleteCommand}"/>
                         <Button  x:Name="findsach"
-                                  Content="Tìm"
-                                  Grid.Column="6"
-                                  Margin="5"      
-                                  Style="{DynamicResource button:find}"
-                                  Command="{Binding SearchCommand}"/>
+                                 Content="Tìm"
+                                 Grid.Column="6"
+                                 Margin="5"      
+                                 Style="{DynamicResource button:find}"
+                                 Command="{Binding SearchCommand}"/>
                         <Button  x:Name="showsach"
-                                  Content="Hiển thị"
-                                  Grid.Column="8"
-                                  Margin="5"
-                                  Style="{DynamicResource button:show}"
-                                  Command="{Binding ShowCommand}"/>
+                                 Content="Hiển thị"
+                                 Grid.Column="8"
+                                 Margin="5"
+                                 Style="{DynamicResource button:show}"
+                                 Command="{Binding ShowCommand}"/>
                         <Button  x:Name="exportsach"
-                                  Content="Xuất file"
-                                  Grid.Column="10"
-                                  Margin="5"
-                                  Style="{DynamicResource button:export}"
-                                  Click="export_Click"/>
+                                 Content="Xuất file"
+                                 Grid.Column="10"
+                                 Margin="5"
+                                 Style="{DynamicResource button:export}"
+                                 Click="export_Click"/>
                     </Grid>
                 </Grid>
             </Border>
             <DataGrid x:Name="datagridMuon"
-                       Grid.Row="1"
-                       Margin="5"
-                       Visibility="Collapsed"
-                       SelectedItem="{Binding SelectedDonMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                       ItemsSource="{Binding DonMuonList}">
+                      Grid.Row="1"
+                      Margin="5"
+                      Visibility="Collapsed"
+                      SelectedItem="{Binding SelectedDonMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding DonMuonList}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã đơn mượn" Width="*" Binding="{Binding MaMuon}"/>
                     <DataGridTextColumn Header="Mã độc giả" Width="*" Binding="{Binding MaDG}"/>
@@ -192,27 +192,27 @@
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid x:Name="sach" 
-                       Grid.Row="1"
-                       Grid.Column="1" 
-                       Margin="5"
-                       Visibility="Collapsed"
-                       ItemsSource="{Binding DanhSachMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">  
+                      Grid.Row="1"
+                      Grid.Column="1" 
+                      Margin="5"
+                      Visibility="Collapsed"
+                      ItemsSource="{Binding DanhSachMuon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">  
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Sách" Width="*" Binding="{Binding TenDauSach}"/>
                     <DataGridTextColumn Header="IBSN" Width="*" Binding="{Binding ISBN}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid x:Name="taikhoan"
-                    Margin="5"
-                    Grid.ColumnSpan="2"
-                    Grid.Row="2"
-                    FontSize="18"
-                    AutoGenerateColumns="False"
-                    HeadersVisibility="Column"
-                    IsReadOnly="True"
-                    SelectedItem="{Binding SelectedTaiKhoan, Mode=OneWayToSource}"
-                    ItemsSource="{Binding TaiKhoanList}"
-                    SelectedCellsChanged="taikhoan_SelectedCellsChanged">
+                      Margin="5"
+                      Grid.ColumnSpan="2"
+                      Grid.Row="2"
+                      FontSize="18"
+                      AutoGenerateColumns="False"
+                      HeadersVisibility="Column"
+                      IsReadOnly="True"
+                      SelectedItem="{Binding SelectedTaiKhoan, Mode=OneWayToSource}"
+                      ItemsSource="{Binding TaiKhoanList}"
+                      SelectedCellsChanged="taikhoan_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã nhân viên" Binding="{Binding UserID}" />
                     <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding UserName}" />

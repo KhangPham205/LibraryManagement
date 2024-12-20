@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -77,6 +78,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 }
             }
         }
+        public ObservableCollection<DonMuon> DonMuonList { get; set; }
         public ObservableCollection<DocGia> DocGiaList { get; set; }
         private DocGia _selectedDocGia;
         public DocGia SelectedDocGia
@@ -94,6 +96,64 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                         Email = SelectedDocGia.Email;
                         SDT = SelectedDocGia.SDT;
                         CCCD = SelectedDocGia.CCCD;
+
+                        using (var context = new LibraryDbContext())
+                        {
+                            DonMuonList = new ObservableCollection<DonMuon>(context.DonMuons.Where(t => t.MaDG == SelectedDocGia.MaDG));
+                            OnPropertyChanged(nameof(DonMuonList));
+                            if (DanhSachMuon == null)
+                            {
+                                DanhSachMuon = new ObservableCollection<BorrowedBook>();
+                            }
+                            DanhSachMuon.Clear();
+                        }
+                    }
+                }
+            }
+        }
+        private ObservableCollection<BorrowedBook> _danhSachMuon;
+        public ObservableCollection<BorrowedBook> DanhSachMuon
+        {
+            get { return _danhSachMuon; }
+            set
+            {
+                _danhSachMuon = value;
+                OnPropertyChanged(nameof(DanhSachMuon));
+            }
+        }
+        private DonMuon _selectedDonMuon;
+        public DonMuon SelectedDonMuon
+        {
+            get { return _selectedDonMuon; }
+            set
+            {
+                if (_selectedDonMuon != value)
+                {
+                    _selectedDonMuon = value;
+                    OnPropertyChanged(nameof(SelectedDonMuon));
+                    if (SelectedDonMuon != null)
+                    {
+                        using (var context = new LibraryDbContext())
+                        {
+                            if (DanhSachMuon == null)
+                            {
+                                DanhSachMuon = new ObservableCollection<BorrowedBook>();
+                            }
+                            DanhSachMuon.Clear();
+                            foreach (var item in context.CTDMs)
+                                if (item != null && item.MaMuon == SelectedDonMuon.MaMuon)
+                                {
+                                    Sach sach = context.Sachs.Where(s => s.MaDauSach == item.MaDauSach && s.ISBN == item.ISBN).FirstOrDefault();
+                                    if (sach != null)
+                                    {
+                                        DanhSachMuon.Add(new BorrowedBook()
+                                        {
+                                            TenDauSach = sach.TenDauSach,
+                                            ISBN = sach.ISBN
+                                        });
+                                    }
+                                }
+                        }                            
                     }
                 }
             }
