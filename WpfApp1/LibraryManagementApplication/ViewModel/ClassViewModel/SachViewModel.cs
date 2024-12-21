@@ -130,7 +130,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             AddCommand = new RelayCommand<object>((p) => true, async (p) => await AddSach());
             EditCommand = new RelayCommand<object>((p) => SelectedSach != null, async (p) => await EditSach());
             DeleteCommand = new RelayCommand<object>((p) => SelectedSach != null, async (p) => await DeleteSach());
-            SearchCommand = new RelayCommand<string>((p) => true, async (p) => await SearchSach());
+            SearchCommand = new RelayCommand<object>((p) => true, async (p) => await SearchSach());
             ShowCommand = new RelayCommand<DataGrid>((p) => true, (p) => ShowDauSach(p));
 
             LoadSachList();
@@ -211,7 +211,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
         private async Task SearchSach()
         {
-            var filteredListFromDb = await SearchSachInDatabaseAsync(tenDauSach, ISBN, ViTri, TrangThai, int.Parse(NamXB));
+            var filteredListFromDb = await SearchSachInDatabaseAsync(TenDauSach, ISBN, ViTri, TrangThai, int.Parse(NamXB));
             SachList.Clear();
             foreach (var sach in filteredListFromDb)
             {
