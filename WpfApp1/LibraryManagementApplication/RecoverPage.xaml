@@ -36,6 +36,7 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <TextBlock Style="{StaticResource textblock:style1}"
                        Grid.Row="1"
@@ -73,19 +74,19 @@
                      Grid.Column="2"
                      Grid.Row="3"
                      Text="{Binding cccd}"/>
+            <TextBlock x:Name="countdown"
+                        Style="{StaticResource textblock:style1}"
+                       Grid.Row="5"
+                       Grid.Column="2"
+                       Margin="10"
+                       HorizontalAlignment="Right"/>
             <Button x:Name="recover"
                     Content="Gửi Mail"
-                    Foreground="#07209e"
-                    Background="#9acbff"
-                    BorderBrush="#07209e"
-                    BorderThickness="1"
-                    FontSize="18"
                     Style="{StaticResource button:style1}"
                     Grid.Column="2"
                     Grid.Row="4"
                     Width="300"
-                    Height="40"
-                    HorizontalAlignment="Right"
+                    Click="recover_Click"
                     Command="{Binding RecoverCommand}">
             </Button>
         </Grid>

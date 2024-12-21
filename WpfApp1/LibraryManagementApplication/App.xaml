@@ -518,6 +518,7 @@
                                BorderBrush="Transparent"
                                Background="white"
                                BorderThickness ="0"
+                               Text="{Binding Path = Text, RelativeSource={RelativeSource AncestorType=DatePicker}}"
                                SelectedDate="{Binding Path = SelectedDate, RelativeSource={RelativeSource AncestorType=DatePicker}}">
                             </DatePicker>
                         </Border>

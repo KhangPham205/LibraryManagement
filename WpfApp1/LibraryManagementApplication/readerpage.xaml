@@ -122,7 +122,7 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Button  x:Name="addtaikhoan"
-                                 Content="Thêm"
+                                 Content="Thêm DG"
                                  Margin="5"        
                                  Style="{DynamicResource button:add}"
                                  Command="{Binding AddCommand}"/>
@@ -133,7 +133,7 @@
                                 Visibility="Collapsed"
                                 Click="Button_Click"/>
                         <Button x:Name="findsach"
-                                Content="Tìm"
+                                Content="Tìm DG"
                                 Grid.Column="6"
                                 Margin="5"      
                                 Style="{DynamicResource button:find}"

@@ -121,13 +121,13 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Button x:Name="editsach"
-                                Content="Sửa"
+                                Content="Sửa DG"
                                 Grid.Column="2"
                                 Margin="5"  
                                 Style="{DynamicResource button:edit}"
                                 Command="{Binding EditCommand}"/>
                         <Button x:Name="deletesach"
-                                Content="Xóa"
+                                Content="Xóa DG"
                                 Grid.Column="4"
                                 Margin="5"
                                 Style="{DynamicResource button:delete}"

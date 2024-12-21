@@ -242,10 +242,26 @@ namespace LibraryManagementApplication
 
         private void show_Click(object sender, RoutedEventArgs e)
         {
+            if (startdate.HasValue && enddate.HasValue) 
             datagridDSMuon.ItemsSource= context.DonMuons
                 .Where(d => d.NgayMuon >= startdate.Value && d.NgayMuon <= enddate.Value)
                 .ToList();
+            else if (startdate.HasValue && !enddate.HasValue) 
+                datagridDSMuon.ItemsSource = context.DonMuons
+                .Where(d => d.NgayMuon >= startdate.Value)
+                .ToList();
+            else 
+                datagridDSMuon.ItemsSource = context.DonMuons
+                .Where(d => d.NgayMuon <= enddate.Value)
+                .ToList();
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            startdate = null;
+            enddate = null;
+            datagridDSMuon.ItemsSource = context.DonMuons.ToList();
         }
     }
 

@@ -35,6 +35,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         private string ngayTraDK;
         private string ngayTraTT;
         private string phiPhat;
+        //public string strstartBorrowDate;
+        //public string strendBorrowDate;
+        //public string strstartReturnDate;
+        //public string strendReturnDate;
+        //public string strrealStartReturnDate;
+        //public string strrealEndReturnDate;
         public string MaMuon 
         { 
             get => maMuon; 
@@ -225,11 +231,15 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                         NgayMuon = SelectedDonMuon.NgayMuon.ToShortDateString();
                         NgayTraDK = SelectedDonMuon.NgayTraDK.ToShortDateString();
                         if (SelectedDonMuon.NgayTraTT != null)
+                        {
                             NgayTraTT = DateTime.Parse(SelectedDonMuon.NgayTraTT.ToString()).ToShortDateString();
+                            RealStartReturnDate = RealEndReturnDate = SelectedDonMuon.NgayTraTT;
+                        }
                         else
                             NgayTraTT = "";
                         PhiPhat = SelectedDonMuon.PhiPhat.ToString();
-
+                        StartBorrowDate = EndBorrowDate = SelectedDonMuon.NgayMuon;
+                        StartReturnDate = EndReturnDate = SelectedDonMuon.NgayTraDK;
                         DanhSachMuon.Clear();
                         foreach (var item in context.CTDMs)
                             if (item != null && item.MaMuon ==  SelectedDonMuon.MaMuon)
@@ -324,104 +334,41 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         private async Task LoadDonMuonTraList()
         {
             var donMuons = await GetAllDonMuonAsync();
-
             // Xử lý DonMuonList
             DonMuonList.Clear();
-            if (StartBorrowDate.HasValue && EndBorrowDate.HasValue)
+            foreach (var item in donMuons.Where(t => t.NgayTraTT == null))
             {
-                if (StartBorrowDate <= EndBorrowDate)
-                {
-                    foreach (var item in donMuons.Where(t => t.NgayTraTT == null && StartBorrowDate <= t.NgayMuon && t.NgayMuon <= EndBorrowDate))
-                    {
-                        DonMuonList.Add(item);
-                    }
-                }
-                else
-                {
-                    EXMessagebox.Show("Vui lòng chọn ngày bắt đầu không lớn hơn ngày kết thúc", "Cảnh báo");
-                }
-            }
-            else if (StartBorrowDate.HasValue)
-            {
-                foreach (var item in donMuons.Where(t => t.NgayTraTT == null && StartBorrowDate <= t.NgayMuon))
-                {
-                    DonMuonList.Add(item);
-                }
-            }
-            else if (EndBorrowDate.HasValue)
-            {
-                foreach (var item in donMuons.Where(t => t.NgayTraTT == null && t.NgayMuon <= EndBorrowDate))
-                {
-                    DonMuonList.Add(item);
-                }
-            }
-            else
-            {
-                foreach (var item in donMuons.Where(t => t.NgayTraTT == null))
-                {
-                    DonMuonList.Add(item);
-                }
+                DonMuonList.Add(item);
             }
 
             // Xử lý DonTraList
             DonTraList.Clear();
-            if (StartReturnDate.HasValue && EndReturnDate.HasValue)
+            foreach (var item in donMuons.Where(t => t.NgayTraTT != null))
             {
-                if (StartReturnDate <= EndReturnDate)
-                {
-                    foreach (var item in donMuons.Where(t => t.NgayTraTT != null && StartReturnDate <= t.NgayTraTT && t.NgayTraTT <= EndReturnDate))
-                    {
-                        DonTraList.Add(item);
-                    }
-                }
-                else
-                {
-                    EXMessagebox.Show("Vui lòng chọn ngày bắt đầu không lớn hơn ngày kết thúc", "Cảnh báo");
-                }
-            }
-            else if (StartReturnDate.HasValue)
-            {
-                foreach (var item in donMuons.Where(t => t.NgayTraTT != null && StartReturnDate <= t.NgayTraTT))
-                {
-                    DonTraList.Add(item);
-                }
-            }
-            else if (EndReturnDate.HasValue)
-            {
-                foreach (var item in donMuons.Where(t => t.NgayTraTT != null && t.NgayTraTT <= EndReturnDate))
-                {
-                    DonTraList.Add(item);
-                }
-            }
-            else
-            {
-                foreach (var item in donMuons.Where(t => t.NgayTraTT != null))
-                {
-                    DonTraList.Add(item);
-                }
+                DonTraList.Add(item);
             }
 
             // Xử lý thêm điều kiện realStartReturnDate và realEndReturnDate nếu có
-            if (realStartReturnDate.HasValue || realEndReturnDate.HasValue)
-            {
-                var filteredDonTraList = DonTraList.ToList(); // Tạm lưu danh sách đã lọc ở trên
+            //if (realStartReturnDate.HasValue || realEndReturnDate.HasValue)
+            //{
+            //    var filteredDonTraList = DonTraList.ToList(); // Tạm lưu danh sách đã lọc ở trên
 
-                if (realStartReturnDate.HasValue)
-                {
-                    filteredDonTraList = filteredDonTraList.Where(t => t.NgayTraTT >= realStartReturnDate).ToList();
-                }
+            //    if (realStartReturnDate.HasValue)
+            //    {
+            //        filteredDonTraList = filteredDonTraList.Where(t => t.NgayTraTT >= realStartReturnDate).ToList();
+            //    }
 
-                if (realEndReturnDate.HasValue)
-                {
-                    filteredDonTraList = filteredDonTraList.Where(t => t.NgayTraTT <= realEndReturnDate).ToList();
-                }
+            //    if (realEndReturnDate.HasValue)
+            //    {
+            //        filteredDonTraList = filteredDonTraList.Where(t => t.NgayTraTT <= realEndReturnDate).ToList();
+            //    }
 
-                DonTraList.Clear();
-                foreach (var item in filteredDonTraList)
-                {
-                    DonTraList.Add(item);
-                }
-            }
+            //    DonTraList.Clear();
+            //    foreach (var item in filteredDonTraList)
+            //    {
+            //        DonTraList.Add(item);
+            //    }
+            //}
         }
         private void AddDonMuon()
         {
@@ -521,27 +468,27 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             {
                 filteredList = filteredList.Where(dm => dm.NgayMuon >= StartBorrowDate && dm.NgayMuon <= EndBorrowDate).ToList();
             }
-            else if (StartBorrowDate.HasValue)
+            else if (StartBorrowDate.HasValue && !EndBorrowDate.HasValue)
             {
                 filteredList = filteredList.Where(dm => dm.NgayMuon >= StartBorrowDate).ToList();
             }
-            else if (EndBorrowDate.HasValue)
+            else if (EndBorrowDate.HasValue && !StartBorrowDate.HasValue)
             {
                 filteredList = filteredList.Where(dm => dm.NgayMuon <= EndBorrowDate).ToList();
             }
 
-            // Lọc theo ngày trả thực tế
+            // Lọc theo ngày trả dự kiến
             if (StartReturnDate.HasValue && EndReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate && dm.NgayTraTT <= EndReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraDK >= StartReturnDate && dm.NgayTraDK <= EndReturnDate).ToList();
             }
-            else if (StartReturnDate.HasValue)
+            else if (StartReturnDate.HasValue && !EndReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraDK >= StartReturnDate).ToList();
             }
-            else if (EndReturnDate.HasValue)
+            else if (EndReturnDate.HasValue && !StartReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT <= EndReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraDK <= EndReturnDate).ToList();
             }
 
             // Cập nhật danh sách
@@ -560,27 +507,41 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             {
                 filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate && dm.NgayTraTT <= EndReturnDate).ToList();
             }
-            else if (StartReturnDate.HasValue)
+            else if (StartReturnDate.HasValue && !EndReturnDate.HasValue)
             {
                 filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate).ToList();
             }
-            else if (EndReturnDate.HasValue)
+            else if (EndReturnDate.HasValue && !StartReturnDate.HasValue)
             {
                 filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT <= EndReturnDate).ToList();
+            }
+
+            // Lọc theo ngày trả dự kiến
+            if (StartReturnDate.HasValue && EndReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraDK >= StartReturnDate && dm.NgayTraDK <= EndReturnDate).ToList();
+            }
+            else if (StartReturnDate.HasValue && !EndReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraDK >= StartReturnDate).ToList();
+            }
+            else if (EndReturnDate.HasValue && !StartReturnDate.HasValue)
+            {
+                filteredList = filteredList.Where(dm => dm.NgayTraDK <= EndReturnDate).ToList();
             }
 
             // Lọc theo ngày trả thực tế cụ thể (realStartReturnDate và realEndReturnDate)
             if (RealStartReturnDate.HasValue && RealEndReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= RealStartReturnDate && dm.NgayTraTT <= RealEndReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT >= RealStartReturnDate && dm.NgayTraTT <= RealEndReturnDate).ToList();
             }
-            else if (RealStartReturnDate.HasValue)
+            else if (RealStartReturnDate.HasValue && !RealEndReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= RealStartReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT >= RealStartReturnDate).ToList();
             }
-            else if (RealEndReturnDate.HasValue)
+            else if (!RealStartReturnDate.HasValue && RealEndReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT <= RealEndReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT <= RealEndReturnDate).ToList();
             }
 
             // Cập nhật danh sách

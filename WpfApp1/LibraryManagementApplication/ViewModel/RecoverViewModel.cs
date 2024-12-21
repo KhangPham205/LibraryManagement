@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -26,6 +27,7 @@ namespace LibraryManagementApplication.ViewModel
 
         public void recover()
         {
+
             try
             {
                 using (var context = new LibraryDbContext())
@@ -36,8 +38,8 @@ namespace LibraryManagementApplication.ViewModel
                     if (taiKhoan != null)
                     {
                         // Gửi email chứa mật khẩu
-                        SendEmail(taiKhoan.Email, taiKhoan.Password);
-                        EXMessagebox.Show("Mật khẩu đã được gửi qua email của bạn!", "Thông báo");
+                        SendEmail(taiKhoan.Email, taiKhoan.Password, taiKhoan.UserName);
+                        //EXMessagebox.Show("Mật khẩu đã được gửi qua email của bạn!", "Thông báo");
                     }
                     else
                     {
@@ -53,7 +55,7 @@ namespace LibraryManagementApplication.ViewModel
             }
         }
 
-        private void SendEmail(string recipientEmail, string password)
+        private async Task SendEmail(string recipientEmail, string password, string username)
         {
             try
             {
@@ -64,20 +66,20 @@ namespace LibraryManagementApplication.ViewModel
                 // Nội dung email
                 string subject = "Thông báo khôi phục mật khẩu tài khoản";
                 string body = $@"
-Kính gửi Quý độc giả,
+Kính gửi {username},
 
-Chúng tôi đã nhận được yêu cầu khôi phục mật khẩu từ Quý độc giả cho tài khoản của mình trên hệ thống quản lý thư viện.
+Chúng tôi đã nhận được yêu cầu khôi phục mật khẩu từ bạn cho tài khoản của mình trên hệ thống quản lý thư viện.
 
-Dưới đây là thông tin mật khẩu của Quý độc giả:
+Dưới đây là thông tin mật khẩu của bạn:
 --------------------------------------------------
 Mật khẩu: {password}
 --------------------------------------------------
 
-Vui lòng sử dụng mật khẩu này để đăng nhập vào hệ thống. Chúng tôi khuyến nghị Quý độc giả đổi mật khẩu sau khi đăng nhập để đảm bảo an toàn thông tin tài khoản.
+Vui lòng sử dụng mật khẩu này để đăng nhập vào hệ thống. Chúng tôi khuyến nghị bạn đổi mật khẩu sau khi đăng nhập để đảm bảo an toàn thông tin tài khoản.
 
 Nếu Quý độc giả không yêu cầu khôi phục mật khẩu, vui lòng bỏ qua email này hoặc liên hệ ngay với chúng tôi qua email hỗ trợ: khonggian2k0520@gmail.com để được hỗ trợ kịp thời.
 
-Chân thành cảm ơn Quý độc giả đã tin tưởng và sử dụng dịch vụ của chúng tôi.
+Chân thành cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi.
 
 Trân trọng,
 Đội ngũ hỗ trợ
@@ -105,7 +107,7 @@ Email: khonggian2k0520@gmail.com
                 mail.To.Add(recipientEmail);
 
                 // Gửi email
-                smtpClient.Send(mail);
+                await smtpClient.SendMailAsync(mail);
                 Console.WriteLine("Email đã được gửi thành công!");
             }
             catch (Exception ex)

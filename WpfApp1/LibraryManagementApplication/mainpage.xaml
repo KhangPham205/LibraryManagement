@@ -102,16 +102,18 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Margin="10,15,10,5" Orientation="Horizontal">
-                    <TextBlock Text="Ngày bắt đầu: "
+                    <TextBlock Text="Ngày mượn:  BD: "
                                Style="{StaticResource textblock:style1}"/>
                     <DatePicker x:Name="Startdate" 
                                 Style="{StaticResource datepick:style1}"
                                 SelectedDate="{Binding startdate}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Margin="10,15,10,5" Orientation="Horizontal">
-                    <TextBlock Text="Ngày kết thúc: "
+                    <TextBlock Text="KT: "
                         Style="{StaticResource textblock:style1}"/>
                     <DatePicker x:Name="Enddate" 
                         Style="{StaticResource datepick:style1}"
@@ -119,10 +121,16 @@
                 </StackPanel>
                 <Button x:Name="show"
                         Grid.Column="4"
-                        Content="Hiển thị"
+                        Content="Tìm đơn"
                         Margin="10,15,10,5"
                         Style="{StaticResource button:find}"
                         Click="show_Click"/>
+                <Button 
+                        Grid.Column="6"
+                        Content="Hiển thị"
+                        Margin="10,15,10,5"
+                        Style="{StaticResource button:show}"
+                        Click="Button_Click"/>
             </Grid>
             <DataGrid x:Name="datagridDSMuon"
                       Grid.Row="2"

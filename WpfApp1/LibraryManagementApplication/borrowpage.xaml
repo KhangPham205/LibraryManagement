@@ -111,19 +111,15 @@
                             <DatePicker x:Name="StartBorrowdate" 
                                         Margin="5"
                                         Style="{StaticResource datepick:style1}"
-                                        SelectedDate="{Binding StartBorrowDate}"/>
+                                        SelectedDate="{Binding StartBorrowDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                             <TextBlock Text="KT: "
                                        Margin="5"
                                        Style="{StaticResource textblock:style1}"/>
                             <DatePicker x:Name="EndBorrowdate" 
                                         Margin="5"
                                         Style="{StaticResource datepick:style1}"
-                                        SelectedDate="{Binding EndBorrowDate}"/>
+                                        SelectedDate="{Binding EndBorrowDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
-                        <TextBox x:Name="ngaymuontb" 
-                                 Style="{StaticResource textbox:style1}"
-                                 Margin="5"
-                                 Text="{Binding NgayMuon, Mode=TwoWay, StringFormat='MM/dd/yyyy', UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBlock Text="Ngày trả dự kiến:"
                                    Style="{StaticResource textblock:style1}"
                                    Grid.Column="0"
@@ -136,14 +132,14 @@
                             <DatePicker x:Name="StartLenddate" 
                                         Margin="5"
                                         Style="{StaticResource datepick:style1}"
-                                        SelectedDate="{Binding StartReturnDate}"/>
+                                        SelectedDate="{Binding StartReturnDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="KT: "
                                        Margin="5"
                                        Style="{StaticResource textblock:style1}"/>
                             <DatePicker x:Name="EndLenddate" 
                                         Margin="5"
                                         Style="{StaticResource datepick:style1}"
-                                        SelectedDate="{Binding EndReturnDate}"/>
+                                        SelectedDate="{Binding EndReturnDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <Grid Grid.Row="8"
                               Grid.Column="0"
@@ -167,13 +163,13 @@
                                     HorizontalAlignment="Left"
                                     Command="{Binding AddCommand}"/>
                             <Button x:Name="traddon"
-                                    Content="Trả"
+                                    Content="Trả đơn"
                                     Grid.Column="2"
                                     Margin="5"        
                                     Style="{DynamicResource button:delete}"
                                     Command="{Binding RestoreCommand}"/>
                             <Button x:Name="finddon"
-                                    Content="Tìm"
+                                    Content="Tìm đơn"
                                     Grid.Column="5"
                                     Margin="5"      
                                     Style="{DynamicResource button:find}"

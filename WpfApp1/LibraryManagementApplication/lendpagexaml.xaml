@@ -111,14 +111,14 @@
                             <DatePicker x:Name="StartBorrowdate" 
                                         Margin="5"
                                         Style="{StaticResource datepick:style1}"
-                                        SelectedDate="{Binding StartBorrowDate}"/>
+                                        SelectedDate="{Binding StartBorrowDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="KT: "
                                        Margin="5"
                                        Style="{StaticResource textblock:style1}"/>
                             <DatePicker x:Name="EndBorrowdate" 
                                         Margin="5"
                                         Style="{StaticResource datepick:style1}"
-                                        SelectedDate="{Binding EndBorrowDate}"/>
+                                        SelectedDate="{Binding EndBorrowDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <TextBlock Text="Ngày trả dự kiến:"
                                    Style="{StaticResource textblock:style1}"
@@ -132,14 +132,14 @@
                             <DatePicker x:Name="StartLenddatedk" 
                                         Margin="5"
                                         Style="{StaticResource datepick:style1}"
-                                        SelectedDate="{Binding StartReturnDate}"/>
+                                        SelectedDate="{Binding StartReturnDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="KT: "
                                        Margin="5"
                                        Style="{StaticResource textblock:style1}"/>
                             <DatePicker x:Name="EndLenddatedk" 
                                         Margin="5"
                                         Style="{StaticResource datepick:style1}"
-                                        SelectedDate="{Binding EndReturnDate}"/>
+                                        SelectedDate="{Binding EndReturnDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <TextBlock Text="Ngày trả thực tế:"
                                    Style="{StaticResource textblock:style1}"
@@ -153,14 +153,14 @@
                             <DatePicker x:Name="StartLenddate" 
                                         Margin="5"
                                         Style="{StaticResource datepick:style1}"
-                                        SelectedDate="{Binding RealStartReturnDate}"/>
+                                        SelectedDate="{Binding RealStartReturnDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="KT: "
                                        Margin="5"
                                        Style="{StaticResource textblock:style1}"/>
                             <DatePicker x:Name="EndLenddate" 
                                         Margin="5"
                                         Style="{StaticResource datepick:style1}"
-                                        SelectedDate="{Binding RealEndReturnDate}"/>
+                                        SelectedDate="{Binding RealEndReturnDate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                         <TextBlock Text="Phí phạt:"
                                    Style="{StaticResource textblock:style1}"
@@ -188,7 +188,7 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <Button x:Name="finddon"
-                                    Content="Tìm"
+                                    Content="Tìm đơn"
                                     Grid.Column="5"
                                     Margin="5"
                                     Style="{DynamicResource button:find}"
