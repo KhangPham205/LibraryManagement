@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using LibraryManagementApplication.ViewModel.ClassViewModel;
+using LibraryManagementApplication.ViewModel;
 
 namespace LibraryManagementApplication
 {
@@ -203,22 +204,25 @@ namespace LibraryManagementApplication
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var selectedEmployee = (DocGia)docgia.SelectedItem;
+            var selectedDocGia = (DocGia)docgia.SelectedItem;
 
-            if (selectedEmployee != null)
+            if (selectedDocGia != null)
             {
-                // Tạo cửa sổ chi tiết nhân viên và truyền dữ liệu
+                // Tạo cửa sổ chi tiết độc giả và truyền dữ liệu
                 var detailWindow = new readerinfowindow
                 {
                     DataContext = new DocGiaViewModel
                     {
-                        SelectedDocGia = selectedEmployee
+                        SelectedDocGia = selectedDocGia
                     }
                 };
 
-                // Đăng ký sự kiện Closed để ẩn nút History khi bị đóng
+                // Đăng ký sự kiện Closed để cập nhật danh sách độc giả sau khi cửa sổ chi tiết bị đóng
                 detailWindow.Closed += (s, args) =>
                 {
+                    // Làm mới danh sách độc giả
+                    LoadDocGiaList();
+
                     // Ẩn nút lịch sử khi cửa sổ bị đóng
                     history.Visibility = Visibility.Collapsed;
                 };
@@ -226,6 +230,27 @@ namespace LibraryManagementApplication
                 // Hiển thị cửa sổ chi tiết
                 detailWindow.ShowDialog();
             }
+        }
+        private void LoadDocGiaList()
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    // Lấy danh sách độc giả từ cơ sở dữ liệu
+                    var docGiaList = context.DocGias.ToList();
+                    docgia.ItemsSource = docGiaList;
+                }
+            }
+            catch (Exception ex)
+            {
+                EXMessagebox.Show($"Có lỗi khi tải danh sách độc giả: {ex.Message}");
+            }
+        }
+
+        private void showsach_Click(object sender, RoutedEventArgs e)
+        {
+            history.Visibility = Visibility.Collapsed;
         }
     }
 }

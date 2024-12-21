@@ -93,6 +93,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async void LoadNhaXuatBanList()
         {
+            DisplayName = "";
             NhaXuatBanList.Clear();
             var nhaXuatBans = await GetAllNhaXuatBanAsync();
             foreach (var nxb in nhaXuatBans)
@@ -122,6 +123,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     EXMessagebox.Show("Cannot save changes.");
                 else
                     NhaXuatBanList.Add(newNhaXuatBan);
+                DisplayName = "";
             }
             else
                 EXMessagebox.Show("Vui lòng nhập tên nhà xuất bản", "Cảnh báo");
@@ -148,6 +150,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (isSuccess)
                 {
                     NhaXuatBanList.Remove(SelectedNhaXuatBan);
+                    DisplayName = "";
                 }
                 else
                 {

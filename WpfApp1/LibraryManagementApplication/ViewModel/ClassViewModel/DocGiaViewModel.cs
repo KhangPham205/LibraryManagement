@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -209,7 +210,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async void LoadDocGiaList()
         {
-                        DocGiaList.Clear();
+            MaDG = TenDG = SDT = Email = CCCD = "";
+            DocGiaList.Clear();
             var docGias = await GetAllDocGiasAsync();
             foreach (var docGia in docGias)
             {
@@ -224,6 +226,23 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 !string.IsNullOrEmpty(SDT) &&
                 !string.IsNullOrEmpty(CCCD))
             {
+                if (!IsValidEmail(Email))
+                {
+                    EXMessagebox.Show("Email không hợp lệ.", "Thông báo");
+                    return;
+                }
+
+                if (!IsCitizenIDValid(CCCD))
+                {
+                    EXMessagebox.Show("CCCD không hợp lệ.", "Thông báo");
+                    return;
+                }
+
+                if (!IsPhoneNumberValid(SDT))
+                {
+                    EXMessagebox.Show("SDT không hợp lệ.", "Thông báo");
+                    return;
+                }
                 bool exists = await IsDocGiaExistsAsync(TenDG, CCCD);
                 if (exists)
                 {
@@ -245,6 +264,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     EXMessagebox.Show("Cannot save changes.");
                 else
                     DocGiaList.Add(newDocGia);
+                MaDG = TenDG = SDT = Email = CCCD = "";
             }
             else
                 EXMessagebox.Show("Vui lòng nhập đầy đủ thông tin của độc giả", "Cảnh báo");
@@ -253,7 +273,24 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         {
             if (SelectedDocGia != null)
             {
-                // Here you can implement logic for editing the selected DocGia.
+                if (!IsValidEmail(Email))
+                {
+                    EXMessagebox.Show("Email không hợp lệ.", "Thông báo");
+                    return;
+                }
+
+                if (!IsCitizenIDValid(CCCD))
+                {
+                    EXMessagebox.Show("CCCD không hợp lệ.", "Thông báo");
+                    return;
+                }
+
+                if (!IsPhoneNumberValid(SDT))
+                {
+                    EXMessagebox.Show("SDT không hợp lệ.", "Thông báo");
+                    return;
+                }
+
                 SelectedDocGia.TenDG = TenDG;
                 SelectedDocGia.Email = Email;
                 SelectedDocGia.SDT = SDT;
@@ -263,7 +300,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (!isSuccess)
                     EXMessagebox.Show("Error updating the record.");
                 else
-                    LoadDocGiaList();
+                    EXMessagebox.Show("Sửa đổi thông tin độc giả thành công", "Thông báo");
             }
         }
         private async Task DeleteDocGia()
@@ -272,7 +309,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             {
                 bool isSuccess = await DeleteDocGiaFromDatabaseAsync(SelectedDocGia.MaDG);
                 if (isSuccess)
-                    DocGiaList.Remove(SelectedDocGia);
+                    EXMessagebox.Show("Xóa thông tin độc giả thành công");
                 else
                     EXMessagebox.Show("Error deleting the record.");
             }
@@ -407,5 +444,31 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         #endregion
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                // Biểu thức chính quy kiểm tra email
+                string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+                return Regex.IsMatch(email, emailPattern);
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
+        private bool IsPhoneNumberValid(string phoneNumber)
+        {
+            var phoneRegex = new Regex(@"^\d{10,11}$");
+            return phoneRegex.IsMatch(phoneNumber);
+        }
+        private bool IsCitizenIDValid(string citizenID)
+        {
+            var citizenIDRegex = new Regex(@"^\d{12}$");
+            return citizenIDRegex.IsMatch(citizenID);
+        }
     }
 }

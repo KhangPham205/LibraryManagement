@@ -137,6 +137,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
         private async void LoadSachList()
         {
+            MaDauSach = TenDauSach = ISBN = ViTri = NamXB = TrangThai = "";
             SachList.Clear();
             var sachs = await GetAllSachsAsync();
             foreach (var sach in sachs)
@@ -171,7 +172,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (!isSuccess)
                     EXMessagebox.Show("Cannot save changes.");
                 else
+                {
+                    MaDauSach = TenDauSach = ISBN = ViTri = NamXB = TrangThai = "";
                     SachList.Add(newSach); // Thêm vào danh sách hiển thị
+                }    
             }
         }
         private async Task EditSach()
@@ -197,9 +201,12 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             {
                 bool isSuccess = await DeleteSachFromDatabaseAsync(SelectedSach);
                 if (isSuccess)
+                {
+                    MaDauSach = TenDauSach = ISBN = ViTri = NamXB = TrangThai = "";
                     SachList.Remove(SelectedSach);
+                }    
                 else
-                    EXMessagebox.Show("Cannot delete sach");
+                    EXMessagebox.Show("Không thể xóa sách");
             }
         }
         private async Task SearchSach()

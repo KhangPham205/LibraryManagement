@@ -92,6 +92,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async void LoadTacGiaList()
         {
+            DisplayName = "";
             TacGiaList.Clear();
             var tacGias = await GetAllTacGiasAsync();
             foreach (var tacGia in tacGias)
@@ -121,7 +122,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (!isSuccess)
                     EXMessagebox.Show("Cannot save changes.");
                 else
+                {
                     TacGiaList.Add(newTacGia);
+                    DisplayName = "";
+                }
             }
         }
         private async Task EditTacGia()
@@ -145,11 +149,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (isSuccess)
                 {
                     TacGiaList.Remove(SelectedTacGia);
+                    DisplayName = "";
                 }
                 else
-                {
                     EXMessagebox.Show("Error deleting the record.");
-                }
             }
         }
         private async Task SearchTacGia()

@@ -95,6 +95,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async void LoadTheLoaiList()
         {
+            DisplayName = "";
             TheLoaiList.Clear();
             var theLoais = await GetAllTheLoaisAsync();
             foreach (var theLoai in theLoais)
@@ -125,6 +126,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     TheLoaiList.Add(newTheLoai);
                 else
                     EXMessagebox.Show("Error adding The Loai.");
+                DisplayName = "";
             }
             else
                 EXMessagebox.Show("Vui lòng nhập tên thể loại", "Cảnh báo");
@@ -151,6 +153,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (isSuccess)
                 {
                     TheLoaiList.Remove(SelectedTheLoai);
+                    DisplayName = "";
                 }
                 else
                 {

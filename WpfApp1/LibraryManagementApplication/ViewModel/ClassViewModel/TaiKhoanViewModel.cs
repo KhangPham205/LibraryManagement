@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Text.RegularExpressions;
 using System.Windows.Media.Imaging;
 using OfficeOpenXml.Table.PivotTable;
+using System.Diagnostics.Eventing.Reader;
 
 namespace LibraryManagementApplication.ViewModel.ClassViewModel
 {
@@ -155,6 +156,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     {
                         UserName = SelectedTaiKhoan.UserName;
                         Password = SelectedTaiKhoan.Password;
+                        LoaiNV = SelectedTaiKhoan.Loai;
                         Email = SelectedTaiKhoan.Email;
                         SDT = SelectedTaiKhoan.SDT;
                         CCCD = SelectedTaiKhoan.CCCD;
@@ -279,6 +281,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async void LoadTaiKhoanList()
         {
+            UserName = Password = Email = SDT = CCCD = LoaiNV = "";
+            SelectedTaiKhoan = null;
             TaiKhoanList.Clear();
             var taiKhoans = await GetAllTaiKhoansAsync();
             foreach (var taiKhoan in taiKhoans)
@@ -338,6 +342,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     TaiKhoanList.Add(newTaiKhoan);
                 else
                     EXMessagebox.Show("Error adding Tai Khoan.");
+                UserName = Password = Email = SDT = CCCD = "";
                 return isSuccess;
             }
             else
@@ -380,7 +385,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     EXMessagebox.Show("Error updating Tai Khoan.");
                 }
                 else
-                    LoadTaiKhoanList();
+                    EXMessagebox.Show("Sửa thông tin tài khoản thành công", "Thông báo");
             }
         }
 
@@ -390,7 +395,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             {
                 bool isSuccess = await DeleteTaiKhoanFromDatabaseAsync(SelectedTaiKhoan.UserID);
                 if (isSuccess)
-                    TaiKhoanList.Remove(SelectedTaiKhoan);
+                    EXMessagebox.Show("Xóa tài khoản thành công", "Thông báo");
                 else
                     EXMessagebox.Show("Error deleting Tai Khoan.");
             }
@@ -593,7 +598,6 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 return false;
             }
         }
-
         private bool IsPhoneNumberValid(string phoneNumber)
         {
             var phoneRegex = new Regex(@"^\d{10,11}$");
@@ -604,6 +608,5 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             var citizenIDRegex = new Regex(@"^\d{12}$");
             return citizenIDRegex.IsMatch(citizenID);
         }
-
     }
 }

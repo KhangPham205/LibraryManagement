@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using LibraryManagementApplication.ViewModel.ClassViewModel;
+using LibraryManagementApplication.ViewModel;
 
 namespace LibraryManagementApplication
 {
@@ -205,9 +206,12 @@ namespace LibraryManagementApplication
                     }
                 };
 
-                // Đăng ký sự kiện Closed để ẩn nút History khi bị đóng
+                // Đăng ký sự kiện Closed để cập nhật danh sách tài khoản sau khi cửa sổ bị đóng
                 detailWindow.Closed += (s, args) =>
                 {
+                    // Làm mới danh sách tài khoản
+                    LoadTaiKhoanList();
+
                     // Ẩn nút lịch sử khi cửa sổ bị đóng
                     history.Visibility = Visibility.Collapsed;
                 };
@@ -215,6 +219,27 @@ namespace LibraryManagementApplication
                 // Hiển thị cửa sổ chi tiết
                 detailWindow.ShowDialog();
             }
+        }
+        private void LoadTaiKhoanList()
+        {
+            try
+            {
+                using (var context = new LibraryDbContext())
+                {
+                    // Lấy danh sách tài khoản từ cơ sở dữ liệu
+                    var taiKhoanList = context.TaiKhoans.ToList();
+                    taikhoan.ItemsSource = taiKhoanList;
+                }
+            }
+            catch (Exception ex)
+            {
+                EXMessagebox.Show($"Có lỗi khi tải danh sách tài khoản: {ex.Message}");
+            }
+        }
+
+        private void showsach_Click(object sender, RoutedEventArgs e)
+        {
+            history.Visibility = Visibility.Collapsed;
         }
     }
 }

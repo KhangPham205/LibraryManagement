@@ -316,23 +316,11 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
 
         #region Method
-        private async Task LoadDonMuonList()
-        {
-            DonMuonList.Clear();
-            DonTraList.Clear();
-            var donMuons = await GetAllDonMuonAsync();
-            foreach (var item in donMuons.Where(t => t.NgayTraTT == null))
-            {
-                DonMuonList.Add(item);
-            }
-            foreach (var item in donMuons.Where(t => t.NgayTraTT != null))
-            {
-                DonTraList.Add(item);
-            }
-        }
-
         private async Task LoadDonMuonTraList()
         {
+            MaMuon = MaDG = MaNV = PhiPhat = "";
+            StartBorrowDate = EndBorrowDate = StartReturnDate = EndReturnDate = RealStartReturnDate = RealEndReturnDate = null;
+            DanhSachMuon.Clear();
             var donMuons = await GetAllDonMuonAsync();
             // Xử lý DonMuonList
             DonMuonList.Clear();
@@ -372,6 +360,9 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
         }
         private void AddDonMuon()
         {
+            MaMuon = MaDG = MaNV = PhiPhat = "";
+            StartBorrowDate = EndBorrowDate = StartReturnDate = EndReturnDate = RealStartReturnDate = RealEndReturnDate = null;
+            DanhSachMuon.Clear();
             var addborrowwindow = new addborrowwindow();
             addborrowwindow.ShowDialog();
             LoadDonMuonTraList();
@@ -421,10 +412,10 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
                 bool isSuccess = await UpdateDonMuonInDatabaseAsync(donMuon);
                 if (!isSuccess)
-                    EXMessagebox.Show("Cannot update DonMuon");
+                    EXMessagebox.Show("Trả đơn thất bại");
                 else
                 {
-                    EXMessagebox.Show("Update DonMuon Successfully");
+                    EXMessagebox.Show("Trả đơn thành công");
                     LoadDonMuonTraList();
                 }
             }
@@ -451,6 +442,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 if (isSuccess)
                 {
                     //DonMuonList.Remove(SelectedDonMuon);
+                    MaMuon = MaDG = MaNV = PhiPhat = "";
+                    StartBorrowDate = EndBorrowDate = StartReturnDate = EndReturnDate = RealStartReturnDate = RealEndReturnDate = null;
                 }
                 else
                 {

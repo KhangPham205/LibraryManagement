@@ -190,6 +190,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
 
         private async void LoadDauSachList()
         {
+            MaDauSach = TenDauSach = TenTG = TenTL = TenNXB = NgonNgu = "";
             DauSachList.Clear();
             var DauSachs = await GetAllDauSachsAsync();
             ThongTinDauSach thongTinDauSach;
@@ -273,6 +274,7 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                 //EXMessagebox.Show(newDauSach.MaDauSach + " " + newDauSach.TenDauSach + " " + newDauSach.TenTL);
                 bool isSuccess = await AddDauSachToDatabaseAsync(newDauSach);
                 if (isSuccess)
+                {
                     DauSachList.Add(thongTinDauSach = new ThongTinDauSach()
                     {
                         MaDauSach = newDauSach.MaDauSach,
@@ -282,6 +284,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                         TenTL = dbContext.TheLoais.FirstOrDefault(t => t.MaTL == newDauSach.MaTL).TenTL,
                         TenNXB = dbContext.NhaXuatBans.FirstOrDefault(t => t.MaNXB == newDauSach.MaNXB).TenNXB,
                     });
+                    MaDauSach = TenDauSach = TenTG = TenTL = TenNXB = NgonNgu = "";
+                }
                 else
                     EXMessagebox.Show("Không thể thêm đầu sách mới");
             }
@@ -362,6 +366,8 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
                     {
                         if (!DauSachList.Remove(SelectedRow))
                             EXMessagebox.Show("Không xóa được phần tử trong danh sách đầu sách");
+                        else
+                            MaDauSach = TenDauSach = TenTG = TenTL = TenNXB = NgonNgu = "";
                     }
                     else
                         EXMessagebox.Show("Không thể xóa đầu sách trong CSDL");
