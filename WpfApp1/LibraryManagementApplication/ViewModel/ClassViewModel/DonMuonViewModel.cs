@@ -466,29 +466,29 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             // Lọc theo ngày mượn
             if (StartBorrowDate.HasValue && EndBorrowDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayMuon >= StartBorrowDate && dm.NgayMuon <= EndBorrowDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT == null && dm.NgayMuon >= StartBorrowDate && dm.NgayMuon <= EndBorrowDate).ToList();
             }
             else if (StartBorrowDate.HasValue && !EndBorrowDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayMuon >= StartBorrowDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT == null && dm.NgayMuon >= StartBorrowDate).ToList();
             }
             else if (EndBorrowDate.HasValue && !StartBorrowDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayMuon <= EndBorrowDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT == null && dm.NgayMuon <= EndBorrowDate).ToList();
             }
 
             // Lọc theo ngày trả dự kiến
             if (StartReturnDate.HasValue && EndReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraDK >= StartReturnDate && dm.NgayTraDK <= EndReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT == null && dm.NgayTraDK >= StartReturnDate && dm.NgayTraDK <= EndReturnDate).ToList();
             }
             else if (StartReturnDate.HasValue && !EndReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraDK >= StartReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT == null && dm.NgayTraDK >= StartReturnDate).ToList();
             }
             else if (EndReturnDate.HasValue && !StartReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraDK <= EndReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT == null && dm.NgayTraDK <= EndReturnDate).ToList();
             }
 
             // Cập nhật danh sách
@@ -505,29 +505,29 @@ namespace LibraryManagementApplication.ViewModel.ClassViewModel
             // Lọc theo ngày trả thực tế
             if (StartReturnDate.HasValue && EndReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate && dm.NgayTraTT <= EndReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT != null && dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate && dm.NgayTraTT <= EndReturnDate).ToList();
             }
             else if (StartReturnDate.HasValue && !EndReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT != null && dm.NgayTraTT.HasValue && dm.NgayTraTT >= StartReturnDate).ToList();
             }
             else if (EndReturnDate.HasValue && !StartReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraTT.HasValue && dm.NgayTraTT <= EndReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT != null && dm.NgayTraTT.HasValue && dm.NgayTraTT <= EndReturnDate).ToList();
             }
 
             // Lọc theo ngày trả dự kiến
             if (StartReturnDate.HasValue && EndReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraDK >= StartReturnDate && dm.NgayTraDK <= EndReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT != null && dm.NgayTraDK >= StartReturnDate && dm.NgayTraDK <= EndReturnDate).ToList();
             }
             else if (StartReturnDate.HasValue && !EndReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraDK >= StartReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT != null && dm.NgayTraDK >= StartReturnDate).ToList();
             }
             else if (EndReturnDate.HasValue && !StartReturnDate.HasValue)
             {
-                filteredList = filteredList.Where(dm => dm.NgayTraDK <= EndReturnDate).ToList();
+                filteredList = filteredList.Where(dm => dm.NgayTraTT != null && dm.NgayTraDK <= EndReturnDate).ToList();
             }
 
             // Lọc theo ngày trả thực tế cụ thể (realStartReturnDate và realEndReturnDate)
